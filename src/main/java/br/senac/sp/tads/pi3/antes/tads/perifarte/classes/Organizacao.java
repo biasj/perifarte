@@ -15,6 +15,9 @@ public class Organizacao extends Usuario {
     private String telefone;
     private Double totalRecebido;
     private String statusCadastral;
+    private String descricao;
+    private String justificativa;
+    private String contaPayPal;
     
     public Organizacao(int id, String nome, String email, String senha, String cnpj, String telefone) {
         super(id, nome, email, senha);
@@ -31,6 +34,31 @@ public class Organizacao extends Usuario {
     public String getStatusCadastral() {
         return statusCadastral;
     }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
+    }
+
+    public String getContaPayPal() {
+        return contaPayPal;
+    }
+
+    public void setContaPayPal(String contaPayPal) {
+        this.contaPayPal = contaPayPal;
+    }
+    
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
