@@ -44,33 +44,15 @@ public class SolicitacaoCadastroOrg2 extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         
+        // pega valor do formulário
         String descricao = request.getParameter("descricao");
         String justificativa = request.getParameter("justificativa");
         
-        // validação dos campos
-        if(descricao.equals("") || justificativa.equals("")) {
-            if(descricao.equals("")) {
-                request.setAttribute("descricaoErro", "A descricao deve ser preenchida");
-            }
-            if(justificativa.equals("")) {
-                request.setAttribute("justificativaErro", "O campo deve ser preenchido");
-            }
-            
-            // coloca os atributos
-            request.setAttribute("descricao", descricao);
-            request.setAttribute("justificativa", justificativa);
-            
-            // volta para o formulário com os campos preenchidos
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/formulario-cadastro-org-2.jsp");
-            dispatcher.forward(request, response);
-            return;
-
-        }
+        // tudo já vai estar preenchido por conta do required no form
         
-        // caso esteja tudo preenchido
-        // cria uma sessao e pega os dados da sessao
+        // cria uma sessao
         HttpSession sessao = request.getSession();
-        // atribui ao objeto organizacao para "setar" os atributos descricao e justificativa
+        // pega os dados da sessao sobre a organizacao e atribui os dados do formulario
         Organizacao novaOrganizacao = (Organizacao) sessao.getAttribute("organizacao");
         novaOrganizacao.setDescricao(descricao);
         novaOrganizacao.setJustificativa(justificativa);

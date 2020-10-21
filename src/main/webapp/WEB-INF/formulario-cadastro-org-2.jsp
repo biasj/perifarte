@@ -25,7 +25,7 @@
         <form method='post' action='solicitacao-cadastro-org-2'>
             <div>
                 <label>Descrição da organização:</label>
-                <input type="text" name="descricao" value="${descricao}">
+                <input type="text" name="descricao" required value="${descricao}">
                 <!-- caso o servlet aponte um erro -->
                     <c:if test="${descricaoErro != null}">
                         <span class="erro"><c:out value="${descricaoErro}" /></span>
@@ -33,7 +33,7 @@
             </div>
             <div>
                 <label>O que será realizado com as doações?</label>
-                <input type="text" name="justificativa" value="${justificativa}">
+                <input type="text" name="justificativa" required value="${justificativa}">
                 <!-- caso o servlet aponte um erro -->
                     <c:if test="${justificativaErro != null}">
                         <span class="erro"><c:out value="${justificativaErro}" /></span>

@@ -44,6 +44,7 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         
+        // pega valores do formulario
         String nome = request.getParameter("nome");
         String cnpj = request.getParameter("cnpj");
         String telefone = request.getParameter("telefone");
@@ -67,7 +68,7 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
         
         // caso todos os campos não estejam ok
         if(!camposValidosGlobal) {
-            // Reapresentar form com mensagens de erro
+            // Reapresentar form com mensagens de erro pelo span
             if (!nomeValido) {
                 request.setAttribute("nomeErro", "Nome deve ser preenchido");
             }
@@ -78,7 +79,7 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
                 request.setAttribute("cnpjErro", "CNPJ deve conter apenas numeros");
             }
             
-           
+           // preenche o formulario de novo para usuário não ter que digitar tudo de novo
             request.setAttribute("nome", nome);
             request.setAttribute("email", email);
             request.setAttribute("cnpj", cnpj);
@@ -92,9 +93,10 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
         // caso esteja tudo certo
         // cria novo objeto Organizacao e atribui os valores do formulario aos atributos
         // id, nome, email, senha, cnpj, telefone
+        // TODO: Arrumar o id da classe Organizacao
         Organizacao novaOrganizacao = new Organizacao(1, nome, email, senha, cnpj, telefone);
         
-        // cria sessão para levar para a próxima página 
+        // cria sessão para levar dados do usuário para a próxima página 
         HttpSession sessao = request.getSession();
         sessao.setAttribute("organizacao", novaOrganizacao);
         response.sendRedirect("solicitacao-cadastro-org-1");

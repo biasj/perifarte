@@ -32,6 +32,7 @@
                         <span class="erro"><c:out value="${nomeErro}" /></span>
                     </c:if>
                 </div>
+                    
                 <div>
                     <label>CNPJ</label>
                     <input type="text" name="cnpj" value="${cnpj}">
@@ -40,10 +41,12 @@
                         <span class="erro"><c:out value="${cnpjErro}" /></span>
                     </c:if>
                 </div>
+                    
                 <div>
                     <label>Telefone</label>
                     <input type="number" name="telefone" value="${telefone}">
                 </div>
+                
                 <div>
                     <label>E-mail</label>
                     <input type="email" name="email" value="${email}">
