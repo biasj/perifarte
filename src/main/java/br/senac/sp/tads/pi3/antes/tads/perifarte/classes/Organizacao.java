@@ -22,9 +22,14 @@ public class Organizacao extends Usuario {
     public Organizacao(int id, String nome, String email, String senha, String cnpj, String telefone) {
         super(id, nome, email, senha);
         this.telefone = telefone;
-        if(validarCnpj(cnpj)) {
+//        if(validarCnpj(cnpj)) {
             this.cnpj = cnpj;
-        }
+//        }
+        descricao = null;
+        justificativa = null;
+        contaPayPal = null;
+        // já começa como pendente e só depois vai ser aprovado
+        statusCadastral = "pendente";
     }
 
     public Double getTotalRecebido() {
