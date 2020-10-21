@@ -33,7 +33,6 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
             // recupera os dados do post guardados pela sessão
             Organizacao novaOrganizacao = (Organizacao) sessao.getAttribute("organizacao");
             request.setAttribute("organizacao", novaOrganizacao);
-//            sessao.removeAttribute("organizacao");
             
             // envia para a tela de continuação de solicitação de cadastro
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/formulario-cadastro-org-2.jsp");
@@ -85,7 +84,7 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
             request.setAttribute("cnpj", cnpj);
             
             // volta para o formulário com os campos preenchidos
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/form-validacao.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/formulario-cadastro-org-1.jsp");
             dispatcher.forward(request, response);
             return;
         }
