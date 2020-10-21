@@ -10,20 +10,22 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
  * @author beatrizsato
  */
 public class Usuario {
-    protected int id;
+    private static int contas = 10000;
+    protected int numeroConta;
     protected String nome;
     protected String email;
     protected String senha;
 
-    public Usuario(int id, String nome, String email, String senha) {
-        this.id = id;
+    public Usuario(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        
+        numeroConta = contas++;
     }
 
-    public int getId() {
-        return id;
+    public int getNumeroConta() {
+        return numeroConta;
     }
 
     public String getNome() {

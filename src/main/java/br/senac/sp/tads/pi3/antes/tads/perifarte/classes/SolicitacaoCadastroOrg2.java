@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author beatrizsato
  */
+
 @WebServlet(name = "SolicitacaoCadastroOrg2", urlPatterns = {"/solicitacao-cadastro-org-2"})
 public class SolicitacaoCadastroOrg2 extends HttpServlet {
 

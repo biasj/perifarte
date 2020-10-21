@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author beatrizsato
  */
+
 @WebServlet(name = "SolicitacaoCadastroOrg1", urlPatterns = {"/solicitacao-cadastro-org-1"})
 public class SolicitacaoCadastroOrg1 extends HttpServlet {
 
@@ -34,7 +35,7 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
             Organizacao novaOrganizacao = (Organizacao) sessao.getAttribute("organizacao");
             request.setAttribute("organizacao", novaOrganizacao);
             
-            // envia para a tela de continuação de solicitação de cadastro
+            // envia para a tela de continuação de solicitação de cadastro 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/formulario-cadastro-org-2.jsp");
             dispatcher.forward(request, response);
     }
@@ -93,8 +94,7 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
         // caso esteja tudo certo
         // cria novo objeto Organizacao e atribui os valores do formulario aos atributos
         // id, nome, email, senha, cnpj, telefone
-        // TODO: Arrumar o id da classe Organizacao
-        Organizacao novaOrganizacao = new Organizacao(1, nome, email, senha, cnpj, telefone);
+        Organizacao novaOrganizacao = new Organizacao(nome, email, senha, cnpj, telefone);
         
         // cria sessão para levar dados do usuário para a próxima página 
         HttpSession sessao = request.getSession();
