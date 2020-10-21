@@ -11,22 +11,39 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
  * @author beatrizsato
  */
 public class Organizacao extends Usuario {
+    private static int contasOrg = 10000;
+    private int numeroConta;
+    
     private String cnpj; // somente números 27326531000125 para poder verificar
     private String telefone;
-    private Double totalRecebido;
-    private String statusCadastral;
     private String descricao;
     private String justificativa;
+    
+    private String statusCadastral;
+    private Double totalRecebido;
+
     private String contaPayPal;
     
-    public Organizacao(int id, String nome, String email, String senha, String cnpj, String telefone) {
-        super(id, nome, email, senha);
+    public Organizacao(String nome, String email, String senha, String cnpj, String telefone) {
+        super(nome, email, senha);
         this.telefone = telefone;
-        if(validarCnpj(cnpj)) {
-            this.cnpj = cnpj;
-        }
+        this.cnpj = cnpj;
+        
+        numeroConta = contasOrg++;
     }
 
+    public String getJustificativa() {
+        return justificativa;
+    }
+    
+    public String getDescricao() {
+        return descricao;
+    }    
+ 
+    public String getContaPayPal() {
+        return contaPayPal;
+    }
+    
     public Double getTotalRecebido() {
         return totalRecebido;
     }
@@ -35,30 +52,17 @@ public class Organizacao extends Usuario {
         return statusCadastral;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public String getJustificativa() {
-        return justificativa;
     }
 
     public void setJustificativa(String justificativa) {
         this.justificativa = justificativa;
     }
 
-    public String getContaPayPal() {
-        return contaPayPal;
-    }
-
     public void setContaPayPal(String contaPayPal) {
         this.contaPayPal = contaPayPal;
     }
-    
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;

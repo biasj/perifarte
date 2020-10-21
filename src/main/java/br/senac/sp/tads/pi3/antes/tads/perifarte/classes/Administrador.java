@@ -12,11 +12,14 @@ import java.util.Random;
  * @author beatrizsato
  */
 public class Administrador extends Usuario{
+    private static int contasAdm = 10000;
+    private static int numeroConta;
     private final String credencial;
     
-    public Administrador(int id, String nome, String email, String senha) {
-        super(id, nome, email, senha);
+    public Administrador(String nome, String email, String senha) {
+        super(nome, email, senha);
         credencial = gerarCredencial();
+        numeroConta = contasAdm++;
     }
     
     // credencial é composta por 3 números e 1 letra, usada para conferir que usuário é administrador
