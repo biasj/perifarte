@@ -11,7 +11,7 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
  * @author beatrizsato
  */
 public class Organizacao extends Usuario {
-    private static int contasOrg = 10000;
+    private static int contasOrg = 1000;
     private int numeroConta;
     
     private String cnpj; // somente números 27326531000125 para poder verificar
@@ -28,6 +28,11 @@ public class Organizacao extends Usuario {
         super(nome, email, senha);
         this.telefone = telefone;
         this.cnpj = cnpj;
+        descricao = null;
+        justificativa = null;
+        contaPayPal = null;
+        // já começa como pendente e só depois vai ser aprovado
+        statusCadastral = "pendente";
         
         numeroConta = contasOrg++;
     }

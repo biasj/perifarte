@@ -12,7 +12,7 @@ import java.util.Random;
  * @author beatrizsato
  */
 public class Administrador extends Usuario{
-    private static int contasAdm = 10000;
+    private static int contasAdm = 100;
     private static int numeroConta;
     private final String credencial;
     
@@ -68,6 +68,6 @@ public class Administrador extends Usuario{
     // criar classe de gestão do site
     public void excluirSolicitacao(Organizacao org) {
         org.setStatusCadastral("excluído");
-        // remove do array de organizações com cadastros pendentes
+        // remove do array de organizações
     }
 }
