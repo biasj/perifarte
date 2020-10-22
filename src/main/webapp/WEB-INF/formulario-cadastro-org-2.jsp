@@ -12,14 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--para "setar" a tela a partir do tamanho da tela do dispositivo-->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
         <title>JSP Page</title>
-        <style>
-            .erro {
-                color: red;
-            }
-        </style>
     </head>
     <body>
+        <!--não consegui colocar pelo pageContext-->
+        <c:import url="./../cabecalho.jsp"/>
         <h1>Solicitação de Cadastro de Organização</h1>
         <h3>Informações sobre a org <c:out value="${organizacao.nome}" /></h3>
         <form method='post' action='solicitacao-cadastro-org-2'>
