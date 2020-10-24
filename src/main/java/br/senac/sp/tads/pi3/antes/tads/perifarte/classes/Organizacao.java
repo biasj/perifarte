@@ -37,6 +37,19 @@ public class Organizacao extends Usuario {
         numeroConta = contasOrg++;
     }
 
+    @Override
+    public int getNumeroConta() {
+        return numeroConta;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+    
     public String getJustificativa() {
         return justificativa;
     }

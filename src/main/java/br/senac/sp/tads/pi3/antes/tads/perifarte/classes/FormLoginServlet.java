@@ -5,8 +5,12 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
+import conexaobd.OrganizacaoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
@@ -63,14 +67,27 @@ public class FormLoginServlet extends HttpServlet {
             return;
         }
         
-        // busca o e-mail na lista de usuários/bd?
-        // confere se a senha é compatível
-        // se for compatível
-        
+        // busca o e-mail na lista de usuários/bd??
+        OrganizacaoDao orgDao = new OrganizacaoDao();
+        Organizacao org;
+        HttpSession sessao = request.getSession();
+        try {
+            // confere se a senha é compatível
+            org = orgDao.findAccount(email, senha);
+            // se for compatível, encaminha para as respectivas páginas
+            if(org != null) {
+                // cria sessão para levar para a próxima página 
+                
+                sessao.setAttribute("org", org);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FormLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         
         // cria sessão para levar para a próxima página 
         Usuario usuario = new Usuario("Bia", email, senha);
-        HttpSession sessao = request.getSession();
         sessao.setAttribute("usuario", usuario);
         // manda para a área do usuário ou carrinho (pra onde tava antes?)
         response.sendRedirect("processamento");
