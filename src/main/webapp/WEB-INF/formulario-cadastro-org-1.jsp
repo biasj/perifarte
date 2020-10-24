@@ -12,14 +12,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--para "setar" a tela a partir do tamanho da tela do dispositivo-->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
         <title>Solicitação de Cadastro</title>
-        <style>
-            .erro {
-                color: red;
-            }
-        </style>
     </head>
     <body>
+        <!--não consegui colocar pelo pageContext-->
+        <c:import url="./../cabecalho.jsp"/>
         <h1>Solicitação de Cadastro de Organização</h1>
         
 <!--        formulário-->
@@ -32,6 +31,7 @@
                         <span class="erro"><c:out value="${nomeErro}" /></span>
                     </c:if>
                 </div>
+                    
                 <div>
                     <label>CNPJ</label>
                     <input type="text" name="cnpj" value="${cnpj}">
@@ -40,10 +40,12 @@
                         <span class="erro"><c:out value="${cnpjErro}" /></span>
                     </c:if>
                 </div>
+                    
                 <div>
                     <label>Telefone</label>
                     <input type="number" name="telefone" value="${telefone}">
                 </div>
+                
                 <div>
                     <label>E-mail</label>
                     <input type="email" name="email" value="${email}">
