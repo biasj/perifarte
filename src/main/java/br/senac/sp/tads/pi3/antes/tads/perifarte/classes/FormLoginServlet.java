@@ -5,6 +5,7 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
+import conexaobd.AdministradorDao;
 import conexaobd.OrganizacaoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,6 +35,7 @@ public class FormLoginServlet extends HttpServlet {
         HttpSession sessao = request.getSession();
         
         Organizacao org = (Organizacao) sessao.getAttribute("organizacao");
+        Administrador adm = (Administrador) sessao.getAttribute("administrador");
         // TODO: doador
         // TODO: artista
         // TODO: adm
@@ -42,6 +44,8 @@ public class FormLoginServlet extends HttpServlet {
         // direciona para a página certa
         if(org != null) {
             redirecionarOrg(request, response, org);
+        } else if (adm != null) {
+            redirecionarAdm(request, response, adm);
         }
         
     }
@@ -59,20 +63,24 @@ public class FormLoginServlet extends HttpServlet {
         // LOGIN ORGANIZACAO
         // busca o e-mail na lista de usuários/bd??
         OrganizacaoDao orgDao = new OrganizacaoDao();
+        AdministradorDao admDao = new AdministradorDao();
         HttpSession sessao = request.getSession();
         
         try {
             // procura no banco de dados pelo e-mail e senha
              Organizacao org = orgDao.findAccount(email, senha);
+             Administrador adm = admDao.findAccount(email, senha);
             // confere se é ong, adm, doador, ou artista. 
             
             // se for ong
             if(org != null) {
                 // coloca o objeto org como atributo sessão para levar dados do usuário para a próxima página 
                 sessao.setAttribute("organizacao", org);
-            } 
+            // se for adm
+            } else if(adm != null) {
+                sessao.setAttribute("administrador", adm);
+            }
             
-            // TODO: adm
             // TODO: doador
             // TODO: artista
             
@@ -105,6 +113,17 @@ public class FormLoginServlet extends HttpServlet {
 
         // envia para a tela de continuação de solicitação de cadastro 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-organizacao.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    // chamado no doGet
+    private void redirecionarAdm(HttpServletRequest request, HttpServletResponse response, Administrador adm) 
+            throws ServletException, IOException {
+        // recupera os dados do post guardados pela sessão
+        request.setAttribute("administrador", adm);
+
+        // envia para a tela de continuação de solicitação de cadastro 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-administrador.jsp");
         dispatcher.forward(request, response);
     }
 }

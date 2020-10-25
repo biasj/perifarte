@@ -49,7 +49,7 @@
             </div>
                     
             <div>    
-                <input type="checkbox" value="artista" name="artista"><label>Sou um artista</label>
+                <input type="checkbox" value="artista" name="artista" ${artista.contains('artista') ? 'checked' : ''}><label>Sou um artista</label>
                 <input type="text" name="portfolio" placeholder="portfolio">
             </div>  
                     
