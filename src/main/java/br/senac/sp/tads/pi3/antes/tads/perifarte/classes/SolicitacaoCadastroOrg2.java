@@ -5,8 +5,12 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
+import conexaobd.OrganizacaoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,6 +61,14 @@ public class SolicitacaoCadastroOrg2 extends HttpServlet {
         Organizacao novaOrganizacao = (Organizacao) sessao.getAttribute("organizacao");
         novaOrganizacao.setDescricao(descricao);
         novaOrganizacao.setJustificativa(justificativa);
+        
+        // insere no banco de dados
+        OrganizacaoDao orgDao = new OrganizacaoDao();
+        try {
+            orgDao.addOrganizacao(novaOrganizacao);
+        } catch (SQLException ex) {
+            Logger.getLogger(SolicitacaoCadastroOrg2.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // atualiza a sessao para mandar para a próxima página
         sessao.setAttribute("organizacao", novaOrganizacao);

@@ -25,9 +25,9 @@ public class testeBD {
         }
         
         // Construtor: String nome, String email, String senha, String cnpj, String telefone
-        Organizacao org1 = new Organizacao("Criança Esperança", "crianca@gmail", "esperanca", "111222333112233", "11999999999");
+        Organizacao org1 = new Organizacao("Criança Esperança", "crianca@gmail.com", "esperanca", "111222333112233", "11999999999");
         
-        dao.addOrganizacao(org1);
+//        dao.addOrganizacao(org1);
         
         resultados = dao.findAll();
         
@@ -36,8 +36,12 @@ public class testeBD {
             printInfo(org);
         }
         
+        System.out.println("");
         System.out.println("LOGIN");
         printInfo(dao.findAccount("crianca@gmail", "esperanca"));
+        
+        Organizacao org2 = dao.findAccount("crianca@gmail.com", "esperanca");
+        
     }
     
     private static void printInfo(Organizacao org) {

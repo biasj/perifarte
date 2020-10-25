@@ -32,13 +32,18 @@ public class FormLoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        // recupera os dados do post guardados pela sessão
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-        request.setAttribute("usuario", usuario);
-
-        // envia para a tela de continuação de solicitação de cadastro 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-usuario.jsp");
-        dispatcher.forward(request, response);
+        
+        Organizacao org = (Organizacao) sessao.getAttribute("organizacao");
+        // TODO: doador
+        // TODO: artista
+        // TODO: adm
+        
+        // switch case?
+        // direciona para a página certa
+        if(org != null) {
+            redirecionarOrg(request, response, org);
+        }
+        
     }
 
     @Override
@@ -50,47 +55,56 @@ public class FormLoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
         
-        // valida os dados
-        boolean emailValido = (email != null && email.trim().length() > 0);
-        if (emailValido) {
-            Pattern emailPattern = Pattern.compile("^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.[a-z]+)?$");
-            Matcher emailMatcher = emailPattern.matcher(email);
-            emailValido = emailValido && emailMatcher.matches();
-        }
         
-        if(!emailValido) {
-            request.setAttribute("email", email);
-            
-            // volta para o formulário com os campos preenchidos
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-login.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
-        
+        // LOGIN ORGANIZACAO
         // busca o e-mail na lista de usuários/bd??
         OrganizacaoDao orgDao = new OrganizacaoDao();
-        Organizacao org;
         HttpSession sessao = request.getSession();
+        
         try {
-            // confere se a senha é compatível
-            org = orgDao.findAccount(email, senha);
-            // se for compatível, encaminha para as respectivas páginas
+            // procura no banco de dados pelo e-mail e senha
+             Organizacao org = orgDao.findAccount(email, senha);
+            // confere se é ong, adm, doador, ou artista. 
+            
+            // se for ong
             if(org != null) {
-                // cria sessão para levar para a próxima página 
-                
-                sessao.setAttribute("org", org);
-                
+                // coloca o objeto org como atributo sessão para levar dados do usuário para a próxima página 
+                sessao.setAttribute("organizacao", org);
+            } 
+            
+            // TODO: adm
+            // TODO: doador
+            // TODO: artista
+            
+            // se não for nenhum dos 4: email/senha errados
+            else {
+                request.setAttribute("email", email);
+                request.setAttribute("loginErro", "E-mail e/ou senha inválidos");
+                // volta para o formulário com os campos preenchidos
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-login.jsp");
+                dispatcher.forward(request, response);
+                return;
             }
+
+
         } catch (SQLException ex) {
             Logger.getLogger(FormLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+            
         
-        // cria sessão para levar para a próxima página 
-        Usuario usuario = new Usuario("Bia", email, senha);
-        sessao.setAttribute("usuario", usuario);
         // manda para a área do usuário ou carrinho (pra onde tava antes?)
         response.sendRedirect("processamento");
+        
     }
+    
+    // chamado no doGet
+    private void redirecionarOrg(HttpServletRequest request, HttpServletResponse response, Organizacao org) 
+            throws ServletException, IOException {
+        // recupera os dados do post guardados pela sessão
+        request.setAttribute("organizacao", org);
 
+        // envia para a tela de continuação de solicitação de cadastro 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-organizacao.jsp");
+        dispatcher.forward(request, response);
+    }
 }

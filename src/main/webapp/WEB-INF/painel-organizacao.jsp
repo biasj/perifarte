@@ -16,9 +16,9 @@
         <title>Painel organização</title>
     </head>
     <body>
-        <h3> <c:out value="${organizacao.nome}" /></h3>
+        <h2> <c:out value="${organizacao.nome}" /></h2>
         
-        <h2>Obras que foram doadas para sua organização</h2>
+        <h3>Obras que foram doadas para sua organização</h3>
         <ul>
             <li>Monalisa</li>
             <li>Abaporu</li>

@@ -21,7 +21,11 @@
         
         <h1>Login</h1>
         <form method="post" action="processamento">
+            <c:if test="${loginErro != null}">
+                        <span class="erro"><c:out value="${loginErro}" /></span>
+            </c:if>
             <div>
+                
                 <label>E-mail</label>
                 <div>
                     <input type="email" name="email" required value="${email}">
@@ -36,7 +40,7 @@
                 <!--TODO: redefinir senha-->
                 <div>
                     <input type="password" name="senha" value="${senha}" required>
-                    <c:if test="${senha != null}">
+                    <c:if test="${senhaErro != null}">
                         <span class="erro"><c:out value="${senhaErro}" /></span>
                     </c:if>
                 </div>
