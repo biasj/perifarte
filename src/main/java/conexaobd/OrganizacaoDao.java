@@ -45,8 +45,8 @@ public class OrganizacaoDao {
     }
     
     public void addOrganizacao(Organizacao org) throws SQLException {
-        String sql = "INSERT INTO organizacao (organizacao_id, organizacao_cnpj, organizacao_nome, organizacao_email, "
-                + "organizacao_senha, organizacao_telefone, organizacao_status) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO organizacao (organizacao_cnpj, organizacao_nome, organizacao_email, "
+                + "organizacao_senha, organizacao_telefone, organizacao_status) VALUES (?,?,?,?,?,?)";
 
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
@@ -54,15 +54,21 @@ public class OrganizacaoDao {
 
             // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
             try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                stmt.setString(1, String.valueOf(org.getNumeroConta()));
-                stmt.setString(2, org.getCnpj());
-                stmt.setString(3, org.getNome());
-                stmt.setString(4, org.getEmail());
-                stmt.setString(5, org.getSenha());
-                stmt.setString(6, org.getTelefone());
-                stmt.setString(7, org.getStatusCadastral());
+                stmt.setString(1, org.getCnpj());
+                stmt.setString(2, org.getNome());
+                stmt.setString(3, org.getEmail());
+                stmt.setString(4, org.getSenha());
+                stmt.setString(5, org.getTelefone());
+                stmt.setString(6, org.getStatus());
 
                 int resultados = stmt.executeUpdate();
+                
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    while(rs.next()) {
+                        Integer idGerado = rs.getInt(1);
+                        org.setId(idGerado);
+                    }
+                }
 
                 conn.commit();
             } catch (SQLException e) {
@@ -86,7 +92,7 @@ public class OrganizacaoDao {
                     String telefone = rs.getString("organizacao_telefone");
                     
                     Organizacao org = new Organizacao(nome, email, senha, cnpj, telefone);
-                    org.setStatusCadastral(rs.getString("organizacao_status"));
+                    org.setStatus(rs.getString("organizacao_status"));
                     
                     return org;
                 }

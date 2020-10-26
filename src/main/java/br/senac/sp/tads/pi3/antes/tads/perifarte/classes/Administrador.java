@@ -5,6 +5,7 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -12,18 +13,34 @@ import java.util.Random;
  * @author beatrizsato
  */
 public class Administrador extends Usuario{
-    private static int contasAdm = 100;
-    private static int numeroConta;
+    private static int id;
     private final String credencial;
+    private List<Organizacao> organizacoes;
     
     public Administrador(String nome, String email, String senha) {
         super(nome, email, senha);
+        organizacoes = null;
         credencial = gerarCredencial();
-        numeroConta = contasAdm++;
     }
 
     public String getCredencial() {
         return credencial;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        Administrador.id = id;
+    }
+
+    public List<Organizacao> getOrganizacoes() {
+        return organizacoes;
+    }
+
+    public void setOrganizacoes(List<Organizacao> organizacoes) {
+        this.organizacoes = organizacoes;
     }
     
     // credencial é composta por 3 números e 1 letra, usada para conferir que usuário é administrador
@@ -59,19 +76,19 @@ public class Administrador extends Usuario{
     
     // MÉTODOS RELACIONADOS À GERENCIAMENTO DE ORGANIZAÇÃO
     public void aprovarCadastro(Organizacao org) {
-        org.setStatusCadastral("aprovado");
+        org.setStatus("aprovado");
         // adiciona no Array de organizações aptas a receberem dinheiro
     }
     
     public void suspenderCadastro(Organizacao org) {
-        org.setStatusCadastral("suspenso");
+        org.setStatus("suspenso");
         // remove do Array de organizações aptas a receberem dinheiro
 
     }
     
     // criar classe de gestão do site
     public void excluirSolicitacao(Organizacao org) {
-        org.setStatusCadastral("excluído");
+        org.setStatus("excluído");
         // remove do array de organizações
     }
 }

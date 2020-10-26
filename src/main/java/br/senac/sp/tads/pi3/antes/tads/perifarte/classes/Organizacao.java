@@ -11,15 +11,14 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
  * @author beatrizsato
  */
 public class Organizacao extends Usuario {
-    private static int contasOrg = 1000;
-    private int numeroConta;
+    private int id;
     
     private String cnpj; // somente números 27326531000125 para poder verificar
     private String telefone;
     private String descricao;
     private String justificativa;
     
-    private String statusCadastral;
+    private String status;
     private Double totalRecebido;
 
     private String contaPayPal;
@@ -32,14 +31,21 @@ public class Organizacao extends Usuario {
         justificativa = null;
         contaPayPal = null;
         // já começa como pendente e só depois vai ser aprovado
-        statusCadastral = "pendente";
+        status = "pendente";
         
-        numeroConta = contasOrg++;
     }
 
     @Override
     public int getNumeroConta() {
         return numeroConta;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCnpj() {
@@ -66,8 +72,8 @@ public class Organizacao extends Usuario {
         return totalRecebido;
     }
 
-    public String getStatusCadastral() {
-        return statusCadastral;
+    public String getStatus() {
+        return status;
     }
 
     public void setDescricao(String descricao) {
@@ -86,8 +92,8 @@ public class Organizacao extends Usuario {
         this.telefone = telefone;
     }
 
-    public void setStatusCadastral(String statusCadastral) {
-        this.statusCadastral = statusCadastral;
+    public void setStatus(String statusCadastral) {
+        this.status = statusCadastral;
     }
     
     // a ideia é que valide o cnpj antes de mandar construir
