@@ -80,20 +80,22 @@ public class FormCadastroServlet extends HttpServlet {
             return;
         }
         
-        if(artista != null) {
+        // se for artista
+        if(artista.equals("checked")) {
             // cria o artista e bota no bd
             Usuario usuario = new Usuario(nome, email, senha);
             HttpSession sessao = request.getSession();
             sessao.setAttribute("usuario", usuario);
-            // manda para a área do usuário ou carrinho (pra onde tava antes?)
-            response.sendRedirect("processar-cadastro");
+        
+        // se for doador
         } else {
             Usuario usuario = new Usuario(nome, email, senha);
             HttpSession sessao = request.getSession();
             sessao.setAttribute("usuario", usuario);
-            // manda para a área do usuário ou carrinho (pra onde tava antes?)
-            response.sendRedirect("processar-cadastro");
         }
+        
+        // manda para a área do usuário ou carrinho (pra onde tava antes?)
+        response.sendRedirect("processar-cadastro");
     }
 
 }

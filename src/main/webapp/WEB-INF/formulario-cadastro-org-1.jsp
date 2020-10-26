@@ -12,54 +12,63 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--para "setar" a tela a partir do tamanho da tela do dispositivo-->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
+
         <title>Solicitação de Cadastro</title>
-        <style>
-            .erro {
-                color: red;
-            }
-        </style>
     </head>
     <body>
-        <h1>Solicitação de Cadastro de Organização</h1>
+        <!--não consegui colocar pelo pageContext-->
+        <c:import url="./../cabecalho.jsp"/>
         
-<!--        formulário-->
-         <form method="post" action="solicitacao-cadastro-org-1">
-                <div>
-                    <label>Nome</label>
-                    <input type="text" name="nome" required value="${nome}">
-                    <!-- caso o servlet aponte um erro -->
-                    <c:if test="${nomeErro != null}">
-                        <span class="erro"><c:out value="${nomeErro}" /></span>
-                    </c:if>
-                </div>
-                <div>
-                    <label>CNPJ</label>
-                    <input type="text" name="cnpj" value="${cnpj}">
-                    <!-- caso o servlet aponte um erro -->
-                    <c:if test="${cnpjErro != null}">
-                        <span class="erro"><c:out value="${cnpjErro}" /></span>
-                    </c:if>
-                </div>
-                <div>
-                    <label>Telefone</label>
-                    <input type="number" name="telefone" value="${telefone}">
-                </div>
-                <div>
-                    <label>E-mail</label>
-                    <input type="email" name="email" value="${email}">
-                    <!-- caso o servlet aponte um erro -->
-                    <c:if test="${emailErro != null}">
-                        <span class="erro"><c:out value="${emailErro}" /></span>
-                    </c:if>
-                </div>
-                <div>
-                    <label>Senha</label>
-                    <input type="password" name="senha">
-                </div>
-                <div>
-                    <button type="reset">Reiniciar dados</button>
-                    <button type="submit">Enviar dados</button>
-                </div>
-            </form>
+        <div class='container'>
+            <form method="post" action="solicitacao-cadastro-org-1">
+               <h2 class='form-group w-75 p3 mx-auto'>Solicitação de Cadastro de Organização</h2>
+               
+               <div class='form-group w-75 p3 mx-auto'>
+                   <label for='nome'>Nome</label>
+                   <input id='nome' class='form-control' type="text" name="nome" required value="${nome}">
+                   <!-- caso o servlet aponte um erro -->
+                   <c:if test="${nomeErro != null}">
+                       <span class="erro"><c:out value="${nomeErro}" /></span>
+                   </c:if>
+               </div>
+
+               <div class='form-group w-75 p3 mx-auto'>
+                   <label for='cnpj'>CNPJ</label>
+                   <input id='cnpj' class='form-control' type="text" name="cnpj" value="${cnpj}">
+                   <!-- caso o servlet aponte um erro -->
+                   <c:if test="${cnpjErro != null}">
+                       <span class="erro"><c:out value="${cnpjErro}" /></span>
+                   </c:if>
+               </div>
+
+               <div class='form-group w-75 p3 mx-auto'>
+                   <label for='telefone'>Telefone</label>
+                   <input class='form-control' type="number" id='telefone' name="telefone" value="${telefone}">
+               </div>
+
+               <div class='form-group w-75 p3 mx-auto'>
+                   <label for='email'>E-mail</label>
+                   <input id='email' class='form-control' type="email" name="email" value="${email}">
+                   <!-- caso o servlet aponte um erro -->
+                   <c:if test="${emailErro != null}">
+                       <span class="erro"><c:out value="${emailErro}" /></span>
+                   </c:if>
+               </div>
+                   
+               <div class='form-group w-75 p3 mx-auto'>
+                   <label for='senha'>Senha</label>
+                   <input class='form-control' type="password" id='senha' name="senha">
+               </div>
+                   
+               <div class='form-group w-75 p3 mx-auto'>
+                   <button class='btn btn-outline-danger' type="reset">Reiniciar dados</button>
+                   <button class='btn btn-primary' type="submit">Enviar dados</button>
+               </div>
+           </form>
+        </div>
+         
     </body>
 </html>

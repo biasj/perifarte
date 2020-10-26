@@ -12,12 +12,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!--para "setar" a tela a partir do tamanho da tela do dispositivo-->
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Solicitação de Cadastro de Organização</h1>
-        <h3> <c:out value="${organizacao.nome}" /></h3>
-        <p>E-mail: <c:out value="${organizacao.email}" /></p>
-        <p>Descricao: <c:out value="${organizacao.descricao}" /></p>
+        <!--não consegui colocar pelo pageContext-->
+        <c:import url="./../cabecalho.jsp"/>
+        <div class="container">
+            <h2 class="w-75 p3 mx-auto">Solicitação de Cadastro de Organização</h2>
+            <c:if test="${organizacao.nome != null}">
+                <h3 class="w-75 p3 mx-auto"> <c:out value="${organizacao.nome}" /></h3>
+                <h4 class="w-75 p3 mx-auto">Solicitação enviada!</h4>
+                <p class="w-75 p3 mx-auto">Suas informações foram recebidas e estão na fila para serem analisadas pela nossa equipe!</p>
+                <p class="w-75 p3 mx-auto">A organização receberá confirmação de cadastro no e-mail: </p>
+                <p class="w-75 p3 mx-auto">E-mail: <c:out value="${organizacao.email}" /></p>
+            </c:if>
+            <c:if test="${organizacao.nome == null}">
+                <p class="w-75 p3 mx-auto">Acesso negado, faça o login para acessar a plataforma</p>
+                <a class="w-75 p3 mx-auto" href="./login">login</a>
+            </c:if>
+        </div>
+        
+            
     </body>
 </html>
