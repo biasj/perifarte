@@ -59,7 +59,7 @@ public class FormCadastroObra extends HttpServlet {
         boolean descricaoValido = (descricao != null);
         
         // Validacao do e-mail
-        boolean precoValido = (preco > 0 && preco < 50);
+        boolean precoValido = (preco >= 0 && preco <= 50);
         
         boolean ongEscolhidaValido = (ongEscolhida != null);
         
@@ -93,7 +93,7 @@ public class FormCadastroObra extends HttpServlet {
             request.setAttribute("ongEscolhida", ongEscolhida);
             
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/form-cadastro-obra.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-cadastro-obra.jsp");
             dispatcher.forward(request, response);
             return;
         }
