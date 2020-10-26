@@ -5,6 +5,7 @@
  */
 package conexaobd;
 
+import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Administrador;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Organizacao;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
@@ -16,28 +17,40 @@ import java.util.List;
  */
 public class testeBD {
     public static void main(String[] args) throws SQLException {
-        OrganizacaoDao dao = new OrganizacaoDao();
-
-        List<Organizacao> resultados = dao.findAll();
-        System.out.println("VALORES NO BANCO DE DADOS");
-        for (Organizacao org : resultados) {
-            printInfo(org);
-        }
+//        OrganizacaoDao dao = new OrganizacaoDao();
+//
+//        List<Organizacao> resultados = dao.findAll();
+//        System.out.println("VALORES NO BANCO DE DADOS");
+//        for (Organizacao org : resultados) {
+//            printInfo(org);
+//        }
+//        
+//        // Construtor: String nome, String email, String senha, String cnpj, String telefone
+//        Organizacao org1 = new Organizacao("Criança Esperança", "crianca@gmail.com", "esperanca", "111222333112233", "11999999999");
+//        
+////        dao.addOrganizacao(org1);
+//        
+//        resultados = dao.findAll();
+//        
+//        System.out.println("VALORES NO BANCO DE DADOS");
+//        for (Organizacao org : resultados) {
+//            printInfo(org);
+//        }
+//        
+//        System.out.println("");
+//        System.out.println("LOGIN");
+//        printInfo(dao.findAccount("crianca@gmail", "esperanca"));
+//        
+//        Organizacao org2 = dao.findAccount("crianca@gmail.com", "esperanca");
         
-        // Construtor: String nome, String email, String senha, String cnpj, String telefone
-        Organizacao org1 = new Organizacao("Criança Esperança", "crianca@gmail", "esperanca", "111222333112233", "11999999999");
         
-        dao.addOrganizacao(org1);
+        AdministradorDao admDao = new AdministradorDao();
+        Administrador adm = new Administrador("Bia", "beatriz@gmail.com", "bia123");
+//        admDao.addAdministrador(adm);
         
-        resultados = dao.findAll();
+        System.out.println("ADM");
+//        printInfoAdm(admDao.findAccount(adm.getEmail(), adm.getSenha()));
         
-        System.out.println("VALORES NO BANCO DE DADOS");
-        for (Organizacao org : resultados) {
-            printInfo(org);
-        }
-        
-        System.out.println("LOGIN");
-        printInfo(dao.findAccount("crianca@gmail", "esperanca"));
     }
     
     private static void printInfo(Organizacao org) {
@@ -45,5 +58,10 @@ public class testeBD {
         System.out.println("Nome: " + org.getNome());
         System.out.println("CNPJ: " + org.getCnpj());
         System.out.println("E-mail: " + org.getEmail());
+    }
+    
+    private static void printInfoAdm(Administrador adm) {
+        System.out.println("E-mail: " + adm.getEmail());
+        System.out.println("Senha: " + adm.getSenha());
     }
 }

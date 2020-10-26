@@ -21,6 +21,10 @@ public class Administrador extends Usuario{
         credencial = gerarCredencial();
         numeroConta = contasAdm++;
     }
+
+    public String getCredencial() {
+        return credencial;
+    }
     
     // credencial é composta por 3 números e 1 letra, usada para conferir que usuário é administrador
     private String gerarCredencial() {

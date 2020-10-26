@@ -1,6 +1,6 @@
 <%-- 
-    Document   : painel-organizacao
-    Created on : 22/10/2020, 11:02:36
+    Document   : painel-administrador
+    Created on : 25/10/2020, 19:59:29
     Author     : beatrizsato
 --%>
 
@@ -13,15 +13,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
-        <title>Painel organização</title>
+        <title>Painel administrador</title>
     </head>
     <body>
-        <h2> <c:out value="${organizacao.nome}" /></h2>
+        <h2> <c:out value="${administrador.nome}" /></h2>
         
-        <h3>Obras que foram doadas para sua organização</h3>
+        <h3>ORGANIZAÇÕES</h3>
         <ul>
-            <li>Monalisa</li>
-            <li>Abaporu</li>
+            <li>AjudaMuito</li>
+            <li>Crança Esperança</li>
         </ul>
     </body>
 </html>
