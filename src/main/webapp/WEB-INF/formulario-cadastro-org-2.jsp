@@ -14,34 +14,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
         <title>JSP Page</title>
     </head>
     <body>
         <!--não consegui colocar pelo pageContext-->
         <c:import url="./../cabecalho.jsp"/>
-        <h1>Solicitação de Cadastro de Organização</h1>
-        <h3>Informações sobre a org <c:out value="${organizacao.nome}" /></h3>
-        <form method='post' action='solicitacao-cadastro-org-2'>
-            <div>
-                <label>Descrição da organização:</label>
-                <input type="text" name="descricao" required value="${descricao}">
-                <!-- caso o servlet aponte um erro -->
-                    <c:if test="${descricaoErro != null}">
-                        <span class="erro"><c:out value="${descricaoErro}" /></span>
-                    </c:if>
-            </div>
-            <div>
-                <label>O que será realizado com as doações?</label>
-                <input type="text" name="justificativa" required value="${justificativa}">
-                <!-- caso o servlet aponte um erro -->
-                    <c:if test="${justificativaErro != null}">
-                        <span class="erro"><c:out value="${justificativaErro}" /></span>
-                    </c:if>
-            </div>
-            <div>
-                <button type="reset">Reiniciar dados</button>
-                <button type="submit">Enviar dados</button>
-            </div>
-        </form>
+        <div class="container">
+            <form method='post' action='solicitacao-cadastro-org-2'>
+                <h2 class='form-group w-75 p3 mx-auto'>Solicitação de Cadastro de Organização</h2>
+                <h3 class='form-group w-75 p3 mx-auto'>Organização: <c:out value="${organizacao.nome}"/></h3>
+                <div class="form-group w-75 p3 mx-auto">
+                    <label>Descrição da organização:</label>
+                    <input class="form-control" type="text" name="descricao" required value="${descricao}">
+                    <!-- caso o servlet aponte um erro -->
+                        <c:if test="${descricaoErro != null}">
+                            <span class="erro"><c:out value="${descricaoErro}" /></span>
+                        </c:if>
+                </div>
+                <div class="form-group w-75 p3 mx-auto">
+                    <label>O que será realizado com as doações?</label>
+                    <input class="form-control" type="text" name="justificativa" required value="${justificativa}">
+                    <!-- caso o servlet aponte um erro -->
+                        <c:if test="${justificativaErro != null}">
+                            <span class="erro"><c:out value="${justificativaErro}" /></span>
+                        </c:if>
+                </div>
+                <div class="form-group w-75 p3 mx-auto">
+                    <button class="btn btn-outline-danger" type="reset">Reiniciar dados</button>
+                    <button class="btn btn-primary" type="submit">Enviar dados</button>
+                </div>
+            </form>
+        </div>
+        
     </body>
 </html>
