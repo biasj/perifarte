@@ -24,6 +24,10 @@ public class testeBD {
         for (Organizacao org : resultados) {
             printInfo(org);
         }
+        
+        
+        System.out.println(dao.findById("1"));
+        printInfo(dao.findById("1"));
 //        
 //        // Construtor: String nome, String email, String senha, String cnpj, String telefone
 //        Organizacao org1 = new Organizacao("Criança Esperança", "crianca@gmail.com", "esperanca", "111222333112233", "11999999999");

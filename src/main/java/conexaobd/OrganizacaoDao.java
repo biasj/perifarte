@@ -31,13 +31,22 @@ public class OrganizacaoDao {
             while (rs.next()) {
                 // pega os dados das colunas da tabela do bd
                 String nome = rs.getString("organizacao_nome");
+                int id = rs.getInt("organizacao_id");
                 String email = rs.getString("organizacao_email");
                 String senha = rs.getString("organizacao_senha");
                 String cnpj = rs.getString("organizacao_cnpj");
                 String telefone = rs.getString("organizacao_telefone");
+                String status = rs.getString("organizacao_status");
+                String descricao = rs.getString("organizacao_descricao");
+                String justificativa = rs.getString("organizacao_justificativa");
                 
                 // Construtor: String nome, String email, String senha, String cnpj, String telefone
                 Organizacao org = new Organizacao(nome, email, senha, cnpj, telefone);
+                org.setId(id);
+                org.setStatus(status);
+                org.setDescricao(descricao);
+                org.setJustificativa(justificativa);
+                
                 resultados.add(org);
             }
         }
@@ -46,7 +55,7 @@ public class OrganizacaoDao {
     
     public void addOrganizacao(Organizacao org) throws SQLException {
         String sql = "INSERT INTO organizacao (organizacao_cnpj, organizacao_nome, organizacao_email, "
-                + "organizacao_senha, organizacao_telefone, organizacao_status) VALUES (?,?,?,?,?,?)";
+                + "organizacao_senha, organizacao_telefone, organizacao_status, organizacao_descricao, organizacao_justificativa) VALUES (?,?,?,?,?,?,?,?)";
 
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
@@ -60,6 +69,8 @@ public class OrganizacaoDao {
                 stmt.setString(4, org.getSenha());
                 stmt.setString(5, org.getTelefone());
                 stmt.setString(6, org.getStatus());
+                stmt.setString(7, org.getDescricao());
+                stmt.setString(8, org.getJustificativa());
 
                 int resultados = stmt.executeUpdate();
                 
@@ -90,9 +101,44 @@ public class OrganizacaoDao {
                     String nome = rs.getString("organizacao_nome");
                     String cnpj = rs.getString("organizacao_cnpj");
                     String telefone = rs.getString("organizacao_telefone");
+                    String descricao = rs.getString("organizacao_descricao");
+                    String justificativa = rs.getString("organizacao_justificativa");
                     
                     Organizacao org = new Organizacao(nome, email, senha, cnpj, telefone);
                     org.setStatus(rs.getString("organizacao_status"));
+                    org.setId(rs.getInt("organizacao_id"));
+                    org.setDescricao(descricao);
+                    org.setJustificativa(justificativa);
+                            
+                    
+                    return org;
+                }
+            }
+        }
+        return null;
+    }
+    
+    public Organizacao findById(String id) throws SQLException {
+        String sql = "SELECT * FROM organizacao WHERE organizacao_id=?";
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, Integer.parseInt(id));
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // pega os dados das colunas da tabela do bd
+                    String nome = rs.getString("organizacao_nome");
+                    String email = rs.getString("organizacao_email");
+                    String senha = rs.getString("organizacao_senha");
+                    String cnpj = rs.getString("organizacao_cnpj");
+                    String telefone = rs.getString("organizacao_telefone");
+                    String descricao = rs.getString("organizacao_descricao");
+                    String justificativa = rs.getString("organizacao_justificativa");
+                    
+                    Organizacao org = new Organizacao(nome, email, senha, cnpj, telefone);
+                    org.setStatus(rs.getString("organizacao_status"));
+                    org.setId(rs.getInt("organizacao_id"));
+                    org.setDescricao(descricao);
+                    org.setJustificativa(justificativa);
                     
                     return org;
                 }

@@ -5,8 +5,12 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
+import conexaobd.OrganizacaoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,14 +30,21 @@ public class AbrirFichaOrg extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        Administrador adm = (Administrador) sessao.getAttribute("administrador");
+
+        String id = request.getParameter("id");
+        OrganizacaoDao orgDao = new OrganizacaoDao();
+        Organizacao org = null;
+        try {
+            org = orgDao.findById(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(AbrirFichaOrg.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        request.setAttribute("org", adm.getOrganizacoes().get(0));
+        sessao.setAttribute("org", org);
         
         // envia para a tela de continuação de solicitação de cadastro 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ficha-org.jsp");
         dispatcher.forward(request, response);
-        
     }
 
 }

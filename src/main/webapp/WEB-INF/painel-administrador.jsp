@@ -28,14 +28,14 @@
 
             <div class="list-group">
                 <c:forEach var="org" items="${administrador.organizacoes}">
-                        <a class="list-group-item list-group-item-action" href="./editar/org">
-                            <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-1">Status: <c:out value="${org.status}"/></p>
-                                <i class="far fa-edit" style="font-size: 30px;"></i>
-                            </div>
-                            <p class="mb-1">Valor arrecadado: R$ 1000</p>
-                        </a>
+                    <a class="list-group-item list-group-item-action" href="./editar/org?id=${org.id}">
+                        <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-1">Status: <c:out value="${org.status}"/></p>
+                            <i class="far fa-edit" style="font-size: 30px;"></i>
+                        </div>
+                        <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                    </a>
                  </c:forEach>
             </div> 
         </div>
