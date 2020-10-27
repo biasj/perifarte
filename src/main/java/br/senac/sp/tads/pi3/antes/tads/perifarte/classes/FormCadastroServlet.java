@@ -81,7 +81,7 @@ public class FormCadastroServlet extends HttpServlet {
         }
         
         // se for artista
-        if(artista.equals("checked")) {
+        if(artista != null) {
             // cria o artista e bota no bd
             Usuario usuario = new Usuario(nome, email, senha);
             HttpSession sessao = request.getSession();

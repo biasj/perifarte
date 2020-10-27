@@ -18,7 +18,7 @@ import java.sql.Statement;
  */
 public class AdministradorDao {
         public void addAdministrador(Administrador adm) throws SQLException {
-        String sql = "INSERT INTO administrador (administrador_id, administrador_nome, administrador_email, administrador_senha) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO administrador (administrador_nome, administrador_email, administrador_senha) VALUES (?,?,?)";
 
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
@@ -26,13 +26,19 @@ public class AdministradorDao {
 
             // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
             try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                stmt.setString(1, String.valueOf(adm.getNumeroConta()));
-                stmt.setString(2, adm.getNome());
-                stmt.setString(3, adm.getEmail());
-                stmt.setString(4, adm.getSenha());
+                stmt.setString(1, adm.getNome());
+                stmt.setString(2, adm.getEmail());
+                stmt.setString(3, adm.getSenha());
 
                 int resultados = stmt.executeUpdate();
-
+                
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    while(rs.next()) {
+                        Integer idGerado = rs.getInt(1);
+                        adm.setId(idGerado);
+                    }
+                }
+                
                 conn.commit();
             } catch (SQLException e) {
                 conn.rollback();

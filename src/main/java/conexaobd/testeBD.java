@@ -17,13 +17,13 @@ import java.util.List;
  */
 public class testeBD {
     public static void main(String[] args) throws SQLException {
-//        OrganizacaoDao dao = new OrganizacaoDao();
-//
-//        List<Organizacao> resultados = dao.findAll();
-//        System.out.println("VALORES NO BANCO DE DADOS");
-//        for (Organizacao org : resultados) {
-//            printInfo(org);
-//        }
+        OrganizacaoDao dao = new OrganizacaoDao();
+
+        List<Organizacao> resultados = dao.findAll();
+        System.out.println("VALORES NO BANCO DE DADOS");
+        for (Organizacao org : resultados) {
+            printInfo(org);
+        }
 //        
 //        // Construtor: String nome, String email, String senha, String cnpj, String telefone
 //        Organizacao org1 = new Organizacao("Criança Esperança", "crianca@gmail.com", "esperanca", "111222333112233", "11999999999");
@@ -44,11 +44,11 @@ public class testeBD {
 //        Organizacao org2 = dao.findAccount("crianca@gmail.com", "esperanca");
         
         
-        AdministradorDao admDao = new AdministradorDao();
-        Administrador adm = new Administrador("Bia", "beatriz@gmail.com", "bia123");
+//        AdministradorDao admDao = new AdministradorDao();
+//        Administrador adm = new Administrador("Bia", "beatriz@gmail.com", "bia123");
 //        admDao.addAdministrador(adm);
         
-        System.out.println("ADM");
+//        System.out.println("ADM");
 //        printInfoAdm(admDao.findAccount(adm.getEmail(), adm.getSenha()));
         
     }

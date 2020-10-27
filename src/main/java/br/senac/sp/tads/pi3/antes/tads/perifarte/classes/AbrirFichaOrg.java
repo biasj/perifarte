@@ -19,25 +19,21 @@ import javax.servlet.http.HttpSession;
  *
  * @author beatrizsato
  */
-@WebServlet(name = "AbrirLoginServlet", urlPatterns = {"/login"})
-public class AbrirLoginServlet extends HttpServlet {
+@WebServlet(name = "AbrirFichaOrg", urlPatterns = {"/editar/org"})
+public class AbrirFichaOrg extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        
-        Organizacao org = (Organizacao) sessao.getAttribute("organizacao");
         Administrador adm = (Administrador) sessao.getAttribute("administrador");
         
-        if(org!=null) {
-            sessao.removeAttribute("organizacao");
-        } else if(adm!=null) {
-            sessao.removeAttribute("administrador");
-        }
+        request.setAttribute("org", adm.getOrganizacoes().get(0));
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-login.jsp");
+        // envia para a tela de continuação de solicitação de cadastro 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ficha-org.jsp");
         dispatcher.forward(request, response);
+        
     }
-    
+
 }

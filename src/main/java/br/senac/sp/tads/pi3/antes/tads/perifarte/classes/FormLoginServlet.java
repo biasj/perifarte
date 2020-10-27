@@ -10,6 +10,7 @@ import conexaobd.OrganizacaoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -78,6 +79,10 @@ public class FormLoginServlet extends HttpServlet {
                 sessao.setAttribute("organizacao", org);
             // se for adm
             } else if(adm != null) {
+                // carregar todas as organizações
+                List organizacoes = orgDao.findAll();
+                // setar o atributo organizacao c a lista das organizacoes
+                adm.setOrganizacoes(organizacoes);
                 sessao.setAttribute("administrador", adm);
             }
             
