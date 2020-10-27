@@ -1,6 +1,6 @@
 <%-- 
-    Document   : painel-organizacao
-    Created on : 22/10/2020, 11:02:36
+    Document   : ficha-org
+    Created on : 27/10/2020, 10:11:52
     Author     : beatrizsato
 --%>
 
@@ -17,16 +17,14 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
-        <title>Perifarte - Obras doadas</title>
+        <title>Perifarte - Organizações</title>
     </head>
     <body>
         <c:import url="./../cabecalho-painel.jsp"/>
-        <h2> <c:out value="${organizacao.nome}" /></h2>
-        
-        <h3>Obras que foram doadas para sua organização</h3>
-        <ul>
-            <li>Monalisa</li>
-            <li>Abaporu</li>
-        </ul>
+        <div class="container">
+            <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
+            <p class="mb-1">Status: <c:out value="${org.status}"/></p>
+            <p class="mb-1">Valor arrecadado: R$ 1000</p>
+        </div>
     </body>
 </html>

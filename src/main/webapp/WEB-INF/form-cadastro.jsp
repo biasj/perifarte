@@ -12,8 +12,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
-        <title>Cadastro</title>
+        <!--font awesome -> icons-->
+        <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>        
+        <title>Perifarte - Cadastro</title>
     </head>
     <body>
         <c:import url="./../cabecalho.jsp"/>
@@ -47,7 +50,7 @@
                     <input id="senha" class="form-control" type="password" name="senha" required>
                 </div>
 
-                <div class="form-check w-75 p3 mx-auto">    
+                <div class="form-check form-group w-75 p3 mx-auto">    
                     <input class="form-check-input" type="checkbox" value="artista" id="artista" name="artista" ${artista.contains('artista') ? 'checked' : ''}>
                     <label class="form-check-label" for="artista">Sou um artista</label>
                 </div>  
@@ -56,10 +59,9 @@
                 <div  style='display: none' class="form-group mx-auto w-75 p3">
                     <label for="portfolio">Portfólio (Instagram/Behance)</label>
                     <input class="form-control" id="portfolio" type="text" name="portfolio" placeholder="Ex: https://www.behance.net/tonariau">
-                    
                 </div>
 
-                <div class='form-group w-75 p3 mx-auto'>
+                <div class='w-75 p3 mx-auto'>
                     <button class="btn btn-primary" type="submit">Enviar dados</button>
                 </div>
             </form>

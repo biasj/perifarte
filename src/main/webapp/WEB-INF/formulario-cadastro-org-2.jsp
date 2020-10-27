@@ -14,8 +14,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
-        <title>JSP Page</title>
+        <!--font awesome -> icons-->
+        <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
+        <title>Perifarte - Solicitação de Cadastro</title>
     </head>
     <body>
         <!--não consegui colocar pelo pageContext-->
@@ -25,16 +28,19 @@
                 <h2 class='form-group w-75 p3 mx-auto'>Solicitação de Cadastro de Organização</h2>
                 <h3 class='form-group w-75 p3 mx-auto'>Organização: <c:out value="${organizacao.nome}"/></h3>
                 <div class="form-group w-75 p3 mx-auto">
-                    <label>Descrição da organização:</label>
-                    <input class="form-control" type="text" name="descricao" required value="${descricao}">
+                    <label for="descricao">Descrição da organização:</label>
+                    
+                    <textarea class="form-control" id="descricao" name="descricao" required value="${descricao}" rows="3"></textarea>    
+                    <small>No máximo 100 caracteres.</small>
                     <!-- caso o servlet aponte um erro -->
-                        <c:if test="${descricaoErro != null}">
-                            <span class="erro"><c:out value="${descricaoErro}" /></span>
-                        </c:if>
+                    <c:if test="${descricaoErro != null}">
+                        <span class="erro"><c:out value="${descricaoErro}" /></span>
+                    </c:if>
                 </div>
                 <div class="form-group w-75 p3 mx-auto">
                     <label>O que será realizado com as doações?</label>
-                    <input class="form-control" type="text" name="justificativa" required value="${justificativa}">
+                    <textarea class="form-control" id="justificativa" name="justificativa" required value="${justificativa}" rows="3"></textarea>  
+                    <small>No máximo 100 caracteres.</small>
                     <!-- caso o servlet aponte um erro -->
                         <c:if test="${justificativaErro != null}">
                             <span class="erro"><c:out value="${justificativaErro}" /></span>

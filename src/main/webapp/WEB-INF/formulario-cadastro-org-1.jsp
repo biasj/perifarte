@@ -14,9 +14,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
-
-        <title>Solicitação de Cadastro</title>
+        <!--font awesome -> icons-->
+        <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
+        <title>Perifarte - Solicitação de Cadastro</title>
     </head>
     <body>
         <!--não consegui colocar pelo pageContext-->
