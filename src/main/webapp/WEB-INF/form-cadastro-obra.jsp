@@ -17,8 +17,8 @@
     </head>
     <body>
         <c:import url="./../cabecalho.jsp"/>
-        <h1>Cadastro</h1>
-        <form method="post" action="processar-cadastro-obra">
+        <h1>Cadastro de Obra</h1>
+        <form method="post" action="processar-cadastro-obra" enctype = "multipart/form-data">
             <div>
                 <label>Titulo</label>
                 <div>
@@ -64,7 +64,10 @@
                 </div>
             </div>
             <div>
-                <button type="submit">Enviar dados</button>
+                <input type="file" name="file" size="50"/><br/>
+            </div>
+            <div>
+                <button type="submit" value="Upload File">Enviar dados</button>
             </div>
                     
             
