@@ -5,8 +5,12 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
+import conexaobd.DoadorDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
@@ -29,9 +33,9 @@ public class FormCadastroServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
         // recupera os dados do post guardados pela sessão
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-        request.setAttribute("usuario", usuario);
-        sessao.removeAttribute("usuario");
+        Doador doador = (Doador) sessao.getAttribute("doador");
+        request.setAttribute("doador", doador);
+        sessao.removeAttribute("doador");
 
         // envia para a tela de login
         // TODO: APARECER MENSAGEM DE CADASTRO COM SUCESSO
@@ -48,8 +52,6 @@ public class FormCadastroServlet extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String artista = request.getParameter("artista");
-        String portfolio = request.getParameter("portfolio");
         
         // Validação do nome
         boolean nomeValido = (nome != null && nome.trim().length() > 0);
@@ -80,19 +82,18 @@ public class FormCadastroServlet extends HttpServlet {
             return;
         }
         
-        // se for artista
-        if(artista != null) {
-            // cria o artista e bota no bd
-            Usuario usuario = new Usuario(nome, email, senha);
-            HttpSession sessao = request.getSession();
-            sessao.setAttribute("usuario", usuario);
+        Doador doador = new Doador(nome, email, senha);
         
-        // se for doador
-        } else {
-            Usuario usuario = new Usuario(nome, email, senha);
-            HttpSession sessao = request.getSession();
-            sessao.setAttribute("usuario", usuario);
+        // insere no banco de dados
+        DoadorDao doadorDao = new DoadorDao();
+        try {
+            doadorDao.addDoador(doador);
+        } catch (SQLException ex) {
+            Logger.getLogger(SolicitacaoCadastroOrg2.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        HttpSession sessao = request.getSession();
+        sessao.setAttribute("doador", doador);
         
         // manda para a área do usuário ou carrinho (pra onde tava antes?)
         response.sendRedirect("processar-cadastro");

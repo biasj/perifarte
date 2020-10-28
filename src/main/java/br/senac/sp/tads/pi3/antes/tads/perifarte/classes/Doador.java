@@ -15,6 +15,7 @@ public class Doador extends Usuario{
     
     private ArrayList<Obra> obras;
     private double totalDoado;
+    private int id;
 
     public Doador(String nome, String email, String senha) {
         super(nome, email, senha);
@@ -25,6 +26,14 @@ public class Doador extends Usuario{
     public void comprarObra(Obra obra){
         this.obras.add(obra);
         totalDoado = totalDoado + obra.getPreco();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     public ArrayList<Obra> getObras() {

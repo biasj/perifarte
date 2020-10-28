@@ -13,12 +13,17 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
+        <!--font awesome -> icons-->
+        <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>  
         <title>Perifarte - Meus pedidos</title>
     </head>
     <body>
         <c:import url="./../cabecalho-painel.jsp"/>
-        <h1>Logado</h1>
-        <h3>Nome: <c:out value="${usuario.nome}"/> </h3>
-        <p>E-mail: <c:out value="${usuario.email}"/></p>
+        <div class="container">
+            <h1>Logado</h1>
+            <h3>Nome: <c:out value="${doador.nome}"/> </h3>
+            <p>E-mail: <c:out value="${doador.email}"/></p>
+        </div>
+
     </body>
 </html>

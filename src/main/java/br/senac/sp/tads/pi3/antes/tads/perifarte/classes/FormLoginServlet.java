@@ -7,6 +7,7 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
 import conexaobd.AdministradorDao;
 import conexaobd.ArtistaDao;
+import conexaobd.DoadorDao;
 import conexaobd.OrganizacaoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,9 +40,7 @@ public class FormLoginServlet extends HttpServlet {
         Organizacao org = (Organizacao) sessao.getAttribute("organizacao");
         Administrador adm = (Administrador) sessao.getAttribute("administrador");
         Artista art = (Artista) sessao.getAttribute("artista");
-        // TODO: doador
-        // TODO: artista
-        // TODO: adm
+        Doador doador = (Doador) sessao.getAttribute("doador");
         
         // switch case?
         // direciona para a página certa
@@ -51,6 +50,8 @@ public class FormLoginServlet extends HttpServlet {
             redirecionarAdm(request, response, adm);
         } else if(art != null){
             redirecionarArt(request, response, art);
+        } else if(doador != null) {
+            redirecionarDoador(request, response, doador);
         }
         
     }
@@ -70,6 +71,7 @@ public class FormLoginServlet extends HttpServlet {
         OrganizacaoDao orgDao = new OrganizacaoDao();
         AdministradorDao admDao = new AdministradorDao();
         ArtistaDao artDao = new ArtistaDao();
+        DoadorDao doadorDao = new DoadorDao();
         HttpSession sessao = request.getSession();
         
         try {
@@ -77,6 +79,7 @@ public class FormLoginServlet extends HttpServlet {
              Organizacao org = orgDao.findAccount(email, senha);
              Administrador adm = admDao.findAccount(email, senha);
              Artista art = artDao.findAccount(email, senha);
+             Doador doador = doadorDao.findAccount(email, senha);
             // confere se é ong, adm, doador, ou artista. 
             
             // se for ong
@@ -93,10 +96,9 @@ public class FormLoginServlet extends HttpServlet {
             //se for art
             } else if(art != null){
                  sessao.setAttribute("artista", art);
+            } else if(doador != null) {
+                sessao.setAttribute("doador", doador);
             }
-            
-            // TODO: doador
-            // TODO: artista
             
             // se não for nenhum dos 4: email/senha errados
             else {
@@ -148,6 +150,16 @@ public class FormLoginServlet extends HttpServlet {
 
         // envia para a tela de artista
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void redirecionarDoador(HttpServletRequest request, HttpServletResponse response, Doador doador) 
+            throws ServletException, IOException {
+        // recupera os dados do post guardados pela sessão
+        request.setAttribute("doador", doador);
+
+        // envia para a tela de doador
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-usuario.jsp");
         dispatcher.forward(request, response);
     }
 }
