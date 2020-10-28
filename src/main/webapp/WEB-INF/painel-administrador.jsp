@@ -27,17 +27,25 @@
             <h3>Organizações</h3>
 
             <div class="list-group">
+                <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="org" items="${administrador.organizacoes}">
-                    <a class="list-group-item list-group-item-action" href="./editar/org?id=${org.id}">
-                        <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-1">Status: <c:out value="${org.status}"/></p>
-                            <i class="far fa-edit" style="font-size: 30px;"></i>
-                        </div>
-                        <p class="mb-1">Valor arrecadado: R$ 1000</p>
-                    </a>
+                    <c:if test="${org.status != 'excluido'}">
+                        
+                        <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                        <a class="list-group-item list-group-item-action" href="/perifarte/editar/org?id=${org.id}">
+                            <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-1">Status: <c:out value="${org.status}"/></p>
+                                <i class="far fa-edit" style="font-size: 30px;"></i>
+                            </div>
+                            <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                        </a>
+                                
+                    </c:if>
                  </c:forEach>
-            </div> 
+                        
+            </div>
+            
         </div>
     </body>
 </html>
