@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Artista extends Usuario{
 
+    private static int id;
 
     private String portifolio;
     private ArrayList<Obra> obras;
@@ -81,6 +82,14 @@ public class Artista extends Usuario{
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    
+     public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        Artista.id = id;
     }
     
     public void AtualizarObra(Obra obra){
