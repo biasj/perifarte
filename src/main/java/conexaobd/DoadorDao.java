@@ -5,8 +5,7 @@
  */
 package conexaobd;
 
-
-import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Artista;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Doador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,11 +14,11 @@ import java.sql.Statement;
 
 /**
  *
- * @author Gabriel
+ * @author beatrizsato
  */
-public class ArtistaDao {
-    public void addArtista(Artista art) throws SQLException {
-        String sql = "INSERT INTO artista (artista_nome, artista_email, artista_senha, artista_portifolio) VALUES (?,?,?,?)";
+public class DoadorDao {
+    public void addDoador(Doador doador) throws SQLException {
+        String sql = "INSERT INTO doador (doador_nome, doador_email, doador_senha) VALUES (?,?,?)";
 
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
@@ -27,17 +26,16 @@ public class ArtistaDao {
 
             // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
             try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                stmt.setString(1, art.getNome());
-                stmt.setString(2, art.getEmail());
-                stmt.setString(3, art.getSenha());
-                stmt.setString(4, art.getPortifolio());
+                stmt.setString(1, doador.getNome());
+                stmt.setString(2, doador.getEmail());
+                stmt.setString(3, doador.getSenha());
 
                 int resultados = stmt.executeUpdate();
                 
                 try (ResultSet rs = stmt.getGeneratedKeys()) {
                     while(rs.next()) {
                         Integer idGerado = rs.getInt(1);
-                        art.setId(idGerado);
+                        doador.setId(idGerado);
                     }
                 }
                 
@@ -49,8 +47,8 @@ public class ArtistaDao {
         }
     }
     
-    public Artista findAccount(String email, String senha) throws SQLException {
-        String sql = "SELECT * FROM artista WHERE artista_email=? and artista_senha=?";
+    public Doador findAccount(String email, String senha) throws SQLException {
+        String sql = "SELECT * FROM doador WHERE doador_email=? and doador_senha=?";
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
@@ -58,13 +56,13 @@ public class ArtistaDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     // pega os dados das colunas da tabela do bd
-                    String nome = rs.getString("artista_nome");
-                    String portifolio = rs.getString("artista_portifolio");
+                    String nome = rs.getString("doador_nome");
+                    String id = rs.getString("doador_id");
                     
-                    Artista art = new Artista(nome, email, senha, portifolio);
-                  
+                    Doador doador = new Doador(nome, email, senha);
+                    doador.setId(Integer.parseInt(id));
                     
-                    return art;
+                    return doador;
                 }
             }
         }
