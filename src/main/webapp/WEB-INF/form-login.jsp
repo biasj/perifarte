@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form.css">
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
@@ -23,7 +24,7 @@
         <c:import url="./../cabecalho.jsp"/>
         <!--INSERIR MENSAGENS DE LOGIN/CADASTRO pela sessao ?-->
         
-        <div class='container-sm'>
+        <div class='container'>
            <form method="post" action="processamento">
                 <h2 class='form-group w-75 p3 mx-auto'>Login</h2>
 

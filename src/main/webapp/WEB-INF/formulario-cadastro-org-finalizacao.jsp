@@ -14,6 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form.css">
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
@@ -24,7 +25,7 @@
         <!--não consegui colocar pelo pageContext-->
         <c:import url="./../cabecalho.jsp"/>
         <div class="container">
-            <h2 class="w-75 p3 mx-auto">Solicitação de Cadastro de Organização</h2>
+            <h3 class="w-75 p3 mx-auto">Cadastro de Organização</h3>
             <c:if test="${organizacao.nome != null}">
                 <h3 class="w-75 p3 mx-auto"> <c:out value="${organizacao.nome}" /></h3>
                 <h4 class="w-75 p3 mx-auto">Solicitação enviada!</h4>

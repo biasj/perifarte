@@ -12,6 +12,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form.css">
+
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
@@ -21,8 +23,7 @@
     <body>
         <c:import url="./../cabecalho.jsp"/>
         
-        <div class="container ">
-            
+        <div class="container">
             <form method="post" action="processar-cadastro">
                 <h2 class='form-group w-75 p3 mx-auto'>Cadastro</h2>
                 <div class="form-group w-75 p3 mx-auto">
