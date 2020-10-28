@@ -58,7 +58,7 @@
 
                 <div class='form-group w-75 p3 mx-auto'>
                     <div><a class="login" href="./cadastro">Ainda não tenho cadastro</a></div>
-                    <div><a class="login" href="./cadastro/artista">Sou artista e quero me cadastrar</a></div>
+                    <div><a class="login" href="./cadastro-artista">Sou artista e quero me cadastrar</a></div>
                     <div><a class="login" href="./formulario-org">Sou uma organizacao e quero me cadastrar</a></div>
                 </div>
 
