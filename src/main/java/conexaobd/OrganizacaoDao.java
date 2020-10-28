@@ -209,5 +209,24 @@ public class OrganizacaoDao {
         }
         return null;
     }
+    
+    public int findByName(String nome) throws SQLException {
+        String sql = "SELECT organizacao_id FROM organizacao WHERE organizacao_nome=?";
+        int id;
+        
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+
+                    id = rs.getInt("organizacao_id");
+                    
+                    return id;
+                }
+            }
+        }
+        return 0;
+    }
 
 }
