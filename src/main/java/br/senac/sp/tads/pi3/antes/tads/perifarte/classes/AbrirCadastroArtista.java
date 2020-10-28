@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author beatrizsato
  */
-@WebServlet(name = "AbrirCadastroArtista", urlPatterns = {"/cadastro/artista"})
+@WebServlet(name = "AbrirCadastroArtista", urlPatterns = {"/cadastro-artista"})
 public class AbrirCadastroArtista extends HttpServlet {
 
     @Override

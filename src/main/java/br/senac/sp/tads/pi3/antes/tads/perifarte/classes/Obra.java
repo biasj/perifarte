@@ -18,6 +18,12 @@ public class Obra {
     private String organizacao;
     private Double preco;
     
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public Obra(String titulo, String descricao, double preco) {
         titulo = null;
         descricao = null;
@@ -60,6 +66,6 @@ public class Obra {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
-    
-        
-}
+
+   
+ }
