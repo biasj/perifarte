@@ -6,6 +6,7 @@
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
 import conexaobd.AdministradorDao;
+import conexaobd.ArtistaDao;
 import conexaobd.OrganizacaoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,6 +38,7 @@ public class FormLoginServlet extends HttpServlet {
         
         Organizacao org = (Organizacao) sessao.getAttribute("organizacao");
         Administrador adm = (Administrador) sessao.getAttribute("administrador");
+        Artista art = (Artista) sessao.getAttribute("artista");
         // TODO: doador
         // TODO: artista
         // TODO: adm
@@ -47,6 +49,8 @@ public class FormLoginServlet extends HttpServlet {
             redirecionarOrg(request, response, org);
         } else if (adm != null) {
             redirecionarAdm(request, response, adm);
+        } else if(art != null){
+            redirecionarArt(request, response, art);
         }
         
     }
@@ -65,12 +69,14 @@ public class FormLoginServlet extends HttpServlet {
         // busca o e-mail na lista de usuários/bd??
         OrganizacaoDao orgDao = new OrganizacaoDao();
         AdministradorDao admDao = new AdministradorDao();
+        ArtistaDao artDao = new ArtistaDao();
         HttpSession sessao = request.getSession();
         
         try {
             // procura no banco de dados pelo e-mail e senha
              Organizacao org = orgDao.findAccount(email, senha);
              Administrador adm = admDao.findAccount(email, senha);
+             Artista art = artDao.findAccount(email, senha);
             // confere se é ong, adm, doador, ou artista. 
             
             // se for ong
@@ -84,6 +90,9 @@ public class FormLoginServlet extends HttpServlet {
                 // setar o atributo organizacao c a lista das organizacoes
                 adm.setOrganizacoes(organizacoes);
                 sessao.setAttribute("administrador", adm);
+            //se for art
+            } else if(art != null){
+                 sessao.setAttribute("artista", art);
             }
             
             // TODO: doador
@@ -129,6 +138,16 @@ public class FormLoginServlet extends HttpServlet {
 
         // envia para a tela de continuação de solicitação de cadastro 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-administrador.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void redirecionarArt(HttpServletRequest request, HttpServletResponse response, Artista art) 
+            throws ServletException, IOException {
+        // recupera os dados do post guardados pela sessão
+        request.setAttribute("artista", art);
+
+        // envia para a tela de artista
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
         dispatcher.forward(request, response);
     }
 }
