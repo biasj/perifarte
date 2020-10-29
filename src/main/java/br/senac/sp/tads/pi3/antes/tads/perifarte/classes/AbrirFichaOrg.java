@@ -78,6 +78,7 @@ public class AbrirFichaOrg extends HttpServlet {
         OrganizacaoDao dao = new OrganizacaoDao();
         
         try {
+            // verifica qual dos botões foram clicados
             if(botaoAprovar != null) {
                 dao.aprovarOrganizacao(id);
             } else if(botaoSuspender != null) {
@@ -86,7 +87,11 @@ public class AbrirFichaOrg extends HttpServlet {
                 dao.excluirSolicitacao(id);
             }
             
+            // atualiza a organizacao a partir do banco de dados
             org = dao.findById(id);
+            
+            // atualiza lista de organizacoes do administrador, com os valores atualizados
+            // a partir do banco de dados
             adm.setOrganizacoes(dao.findAll());
             
         } catch (SQLException ex) {

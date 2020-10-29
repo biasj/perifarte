@@ -17,6 +17,7 @@ import java.sql.Statement;
  * @author beatrizsato
  */
 public class DoadorDao {
+    // insere
     public void addDoador(Doador doador) throws SQLException {
         String sql = "INSERT INTO doador (doador_nome, doador_email, doador_senha) VALUES (?,?,?)";
 
@@ -34,6 +35,7 @@ public class DoadorDao {
                 
                 try (ResultSet rs = stmt.getGeneratedKeys()) {
                     while(rs.next()) {
+                        // pega o id gerado pelo banco e atribui ao objeto passado
                         Integer idGerado = rs.getInt(1);
                         doador.setId(idGerado);
                     }
@@ -47,6 +49,7 @@ public class DoadorDao {
         }
     }
     
+    // le
     public Doador findAccount(String email, String senha) throws SQLException {
         String sql = "SELECT * FROM doador WHERE doador_email=? and doador_senha=?";
         try (Connection conn = Conexao.obterConexao();
@@ -60,6 +63,7 @@ public class DoadorDao {
                     String id = rs.getString("doador_id");
                     
                     Doador doador = new Doador(nome, email, senha);
+                    // atualiza o id que não é inicializado na construção
                     doador.setId(Integer.parseInt(id));
                     
                     return doador;
@@ -67,5 +71,47 @@ public class DoadorDao {
             }
         }
         return null;
+    }
+    
+    public void atualizaDoador(Doador doador) throws SQLException {
+        String sql = "update doador set doador_email=?, doador_senha=? where doador_id=?";
+        try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, doador.getEmail());
+                stmt.setString(2, doador.getSenha());
+                stmt.setInt(3, doador.getId());
+                
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
+    }
+    
+    // deleta o doador
+    public void deletaDoador(String id) throws SQLException {
+        String sql = "delete from doador where doador_id = ?";
+        
+        try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, Integer.parseInt(id));
+                
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
     }
 }

@@ -24,7 +24,6 @@
     <body>
         <c:import url="./../cabecalho-painel.jsp"/>
         
-
         <div class="container ficha-org">
             <a class="back-button" href="/perifarte/processamento"><i class="fas fa-chevron-left" ></i> Voltar</a>
             

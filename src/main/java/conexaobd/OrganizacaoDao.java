@@ -19,6 +19,7 @@ import java.util.List;
  * @author beatrizsato
  */
 public class OrganizacaoDao {
+    // insere
     public void addOrganizacao(Organizacao org) throws SQLException {
         String sql = "INSERT INTO organizacao (organizacao_cnpj, organizacao_nome, organizacao_email, "
                 + "organizacao_senha, organizacao_telefone, organizacao_status, organizacao_descricao, organizacao_justificativa) VALUES (?,?,?,?,?,?,?,?)";
@@ -54,16 +55,15 @@ public class OrganizacaoDao {
             }
         }
     }
-        
+    
+    // atualiza
     public void aprovarOrganizacao(String id) throws SQLException {
         String sql = "update organizacao set organizacao_status = 'aprovado' where organizacao_id=?";
             try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
             conn.setAutoCommit(false);
 
-            
-            // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
-            try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, id);
                 int resultados = stmt.executeUpdate();
 
@@ -75,15 +75,14 @@ public class OrganizacaoDao {
         }
     }
     
+    // atualiza
     public void suspenderCadastro(String id) throws SQLException {
         String sql = "update organizacao set organizacao_status = 'suspenso' where organizacao_id=?";
             try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
             conn.setAutoCommit(false);
 
-            
-            // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
-            try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, id);
                 int resultados = stmt.executeUpdate();
 
@@ -95,15 +94,14 @@ public class OrganizacaoDao {
         }
     }
     
+    // atualiza
     public void excluirSolicitacao(String id) throws SQLException {
         String sql = "update organizacao set organizacao_status = 'excluido' where organizacao_id=?";
             try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
             conn.setAutoCommit(false);
 
-            
-            // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
-            try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, id);
                 int resultados = stmt.executeUpdate();
 
@@ -115,6 +113,26 @@ public class OrganizacaoDao {
         }
     }
     
+    // exclui (não tá sendo chamado)
+    public void excluirOrganizacaoBD(String id) throws SQLException {
+        String sql = "delete from organizacao where organizacao_id=?";
+            try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, id);
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
+    }
+    
+    // métodos de leitura
     public List<Organizacao> findAll() throws SQLException {
         String sql = "select * from organizacao";
         List<Organizacao> resultados = new ArrayList<>();

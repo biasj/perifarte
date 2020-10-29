@@ -17,7 +17,8 @@ import java.sql.Statement;
  * @author beatrizsato
  */
 public class AdministradorDao {
-        public void addAdministrador(Administrador adm) throws SQLException {
+    // insere
+    public void addAdministrador(Administrador adm) throws SQLException {
         String sql = "INSERT INTO administrador (administrador_nome, administrador_email, administrador_senha) VALUES (?,?,?)";
 
         try (Connection conn = Conexao.obterConexao()) {
@@ -47,6 +48,7 @@ public class AdministradorDao {
         }
     }
     
+    // le
     public Administrador findAccount(String email, String senha) throws SQLException {
         String sql = "SELECT * FROM administrador WHERE administrador_email=? and administrador_senha=?";
         try (Connection conn = Conexao.obterConexao();
@@ -68,4 +70,47 @@ public class AdministradorDao {
         return null;
     }
     
+    // atualiza
+    public void atualizaConta(Administrador adm) throws SQLException {
+        String sql = "update administrador set administrador_email=?, administrador_senha=? where administrador_id=?";
+        try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, adm.getEmail());
+                stmt.setString(2, adm.getSenha());
+                stmt.setInt(3, adm.getId());
+                
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
+        
+    }
+    
+    // exclui conta
+    public void excluirConta(String id) throws SQLException {
+        String sql = "delete from administrador where administrador_id = ?";
+        
+        try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, Integer.parseInt(id));
+                
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
+    }
 }
