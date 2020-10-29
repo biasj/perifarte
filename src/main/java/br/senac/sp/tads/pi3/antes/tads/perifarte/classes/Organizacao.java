@@ -36,7 +36,6 @@ public class Organizacao extends Usuario {
         contaPayPal = null;
         // já começa como pendente e só depois vai ser aprovado
         status = "pendente";
-        
     }
 
     @Override

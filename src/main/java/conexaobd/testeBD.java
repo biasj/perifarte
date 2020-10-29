@@ -6,6 +6,8 @@
 package conexaobd;
 
 import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Administrador;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Artista;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Doador;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Organizacao;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
@@ -18,38 +20,27 @@ import java.util.List;
 public class testeBD {
     public static void main(String[] args) throws SQLException {
         OrganizacaoDao dao = new OrganizacaoDao();
+        ArtistaDao artDao = new ArtistaDao();
+//        Artista art = new Artista("Marcelo", "marcelo@gmail.com", "marcelo123", "insta");
+//        artDao.addArtista(art);
 
-        List<Organizacao> resultados = dao.findAll();
-        System.out.println("VALORES NO BANCO DE DADOS");
-        for (Organizacao org : resultados) {
-            printInfo(org);
-        }
-//        
-//        // Construtor: String nome, String email, String senha, String cnpj, String telefone
-//        Organizacao org1 = new Organizacao("Criança Esperança", "crianca@gmail.com", "esperanca", "111222333112233", "11999999999");
-//        
-////        dao.addOrganizacao(org1);
-//        
-//        resultados = dao.findAll();
-//        
+//        System.out.println(dao.findById("1"));
+//        printInfo(dao.findById("1"));
+//        printInfoArt(artDao.findAccount("marcelo@gmail.com", "marcelo123"));
+        
+//        dao.excluirSolicitacao("1");
+//        dao.aprovarOrganizacao("1");
+//        dao.suspenderCadastro("1");
+//        List<Organizacao> resultados = dao.findAll();
 //        System.out.println("VALORES NO BANCO DE DADOS");
 //        for (Organizacao org : resultados) {
 //            printInfo(org);
 //        }
-//        
-//        System.out.println("");
-//        System.out.println("LOGIN");
-//        printInfo(dao.findAccount("crianca@gmail", "esperanca"));
-//        
-//        Organizacao org2 = dao.findAccount("crianca@gmail.com", "esperanca");
+
+        DoadorDao doaDao = new DoadorDao();
+        Doador doador = new Doador("Juan", "juan@gmail.com", "juan123");
+        doaDao.addDoador(doador);
         
-        
-//        AdministradorDao admDao = new AdministradorDao();
-//        Administrador adm = new Administrador("Bia", "beatriz@gmail.com", "bia123");
-//        admDao.addAdministrador(adm);
-        
-//        System.out.println("ADM");
-//        printInfoAdm(admDao.findAccount(adm.getEmail(), adm.getSenha()));
         
     }
     
@@ -63,5 +54,10 @@ public class testeBD {
     private static void printInfoAdm(Administrador adm) {
         System.out.println("E-mail: " + adm.getEmail());
         System.out.println("Senha: " + adm.getSenha());
+    }
+    
+    private static void printInfoArt(Artista art) {
+        System.out.println("Nome: " + art.getNome());
+        System.out.println("E-mail: " + art.getEmail());
     }
 }

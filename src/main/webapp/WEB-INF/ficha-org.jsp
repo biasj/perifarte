@@ -21,10 +21,34 @@
     </head>
     <body>
         <c:import url="./../cabecalho-painel.jsp"/>
-        <div class="container">
-            <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
-            <p class="mb-1">Status: <c:out value="${org.status}"/></p>
-            <p class="mb-1">Valor arrecadado: R$ 1000</p>
+        <div class="container ">
+            <form method="post" action="org">
+                <!--cabeçalho do formulário-->
+                <div class="form-group w-75 p3 mx-auto">
+                    <h3 class="mb-1"><c:out value="${org.nome}"/></h3>
+                    <p class="mb-1">Status: <c:out value="${org.status}"/></p>
+                    <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                </div>
+
+                <div class="form-group w-75 p3 mx-auto">
+                    <h5 class="mb-1">Descrição</h5>
+                    <p class="mb-1"><c:out value="${org.descricao}"/></p> 
+                </div>
+                <div class="form-group w-75 p3 mx-auto">
+                    <h5 class="mb-1">Justificativa</h5>
+                    <p class="mb-1"><c:out value="${org.justificativa}"/></p>
+                </div>
+                
+                <div class="form-group w-75 p3 mx-auto">
+                    <c:if test="${org.status == 'pendente' || org.status == 'suspenso'}">
+                        <button class="btn btn-primary" type="submit">Aprovar Cadastro</button>
+                        <!--<button class="btn btn-outline-danger" type="submit">Excluir Solicitação</button>-->
+                    </c:if>
+                    <c:if test="${org.status == 'aprovado'}">
+                        <button class="btn btn-outline-danger">Suspender Cadastro</button>
+                    </c:if> 
+                </div>
+            </form>
         </div>
     </body>
 </html>
