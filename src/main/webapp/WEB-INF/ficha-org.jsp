@@ -47,12 +47,15 @@
                 
                 <div class="form-group w-75 p3 mx-auto">
                     <c:if test="${org.status == 'pendente' || org.status == 'suspenso'}">
-                        <button class="btn btn-primary" type="submit">Aprovar Cadastro</button>
-                        <!--<button class="btn btn-outline-danger" type="submit">Excluir Solicitação</button>-->
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-danger" type="submit" name="excluir">Excluir Solicitação</button>
+                            <button class="btn btn-primary" type="submit" name="aprovar">Aprovar Cadastro</button> 
+                        </div>
                     </c:if>
                     <c:if test="${org.status == 'aprovado'}">
-                        <button class="btn btn-outline-danger">Suspender Cadastro</button>
+                        <button class="btn btn-outline-danger" name="suspender">Suspender Cadastro</button>
                     </c:if> 
+                    
                 </div>
             </form>
         </div>

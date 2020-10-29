@@ -62,8 +62,8 @@
                     <input class="form-control" id="portfolio" type="text" name="portfolio" placeholder="Ex: https://www.behance.net/tonariau">
                 </div>
 
-                <div class='w-75 p3 mx-auto'>
-                    <button class="btn btn-primary" type="submit">Enviar dados</button>
+                <div class="d-flex justify-content-center">
+                    <button class="w-50 btn btn-primary" type="submit">Enviar dados</button>
                 </div>
             </form>
         </div>

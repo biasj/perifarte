@@ -31,7 +31,6 @@
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="org" items="${administrador.organizacoes}">
                     <c:if test="${org.status != 'excluido'}">
-                        
                         <!--mostrar as seguintes informacoes com possibilidade de editar-->
                         <a class="list-group-item list-group-item-action" href="/perifarte/editar/org?id=${org.id}">
                             <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
@@ -41,7 +40,6 @@
                             </div>
                             <p class="mb-1">Valor arrecadado: R$ 1000</p>
                         </a>
-                                
                     </c:if>
                  </c:forEach>
                         

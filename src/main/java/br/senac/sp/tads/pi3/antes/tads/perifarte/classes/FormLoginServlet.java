@@ -137,7 +137,7 @@ public class FormLoginServlet extends HttpServlet {
             throws ServletException, IOException {
         // recupera os dados do post guardados pela sessão
         request.setAttribute("administrador", adm);
-
+        
         // envia para a tela de continuação de solicitação de cadastro 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-administrador.jsp");
         dispatcher.forward(request, response);

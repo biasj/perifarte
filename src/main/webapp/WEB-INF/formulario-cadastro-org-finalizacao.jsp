@@ -31,11 +31,13 @@
                 <h4 class="w-75 p3 mx-auto">Solicitação enviada!</h4>
                 <p class="w-75 p3 mx-auto">Suas informações foram recebidas e estão na fila para serem analisadas pela nossa equipe!</p>
                 <p class="w-75 p3 mx-auto">A organização receberá confirmação de cadastro no e-mail: </p>
-                <p class="w-75 p3 mx-auto">E-mail: <c:out value="${organizacao.email}" /></p>
+                <p class="w-75 p3 mx-auto"><c:out value="${organizacao.email}" /></p>
             </c:if>
             <c:if test="${organizacao.nome == null}">
-                <p class="w-75 p3 mx-auto">Acesso negado, faça o login para acessar a plataforma</p>
-                <a class="w-75 p3 mx-auto" href="./login">login</a>
+                <p class="w-75 p3 mx-auto">Acesso negado, faça o login para acessar a plataforma</p>                
+                <div class="d-flex justify-content-center ">
+                    <a class="w-50 btn btn-primary" href="./login">login</a>
+                </div>
             </c:if>
         </div>
         

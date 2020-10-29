@@ -67,9 +67,9 @@
                    <input class='form-control' type="password" id='senha' name="senha">
                </div>
                    
-               <div class='form-group w-75 p3 mx-auto'>
+               <div class='w-75 p3 mx-auto d-flex justify-content-between'>
                    <button class='btn btn-outline-danger' type="reset">Reiniciar dados</button>
-                   <button class='btn btn-primary' type="submit">Enviar dados</button>
+                   <button class='btn btn-primary w-50' type="submit">Enviar dados</button>
                </div>
            </form>
         </div>

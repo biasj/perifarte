@@ -63,8 +63,8 @@
                     <div><a class="login" href="./formulario-org">Sou uma organizacao e quero me cadastrar</a></div>
                 </div>
 
-                <div class='form-group w-75 p3 mx-auto'>
-                    <button class='btn btn-primary' type="submit">Fazer Login</button>
+                <div class='d-flex justify-content-center'>
+                    <button class='w-50 btn btn-primary' type="submit">Fazer Login</button>
                 </div>
             </form> 
         </div>
