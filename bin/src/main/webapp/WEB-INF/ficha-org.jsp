@@ -1,7 +1,7 @@
 <%-- 
-    Document   : painel-administrador
-    Created on : 25/10/2020, 19:59:29
-    Author     : beatrizsatosim
+    Document   : ficha-org
+    Created on : 27/10/2020, 10:11:52
+    Author     : beatrizsato
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,22 +22,9 @@
     <body>
         <c:import url="./../cabecalho-painel.jsp"/>
         <div class="container">
-            <h2>Administrador: <c:out value="${administrador.nome}" /></h2>
-        
-            <h3>Organizações</h3>
-
-            <div class="list-group">
-                <c:forEach var="org" items="${administrador.organizacoes}">
-                        <a class="list-group-item list-group-item-action" href="./editar/org">
-                            <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-1">Status: <c:out value="${org.status}"/></p>
-                                <i class="far fa-edit" style="font-size: 30px;"></i>
-                            </div>
-                            <p class="mb-1">Valor arrecadado: R$ 1000</p>
-                        </a>
-                 </c:forEach>
-            </div> 
+            <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
+            <p class="mb-1">Status: <c:out value="${org.status}"/></p>
+            <p class="mb-1">Valor arrecadado: R$ 1000</p>
         </div>
     </body>
 </html>

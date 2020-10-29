@@ -1,7 +1,7 @@
 <%-- 
     Document   : painel-administrador
     Created on : 25/10/2020, 19:59:29
-    Author     : beatrizsatosim
+    Author     : beatrizsato
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
