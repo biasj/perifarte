@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -113,5 +115,33 @@ public class DoadorDao {
                 throw e;
             }
         }
+    }
+    
+    // lista de todos os doadores do sistema
+    public List<Doador> findAll() throws SQLException {
+        String sql = "select * from doador";
+        List<Doador> resultados = new ArrayList<>();
+
+        // try-with-resources (após Java 7 ou superior)
+        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                // pega os dados das colunas da tabela do bd
+                String nome = rs.getString("doador_nome");
+                int id = rs.getInt("doador_id");
+                String email = rs.getString("doador_email");
+                String senha = rs.getString("doador_senha");
+  
+                // Construtor: String nome, String email, String senha, String portfolio
+                Doador doador = new Doador(nome, email, senha);
+                // inicializa id pelo id do banco
+                doador.setId(id);
+                
+                resultados.add(doador);
+            }
+        }
+        return resultados;
     }
 }

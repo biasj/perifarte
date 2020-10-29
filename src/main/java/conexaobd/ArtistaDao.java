@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -69,5 +71,34 @@ public class ArtistaDao {
             }
         }
         return null;
+    }
+    
+    // métodos de leitura
+    public List<Artista> findAll() throws SQLException {
+        String sql = "select * from artista";
+        List<Artista> resultados = new ArrayList<>();
+
+        // try-with-resources (após Java 7 ou superior)
+        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                // pega os dados das colunas da tabela do bd
+                String nome = rs.getString("artista_nome");
+                int id = rs.getInt("artista_id");
+                String email = rs.getString("artista_email");
+                String senha = rs.getString("artista_senha");
+                String portfolio = rs.getString("artista_portifolio");
+  
+                // Construtor: String nome, String email, String senha, String portfolio
+                Artista artista = new Artista(nome, email, senha, portfolio);
+                // inicializa id pelo id do banco
+                artista.setId(id);
+                
+                resultados.add(artista);
+            }
+        }
+        return resultados;
     }
 }
