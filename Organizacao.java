@@ -5,7 +5,6 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +24,8 @@ public class Organizacao extends Usuario {
 
     private String contaPayPal;
     
-    private ArrayList<Obra> obraDoada;
+    private List<Obra> obrasDoadas;
+
     
     public Organizacao(String nome, String email, String senha, String cnpj, String telefone) {
         super(nome, email, senha);
@@ -36,6 +36,7 @@ public class Organizacao extends Usuario {
         contaPayPal = null;
         // já começa como pendente e só depois vai ser aprovado
         status = "pendente";
+        
     }
 
     @Override
@@ -79,8 +80,8 @@ public class Organizacao extends Usuario {
         return status;
     }
     
-    public ArrayList<Obra> getObraDoada() {
-        return obraDoada;
+    public List<Obra> getobrasDoadas() {
+        return obrasDoadas;
     }
 
     public void setDescricao(String descricao) {
@@ -102,10 +103,12 @@ public class Organizacao extends Usuario {
     public void setStatus(String statusCadastral) {
         this.status = statusCadastral;
     }
-    
-    public void setObraDoada(ArrayList<Obra> obraDoada) {
-        this.obraDoada = obraDoada;
+
+    public void setobrasDoadas(List<Obra> obrasDoadas) {
+        this.obrasDoadas = obrasDoadas;
     }
+    
+    
     
     // a ideia é que valide o cnpj antes de mandar construir
     private boolean validarCnpj(String cnpj) {
