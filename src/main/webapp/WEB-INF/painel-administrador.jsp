@@ -24,8 +24,8 @@
         <c:import url="./../cabecalho-painel.jsp"/>
         <div class="container">
             <h2>Administrador: <c:out value="${administrador.nome}" /></h2>
-        
-            <div class="list-group adm">
+            
+            <div class="list-group">
                 <h3>Organizações</h3>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="org" items="${administrador.organizacoes}">
@@ -44,7 +44,7 @@
             </div>
             
             <!--lista de doadores cadastrados-->
-            <div class="list-group adm">
+            <div class="list-group">
                 <h3>Doadores</h3>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="doador" items="${doadores}">
@@ -63,7 +63,7 @@
             </div>
             
             <!--lista de artistas cadastrados-->
-            <div class="list-group adm">
+            <div class="list-group">
                 <h3>Artistas</h3>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="artista" items="${artistas}">
