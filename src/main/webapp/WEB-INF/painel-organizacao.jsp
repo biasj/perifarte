@@ -24,9 +24,42 @@
         <h2> <c:out value="${organizacao.nome}" /></h2>
         
         <h3>Obras que foram doadas para sua organização</h3>
-        <ul>
-            <li>Monalisa</li>
-            <li>Abaporu</li>
-        </ul>
+        
+        <div class="list-obras-doadas">
+        	<c:choose>
+        		<c:when test="${obra.obraDoada != null && obra.obraDoada.length > 0}">
+     				<ul>
+		     			<c:forEach var="org" items="${administrador.organizacoes}">
+			     			<li>
+			     			<a class="list-group-item list-group-item-action" href="./editar/org">
+			     				<h5 class="mb-1"><c:out value="${obra.nome}"/></h5>
+			     				<h5 class="mb-1"><c:out value="${artista.nome}"/></h5>
+			     				<h5 class="mb-1"><c:out value="${obra.preco}"/></h5>
+			                </a>
+		     				</li>
+		     			</c:forEach>
+		            </ul>
+		        </c:when>
+		   
+		    <c:otherwise>
+		    	<p>Infelizmente obras ainda não foram revertidas para a sua Organização.</p>
+		    </c:otherwise>
+		   	</c:choose>
+        </div> 
+        
+        <div class="total-doado">
+	        <c:choose>
+	        	<c:when test="${obra.obraDoada != null && obra.obraDoada.length > 0}"> 
+	        		<c:forEach var="totalDoado" items="${doacoes.totalDoado}">
+	        		<h4><c:out value="${totalDoado}"/></h4>
+	        		</c:forEach>
+	        	</c:when>
+	        
+		    	<c:otherwise>
+		    		<p>Total doado: R$ 0.00</p>
+		    	</c:otherwise>
+		    </c:choose>
+        </div>
+        
     </body>
 </html>
