@@ -21,13 +21,13 @@
     </head>
     <body>
         <c:import url="./../cabecalho-painel.jsp"/>
-        <h2> <c:out value="${organizacaoAttr}" /></h2>
+        <h2> <c:out value="${organizacao.nome}" /></h2>
         
         <h3>Obras que foram doadas para sua organização</h3>
         
         <div class="list-obras-doadas">
         	<c:choose>
-        		<c:when test="${ArrayList<Obra> obraDoada != null && ArrayList<Obra> obraDoada.length > 0}" 
+        		<c:when test="${obra.obraDoada != null && obra.obraDoada.length > 0}">
      				<ul>
 		     			<c:forEach var="org" items="${administrador.organizacoes}">
 			     			<li>
@@ -35,8 +35,6 @@
 			     				<h5 class="mb-1"><c:out value="${obra.nome}"/></h5>
 			     				<h5 class="mb-1"><c:out value="${artista.nome}"/></h5>
 			     				<h5 class="mb-1"><c:out value="${obra.preco}"/></h5>
-			     				
-			     				
 			                </a>
 		     				</li>
 		     			</c:forEach>
@@ -50,9 +48,10 @@
         
         <div class="total-doado">
 	        <c:choose>
-	        	<c:when test="${ArrayList<Obra> obraDoada != null && ArrayList<Obra> obraDoada.length > 0}" 
-	        		<c: forEach var="totalDoado" items="${doacoes.totalDoado}"}>
+	        	<c:when test="${obra.obraDoada != null && obra.obraDoada.length > 0}"> 
+	        		<c:forEach var="totalDoado" items="${doacoes.totalDoado}">
 	        		<h4><c:out value="${totalDoado}"/></h4>
+	        		</c:forEach>
 	        	</c:when>
 	        </c:choose>
 		    <c:otherwise>
