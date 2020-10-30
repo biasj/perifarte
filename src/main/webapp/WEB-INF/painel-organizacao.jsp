@@ -40,10 +40,11 @@
 		     			</c:forEach>
 		            </ul>
 		        </c:when>
-		    </c:choose>
+		   
 		    <c:otherwise>
 		    	<p>Infelizmente obras ainda não foram revertidas para a sua Organização.</p>
-		    </c:otherwise>   
+		    </c:otherwise>
+		   	</c:choose>
         </div> 
         
         <div class="total-doado">
@@ -53,10 +54,11 @@
 	        		<h4><c:out value="${totalDoado}"/></h4>
 	        		</c:forEach>
 	        	</c:when>
-	        </c:choose>
-		    <c:otherwise>
-		    	<p>Total doado: R$ 0.00</p>
-		    </c:otherwise>
+	        
+		    	<c:otherwise>
+		    		<p>Total doado: R$ 0.00</p>
+		    	</c:otherwise>
+		    </c:choose>
         </div>
         
     </body>
