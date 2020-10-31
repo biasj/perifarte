@@ -5,6 +5,7 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -14,18 +15,18 @@ import java.util.ArrayList;
 public class Doador extends Usuario{
     
     private ArrayList<Obra> obras;
-    private double totalDoado;
+    private BigDecimal totalDoado;
     private int id;
 
     public Doador(String nome, String email, String senha) {
         super(nome, email, senha);
         this.obras = new ArrayList<>();
-        this.totalDoado = 0;
+        this.totalDoado = new BigDecimal(0);
     }
     
     public void comprarObra(Obra obra){
         this.obras.add(obra);
-        totalDoado = totalDoado + obra.getPreco();
+        totalDoado = totalDoado.add(obra.getPreco());
     }
 
     public int getId() {
@@ -40,7 +41,7 @@ public class Doador extends Usuario{
         return obras;
     }
 
-    public double getTotalDoado() {
+    public BigDecimal getTotalDoado() {
         return totalDoado;
     }
 
@@ -68,7 +69,7 @@ public class Doador extends Usuario{
         this.obras = obras;
     }
 
-    public void setTotalDoado(double totalDoado) {
+    public void setTotalDoado(BigDecimal totalDoado) {
         this.totalDoado = totalDoado;
     }
 

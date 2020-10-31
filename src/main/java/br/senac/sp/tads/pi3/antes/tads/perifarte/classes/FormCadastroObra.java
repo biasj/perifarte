@@ -5,10 +5,17 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
+import conexaobd.ObraDao;
+import conexaobd.OrganizacaoDao;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
  
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,16 +41,23 @@ public class FormCadastroObra extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
         HttpSession sessao = request.getSession();
         // recupera os dados do post guardados pela sessão
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-        request.setAttribute("usuario", usuario);
-        sessao.removeAttribute("usuario");
+        Obra obra = (Obra) sessao.getAttribute("obra");
+        request.setAttribute("obra", obra);
+        sessao.removeAttribute("obra");
+        
+        // mostra todos as obras daquele artista
+        ObraDao obraDao = new ObraDao();
+        Artista artista = (Artista) sessao.getAttribute("artista");
+        try {
+            List<Obra> obras = obraDao.findObraByArtista(artista.getId());
+            artista.setObras(obras);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormCadastroObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        // envia para a tela de login
-        // TODO: APARECER MENSAGEM DE CADASTRO COM SUCESSO
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-cadastro-obra.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
         dispatcher.forward(request, response);
         
     }
@@ -56,8 +70,13 @@ public class FormCadastroObra extends HttpServlet {
         // pega os dados do formulario de login
         String titulo = request.getParameter("titulo");
         String descricao = request.getParameter("descricao");
-        double preco = Double.parseDouble(request.getParameter("preco"));
+        String precoStr = request.getParameter("preco");
         String ongEscolhida = request.getParameter("ongEscolhida");
+        
+        BigDecimal preco = null;
+        if(precoStr != null && precoStr.trim().length() > 0) {
+            preco = new BigDecimal(precoStr);
+        }
         
         System.out.println("entrou no post");
 
@@ -68,13 +87,13 @@ public class FormCadastroObra extends HttpServlet {
         boolean descricaoValido = (descricao != null);
         
          //Validacao do e-mail
-        boolean precoValido = (preco >= 0 && preco <= 50);
+        // BigDecimal compara = new BigDecimal(0);
+        //boolean precoValido = (preco.compareTo(compara) >= 0 && preco.compareTo(compara) <= 50);
         
         boolean ongEscolhidaValido = (ongEscolhida != null);
         
-        boolean camposValidosGlobal = tituloValido && descricaoValido && precoValido &&  ongEscolhidaValido;
-        
-        
+        boolean camposValidosGlobal = tituloValido && descricaoValido && /*precoValido &&*/  ongEscolhidaValido;
+
         
         if (!camposValidosGlobal) {
             
@@ -86,15 +105,13 @@ public class FormCadastroObra extends HttpServlet {
                 request.setAttribute("descricaoErro", "descricao deve ser preenchida");
             }
             
-            if (!precoValido) {
+            /*if (!precoValido) {
                 request.setAttribute("precoErro", "preco deve ser preenchido");
-            }
+            }*/
             
            if (!ongEscolhidaValido) {
                request.setAttribute("ongEscolhidaErro", "ongEscolhida deve ser preenchida");
            }
-            
-            
             
             request.setAttribute("titulo", titulo);
             request.setAttribute("descricao", descricao);
@@ -121,12 +138,22 @@ public class FormCadastroObra extends HttpServlet {
             inputStream = filePart.getInputStream();
         }*/
         
-        
-        
-        // cria a obra e bota no bd
-        Obra lObra = new Obra(titulo, descricao, preco);
         HttpSession sessao = request.getSession();
-        sessao.setAttribute("obra", lObra);
+        Artista art = (Artista) sessao.getAttribute("artista");
+        
+        Obra obra = new Obra(titulo, descricao, preco);
+        
+        ObraDao obraDao = new ObraDao();
+        OrganizacaoDao orgDao = new OrganizacaoDao();
+        // cria a obra e bota no bd
+        try {
+            int idOrg = orgDao.findByName(ongEscolhida);
+            obraDao.addObra(obra, idOrg, art.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(FormCadastroObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        sessao.setAttribute("obra", obra);
         // manda para a área do usuário ou carrinho (pra onde tava antes?)
         response.sendRedirect("processar-cadastro-obra");
         

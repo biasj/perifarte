@@ -5,7 +5,7 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,12 +15,12 @@ public class Artista extends Usuario{
 
     private int id;
     private String portifolio;
-    private ArrayList<Obra> obras;
+    private List<Obra> obras;
  
     public Artista(String nome, String email, String senha, String portifolio) {
         super(nome, email, senha);
         this.portifolio = portifolio;
-        this.obras = new ArrayList<>();
+        this.obras = null;
     }
     
     public void cadastrarObra(Obra obra){
@@ -31,7 +31,7 @@ public class Artista extends Usuario{
         return portifolio;
     }
 
-    public ArrayList<Obra> getObras() {
+    public List<Obra> getObras() {
         return obras;
     }
     
@@ -67,7 +67,7 @@ public class Artista extends Usuario{
         this.portifolio = portifolio;
     }
 
-    public void setObras(ArrayList<Obra> obras) {
+    public void setObras(List<Obra> obras) {
         this.obras = obras;
     }
 

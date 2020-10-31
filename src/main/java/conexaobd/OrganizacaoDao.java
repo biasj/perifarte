@@ -246,5 +246,40 @@ public class OrganizacaoDao {
         }
         return 0;
     }
+    
+    // devolve todas organizações cujo status == aprovado
+    public List<Organizacao> findOrganizacoesAprovadas() throws SQLException {
+        String sql = "select * from organizacao where organizacao_status = 'aprovado'";
+        List<Organizacao> resultados = new ArrayList<>();
+
+        // try-with-resources (após Java 7 ou superior)
+        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                // pega os dados das colunas da tabela do bd
+                String nome = rs.getString("organizacao_nome");
+                int id = rs.getInt("organizacao_id");
+                String email = rs.getString("organizacao_email");
+                String senha = rs.getString("organizacao_senha");
+                String cnpj = rs.getString("organizacao_cnpj");
+                String telefone = rs.getString("organizacao_telefone");
+                String status = rs.getString("organizacao_status");
+                String descricao = rs.getString("organizacao_descricao");
+                String justificativa = rs.getString("organizacao_justificativa");
+                
+                // Construtor: String nome, String email, String senha, String cnpj, String telefone
+                Organizacao org = new Organizacao(nome, email, senha, cnpj, telefone);
+                org.setId(id);
+                org.setStatus(status);
+                org.setDescricao(descricao);
+                org.setJustificativa(justificativa);
+                
+                resultados.add(org);
+            }
+        }
+        return resultados;
+    }
 
 }

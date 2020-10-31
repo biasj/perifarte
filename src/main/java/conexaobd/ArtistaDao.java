@@ -60,11 +60,13 @@ public class ArtistaDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     // pega os dados das colunas da tabela do bd
+                    int id = rs.getInt("artista_id");
                     String nome = rs.getString("artista_nome");
                     String portifolio = rs.getString("artista_portifolio");
                     
                     Artista art = new Artista(nome, email, senha, portifolio);
-                  
+                    
+                    art.setId(id);
                     
                     return art;
                 }

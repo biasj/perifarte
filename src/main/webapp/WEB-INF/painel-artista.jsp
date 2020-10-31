@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form.css">
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
@@ -22,18 +23,22 @@
     <body>
          <c:import url="./../cabecalho-painel.jsp"/>
         <div class="container">
-            <h2>Artista: <c:out value="${artista.nome}" /></h2>
-            <div><a class="login" href="./cadastroobra">Adicionar Obra</a></div>
+            <div class="d-flex justify-content-between">
+               <h2>Artista: <c:out value="${artista.nome}" /></h2>
+                <div><a class="login btn btn-primary" href="./cadastroobra">Adicionar Obra</a></div> 
+            </div>
+            
             <h3>Obras</h3>
 
             <div class="list-group">
-                <c:forEach var="org" items="${arttista.obras}">
-                        <a class="list-group-item list-group-item-action" href="./editar/org">
-                            <h5 class="mb-1"><c:out value="${art.nome}"/></h5>
+                <c:forEach var="obra" items="${artista.obras}">
+                        <a class="list-group-item list-group-item-action" href="./editar/art">
+                            <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
                             <div class="d-flex justify-content-between">
-                                <p class="mb-1">Preço: <c:out value="${art.preco}"/></p>
+                                <p class="mb-1">Preço: <c:out value="${obra.preco}"/></p>
                                 <i class="far fa-edit" style="font-size: 30px;"></i>
                             </div>
+                            <p class="mb-1">Descrição: <c:out value="${obra.descricao}"/></p>
                         </a>
                  </c:forEach>
             </div> 

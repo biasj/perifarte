@@ -47,7 +47,6 @@
                     
             <div class="form-group w-75 p3 mx-auto">
                 <label for="preco-obra">Preço</label>
-                <!--TODO: redefinir senha-->
                 <div>
                     <input class="form-control" id="preco-obra" type="number" name="preco" required value ="${preco}">
                     <!-- caso o servlet aponte um erro -->

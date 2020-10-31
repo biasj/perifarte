@@ -20,8 +20,6 @@ public class Doacoes {
     private String organizacao;
     private Date data_compra;
 
-    
-       
     public Doacoes(int idCompra, double total_doado, String doador, String nome, String organizacao) {
         this.doador = doador;
         this.nome = nome;

@@ -8,6 +8,7 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 import conexaobd.AdministradorDao;
 import conexaobd.ArtistaDao;
 import conexaobd.DoadorDao;
+import conexaobd.ObraDao;
 import conexaobd.OrganizacaoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -77,6 +78,8 @@ public class FormLoginServlet extends HttpServlet {
         AdministradorDao admDao = new AdministradorDao();
         ArtistaDao artDao = new ArtistaDao();
         DoadorDao doadorDao = new DoadorDao();
+        ObraDao obraDao = new ObraDao();
+        
         HttpSession sessao = request.getSession();
         
         try {
@@ -86,9 +89,9 @@ public class FormLoginServlet extends HttpServlet {
              Artista art = artDao.findAccount(email, senha);
              Doador doador = doadorDao.findAccount(email, senha);
              
-             // pega a lista de doador e artista para apresentar no painel adm
-             List<Artista> artistas = artDao.findAll();
-             List<Doador> doadores = doadorDao.findAll();
+             
+             
+            
              
             // confere se é ong, adm, doador, ou artista. 
             
@@ -98,6 +101,9 @@ public class FormLoginServlet extends HttpServlet {
                 sessao.setAttribute("organizacao", org);
             // se for adm
             } else if(adm != null) {
+                // pega a lista de doador e artista para apresentar no painel adm
+                List<Artista> artistas = artDao.findAll();
+                List<Doador> doadores = doadorDao.findAll();
                 // carregar todas as organizações
                 List organizacoes = orgDao.findAll();
                 // setar o atributo organizacao c a lista das organizacoes
@@ -109,6 +115,10 @@ public class FormLoginServlet extends HttpServlet {
                 
             //se for art
             } else if(art != null){
+                 // pega a lista de obras para apresentar no painel de adm
+                List<Obra> obras = obraDao.findObraByArtista(art.getId());
+                art.setObras(obras);
+                 
                  sessao.setAttribute("artista", art);
             } else if(doador != null) {
                 sessao.setAttribute("doador", doador);
