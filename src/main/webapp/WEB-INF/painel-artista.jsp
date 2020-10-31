@@ -27,8 +27,8 @@
             <h3>Obras</h3>
 
             <div class="list-group">
-                <c:forEach var="org" items="${arttista.obras}">
-                        <a class="list-group-item list-group-item-action" href="./editar/org">
+                <c:forEach var="art" items="${artista.obras}">
+                        <a class="list-group-item list-group-item-action" href="./editar/art">
                             <h5 class="mb-1"><c:out value="${art.nome}"/></h5>
                             <div class="d-flex justify-content-between">
                                 <p class="mb-1">Preço: <c:out value="${art.preco}"/></p>

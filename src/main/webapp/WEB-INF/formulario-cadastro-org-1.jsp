@@ -14,6 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form.css">
+
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
@@ -26,7 +28,7 @@
         
         <div class='container'>
             <form method="post" action="solicitacao-cadastro-org-1">
-               <h2 class='form-group w-75 p3 mx-auto'>Solicitação de Cadastro de Organização</h2>
+               <h3 class='form-group w-75 p3 mx-auto'>Cadastro de Organização</h3>
                
                <div class='form-group w-75 p3 mx-auto'>
                    <label for='nome'>Nome</label>
@@ -65,9 +67,9 @@
                    <input class='form-control' type="password" id='senha' name="senha">
                </div>
                    
-               <div class='form-group w-75 p3 mx-auto'>
+               <div class='w-75 p3 mx-auto d-flex justify-content-between'>
                    <button class='btn btn-outline-danger' type="reset">Reiniciar dados</button>
-                   <button class='btn btn-primary' type="submit">Enviar dados</button>
+                   <button class='btn btn-primary w-50' type="submit">Enviar dados</button>
                </div>
            </form>
         </div>

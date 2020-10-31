@@ -18,13 +18,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author beatrizsato
  */
-@WebServlet(name = "AbrirCadastroArtista", urlPatterns = {"/cadastro/artista"})
+@WebServlet(name = "AbrirCadastroArtista", urlPatterns = {"/cadastro-artista"})
 public class AbrirCadastroArtista extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // FALTA CRIAR O JSP FORM-CADASTRO-ARTISTA
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-cadastro-artista.jsp");
         dispatcher.forward(request, response);
     }

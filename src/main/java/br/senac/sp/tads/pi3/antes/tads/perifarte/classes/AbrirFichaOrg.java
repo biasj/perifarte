@@ -31,16 +31,20 @@ public class AbrirFichaOrg extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
         Administrador adm = (Administrador) sessao.getAttribute("administrador");
-        Organizacao org = (Organizacao) sessao.getAttribute("org");
         
         String id = request.getParameter("id");
         
-        OrganizacaoDao orgDao = new OrganizacaoDao();        
+        OrganizacaoDao orgDao = new OrganizacaoDao(); 
+        Organizacao org = null;
         
         try {
-            // caso esteja acessando pelo painel
+            // caso esteja acessando pelo painel de administrador
             if(id != null && org == null) {
                 org = orgDao.findById(id);
+                
+            } else {
+                // caso tenha acessado o get pelo post (organizacao atualizada)
+                org = (Organizacao) sessao.getAttribute("org");
             }
             
         } catch (SQLException ex) {
@@ -63,18 +67,32 @@ public class AbrirFichaOrg extends HttpServlet {
         
         // recupera dados enviados no form
         Organizacao org = (Organizacao) sessao.getAttribute("org");
+        Administrador adm = (Administrador) sessao.getAttribute("administrador");
         String id = String.valueOf(org.getId());
+        
+        // pega os valores para saber qual botão foi clicado
+        String botaoAprovar = request.getParameter("aprovar");
+        String botaoSuspender = request.getParameter("suspender");
+        String botaoExcluir = request.getParameter("excluir");
         
         OrganizacaoDao dao = new OrganizacaoDao();
         
         try {
-            if(org.getStatus().equals("pendente") || org.getStatus().equals("suspenso")) {
+            // verifica qual dos botões foram clicados
+            if(botaoAprovar != null) {
                 dao.aprovarOrganizacao(id);
-            } else if(org.getStatus().equals("aprovado")) {
+            } else if(botaoSuspender != null) {
                 dao.suspenderCadastro(id);
+            } else {
+                dao.excluirSolicitacao(id);
             }
             
+            // atualiza a organizacao a partir do banco de dados
             org = dao.findById(id);
+            
+            // atualiza lista de organizacoes do administrador, com os valores atualizados
+            // a partir do banco de dados
+            adm.setOrganizacoes(dao.findAll());
             
         } catch (SQLException ex) {
             
@@ -82,6 +100,7 @@ public class AbrirFichaOrg extends HttpServlet {
         }
         
         sessao.setAttribute("org", org);
+        sessao.setAttribute("administrador", adm);
         
         response.sendRedirect("org");
         

@@ -37,11 +37,8 @@ public class testeBD {
 //            printInfo(org);
 //        }
 
-        DoadorDao doaDao = new DoadorDao();
-        Doador doador = new Doador("Juan", "juan@gmail.com", "juan123");
-        doaDao.addDoador(doador);
-        
-        
+
+    
     }
     
     private static void printInfo(Organizacao org) {

@@ -5,24 +5,29 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author marce_000
  */
 public class Obra {
-    private static int contasObra = 1000;
     private int numeroObra;
-    
     private String titulo; 
     private String descricao;
     private String organizacao;
-    private Double preco;
+    private BigDecimal preco;
     
-    public Obra(String titulo, String descricao, double preco) {
-        titulo = null;
-        descricao = null;
-        preco = 0; //começa com o valor zerado.
-        numeroObra = contasObra++;
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public Obra(String pTitulo, String pDescricao, BigDecimal pPreco) {
+        this.titulo = pTitulo;
+        this.descricao = pDescricao;
+        this.preco = pPreco; //começa com o valor zerado.
     }
 
     public int getNumeroObra() {
@@ -53,13 +58,13 @@ public class Obra {
         this.organizacao = organizacao;
     }
 
-    public Double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
-    
-        
-}
+
+   
+ }

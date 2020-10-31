@@ -13,6 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form.css">
+
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
@@ -21,7 +23,10 @@
     </head>
     <body>
         <c:import url="./../cabecalho-painel.jsp"/>
-        <div class="container ">
+        
+        <div class="container ficha-org">
+            <a class="back-button" href="/perifarte/processamento"><i class="fas fa-chevron-left" ></i> Voltar</a>
+            
             <form method="post" action="org">
                 <!--cabeçalho do formulário-->
                 <div class="form-group w-75 p3 mx-auto">
@@ -41,12 +46,15 @@
                 
                 <div class="form-group w-75 p3 mx-auto">
                     <c:if test="${org.status == 'pendente' || org.status == 'suspenso'}">
-                        <button class="btn btn-primary" type="submit">Aprovar Cadastro</button>
-                        <!--<button class="btn btn-outline-danger" type="submit">Excluir Solicitação</button>-->
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-danger" type="submit" name="excluir">Excluir Solicitação</button>
+                            <button class="btn btn-primary" type="submit" name="aprovar">Aprovar Cadastro</button> 
+                        </div>
                     </c:if>
                     <c:if test="${org.status == 'aprovado'}">
-                        <button class="btn btn-outline-danger">Suspender Cadastro</button>
+                        <button class="btn btn-outline-danger" name="suspender">Suspender Cadastro</button>
                     </c:if> 
+                    
                 </div>
             </form>
         </div>

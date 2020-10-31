@@ -1,7 +1,7 @@
 <%-- 
-    Document   : form-cadastro
-    Created on : 21/10/2020, 13:47:40
-    Author     : beatrizsato
+    Document   : form-cadastro-artista
+    Created on : 28/10/2020, 15:06:55
+    Author     : Gabriel
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,14 +18,14 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>        
-        <title>Perifarte - Cadastro</title>
+        <title>Perifarte - CadastroArtista</title>
     </head>
     <body>
-        <c:import url="./../cabecalho.jsp"/>
-        
-        <div class="container">
-            <form method="post" action="processar-cadastro">
-                <h2 class='form-group w-75 p3 mx-auto'>Cadastro</h2>
+         <c:import url="./../cabecalho.jsp"/>
+         <div class="container ">
+            
+            <form method="post" action="processar-cadastro-artista">
+                <h2 class='form-group w-75 p3 mx-auto'>Cadastro de Artista</h2>
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="nome">Nome</label>
                     <input class="form-control" type="text" name="nome" id="nome" required value="${nome}">
@@ -48,22 +48,24 @@
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="senha">Senha</label>
                     <!--TODO: redefinir senha-->
-                    <input id="senha" class="form-control" type="password" name="senha" required>
+                    <input id="senha" class="form-control" type="password" name="senha" required value="${senha}">
+                    <c:if test="${senhaErro != null}">
+                        <span class="erro"><c:out value="${emailErro}" /></span>
+                    </c:if>
+                </div>
+                    
+                <div class="form-group w-75 p3 mx-auto">
+                    <label for="portfolio">portifolio</label>
+                    <!--TODO: redefinir senha-->
+                    <input id="portifolio" class="form-control" type="portifolio" name="portifolio" required value="${portifolio}">
+                    <c:if test="${portifolioErro != null}">
+                        <span class="erro"><c:out value="${portifolioErro}" /></span>
+                    </c:if>
                 </div>
 
-                <div class="form-check form-group w-75 p3 mx-auto">    
-                    <input class="form-check-input" type="checkbox" value="artista" id="artista" name="artista" ${artista.contains('artista') ? 'checked' : ''}>
-                    <label class="form-check-label" for="artista">Sou um artista</label>
-                </div>  
                 
-                <!--só vai aparecer caso seja artista-->
-                <div  style='display: none' class="form-group mx-auto w-75 p3">
-                    <label for="portfolio">Portfólio (Instagram/Behance)</label>
-                    <input class="form-control" id="portfolio" type="text" name="portfolio" placeholder="Ex: https://www.behance.net/tonariau">
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <button class="w-50 btn btn-primary" type="submit">Enviar dados</button>
+                <div class='w-75 p3 mx-auto'>
+                    <button class="btn btn-primary" type="submit">Enviar dados</button>
                 </div>
             </form>
         </div>

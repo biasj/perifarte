@@ -13,11 +13,10 @@ import java.util.ArrayList;
  */
 public class Artista extends Usuario{
 
-    private static int id;
-
+    private int id;
     private String portifolio;
     private ArrayList<Obra> obras;
-
+ 
     public Artista(String nome, String email, String senha, String portifolio) {
         super(nome, email, senha);
         this.portifolio = portifolio;
@@ -34,6 +33,10 @@ public class Artista extends Usuario{
 
     public ArrayList<Obra> getObras() {
         return obras;
+    }
+    
+    public int contaObras() {
+        return obras.size();
     }
 
     @Override
@@ -84,13 +87,15 @@ public class Artista extends Usuario{
         this.senha = senha;
     }
     
-     public static int getId() {
+     public int getId() {
         return id;
     }
 
-    public static void setId(int id) {
-        Artista.id = id;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    
     
     public void AtualizarObra(Obra obra){
         //tarefa referente ao marco 3 

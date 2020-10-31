@@ -47,6 +47,11 @@ public class FormLoginServlet extends HttpServlet {
         if(org != null) {
             redirecionarOrg(request, response, org);
         } else if (adm != null) {
+            List<Artista> artistas = (List<Artista>) sessao.getAttribute("artistas");
+            List<Doador> doadores = (List<Doador>) sessao.getAttribute("doadores");
+            request.setAttribute("doadores", doadores);
+            request.setAttribute("artistas", artistas);
+            
             redirecionarAdm(request, response, adm);
         } else if(art != null){
             redirecionarArt(request, response, art);
@@ -80,6 +85,11 @@ public class FormLoginServlet extends HttpServlet {
              Administrador adm = admDao.findAccount(email, senha);
              Artista art = artDao.findAccount(email, senha);
              Doador doador = doadorDao.findAccount(email, senha);
+             
+             // pega a lista de doador e artista para apresentar no painel adm
+             List<Artista> artistas = artDao.findAll();
+             List<Doador> doadores = doadorDao.findAll();
+             
             // confere se é ong, adm, doador, ou artista. 
             
             // se for ong
@@ -93,6 +103,10 @@ public class FormLoginServlet extends HttpServlet {
                 // setar o atributo organizacao c a lista das organizacoes
                 adm.setOrganizacoes(organizacoes);
                 sessao.setAttribute("administrador", adm);
+                // passa a lista de artistas e doadores para serem apresentadas no painel
+                sessao.setAttribute("artistas", artistas);
+                sessao.setAttribute("doadores", doadores);
+                
             //se for art
             } else if(art != null){
                  sessao.setAttribute("artista", art);
@@ -137,7 +151,8 @@ public class FormLoginServlet extends HttpServlet {
             throws ServletException, IOException {
         // recupera os dados do post guardados pela sessão
         request.setAttribute("administrador", adm);
-
+        
+        
         // envia para a tela de continuação de solicitação de cadastro 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-administrador.jsp");
         dispatcher.forward(request, response);

@@ -74,21 +74,4 @@ public class Administrador extends Usuario{
         return String.valueOf(num);
     }
     
-    // MÉTODOS RELACIONADOS À GERENCIAMENTO DE ORGANIZAÇÃO
-    public void aprovarCadastro(Organizacao org) {
-        org.setStatus("aprovado");
-        // adiciona no Array de organizações aptas a receberem dinheiro
-    }
-    
-    public void suspenderCadastro(Organizacao org) {
-        org.setStatus("suspenso");
-        // remove do Array de organizações aptas a receberem dinheiro
-
-    }
-    
-    // criar classe de gestão do site
-    public void excluirSolicitacao(Organizacao org) {
-        org.setStatus("excluído");
-        // remove do array de organizações
-    }
 }
