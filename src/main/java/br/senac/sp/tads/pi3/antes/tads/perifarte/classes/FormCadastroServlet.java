@@ -77,7 +77,7 @@ public class FormCadastroServlet extends HttpServlet {
             request.setAttribute("nome", nome);
             request.setAttribute("email", email);
             
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/form-cadastro.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-cadastro.jsp");
             dispatcher.forward(request, response);
             return;
         }
