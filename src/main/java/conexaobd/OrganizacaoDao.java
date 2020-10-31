@@ -228,7 +228,7 @@ public class OrganizacaoDao {
         return null;
     }
     
-    public int findByName(String nome) throws SQLException {
+    public int findIdByName(String nome) throws SQLException {
         String sql = "SELECT organizacao_id FROM organizacao WHERE organizacao_nome=?";
         int id;
         

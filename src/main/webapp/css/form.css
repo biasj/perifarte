@@ -15,3 +15,7 @@ and open the template in the editor.
 .back-button{
     padding: 20px;
 }
+
+.sucesso {
+    color: green;
+}
