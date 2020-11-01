@@ -48,17 +48,15 @@
                 <h3>Doadores</h3>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="doador" items="${doadores}">
-                    <c:if test="${org.status != 'excluido'}">
-                        <!--mostrar as seguintes informacoes com possibilidade de editar-->
-                        <a class="list-group-item list-group-item-action" href="#">
-                            <h5 class="mb-1"><c:out value="${doador.nome}"/></h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-1">E-mail: <c:out value="${doador.email}"/></p>
-                                <!--<i class="far fa-edit" style="font-size: 30px;"></i>-->
-                            </div>
-                            <p class="mb-1">Valor arrecadado: R$ 1000</p>
-                        </a>
-                    </c:if>
+                    <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                    <a class="list-group-item list-group-item-action" href="#">
+                        <h5 class="mb-1"><c:out value="${doador.nome}"/></h5>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-1">E-mail: <c:out value="${doador.email}"/></p>
+                            <!--<i class="far fa-edit" style="font-size: 30px;"></i>-->
+                        </div>
+                        <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                    </a>
                  </c:forEach>
             </div>
             
@@ -67,16 +65,14 @@
                 <h3>Artistas</h3>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="artista" items="${artistas}">
-                    <c:if test="${org.status != 'excluido'}">
-                        <!--mostrar as seguintes informacoes com possibilidade de editar-->
-                        <a class="list-group-item list-group-item-action" href="#">
-                            <h5 class="mb-1"><c:out value="${artista.nome}"/></h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-1">Portfolio: <c:out value="${artista.portifolio}"/></p>
-                                <!--<i class="far fa-edit" style="font-size: 30px;"></i>-->
-                            </div>
-                        </a>
-                    </c:if>
+                    <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                    <a class="list-group-item list-group-item-action" href="#">
+                        <h5 class="mb-1"><c:out value="${artista.nome}"/></h5>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-1">Portfolio: <c:out value="${artista.portifolio}"/></p>
+                            <!--<i class="far fa-edit" style="font-size: 30px;"></i>-->
+                        </div>
+                    </a>
                  </c:forEach>
             </div>
             

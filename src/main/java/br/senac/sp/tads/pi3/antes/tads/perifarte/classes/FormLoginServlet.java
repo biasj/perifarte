@@ -55,6 +55,7 @@ public class FormLoginServlet extends HttpServlet {
             
             redirecionarAdm(request, response, adm);
         } else if(art != null){
+            
             redirecionarArt(request, response, art);
         } else if(doador != null) {
             redirecionarDoador(request, response, doador);
@@ -89,10 +90,6 @@ public class FormLoginServlet extends HttpServlet {
              Artista art = artDao.findAccount(email, senha);
              Doador doador = doadorDao.findAccount(email, senha);
              
-             
-             
-            
-             
             // confere se é ong, adm, doador, ou artista. 
             
             // se for ong
@@ -118,8 +115,8 @@ public class FormLoginServlet extends HttpServlet {
                  // pega a lista de obras para apresentar no painel de adm
                 List<Obra> obras = obraDao.findObraByArtista(art.getId());
                 art.setObras(obras);
-                 
-                 sessao.setAttribute("artista", art);
+
+                sessao.setAttribute("artista", art);
             } else if(doador != null) {
                 sessao.setAttribute("doador", doador);
             }

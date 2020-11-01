@@ -31,7 +31,7 @@ public class AbrirFichaOrg extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
         Administrador adm = (Administrador) sessao.getAttribute("administrador");
-        
+
         String id = request.getParameter("id");
         
         OrganizacaoDao orgDao = new OrganizacaoDao(); 
@@ -53,7 +53,7 @@ public class AbrirFichaOrg extends HttpServlet {
         
         sessao.setAttribute("org", org);
         sessao.setAttribute("administrador", adm);
-        
+  
         // envia para a tela de ficha de específica de organização
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ficha-org.jsp");
         dispatcher.forward(request, response);

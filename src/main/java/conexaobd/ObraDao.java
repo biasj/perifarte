@@ -67,6 +67,7 @@ public class ObraDao {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
                     String titulo = rs.getString("obra_titulo");
+                    int id = rs.getInt("obra_id");
                     String descricao = rs.getString("obra_descricao");
                     int idOrganizacao = rs.getInt("obra_organizacao_id");
                     BigDecimal preco = rs.getBigDecimal("obra_preco");
@@ -74,6 +75,7 @@ public class ObraDao {
                     // Construtor: String titulo, String descricao, BigDecimal preco
                     Obra obra = new Obra(titulo, descricao, preco);
                     OrganizacaoDao orgDao = new OrganizacaoDao();
+                    obra.setId(id);
                     
                     obra.setOrganizacao(orgDao.findById(String.valueOf(idOrganizacao)));
 
@@ -85,5 +87,80 @@ public class ObraDao {
         return resultados;
     }
     
+    public Obra findById(String id) throws SQLException {
+        String sql = "SELECT * FROM obra WHERE obra_id=?";
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, Integer.parseInt(id));
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // pega os dados das colunas da tabela do bd
+                    String titulo = rs.getString("obra_titulo");
+                    String descricao = rs.getString("obra_descricao");
+                    int idOrganizacao = rs.getInt("obra_organizacao_id");
+                    BigDecimal preco = rs.getBigDecimal("obra_preco");
+                    int idArtista = rs.getInt("obra_artista_id");
+                  
+                    // Construtor: String titulo, String descricao, BigDecimal preco
+                    Obra obra = new Obra(titulo, descricao, preco);
+                    // seta os atributos que não são inicializados no construtor
+                    obra.setId(Integer.parseInt(id));
+                    OrganizacaoDao orgDao = new OrganizacaoDao();
+                    
+                    obra.setOrganizacao(orgDao.findById(String.valueOf(idOrganizacao)));
+                    
+                    return obra;
+                }
+            }
+        }
+        return null;
+    }
     
+        // atualiza
+    public void atualizarObra(Obra obra, String organizacao) throws SQLException {
+        String sql = "update obra set obra_titulo=?, obra_descricao=?, obra_organizacao_id=?, obra_preco=? where obra_id=?";
+            try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, obra.getTitulo());
+                stmt.setString(2, obra.getDescricao());
+                // recupera id da nova organizacao escolhida
+                OrganizacaoDao orgDao = new OrganizacaoDao();
+                stmt.setInt(3, orgDao.findIdByName(organizacao));
+                
+                stmt.setBigDecimal(4, obra.getPreco());
+                stmt.setInt(5, obra.getId());
+                
+                
+                
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
+    }
+    
+    // exclui (não tá sendo chamado)
+    public void excluirObra(int id) throws SQLException {
+        String sql = "delete from obra where obra_id=?";
+            try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, id);
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
+    }
 }
