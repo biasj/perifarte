@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import conexaobd.ArtistaDao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doador;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.DoadorDao;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,28 +24,27 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Gabriel
+ * @author beatrizsato
  */
-@WebServlet(name = "FormCadastroArtista", urlPatterns = {"/processar-cadastro-artista"})
-public class FormCadastroArtista extends HttpServlet {
+@WebServlet(name = "FormCadastro", urlPatterns = {"/processar-cadastro"})
+public class FormCadastro extends HttpServlet {
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession sessao = request.getSession();
+        HttpSession sessao = request.getSession();
         // recupera os dados do post guardados pela sessão
-        Artista artista = (Artista) sessao.getAttribute("artista");
-        request.setAttribute("artista", artista);
-        sessao.removeAttribute("artista");
+        Doador doador = (Doador) sessao.getAttribute("doador");
+        request.setAttribute("doador", doador);
+        sessao.removeAttribute("doador");
 
-        // envia para a tela de login
         // TODO: APARECER MENSAGEM DE CADASTRO COM SUCESSO
+        // envia para a tela de login
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-login.jsp");
         dispatcher.forward(request, response);
+
     }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,7 +53,6 @@ public class FormCadastroArtista extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String portifolio = request.getParameter("portifolio");
         
         // Validação do nome
         boolean nomeValido = (nome != null && nome.trim().length() > 0);
@@ -65,53 +65,39 @@ public class FormCadastroArtista extends HttpServlet {
             emailValido = emailValido && emailMatcher.matches();
         }
         
-        boolean senhaValido = (senha != null);
         
-        
-        
-        boolean camposValidosGlobal = nomeValido && emailValido && senhaValido; 
-        
+        boolean camposValidosGlobal = nomeValido && emailValido;
         if(!camposValidosGlobal) {
             if(!nomeValido) {
                 request.setAttribute("nomeErro", "Nome deve ser preenchido");
             }
             if(!emailValido) {
-                request.setAttribute("emailErro", "email deve ser preenchido");
-            }
-            
-            if(!senhaValido){
-                request.setAttribute("senhaErro", "senha deve ser preenchida");
+                request.setAttribute("emailErro", "E-mail deve ser preenchido");
             }
             
             request.setAttribute("nome", nome);
             request.setAttribute("email", email);
-            request.setAttribute("senha", senha);
-            request.setAttribute("portfolio", portifolio);
             
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/form-cadastro-artista.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-cadastro.jsp");
             dispatcher.forward(request, response);
             return;
         }
         
-        Artista artista = new Artista(nome, email, senha, portifolio);
+        Doador doador = new Doador(nome, email, senha);
         
         // insere no banco de dados
-        ArtistaDao artistaDao = new ArtistaDao();
+        DoadorDao doadorDao = new DoadorDao();
         try {
-            artistaDao.addArtista(artista);
+            doadorDao.addDoador(doador);
         } catch (SQLException ex) {
-            Logger.getLogger(FormCadastroArtista.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SolicitacaoCadastroOrg2.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         HttpSession sessao = request.getSession();
-        sessao.setAttribute("artista", artista);
+        sessao.setAttribute("doador", doador);
         
-        
-        response.sendRedirect("processar-cadastro-artista");
-        
+        // manda para a área do usuário ou carrinho (pra onde tava antes?)
+        response.sendRedirect("processar-cadastro");
     }
-
-    
 
 }

@@ -1,5 +1,9 @@
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Organizacao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Usuario;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +17,8 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class FormListaDoacoes
  */
+
+// NÃO ESTÁ SENDO USADO (relacionado à ficha-org)
 @WebServlet(name = "/FormListaDoacoes", urlPatterns = {"/painel-org-servlet"})
 public class FormListaDoacoesServlet extends HttpServlet {
 	

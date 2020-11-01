@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
 
 import java.math.BigDecimal;
 
@@ -15,10 +15,14 @@ public class Obra {
     private int numeroObra;
     private String titulo; 
     private String descricao;
-    private String organizacao;
+    private Organizacao organizacao;
     private BigDecimal preco;
     
     private int id;
+
+    public int getId() {
+        return id;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -50,11 +54,11 @@ public class Obra {
         this.descricao = descricao;
     }
 
-    public String getOrganizacao() {
+    public Organizacao getOrganizacao() {
         return organizacao;
     }
-
-    public void setOrganizacao(String organizacao) {
+    
+    public void setOrganizacao(Organizacao organizacao) {
         this.organizacao = organizacao;
     }
 
@@ -66,5 +70,4 @@ public class Obra {
         this.preco = preco;
     }
 
-   
  }

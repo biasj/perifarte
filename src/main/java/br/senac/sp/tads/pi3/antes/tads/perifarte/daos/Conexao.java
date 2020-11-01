@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexaobd;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.daos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,7 +20,6 @@ import java.util.logging.Logger;
 public class Conexao {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/perifarte";
-    private static final String URL1 = "jdbc:mysql://localhost:3307/perifarte";
     private static final String USER = "root";
     private static final String PASS = "";
 

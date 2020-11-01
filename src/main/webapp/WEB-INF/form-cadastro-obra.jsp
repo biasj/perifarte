@@ -12,66 +12,70 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form.css">
+        <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
-        <title>Cadastro</title>
+        
+        <title>Perifarte - Cadastro</title>
     </head>
     <body>
-        <c:import url="./../cabecalho.jsp"/>
-        <h1>Cadastro de Obra</h1>
-        <form method="post" action="processar-cadastro-obra">
-            <div>
-                <label>Titulo</label>
-                <div>
-                    <input type="text" name="titulo" required value="${titulo}">
+        <c:import url="./../cabecalho-painel.jsp"/>
+        <div class="container">
+            <form method="post" action="processar-cadastro-obra">
+                <h2 class='form-group w-75 p3 mx-auto'>Cadastro de Obra</h2>
+                    
+                <div class='form-group w-75 p3 mx-auto'>
+                    <label for="titulo">Titulo</label>
+                    <input class="form-control" type="text" id="titulo" name="titulo" required value="${titulo}">
                     <!-- caso o servlet aponte um erro -->
                     <c:if test="${tituloErro != null}">
                         <span class="erro"><c:out value="${tituloErro}" /></span>
                     </c:if>
                 </div>
-            </div>
-            
-            <div>
-                <label>descricao</label>
-                <div>
-                    <input type="text" name="descricao" required value="${descricao}">
+
+                <div class="form-group w-75 p3 mx-auto">
+                    <label for="descricao-obra">Descrição</label>
+                    <input class="form-control" type="text" id="descricao-obra" name="descricao" required value="${descricao}">
                     <!-- caso o servlet aponte um erro -->
                     <c:if test="${descricaoErro != null}">
                         <span class="erro"><c:out value="${descricaoErro}" /></span>
                     </c:if>
                 </div>
-            </div>
-                    
-            <div>
-                <label>preco</label>
-                <!--TODO: redefinir senha-->
-                <div>
-                    <input type="number" name="preco" required value ="${preco}">
+
+                <div class='form-group w-75 p3 mx-auto'>
+                    <label for="preco">Preço</label>
+                    <input class="form-control" id="preco-obra" type="number" name="preco" required value ="${preco}">
                     <!-- caso o servlet aponte um erro -->
                      <c:if test="${precoErro != null}">
                         <span class="erro"><c:out value="${precoErro}" /></span>
                     </c:if>
                 </div>
-            </div>
-            <div>
-                <label>ongEscolhida</label>
-                <!--TODO: redefinir senha-->
-                <div>
-                    <input type="text" name="ongEscolhida" required value ="${ongEscolhida}">
+                    
+                <div class='form-group w-75 p3 mx-auto'>
+                    <label for="org-obra">Organização beneficiada:</label>
+                    <select class="form-control" id="org-obra" name="ongEscolhida" required value="${ongEscolhida}">
+                        <c:forEach var="org" items="${organizacoes}">
+                            <option>${org.nome}</option>
+                        </c:forEach>
+                    </select>
                     <!-- caso o servlet aponte um erro -->
                      <c:if test="${ongEscolhidaErro != null}">
                         <span class="erro"><c:out value="${ongEscolhidaErro}" /></span>
                     </c:if>
                 </div>
-            </div>
-            <div>
-                <input type="file" name="file" size="50"/><br/>
-            </div>
-            <div>
-                <button type="submit" value="Upload File">Enviar dados</button>
-            </div>
+                        
+                <div class='form-group w-75 p3 mx-auto'>
+                    <input type="file" name="file" size="50"/><br/>
+                </div>
+                        
+                <div class='form-group w-75 p3 mx-auto'>
+                    <button class="btn btn-primary" type="submit" value="Upload File">Cadastrar obra</button>
+                </div>
 
-        </form>
+            </form>
+        </div>
+        
     </body>
 </html>

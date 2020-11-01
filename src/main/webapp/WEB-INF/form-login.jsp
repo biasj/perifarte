@@ -22,7 +22,7 @@
     </head>
     <body>
         <c:import url="./../cabecalho.jsp"/>
-        <!--INSERIR MENSAGENS DE LOGIN/CADASTRO pela sessao ?-->
+        <!-- INSERIR MENSAGENS DE LOGIN/CADASTRO pela sessao ? -->
         
         <div class='container'>
            <form method="post" action="processamento">

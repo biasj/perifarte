@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexaobd;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.daos;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Administrador;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Administrador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ import java.sql.Statement;
  * @author beatrizsato
  */
 public class AdministradorDao {
-    // insere
+    // insere administrador no banco de dados
     public void addAdministrador(Administrador adm) throws SQLException {
         String sql = "INSERT INTO administrador (administrador_nome, administrador_email, administrador_senha) VALUES (?,?,?)";
 
@@ -48,7 +48,7 @@ public class AdministradorDao {
         }
     }
     
-    // le
+    // procura administrador no banco de dados (login)
     public Administrador findAccount(String email, String senha) throws SQLException {
         String sql = "SELECT * FROM administrador WHERE administrador_email=? and administrador_senha=?";
         try (Connection conn = Conexao.obterConexao();
@@ -93,7 +93,7 @@ public class AdministradorDao {
         
     }
     
-    // exclui conta
+    // exclui conta (não está sendo usado)
     public void excluirConta(String id) throws SQLException {
         String sql = "delete from administrador where administrador_id = ?";
         

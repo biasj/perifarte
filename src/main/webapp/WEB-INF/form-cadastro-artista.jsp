@@ -17,8 +17,9 @@
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
-        <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>        
-        <title>Perifarte - CadastroArtista</title>
+        <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script> 
+        
+        <title>Perifarte - Cadastro Artista</title>
     </head>
     <body>
          <c:import url="./../cabecalho.jsp"/>
@@ -47,8 +48,8 @@
 
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="senha">Senha</label>
-                    <!--TODO: redefinir senha-->
                     <input id="senha" class="form-control" type="password" name="senha" required value="${senha}">
+                    <!-- caso o servlet aponte um erro -->
                     <c:if test="${senhaErro != null}">
                         <span class="erro"><c:out value="${emailErro}" /></span>
                     </c:if>
@@ -56,16 +57,15 @@
                     
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="portfolio">portifolio</label>
-                    <!--TODO: redefinir senha-->
                     <input id="portifolio" class="form-control" type="portifolio" name="portifolio" required value="${portifolio}">
+                    <!-- caso o servlet aponte um erro -->
                     <c:if test="${portifolioErro != null}">
                         <span class="erro"><c:out value="${portifolioErro}" /></span>
                     </c:if>
                 </div>
 
-                
-                <div class='w-75 p3 mx-auto'>
-                    <button class="btn btn-primary" type="submit">Enviar dados</button>
+                <div class='d-flex justify-content-center'>
+                    <button class="w-50 btn btn-primary" type="submit">Enviar dados</button>
                 </div>
             </form>
         </div>

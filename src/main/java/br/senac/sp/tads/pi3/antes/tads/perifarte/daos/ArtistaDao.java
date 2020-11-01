@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexaobd;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.daos;
 
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Artista;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +20,7 @@ import java.util.List;
  * @author Gabriel
  */
 public class ArtistaDao {
+    // insere artista no banco de dados
     public void addArtista(Artista art) throws SQLException {
         String sql = "INSERT INTO artista (artista_nome, artista_email, artista_senha, artista_portifolio) VALUES (?,?,?,?)";
 
@@ -51,6 +52,7 @@ public class ArtistaDao {
         }
     }
     
+    // procura artista no banco de dados (Login)
     public Artista findAccount(String email, String senha) throws SQLException {
         String sql = "SELECT * FROM artista WHERE artista_email=? and artista_senha=?";
         try (Connection conn = Conexao.obterConexao();
@@ -76,6 +78,7 @@ public class ArtistaDao {
     }
     
     // métodos de leitura
+    // retorna todos os artistas (para mostrar no painel de administrador)
     public List<Artista> findAll() throws SQLException {
         String sql = "select * from artista";
         List<Artista> resultados = new ArrayList<>();

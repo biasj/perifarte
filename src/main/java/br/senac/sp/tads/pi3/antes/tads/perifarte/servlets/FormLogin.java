@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import conexaobd.AdministradorDao;
-import conexaobd.ArtistaDao;
-import conexaobd.DoadorDao;
-import conexaobd.OrganizacaoDao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,21 +29,24 @@ import javax.servlet.http.HttpSession;
  * @author beatrizsato
  */
 @WebServlet(name = "FormLoginServlet", urlPatterns = {"/processamento"})
-public class FormLoginServlet extends HttpServlet {
+public class FormLogin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
         
+        // pega os atributos da sessão para saber qual o tipo de login
         Organizacao org = (Organizacao) sessao.getAttribute("organizacao");
         Administrador adm = (Administrador) sessao.getAttribute("administrador");
         Artista art = (Artista) sessao.getAttribute("artista");
         Doador doador = (Doador) sessao.getAttribute("doador");
         
-        // switch case?
         // direciona para a página certa
         if(org != null) {
+            List<Obra> obrasDoadas = (List<Obra>) sessao.getAttribute("obrasDoadas");
+            request.setAttribute("obrasDoadas", obrasDoadas);
+            
             redirecionarOrg(request, response, org);
         } else if (adm != null) {
             List<Artista> artistas = (List<Artista>) sessao.getAttribute("artistas");
@@ -54,6 +56,7 @@ public class FormLoginServlet extends HttpServlet {
             
             redirecionarAdm(request, response, adm);
         } else if(art != null){
+            
             redirecionarArt(request, response, art);
         } else if(doador != null) {
             redirecionarDoador(request, response, doador);
@@ -71,12 +74,14 @@ public class FormLoginServlet extends HttpServlet {
         String senha = request.getParameter("senha");
         
         
-        // LOGIN ORGANIZACAO
-        // busca o e-mail na lista de usuários/bd??
+        // LOGIN 
+        // busca o e-mail na lista de usuários/bd
         OrganizacaoDao orgDao = new OrganizacaoDao();
         AdministradorDao admDao = new AdministradorDao();
         ArtistaDao artDao = new ArtistaDao();
         DoadorDao doadorDao = new DoadorDao();
+        ObraDao obraDao = new ObraDao();
+        
         HttpSession sessao = request.getSession();
         
         try {
@@ -86,18 +91,21 @@ public class FormLoginServlet extends HttpServlet {
              Artista art = artDao.findAccount(email, senha);
              Doador doador = doadorDao.findAccount(email, senha);
              
-             // pega a lista de doador e artista para apresentar no painel adm
-             List<Artista> artistas = artDao.findAll();
-             List<Doador> doadores = doadorDao.findAll();
-             
             // confere se é ong, adm, doador, ou artista. 
             
             // se for ong
             if(org != null) {
+                // carrega todas as obras que já foram doadas para a organização
+                List<Obra> obrasDoadas = obraDao.findObraByOrganizacao(org.getId());
+                sessao.setAttribute("obrasDoadas", obrasDoadas);
+                
                 // coloca o objeto org como atributo sessão para levar dados do usuário para a próxima página 
                 sessao.setAttribute("organizacao", org);
             // se for adm
             } else if(adm != null) {
+                // pega a lista de doador e artista para apresentar no painel adm
+                List<Artista> artistas = artDao.findAll();
+                List<Doador> doadores = doadorDao.findAll();
                 // carregar todas as organizações
                 List organizacoes = orgDao.findAll();
                 // setar o atributo organizacao c a lista das organizacoes
@@ -109,7 +117,11 @@ public class FormLoginServlet extends HttpServlet {
                 
             //se for art
             } else if(art != null){
-                 sessao.setAttribute("artista", art);
+                 // pega a lista de obras para apresentar no painel de adm
+                List<Obra> obras = obraDao.findObraByArtista(art.getId());
+                art.setObras(obras);
+
+                sessao.setAttribute("artista", art);
             } else if(doador != null) {
                 sessao.setAttribute("doador", doador);
             }
@@ -126,7 +138,7 @@ public class FormLoginServlet extends HttpServlet {
 
 
         } catch (SQLException ex) {
-            Logger.getLogger(FormLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
             
         

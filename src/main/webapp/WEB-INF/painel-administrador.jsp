@@ -14,10 +14,12 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form.css">
+        
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
+        
         <title>Perifarte - Organizações</title>
     </head>
     <body>
@@ -48,17 +50,14 @@
                 <h3>Doadores</h3>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="doador" items="${doadores}">
-                    <c:if test="${org.status != 'excluido'}">
-                        <!--mostrar as seguintes informacoes com possibilidade de editar-->
-                        <a class="list-group-item list-group-item-action" href="#">
-                            <h5 class="mb-1"><c:out value="${doador.nome}"/></h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-1">E-mail: <c:out value="${doador.email}"/></p>
-                                <!--<i class="far fa-edit" style="font-size: 30px;"></i>-->
-                            </div>
-                            <p class="mb-1">Valor arrecadado: R$ 1000</p>
-                        </a>
-                    </c:if>
+                    <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                    <a class="list-group-item list-group-item-action" href="#">
+                        <h5 class="mb-1"><c:out value="${doador.nome}"/></h5>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-1">E-mail: <c:out value="${doador.email}"/></p>
+                        </div>
+                        <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                    </a>
                  </c:forEach>
             </div>
             
@@ -67,16 +66,13 @@
                 <h3>Artistas</h3>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="artista" items="${artistas}">
-                    <c:if test="${org.status != 'excluido'}">
-                        <!--mostrar as seguintes informacoes com possibilidade de editar-->
-                        <a class="list-group-item list-group-item-action" href="#">
-                            <h5 class="mb-1"><c:out value="${artista.nome}"/></h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-1">Portfolio: <c:out value="${artista.portifolio}"/></p>
-                                <!--<i class="far fa-edit" style="font-size: 30px;"></i>-->
-                            </div>
-                        </a>
-                    </c:if>
+                    <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                    <a class="list-group-item list-group-item-action" href="#">
+                        <h5 class="mb-1"><c:out value="${artista.nome}"/></h5>
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-1">Portfolio: <c:out value="${artista.portifolio}"/></p>
+                        </div>
+                    </a>
                  </c:forEach>
             </div>
             

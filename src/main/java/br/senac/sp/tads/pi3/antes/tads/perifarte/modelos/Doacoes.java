@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
 
 import java.util.Date;
 
@@ -20,8 +20,6 @@ public class Doacoes {
     private String organizacao;
     private Date data_compra;
 
-    
-       
     public Doacoes(int idCompra, double total_doado, String doador, String nome, String organizacao) {
         this.doador = doador;
         this.nome = nome;
@@ -69,9 +67,5 @@ public class Doacoes {
     public void setTotalDoado(double totalDoado) {
         this.totalDoado = totalDoado;
     }
-    
-    
-    
-    
     
 }

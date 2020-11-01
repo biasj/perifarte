@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
 
 import java.util.List;
 import java.util.Random;
@@ -31,12 +31,12 @@ public class Administrador extends Usuario{
         return id;
     }
 
-    public void setId(int id) {
-        Administrador.id = id;
-    }
-
     public List<Organizacao> getOrganizacoes() {
         return organizacoes;
+    }
+    
+    public void setId(int id) {
+        Administrador.id = id;
     }
 
     public void setOrganizacoes(List<Organizacao> organizacoes) {

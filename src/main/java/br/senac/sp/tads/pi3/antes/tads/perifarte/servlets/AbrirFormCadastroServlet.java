@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,16 +18,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author beatrizsato
  */
-
-@WebServlet(name = "FormularioCadastroOrgServlet", urlPatterns = {"/formulario-org"})
-public class FormularioCadastroOrgServlet extends HttpServlet {
-
+@WebServlet(name = "AbrirFormCadastroServlet", urlPatterns = {"/cadastro"})
+public class AbrirFormCadastroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/formulario-cadastro-org-1.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-cadastro.jsp");
         dispatcher.forward(request, response);
     }
-
 
 }

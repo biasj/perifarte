@@ -20,6 +20,8 @@
     </head>
     <body>
         <c:import url="./../cabecalho-painel.jsp"/>
+        
+        <!--será painel de meus pedidos-->
         <div class="container">
             <h1>Logado</h1>
             <h3>Nome: <c:out value="${doador.nome}"/> </h3>

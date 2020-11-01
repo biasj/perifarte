@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexaobd;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.daos;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.classes.Doador;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +19,7 @@ import java.util.List;
  * @author beatrizsato
  */
 public class DoadorDao {
-    // insere
+    // insere doador no banco de dados
     public void addDoador(Doador doador) throws SQLException {
         String sql = "INSERT INTO doador (doador_nome, doador_email, doador_senha) VALUES (?,?,?)";
 
@@ -51,7 +51,7 @@ public class DoadorDao {
         }
     }
     
-    // le
+    // procura conta de doador no banco (login)
     public Doador findAccount(String email, String senha) throws SQLException {
         String sql = "SELECT * FROM doador WHERE doador_email=? and doador_senha=?";
         try (Connection conn = Conexao.obterConexao();
@@ -117,7 +117,7 @@ public class DoadorDao {
         }
     }
     
-    // lista de todos os doadores do sistema
+    // retorna todos os doadores (para mostrar no painel de administrador)
     public List<Doador> findAll() throws SQLException {
         String sql = "select * from doador";
         List<Doador> resultados = new ArrayList<>();

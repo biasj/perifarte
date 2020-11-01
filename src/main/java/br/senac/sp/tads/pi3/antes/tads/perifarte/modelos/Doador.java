@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @author Gabriel
  */
 public class Doador extends Usuario{
-    
     private ArrayList<Obra> obras;
     private BigDecimal totalDoado;
     private int id;

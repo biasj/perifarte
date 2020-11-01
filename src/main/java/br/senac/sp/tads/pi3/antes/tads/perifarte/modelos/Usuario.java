@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
 
 /**
  *
  * @author beatrizsato
  */
-public class Usuario {
+public abstract class Usuario {
     private static int contas = 10000;
     protected int numeroConta;
     protected String nome;

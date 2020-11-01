@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.tads.pi3.antes.tads.perifarte.classes;
+package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import conexaobd.ObraDao;
-import conexaobd.OrganizacaoDao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ObraDao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.OrganizacaoDao;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
  
@@ -40,15 +43,22 @@ public class FormCadastroObra extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
         HttpSession sessao = request.getSession();
         // recupera os dados do post guardados pela sessão
         Obra obra = (Obra) sessao.getAttribute("obra");
         request.setAttribute("obra", obra);
         sessao.removeAttribute("obra");
+        
+        // mostra todos as obras daquele artista
+        ObraDao obraDao = new ObraDao();
+        Artista artista = (Artista) sessao.getAttribute("artista");
+        try {
+            List<Obra> obras = obraDao.findObraByArtista(artista.getId());
+            artista.setObras(obras);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormCadastroObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        // envia para a tela de login
-        // TODO: APARECER MENSAGEM DE CADASTRO COM SUCESSO
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
         dispatcher.forward(request, response);
         
@@ -59,7 +69,7 @@ public class FormCadastroObra extends HttpServlet {
             throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
-        // pega os dados do formulario de login
+        // pega os dados do formulario de cadastro de obra
         String titulo = request.getParameter("titulo");
         String descricao = request.getParameter("descricao");
         String precoStr = request.getParameter("preco");
@@ -85,8 +95,7 @@ public class FormCadastroObra extends HttpServlet {
         boolean ongEscolhidaValido = (ongEscolhida != null);
         
         boolean camposValidosGlobal = tituloValido && descricaoValido && /*precoValido &&*/  ongEscolhidaValido;
-        
-        
+
         
         if (!camposValidosGlobal) {
             
@@ -106,8 +115,6 @@ public class FormCadastroObra extends HttpServlet {
                request.setAttribute("ongEscolhidaErro", "ongEscolhida deve ser preenchida");
            }
             
-            
-            
             request.setAttribute("titulo", titulo);
             request.setAttribute("descricao", descricao);
             request.setAttribute("preco", preco);
@@ -119,7 +126,7 @@ public class FormCadastroObra extends HttpServlet {
             return;
         }
         
-        
+        // TENTA PEGAR ARQUIVO DO FORMULARIO (não tá funcionando ainda)
         /*InputStream inputStream = null; // input stream of the upload file
          
         // obtains the upload file part in this multipart request
@@ -139,16 +146,15 @@ public class FormCadastroObra extends HttpServlet {
         Obra obra = new Obra(titulo, descricao, preco);
         
         ObraDao obraDao = new ObraDao();
-        // cria a obra e bota no bd
         OrganizacaoDao orgDao = new OrganizacaoDao();
+        // cria a obra e bota no bd
         try {
-            int idOrg = orgDao.findByName(ongEscolhida);
+            int idOrg = orgDao.findIdByName(ongEscolhida);
             obraDao.addObra(obra, idOrg, art.getId());
         } catch (SQLException ex) {
             Logger.getLogger(FormCadastroObra.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       
         sessao.setAttribute("obra", obra);
         // manda para a área do usuário ou carrinho (pra onde tava antes?)
         response.sendRedirect("processar-cadastro-obra");
