@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
+        
         <title>Perifarte - Organizações</title>
     </head>
     <body>
@@ -26,6 +27,12 @@
         
         <div class="container ficha-org">
             <a class="back-button" href="/perifarte/processamento"><i class="fas fa-chevron-left" ></i> Voltar</a>
+            
+            <c:if test="${atualizacaoSucesso != null}">
+                <div class="form-group w-75 mx-auto">
+                    <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>
+                </div>  
+            </c:if>
             
             <form method="post" action="org">
                 <!--cabeçalho do formulário-->
@@ -39,6 +46,7 @@
                     <h5 class="mb-1">Descrição</h5>
                     <p class="mb-1"><c:out value="${org.descricao}"/></p> 
                 </div>
+                
                 <div class="form-group w-75 p3 mx-auto">
                     <h5 class="mb-1">Justificativa</h5>
                     <p class="mb-1"><c:out value="${org.justificativa}"/></p>
@@ -54,8 +62,8 @@
                     <c:if test="${org.status == 'aprovado'}">
                         <button class="btn btn-outline-danger" name="suspender">Suspender Cadastro</button>
                     </c:if> 
-                    
                 </div>
+                
             </form>
         </div>
     </body>

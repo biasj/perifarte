@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
-        <title>Cadastro</title>
+        
+        <title>Perifarte - Cadastro</title>
     </head>
     <body>
         <c:import url="./../cabecalho-painel.jsp"/>

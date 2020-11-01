@@ -19,12 +19,15 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
-        <title>Perifarte - ${art.nome}</title>
+        
+        <title>Perifarte - Obra</title>
     </head>
     <body>
          <c:import url="./../cabecalho-painel.jsp"/>
+         
          <div class="container">
             <a class="back-button" href="/perifarte/processamento"><i class="fas fa-chevron-left" ></i> Voltar</a>
+            
             <c:if test="${atualizacaoSucesso != null}">
                 <div class="form-group w-75 mx-auto">
                     <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>
@@ -76,7 +79,6 @@
                         </c:forEach>
                     </select>
 
-                    <!-- caso o servlet aponte um erro -->
                      <c:if test="${ongEscolhidaErro != null}">
                         <span class="erro"><c:out value="${ongEscolhidaErro}" /></span>
                     </c:if>

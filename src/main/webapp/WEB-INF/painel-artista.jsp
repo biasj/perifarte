@@ -14,10 +14,12 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/form.css">
+        
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
+        
         <title>Perifarte - Artistas</title>
     </head>
     <body>
@@ -36,6 +38,7 @@
             
             <h3>Obras</h3>
 
+            <!--para cada obra existente publica por esse artista logado-->
             <div class="list-group">
                 <c:forEach var="obra" items="${artista.obras}">
                         <a class="list-group-item list-group-item-action" href="/perifarte/editar/obra?id=${obra.id}">

@@ -20,10 +20,10 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
+        
         <title>Perifarte - Solicitação de Cadastro</title>
     </head>
     <body>
-        <!--não consegui colocar pelo pageContext-->
         <c:import url="./../cabecalho.jsp"/>
         
         <div class='container'>
