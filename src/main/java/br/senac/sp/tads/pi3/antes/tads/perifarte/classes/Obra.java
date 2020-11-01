@@ -20,10 +20,6 @@ public class Obra {
     
     private int id;
 
-    public int getId() {
-        return id;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -57,7 +53,7 @@ public class Obra {
     public Organizacao getOrganizacao() {
         return organizacao;
     }
-    
+
     public void setOrganizacao(Organizacao organizacao) {
         this.organizacao = organizacao;
     }
@@ -70,4 +66,5 @@ public class Obra {
         this.preco = preco;
     }
 
+   
  }

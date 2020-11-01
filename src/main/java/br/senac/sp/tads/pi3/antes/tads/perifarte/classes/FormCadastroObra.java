@@ -67,7 +67,7 @@ public class FormCadastroObra extends HttpServlet {
             throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
-        // pega os dados do formulario de cadastro de obra
+        // pega os dados do formulario de login
         String titulo = request.getParameter("titulo");
         String descricao = request.getParameter("descricao");
         String precoStr = request.getParameter("preco");
@@ -147,7 +147,7 @@ public class FormCadastroObra extends HttpServlet {
         OrganizacaoDao orgDao = new OrganizacaoDao();
         // cria a obra e bota no bd
         try {
-            int idOrg = orgDao.findIdByName(ongEscolhida);
+            int idOrg = orgDao.findByName(ongEscolhida);
             obraDao.addObra(obra, idOrg, art.getId());
         } catch (SQLException ex) {
             Logger.getLogger(FormCadastroObra.class.getName()).log(Level.SEVERE, null, ex);
