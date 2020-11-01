@@ -71,7 +71,7 @@ public class FormCadastroServlet extends HttpServlet {
                 request.setAttribute("nomeErro", "Nome deve ser preenchido");
             }
             if(!emailValido) {
-                request.setAttribute("emailErro", "E-mail deve ser preenchido no formato abc@def.ghi");
+                request.setAttribute("emailErro", "Nome deve ser preenchido");
             }
             
             request.setAttribute("nome", nome);

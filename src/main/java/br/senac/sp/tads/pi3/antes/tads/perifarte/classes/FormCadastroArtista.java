@@ -76,7 +76,7 @@ public class FormCadastroArtista extends HttpServlet {
                 request.setAttribute("nomeErro", "Nome deve ser preenchido");
             }
             if(!emailValido) {
-                request.setAttribute("emailErro", "email deve ser preenchido no formato abc@def.ghi");
+                request.setAttribute("emailErro", "email deve ser preenchido");
             }
             
             if(!senhaValido){

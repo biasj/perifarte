@@ -73,15 +73,6 @@
                </div>
            </form>
         </div>
-        
-                        // consulta se os dados informados são iguais aos dados já existentes no banco de dados e, em caso positivo, imprime a mensagem de cadastro já existente.
-        <div class="consulta-dados-bd">
-			<c:choose>
-	    		<c:when test="${organizacao.nome == nome || organizacao.cnpj == cnpj}">		
-					<p>Cadastro já existente!</p>
-				</c:when>
-			</c:choose>	
-		</div>
          
     </body>
 </html>
