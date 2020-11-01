@@ -21,39 +21,41 @@ import java.util.List;
 public class OrganizacaoDao {
     // insere
     public void addOrganizacao(Organizacao org) throws SQLException {
-        String sql = "INSERT INTO organizacao (organizacao_cnpj, organizacao_nome, organizacao_email, "
+    	String nome = org.getNome();
+    	String sql = "INSERT INTO organizacao (organizacao_cnpj, organizacao_nome, organizacao_email, "
                 + "organizacao_senha, organizacao_telefone, organizacao_status, organizacao_descricao, organizacao_justificativa) VALUES (?,?,?,?,?,?,?,?)";
 
-        try (Connection conn = Conexao.obterConexao()) {
-            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
-            conn.setAutoCommit(false);
-
-            // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
+    	try (Connection conn = Conexao.obterConexao()) {	
+    		// DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+    		conn.setAutoCommit(false);
+	
+	        // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
             try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                stmt.setString(1, org.getCnpj());
-                stmt.setString(2, org.getNome());
-                stmt.setString(3, org.getEmail());
-                stmt.setString(4, org.getSenha());
-                stmt.setString(5, org.getTelefone());
-                stmt.setString(6, org.getStatus());
-                stmt.setString(7, org.getDescricao());
-                stmt.setString(8, org.getJustificativa());
+	            stmt.setString(1, org.getCnpj());
+	            stmt.setString(2, org.getNome());
+	            stmt.setString(3, org.getEmail());
+	            stmt.setString(4, org.getSenha());
+	            stmt.setString(5, org.getTelefone());
+	            stmt.setString(6, org.getStatus());
+	            stmt.setString(7, org.getDescricao());
+	            stmt.setString(8, org.getJustificativa());
+	
+	            int resultados = stmt.executeUpdate();
+	                
+	            try (ResultSet rs = stmt.getGeneratedKeys()) {
+	                while(rs.next()) {
+	                    Integer idGerado = rs.getInt(1);
+	                    org.setId(idGerado);
+	                }
+	            }
 
-                int resultados = stmt.executeUpdate();
-                
-                try (ResultSet rs = stmt.getGeneratedKeys()) {
-                    while(rs.next()) {
-                        Integer idGerado = rs.getInt(1);
-                        org.setId(idGerado);
-                    }
-                }
-
-                conn.commit();
-            } catch (SQLException e) {
-                conn.rollback();
-                throw e;
-            }
-        }
+	            conn.commit();
+	        } catch (SQLException e) {
+	            conn.rollback();
+	            throw e;
+	        }
+    		
+    	}
     }
     
     // atualiza
@@ -228,9 +230,10 @@ public class OrganizacaoDao {
         return null;
     }
     
-    public int findByName(String nome) throws SQLException {
-        String sql = "SELECT organizacao_id FROM organizacao WHERE organizacao_nome=?";
-        int id;
+    //metodo para consulta de doadores pelo nome para verificar se já existe no banco de dados.
+    public Boolean checkIfNameExist(String nome) throws SQLException {
+        String sql = "SELECT doador_id FROM doador WHERE doador_nome=?";
+        int id =0;
         
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -240,11 +243,14 @@ public class OrganizacaoDao {
 
                     id = rs.getInt("organizacao_id");
                     
-                    return id;
-                }
+                    }
             }
         }
-        return 0;
+        if (id != 0 ) {
+        	return false;
+        }
+        return true;
     }
+
 
 }

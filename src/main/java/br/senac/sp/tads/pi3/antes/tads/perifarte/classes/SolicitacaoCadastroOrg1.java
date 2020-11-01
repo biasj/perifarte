@@ -91,16 +91,23 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
             return;
         }
         
-        // caso esteja tudo certo
-        // cria novo objeto Organizacao e atribui os valores do formulario aos atributos
-        // id, nome, email, senha, cnpj, telefone
-        Organizacao novaOrganizacao = new Organizacao(nome, email, senha, cnpj, telefone);
-        
-        // cria sessão para levar dados do usuário para a próxima página 
-        HttpSession sessao = request.getSession();
-        sessao.setAttribute("organizacao", novaOrganizacao);
-        response.sendRedirect("solicitacao-cadastro-org-1");
+        //confere se o nome do cadastro já existe no banco de dados.
+
+        if (!checkIfNameExist(nome)) {
+    		// preciso colocar uma mensagem de erro aqui.
+
+        }
+        else {
+	        // caso esteja tudo certo
+	        // cria novo objeto Organizacao e atribui os valores do formulario aos atributos
+	        // id, nome, email, senha, cnpj, telefone
+	        Organizacao novaOrganizacao = new Organizacao(nome, email, senha, cnpj, telefone);
+	        
+	        // cria sessão para levar dados do usuário para a próxima página 
+	        HttpSession sessao = request.getSession();
+	        sessao.setAttribute("organizacao", novaOrganizacao);
+	        response.sendRedirect("solicitacao-cadastro-org-1");
+        }
     }
-    
 
 }

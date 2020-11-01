@@ -81,22 +81,31 @@ public class FormCadastroServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
-        
         Doador doador = new Doador(nome, email, senha);
         
-        // insere no banco de dados
-        DoadorDao doadorDao = new DoadorDao();
-        try {
-            doadorDao.addDoador(doador);
-        } catch (SQLException ex) {
-            Logger.getLogger(SolicitacaoCadastroOrg2.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
-        HttpSession sessao = request.getSession();
-        sessao.setAttribute("doador", doador);
-        
-        // manda para a área do usuário ou carrinho (pra onde tava antes?)
-        response.sendRedirect("processar-cadastro");
+        //confere se o nome do cadastro já existe no banco de dados.
+
+        if (!this.checkIfNameExist(nome)) {
+    		// preciso colocar uma mensagem de erro aqui.
+
+    	} 
+    	else {
+	    
+    		// insere no banco de dados
+    		DoadorDao doadorDao = new DoadorDao();
+	        try {
+	            doadorDao.addDoador(doador);
+	        } catch (SQLException ex) {
+	            Logger.getLogger(SolicitacaoCadastroOrg2.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	        
+	        HttpSession sessao = request.getSession();
+	        sessao.setAttribute("doador", doador);
+	        
+	        // manda para a área do usuário ou carrinho (pra onde tava antes?)
+	        response.sendRedirect("processar-cadastro");
+    	}    
     }
 
 }

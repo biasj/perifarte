@@ -94,22 +94,29 @@ public class FormCadastroArtista extends HttpServlet {
             return;
         }
         
-        Artista artista = new Artista(nome, email, senha, portifolio);
-        
-        // insere no banco de dados
-        ArtistaDao artistaDao = new ArtistaDao();
-        try {
-            artistaDao.addArtista(artista);
-        } catch (SQLException ex) {
-            Logger.getLogger(FormCadastroArtista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        HttpSession sessao = request.getSession();
-        sessao.setAttribute("artista", artista);
+        //confere se o nome do cadastro já existe no banco de dados.
+        if (!checkIfNameExist(nome)) {
+    		// preciso colocar uma mensagem de erro aqui.
+    	} 
+    	else {
         
         
-        response.sendRedirect("processar-cadastro-artista");
-        
+	        Artista artista = new Artista(nome, email, senha, portifolio);
+	        
+	        // insere no banco de dados
+	        ArtistaDao artistaDao = new ArtistaDao();
+	        try {
+	            artistaDao.addArtista(artista);
+	        } catch (SQLException ex) {
+	            Logger.getLogger(FormCadastroArtista.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	        
+	        HttpSession sessao = request.getSession();
+	        sessao.setAttribute("artista", artista);
+	        
+	        
+	        response.sendRedirect("processar-cadastro-artista");
+    	}
     }
 
     

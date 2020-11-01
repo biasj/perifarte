@@ -103,4 +103,28 @@ public class ArtistaDao {
         }
         return resultados;
     }
+    
+    //metodo para consulta de doadores pelo nome para verificar se já existe no banco de dados.
+    public Boolean checkIfNameExist(String nome) throws SQLException {
+        String sql = "SELECT doador_id FROM doador WHERE doador_nome=?";
+        int id =0;
+        
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+
+                    id = rs.getInt("organizacao_id");
+                    
+                    }
+            }
+        }
+        if (id != 0 ) {
+        	return false;
+        }
+        return true;
+    }
+
+    
 }
