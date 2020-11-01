@@ -62,7 +62,15 @@
                         <span class="erro"><c:out value="${portifolioErro}" /></span>
                     </c:if>
                 </div>
-
+				
+				                // consulta se os dados informados são iguais aos dados já existentes no banco de dados e, em caso positivo, imprime a mensagem de cadastro já existente.
+				<div class="consulta-dados-bd">
+					<c:choose>
+		        		<c:when test="${artista.nome == nome || artista.email == email}">		
+							<p>Cadastro já existente!</p>
+						</c:when>
+					</c:choose>	
+				</div>
                 
                 <div class='w-75 p3 mx-auto'>
                     <button class="btn btn-primary" type="submit">Enviar dados</button>

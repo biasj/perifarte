@@ -65,6 +65,16 @@
                 <div class="d-flex justify-content-center">
                     <button class="w-50 btn btn-primary" type="submit">Enviar dados</button>
                 </div>
+                
+                // consulta se os dados informados são iguais aos dados já existentes no banco de dados e, em caso positivo, imprime a mensagem de cadastro já existente.
+                <div class="consulta-dados-bd">
+					<c:choose>
+	    				<c:when test="${nome == organizacao.nome || email == organizacao.email}">		
+							<p>Cadastro já existente!</p>
+						</c:when>
+					</c:choose>	
+				</div>
+                
             </form>
         </div>
     </body>

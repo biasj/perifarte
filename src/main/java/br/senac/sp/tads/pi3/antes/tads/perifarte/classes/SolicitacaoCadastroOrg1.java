@@ -74,7 +74,7 @@ public class SolicitacaoCadastroOrg1 extends HttpServlet {
                 request.setAttribute("nomeErro", "Nome deve ser preenchido");
             }
             if (!emailValido) {
-                request.setAttribute("emailErro", "E-mail deve ser preenchido");
+                request.setAttribute("emailErro", "E-mail deve ser preenchido no formato abc@def.ghi");
             }
             if(!cnpjValido) {
                 request.setAttribute("cnpjErro", "CNPJ deve conter apenas numeros");
