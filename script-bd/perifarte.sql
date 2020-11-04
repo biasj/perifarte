@@ -21,28 +21,16 @@ create table artista (
 
 create table organizacao (
 	organizacao_id SMALLINT AUTO_INCREMENT,
-    	organizacao_cnpj VARCHAR(20),
+    organizacao_cnpj VARCHAR(20),
 	organizacao_nome VARCHAR(45) NOT NULL,
 	organizacao_email VARCHAR(45) NOT NULL,
 	organizacao_senha VARCHAR(45) NOT NULL,
-    	organizacao_telefone VARCHAR(15),
-    	organizacao_status VARCHAR(45) NOT NULL,
-organizacao_descricao VARCHAR(255),
-organizacao_justificativa VARCHAR(255),
+    organizacao_telefone VARCHAR(15),
+    organizacao_status VARCHAR(45) NOT NULL,
+	organizacao_descricao VARCHAR(255),
+	organizacao_justificativa VARCHAR(255),
 	PRIMARY KEY  (organizacao_id)
 );
-
-create table doacao (
-	doacao_id SMALLINT AUTO_INCREMENT,
-	doacao_doador_id SMALLINT,
-    	doacao_obra_id SMALLINT,
-    	doacao_data DATE NOT NULL,
-    	doacao_valor DOUBLE,   /*aqui deverá ficar registrado o valor que será pago pelo usuário doador ao adquirir uma obra*/
-    	PRIMARY KEY  (doacao_id),
-	FOREIGN KEY (doacao_doador_id) REFERENCES doador (doador_id),
-	FOREIGN KEY (doacao_obra_id) REFERENCES obra (obra_id)
-);
-
 
 create table doador (
 	doador_id SMALLINT AUTO_INCREMENT,
@@ -50,8 +38,8 @@ create table doador (
 	doador_email VARCHAR(45) NOT NULL,
 	doador_senha VARCHAR(45) NOT NULL,
     PRIMARY KEY  (doador_id)
-	);
-
+);
+    
 create table obra (
 	obra_id SMALLINT AUTO_INCREMENT,
 	obra_titulo VARCHAR(45) NOT NULL,
@@ -62,28 +50,43 @@ create table obra (
     PRIMARY KEY  (obra_id),
 	FOREIGN KEY (obra_organizacao_id) REFERENCES organizacao (organizacao_id),
     FOREIGN KEY (obra_artista_id) REFERENCES artista (artista_id)
-    );
-    
+);
 
+create table doacao (
+	doacao_id SMALLINT AUTO_INCREMENT,
+	doacao_doador_id SMALLINT,
+    doacao_obra_id SMALLINT,
+    doacao_data DATE NOT NULL,
+    doacao_valor DOUBLE,   /*aqui deverá ficar registrado o valor que será pago pelo usuário doador ao adquirir uma obra*/
+    PRIMARY KEY  (doacao_id),
+	FOREIGN KEY (doacao_doador_id) REFERENCES doador (doador_id),
+	FOREIGN KEY (doacao_obra_id) REFERENCES obra (obra_id)
+);
+
+
+insert into administrador values
+("1", "Marcelo", "marcelo@hotmail", "marcelo123"),
+("2", "Gabriel", "gabriel@hotmail", "gabriel123"),
+("3", "Bia", "bia@gmail", "bia123");
 
 insert into artista values
-("1", "marcelo", "marcelo@hotmail", "feliz", "eh isso ai"),
-("2", "gabriel", "gabriel@hotmail", "ok", "eh isso mesmo"),
-("3", "bia", "bia@gmail", "tranquila", "eh isso");
+("1", "Leonardo", "leonardo@hotmail", "davinci", "instagram.com/leodavinci"),
+("2", "Nadja", "nadja@hotmail", "tonariau", "behance.com/nadja"),
+("3", "Juan", "juan@gmail", "juanzito", "linkedin.com/juan");
 
 insert into doador values 
-("1", "ma", "ma@hotmail", "ma12"),
-("2", "ga", "ga@hotmail", "ga12"),
-("3", "bi", "bi@gmail", "bi12");
-
-insert into obra values
-("1", "monalisa", "a mais bela", "1", "1", 10),
-("2", "o grito", "berrante", "2", "3", "15"),
-("3", "guernica", "espanha", "1", "3", "30");
+("1", "Ana", "ana@hotmail", "ana12"),
+("2", "Gabi", "gabi@hotmail", "gabi12"),
+("3", "Bianca", "bianca@gmail", "bianca12");
 
 insert into organizacao values 
-("1", "32767", "AjudaMuito", "AM@gmail", "am12", "137893", "estamos bem"),
-("2", "87656", "MuitoBoa", "MB@hotmail", "mb12", "648769", "estamos ajudando");
+("1", "32767", "Org Zona Sul", "zonasul@gmail", "zonasul", "1199998888", "aprovado","organizacao da zona sul",  "compraremos mascara"),
+("2", "87656", "Org Ajuda Muito", "am@hotmail", "am12", "1334559900", "aprovado","organizacao que ajuda muito",  "vamos ajudar as pessoas");
+
+insert into obra values
+("1", "Monalisa", "A mais bela", "1", "1", 10),
+("2", "O grito", "Obra berrante", "2", "3", "15"),
+("3", "Guernica", "Representação da Espanha", "1", "3", "30");
 
 insert into doacao values
 ("1", "2", "1", "2020-10-12", "30"),
