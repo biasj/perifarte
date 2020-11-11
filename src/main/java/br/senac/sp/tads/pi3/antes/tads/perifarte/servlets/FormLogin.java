@@ -51,8 +51,10 @@ public class FormLogin extends HttpServlet {
         } else if (adm != null) {
             List<Artista> artistas = (List<Artista>) sessao.getAttribute("artistas");
             List<Doador> doadores = (List<Doador>) sessao.getAttribute("doadores");
+            List<Administrador> adms = (List<Administrador>) sessao.getAttribute("adms");
             request.setAttribute("doadores", doadores);
             request.setAttribute("artistas", artistas);
+            request.setAttribute("adms", adms);
             
             redirecionarAdm(request, response, adm);
         } else if(art != null){
@@ -108,12 +110,16 @@ public class FormLogin extends HttpServlet {
                 List<Doador> doadores = doadorDao.findAll();
                 // carregar todas as organizações
                 List organizacoes = orgDao.findAll();
+                // carrega todos os adms
+                List adms = admDao.findAll();
+                
                 // setar o atributo organizacao c a lista das organizacoes
                 adm.setOrganizacoes(organizacoes);
                 sessao.setAttribute("administrador", adm);
                 // passa a lista de artistas e doadores para serem apresentadas no painel
                 sessao.setAttribute("artistas", artistas);
                 sessao.setAttribute("doadores", doadores);
+                sessao.setAttribute("adms", adms);
                 
             //se for art
             } else if(art != null){

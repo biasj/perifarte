@@ -26,7 +26,18 @@
         <c:import url="./../cabecalho-painel.jsp"/>
         <div class="container">
             <h2>Administrador: <c:out value="${administrador.nome}" /></h2>
-        
+            <c:if test="${atualizacaoSucesso != null}">
+                <div class="form-group w-75 mx-auto">
+                    <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>
+                </div>  
+            </c:if>
+            
+            <c:if test="${exclusaoSucesso != null}">
+                <div class="form-group w-75 mx-auto">
+                    <span class="sucesso"><c:out value="${exclusaoSucesso}" /></span>
+                </div>  
+            </c:if>
+            
             <div class="list-group adm">
                 <h3>Organizações</h3>
                 <!--para cada organizacao existente no banco de dados--> 
@@ -45,6 +56,24 @@
                  </c:forEach>
             </div>
             
+            <!--lista de administradores cadastrados-->
+            <div class="list-group adm">
+                <h3>Administradores</h3>
+                <!--para cada organizacao existente no banco de dados--> 
+                <c:forEach var="admin" items="${adms}">
+                    <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                    <a class="list-group-item list-group-item-action" href="/perifarte/editar/adm?id=${admin.id}">
+                        
+                        <h5 class="mb-1"><c:out value="${admin.nome}"/></h5>
+                        <div class="d-flex justify-content-between">    
+                            <p class="mb-1">E-mail: <c:out value="${admin.email}"/></p>
+                            <i class="far fa-edit" style="font-size: 30px;"></i>
+                        </div>
+                        <p>Id: <c:out value="${admin.id}"/></p>
+                    </a>
+                 </c:forEach>
+            </div>
+            
             <!--lista de doadores cadastrados-->
             <div class="list-group adm">
                 <h3>Doadores</h3>
@@ -56,7 +85,7 @@
                         <div class="d-flex justify-content-between">
                             <p class="mb-1">E-mail: <c:out value="${doador.email}"/></p>
                         </div>
-                        <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                        <p class="mb-1">Valor doado R$ 1000</p>
                     </a>
                  </c:forEach>
             </div>
