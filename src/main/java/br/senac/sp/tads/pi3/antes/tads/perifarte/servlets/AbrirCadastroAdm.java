@@ -18,16 +18,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author beatrizsato
  */
-
-@WebServlet(name = "FormCadastroOrg", urlPatterns = {"/cadastro-org"})
-public class FormCadastroOrg extends HttpServlet {
+@WebServlet(name = "AbrirCadastroAdm", urlPatterns = {"/cadastro-adm"})
+public class AbrirCadastroAdm extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/formulario-cadastro-org-1.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-cadastro-adm.jsp");
         dispatcher.forward(request, response);
     }
-
 
 }

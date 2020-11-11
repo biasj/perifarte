@@ -1,6 +1,6 @@
 <%-- 
-    Document   : form-cadastro
-    Created on : 21/10/2020, 13:47:40
+    Document   : form-cadastro-adm
+    Created on : 09/11/2020, 14:11:10
     Author     : beatrizsato
 --%>
 
@@ -18,16 +18,16 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>        
-        <title>Perifarte - Cadastro</title>
+        <title>Perifarte - Cadastro Administrador</title>
     </head>
     <body>
         <c:import url="./../cabecalho.jsp"/>
         
         <div class="container">
             
-            <form method="post" action="processar-cadastro">
+            <form method="post" action="processar-cadastro-adm">
                 
-                <h2 class='form-group w-75 p3 mx-auto'>Cadastro</h2>
+                <h2 class='form-group w-75 p3 mx-auto'>Cadastro de Administrador</h2>
                 
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="nome">Nome</label>
@@ -51,16 +51,11 @@
                     <label for="senha">Senha</label>
                     <input id="senha" class="form-control" type="password" name="senha" required>
                 </div>
-                    
-                <div class='form-group w-75 p3 mx-auto'>
-                    <div><a class="login" href="./cadastro-artista">Cadastro de artista</a></div>
-                    <div><a class="login" href="./cadastro-org">Cadastro de organização</a></div>
-                    <div><a class="login" href="./cadastro-adm">Cadastro de administrador</a></div>
-                </div>
 
                 <div class="d-flex justify-content-center">
                     <button class="w-50 btn btn-primary" type="submit">Enviar dados</button>
                 </div>
+                    
             </form>
         </div>
     </body>
