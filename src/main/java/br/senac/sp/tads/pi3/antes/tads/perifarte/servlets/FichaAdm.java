@@ -32,7 +32,6 @@ public class FichaAdm extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        Administrador adm = (Administrador) sessao.getAttribute("administrador");
 
         String id = request.getParameter("id");
         
@@ -49,7 +48,7 @@ public class FichaAdm extends HttpServlet {
             Logger.getLogger(FichaOrg.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        sessao.setAttribute("administrador", adm);
+//        sessao.setAttribute("administrador", adm);
         sessao.setAttribute("admEdit", admEdit);
   
         // envia para a tela de ficha de específica de organização
@@ -70,6 +69,7 @@ public class FichaAdm extends HttpServlet {
         try {
             admDao.excluirConta(String.valueOf(admEdit.getId()));
             
+            // atualiza a lista de administradores no painels
             List adms = admDao.findAll();
             sessao.setAttribute("adms", adms);
             
@@ -78,12 +78,8 @@ public class FichaAdm extends HttpServlet {
             Logger.getLogger(FichaAdm.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
         request.setAttribute("exclusaoSucesso", "Administrador excluído com sucesso");
-        
-        
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-administrador.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/painel/adm");
     }
 }

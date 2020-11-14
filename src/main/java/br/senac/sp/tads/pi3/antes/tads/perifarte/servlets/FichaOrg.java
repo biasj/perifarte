@@ -32,7 +32,6 @@ public class FichaOrg extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        Administrador adm = (Administrador) sessao.getAttribute("administrador");
         // pega o parametro passado pela url (ao clicar no item da lista)
         String id = request.getParameter("id");
         
@@ -56,7 +55,6 @@ public class FichaOrg extends HttpServlet {
         }
         
         sessao.setAttribute("org", org);
-        sessao.setAttribute("administrador", adm);
   
         // envia para a tela de ficha de específica de organização
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ficha-org.jsp");
