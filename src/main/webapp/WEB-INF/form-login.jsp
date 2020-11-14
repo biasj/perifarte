@@ -25,7 +25,7 @@
         <!-- INSERIR MENSAGENS DE LOGIN/CADASTRO pela sessao ? -->
         
         <div class='container'>
-           <form method="post" action="processamento">
+           <form method="post" action="${pageContext.request.contextPath}/login">
                 <h2 class='form-group w-75 p3 mx-auto'>Login</h2>
 
                 <c:if test="${loginErro != null}">

@@ -41,7 +41,7 @@
             <!--para cada obra existente publica por esse artista logado-->
             <div class="list-group">
                 <c:forEach var="obra" items="${artista.obras}">
-                        <a class="list-group-item list-group-item-action" href="/perifarte/editar/obra?id=${obra.id}">
+                        <a class="list-group-item list-group-item-action" href="${pageContext.request.contextPath}/editar/obra?id=${obra.id}">
                             <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
                             <div class="d-flex justify-content-between">
                                 <p class="mb-1">Preço: <c:out value="${obra.preco}"/></p>
