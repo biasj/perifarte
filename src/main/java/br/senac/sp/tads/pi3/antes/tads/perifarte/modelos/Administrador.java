@@ -13,7 +13,7 @@ import java.util.Random;
  * @author beatrizsato
  */
 public class Administrador extends Usuario{
-    private int id;
+    private static int id;
     private final String credencial;
     private List<Organizacao> organizacoes;
     
@@ -36,7 +36,7 @@ public class Administrador extends Usuario{
     }
     
     public void setId(int id) {
-        this.id = id;
+        Administrador.id = id;
     }
 
     public void setOrganizacoes(List<Organizacao> organizacoes) {

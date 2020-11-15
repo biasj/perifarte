@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -64,56 +62,6 @@ public class AdministradorDao {
                     
                     Administrador adm = new Administrador(nome, email, senha);
                   
-                    
-                    return adm;
-                }
-            }
-        }
-        return null;
-    }
-    
-    // retorna todos os artistas (para mostrar no painel de administrador)
-    public List<Administrador> findAll() throws SQLException {
-        String sql = "select * from administrador";
-        List<Administrador> resultados = new ArrayList<>();
-
-        // try-with-resources (após Java 7 ou superior)
-        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
-        try (Connection conn = Conexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                // pega os dados das colunas da tabela do bd
-                String nome = rs.getString("administrador_nome");
-                int id = rs.getInt("administrador_id");
-                String email = rs.getString("administrador_email");
-                String senha = rs.getString("administrador_senha");
-  
-                // Construtor: String nome, String email, String senha, String portfolio
-                Administrador adm = new Administrador(nome, email, senha);
-                // inicializa id pelo id do banco
-                adm.setId(id);
-                
-                resultados.add(adm);
-            }
-        }
-        return resultados;
-    }
-    
-    public Administrador findById(String id) throws SQLException {
-        String sql = "SELECT * FROM administrador WHERE administrador_id=?";
-        try (Connection conn = Conexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, Integer.parseInt(id));
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    // pega os dados das colunas da tabela do bd
-                    String nome = rs.getString("administrador_nome");
-                    String email = rs.getString("administrador_email");
-                    String senha = rs.getString("administrador_senha");
-                  
-                    Administrador adm = new Administrador(nome, email, senha);
-                    adm.setId(Integer.parseInt(id));
                     
                     return adm;
                 }

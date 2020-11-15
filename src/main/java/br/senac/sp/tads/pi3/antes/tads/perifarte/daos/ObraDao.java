@@ -5,7 +5,8 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.daos;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -149,78 +150,6 @@ public class ObraDao {
                 
         }
         return resultados;
-    }
-    
-    public List<Obra> findAll() throws SQLException {
-        String sql = "select * from obra";
-        List<Obra> resultados = new ArrayList<>();
-
-        // try-with-resources (após Java 7 ou superior)
-        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
-        try (Connection conn = Conexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                // pega os dados das colunas da tabela do bd
-                String titulo = rs.getString("obra_titulo");
-                int id = rs.getInt("obra_id");
-                String descricao = rs.getString("obra_descricao");
-                int idOrganizacao = rs.getInt("obra_organizacao_id");
-                int artistaId = rs.getInt("obra_artista_id");
-                BigDecimal preco = rs.getBigDecimal("obra_preco");
-                
-                // Construtor: String nome, String email, String senha, String cnpj, String telefone
-                Obra obra = new Obra(titulo, descricao, preco);
-                
-                obra.setId(id);
-                
-                resultados.add(obra);
-            }
-        }
-        return resultados;
-    }
-    
-    public List<MiniaturaObra> findAllMiniaturas() throws SQLException {
-        String sql = "select obra_artista_id, obra_id from obra";
-        List<MiniaturaObra> resultados = new ArrayList<>();
-
-        // try-with-resources (após Java 7 ou superior)
-        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
-        try (Connection conn = Conexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                // pega os dados das colunas da tabela do bd
-                int id = rs.getInt("obra_id");
-                int idArtista = rs.getInt("obra_artista_id");
-                
-                MiniaturaObra mini = new MiniaturaObra(id, idArtista);
-                                
-                resultados.add(mini);
-            }
-        }
-        return resultados;
-    }
-    
-    public MiniaturaObra findMiniaturaByObra(int idObra) throws SQLException {
-        String sql = "select obra_artista_id, obra_id from obra where obra_id = ?";
-        
-        try (Connection conn = Conexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idObra);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    // pega os dados das colunas da tabela do bd
-                    int id = rs.getInt("obra_id");
-                    int idArtista = rs.getInt("obra_artista_id");
-
-                    MiniaturaObra miniatura = new MiniaturaObra(id, idArtista);
-                    
-                    return miniatura;
-                }
-            }
-        }
-        return null;
     }
     
     // atualiza obra através do ficha-obra (login de artista)/ fichaObra (servlet)

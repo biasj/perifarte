@@ -106,30 +106,4 @@ public class ArtistaDao {
         }
         return resultados;
     }
-    
-        
-    public Artista findById(int id) throws SQLException {
-        String sql = "SELECT * FROM artista WHERE artista_id=?";
-        try (Connection conn = Conexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    // pega os dados das colunas da tabela do bd
-                    String nome = rs.getString("artista_nome");
-                    String email = rs.getString("artista_email");
-                    String senha = rs.getString("artista_senha");
-                    String portfolio = rs.getString("artista_portifolio");
-
-                    // Construtor: String nome, String email, String senha, String portfolio
-                    Artista artista = new Artista(nome, email, senha, portfolio);
-                    // inicializa id pelo id do banco
-                    artista.setId(id);
-                    
-                    return artista;
-                }
-            }
-        }
-        return null;
-    }
 }
