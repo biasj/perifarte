@@ -5,8 +5,12 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Organizacao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ArtistaDao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ObraDao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.OrganizacaoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -33,7 +37,7 @@ public class FichaObra extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        Artista artista = (Artista) sessao.getAttribute("usuario");
+        Artista artista = (Artista) sessao.getAttribute("artista");
 
         String id = request.getParameter("id");
         
@@ -60,9 +64,8 @@ public class FichaObra extends HttpServlet {
         }
         
         sessao.setAttribute("obra", obra);
-        sessao.setAttribute("usuario", artista);
-        request.setAttribute("artista", artista);
-        
+        sessao.setAttribute("artista", artista);
+  
         // envia para a tela de ficha de específica de organização
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ficha-obra.jsp");
         dispatcher.forward(request, response);
@@ -76,7 +79,7 @@ public class FichaObra extends HttpServlet {
         
         // recupera dados enviados no form
         Obra obra = (Obra) sessao.getAttribute("obra");
-        Artista artista = (Artista) sessao.getAttribute("usuario");
+        Artista artista = (Artista) sessao.getAttribute("artista");
         
         String titulo = request.getParameter("titulo");
         String descricao = request.getParameter("descricao");
@@ -107,7 +110,6 @@ public class FichaObra extends HttpServlet {
                 artista.setObras(obraDao.findObraByArtista(artista.getId()));
                 // manda mensagem de sucesso
                 request.setAttribute("exclusaoSucesso", "Obra excluída com sucesso");
-                request.setAttribute("artista", artista);
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
                 dispatcher.forward(request, response);
@@ -122,7 +124,7 @@ public class FichaObra extends HttpServlet {
         }
         
         sessao.setAttribute("obra", obra);
-        sessao.setAttribute("usuario", artista);
+        sessao.setAttribute("artista", artista);
         
         response.sendRedirect("obra");
     }

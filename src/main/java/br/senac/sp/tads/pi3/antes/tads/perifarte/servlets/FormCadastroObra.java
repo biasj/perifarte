@@ -5,8 +5,10 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ObraDao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.OrganizacaoDao;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -49,16 +51,14 @@ public class FormCadastroObra extends HttpServlet {
         
         // mostra todos as obras daquele artista
         ObraDao obraDao = new ObraDao();
-        Artista artista = (Artista) sessao.getAttribute("usuario");
+        Artista artista = (Artista) sessao.getAttribute("artista");
         try {
             List<Obra> obras = obraDao.findObraByArtista(artista.getId());
             artista.setObras(obras);
         } catch (SQLException ex) {
             Logger.getLogger(FormCadastroObra.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-//        sessao.setAttribute("usuario", artista);
-        request.setAttribute("artista", artista);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
         dispatcher.forward(request, response);
         
@@ -141,7 +141,7 @@ public class FormCadastroObra extends HttpServlet {
         }*/
         
         HttpSession sessao = request.getSession();
-        Artista art = (Artista) sessao.getAttribute("usuario");
+        Artista art = (Artista) sessao.getAttribute("artista");
         
         Obra obra = new Obra(titulo, descricao, preco);
         
@@ -156,7 +156,6 @@ public class FormCadastroObra extends HttpServlet {
         }
         
         sessao.setAttribute("obra", obra);
-        
         // manda para a área do usuário ou carrinho (pra onde tava antes?)
         response.sendRedirect("processar-cadastro-obra");
         

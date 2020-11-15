@@ -144,25 +144,4 @@ public class DoadorDao {
         }
         return resultados;
     }
-    
-    public Doador findById(String id) throws SQLException {
-        String sql = "SELECT * FROM doador WHERE doador_id=?";
-        try (Connection conn = Conexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, Integer.parseInt(id));
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    // pega os dados das colunas da tabela do bd
-                    String nome = rs.getString("doador_nome");
-                    String email = rs.getString("doador_email");
-                    String senha = rs.getString("doador_senha");
-                  
-                    Doador doador = new Doador(nome, email, senha);
-                    
-                    return doador;
-                }
-            }
-        }
-        return null;
-    }
 }

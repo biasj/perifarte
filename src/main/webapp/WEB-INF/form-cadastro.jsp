@@ -51,12 +51,6 @@
                     <label for="senha">Senha</label>
                     <input id="senha" class="form-control" type="password" name="senha" required>
                 </div>
-                    
-                <div class='form-group w-75 p3 mx-auto'>
-                    <div><a class="login" href="./cadastro-artista">Cadastro de artista</a></div>
-                    <div><a class="login" href="./cadastro-org">Cadastro de organização</a></div>
-                    <div><a class="login" href="./cadastro-adm">Cadastro de administrador</a></div>
-                </div>
 
                 <div class="d-flex justify-content-center">
                     <button class="w-50 btn btn-primary" type="submit">Enviar dados</button>

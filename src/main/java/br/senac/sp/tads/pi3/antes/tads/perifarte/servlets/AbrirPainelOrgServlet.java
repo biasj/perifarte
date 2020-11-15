@@ -28,7 +28,7 @@ public class AbrirPainelOrgServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
         // recupera os dados do post guardados pela sessão
-        Organizacao org = (Organizacao) sessao.getAttribute("usuario");
+        Organizacao org = (Organizacao) sessao.getAttribute("org");
         request.setAttribute("org", org);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-organizacao.jsp");
         dispatcher.forward(request, response);

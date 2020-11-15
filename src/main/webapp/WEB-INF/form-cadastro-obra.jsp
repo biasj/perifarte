@@ -21,7 +21,7 @@
         <title>Perifarte - Cadastro</title>
     </head>
     <body>
-        <c:import url="./../cabecalho.jsp"/>
+        <c:import url="./../cabecalho-painel.jsp"/>
         <div class="container">
             <form method="post" action="processar-cadastro-obra">
                 <h2 class='form-group w-75 p3 mx-auto'>Cadastro de Obra</h2>

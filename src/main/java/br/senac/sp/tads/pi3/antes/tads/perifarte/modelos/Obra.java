@@ -57,11 +57,11 @@ public class Obra {
     public Organizacao getOrganizacao() {
         return organizacao;
     }
-
+    
     public void setOrganizacao(Organizacao organizacao) {
         this.organizacao = organizacao;
     }
-      
+
     public BigDecimal getPreco() {
         return preco;
     }

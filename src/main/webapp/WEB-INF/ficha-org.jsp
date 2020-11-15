@@ -23,10 +23,10 @@
         <title>Perifarte - Organizações</title>
     </head>
     <body>
-        <c:import url="./../cabecalho.jsp"/>
+        <c:import url="./../cabecalho-painel.jsp"/>
         
         <div class="container ficha-org">
-            <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Voltar</a>
+            <a class="back-button" href="/perifarte/processamento"><i class="fas fa-chevron-left" ></i> Voltar</a>
             
             <c:if test="${atualizacaoSucesso != null}">
                 <div class="form-group w-75 mx-auto">
