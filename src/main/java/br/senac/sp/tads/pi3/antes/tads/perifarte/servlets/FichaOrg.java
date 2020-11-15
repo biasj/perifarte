@@ -34,6 +34,7 @@ public class FichaOrg extends HttpServlet {
         HttpSession sessao = request.getSession();
         // pega o parametro passado pela url (ao clicar no item da lista)
         String id = request.getParameter("id");
+        Administrador adm = (Administrador) sessao.getAttribute("usuario");
         
         OrganizacaoDao orgDao = new OrganizacaoDao(); 
         Organizacao org = null;
@@ -55,6 +56,7 @@ public class FichaOrg extends HttpServlet {
         }
         
         sessao.setAttribute("org", org);
+        sessao.setAttribute("usuario", adm);
   
         // envia para a tela de ficha de específica de organização
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ficha-org.jsp");
@@ -69,7 +71,7 @@ public class FichaOrg extends HttpServlet {
         
         // recupera dados enviados no form
         Organizacao org = (Organizacao) sessao.getAttribute("org");
-        Administrador adm = (Administrador) sessao.getAttribute("administrador");
+        Administrador adm = (Administrador) sessao.getAttribute("usuario");
         String id = String.valueOf(org.getId());
         
         // pega os valores para saber qual botão foi clicado
@@ -101,7 +103,7 @@ public class FichaOrg extends HttpServlet {
         }
         
         sessao.setAttribute("org", org);
-        sessao.setAttribute("administrador", adm);
+        sessao.setAttribute("usuario", adm);
         
         response.sendRedirect("org");
         

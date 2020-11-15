@@ -33,7 +33,7 @@ public class FichaObra extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        Artista artista = (Artista) sessao.getAttribute("artista");
+        Artista artista = (Artista) sessao.getAttribute("usuario");
 
         String id = request.getParameter("id");
         
@@ -60,8 +60,9 @@ public class FichaObra extends HttpServlet {
         }
         
         sessao.setAttribute("obra", obra);
-        sessao.setAttribute("artista", artista);
-  
+        sessao.setAttribute("usuario", artista);
+        request.setAttribute("artista", artista);
+        
         // envia para a tela de ficha de específica de organização
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/ficha-obra.jsp");
         dispatcher.forward(request, response);
@@ -75,7 +76,7 @@ public class FichaObra extends HttpServlet {
         
         // recupera dados enviados no form
         Obra obra = (Obra) sessao.getAttribute("obra");
-        Artista artista = (Artista) sessao.getAttribute("artista");
+        Artista artista = (Artista) sessao.getAttribute("usuario");
         
         String titulo = request.getParameter("titulo");
         String descricao = request.getParameter("descricao");
@@ -106,6 +107,7 @@ public class FichaObra extends HttpServlet {
                 artista.setObras(obraDao.findObraByArtista(artista.getId()));
                 // manda mensagem de sucesso
                 request.setAttribute("exclusaoSucesso", "Obra excluída com sucesso");
+                request.setAttribute("artista", artista);
                 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
                 dispatcher.forward(request, response);
@@ -120,7 +122,7 @@ public class FichaObra extends HttpServlet {
         }
         
         sessao.setAttribute("obra", obra);
-        sessao.setAttribute("artista", artista);
+        sessao.setAttribute("usuario", artista);
         
         response.sendRedirect("obra");
     }
