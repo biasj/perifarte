@@ -89,3 +89,15 @@ a.to_nav:focus {
 .erro {
     color: red;
 }
+
+.container {
+    padding: 20px;
+}
+
+.back-button{
+    padding: 20px;
+}
+
+.sucesso {
+    color: green;
+}

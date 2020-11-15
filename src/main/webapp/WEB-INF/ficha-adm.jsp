@@ -23,7 +23,7 @@
         <title>Perifarte - Administrador</title>
     </head>
     <body>
-         <c:import url="./../cabecalho-painel.jsp"/>
+         <c:import url="./../cabecalho.jsp"/>
          
          <div class="container">
             <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Voltar</a>
