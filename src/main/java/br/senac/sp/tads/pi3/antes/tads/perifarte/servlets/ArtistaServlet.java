@@ -5,7 +5,7 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Organizacao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,17 +20,19 @@ import javax.servlet.http.HttpSession;
  *
  * @author beatrizsato
  */
-@WebServlet(name = "AbrirPainelOrgServlet", urlPatterns = {"/painel/organizacao"})
-public class AbrirPainelOrgServlet extends HttpServlet {
+@WebServlet(name = "ArtistaServlet", urlPatterns = {"/painel/artista"})
+public class ArtistaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        // recupera os dados do post guardados pela sessão
-        Organizacao org = (Organizacao) sessao.getAttribute("usuario");
-        request.setAttribute("org", org);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-organizacao.jsp");
+        Artista artista = (Artista) sessao.getAttribute("usuario");
+        
+        request.setAttribute("artista", artista);
+        
+        // envia para a tela de continuação de solicitação de cadastro 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
         dispatcher.forward(request, response);
     }
 
