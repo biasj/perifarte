@@ -180,6 +180,49 @@ public class ObraDao {
         return resultados;
     }
     
+    public List<MiniaturaObra> findAllMiniaturas() throws SQLException {
+        String sql = "select obra_artista_id, obra_id from obra";
+        List<MiniaturaObra> resultados = new ArrayList<>();
+
+        // try-with-resources (após Java 7 ou superior)
+        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                // pega os dados das colunas da tabela do bd
+                int id = rs.getInt("obra_id");
+                int idArtista = rs.getInt("obra_artista_id");
+                
+                MiniaturaObra mini = new MiniaturaObra(id, idArtista);
+                                
+                resultados.add(mini);
+            }
+        }
+        return resultados;
+    }
+    
+    public MiniaturaObra findMiniaturaByObra(int idObra) throws SQLException {
+        String sql = "select obra_artista_id, obra_id from obra where obra_id = ?";
+        
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idObra);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // pega os dados das colunas da tabela do bd
+                    int id = rs.getInt("obra_id");
+                    int idArtista = rs.getInt("obra_artista_id");
+
+                    MiniaturaObra miniatura = new MiniaturaObra(id, idArtista);
+                    
+                    return miniatura;
+                }
+            }
+        }
+        return null;
+    }
+    
     // atualiza obra através do ficha-obra (login de artista)/ fichaObra (servlet)
     public void atualizarObra(Obra obra, String organizacao) throws SQLException {
         String sql = "update obra set obra_titulo=?, obra_descricao=?, obra_organizacao_id=?, obra_preco=? where obra_id=?";
@@ -225,41 +268,4 @@ public class ObraDao {
             }
         }
     }
-    
-    
-    public int getArtistaId(int idObra) throws SQLException {
-        String sql = "select artista.artista_id from obra join artista on obra_artista_id = artista.artista_id where obra_id = ?";
-        try (Connection conn = Conexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idObra);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    // pega os dados das colunas da tabela do bd
-                    int id = rs.getInt("artista_id");
-                    
-                    
-                    return id;
-                }
-            }
-        }
-        return -1;
-    }
-
-    public int getOrganizacaoId(int idObra) throws SQLException {
-        String sql = "select organizacao.organizacao_id from obra join organizacao on obra_organizacao_id = organizacao.organizacao_id where obra_id = ?";
-        try (Connection conn = Conexao.obterConexao();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idObra);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    // pega os dados das colunas da tabela do bd
-                    int id = rs.getInt("organizacao_id");
-                    
-                    return id;
-                }
-            }
-        }
-        return -1;
-    } 
-
 }

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-dark bg-dark justify-content-between">
-    <a class="navbar-brand">Perifarte</a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Perifarte</a>
     <form class='form-inline'>
         <c:choose>
             <c:when test="${sessionScope.usuario != null}">

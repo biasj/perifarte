@@ -30,25 +30,21 @@ public class ObraServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sessao = request.getSession();
         String id = request.getParameter("id");
         
         ObraDao obraDao = new ObraDao();
         ArtistaDao artistaDao = new ArtistaDao();
-        OrganizacaoDao orgDao = new OrganizacaoDao();
         
         try {
+            MiniaturaObra mini = obraDao.findMiniaturaByObra(Integer.parseInt(id));
+            
             // carregar informações da obra, artista e ong
             Obra obra = obraDao.findById(id);
-            int idArtista = obraDao.getArtistaId(obra.getId());
-            int idOrganizacao = obraDao.getOrganizacaoId(obra.getId());
-            Artista artista = artistaDao.findById(idArtista);
-            Organizacao org = orgDao.findById(String.valueOf(idOrganizacao));
+            Artista artista = artistaDao.findById(mini.getIdArtista());
             
-            request.setAttribute("obra", obra);
-            request.setAttribute("artista", artista);
-            request.setAttribute("org", org);
-
+            DetalheObra detalheObra = new DetalheObra(obra, artista);
+            
+            request.setAttribute("detalhe", detalheObra);
             
         } catch (SQLException ex) {
             Logger.getLogger(ObraServlet.class.getName()).log(Level.SEVERE, null, ex);

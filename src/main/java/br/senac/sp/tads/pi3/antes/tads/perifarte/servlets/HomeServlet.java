@@ -5,11 +5,12 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ObraDao;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,13 +31,15 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // carrega todas as obras do banco de dados
         ObraDao obraDao = new ObraDao();
-        List<Obra> obras = null;
+        
+        List<MiniaturaObra> miniaturas = null;
+        List<DetalheObra> obras = null;
         
         try {
-            obras = obraDao.findAll();
-            // TODO: pegar nome do artista + organização
+            // carrega todas as obras do banco de dados
+            miniaturas = obraDao.findAllMiniaturas();
+            obras = this.getObras(miniaturas);
             
         } catch (SQLException ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,5 +50,22 @@ public class HomeServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/home.jsp");
         dispatcher.forward(request, response);
     }
-
+    
+    public List<DetalheObra> getObras(List<MiniaturaObra> miniaturas) throws SQLException {
+        List<DetalheObra> obras = new ArrayList<>();
+        ObraDao obraDao = new ObraDao();
+        ArtistaDao artDao = new ArtistaDao();
+        
+        // para cada miniatura, pegar a obra e o artsita pelo id
+        for(MiniaturaObra miniatura: miniaturas) {
+            Obra obra = obraDao.findById(String.valueOf(miniatura.getIdObra()));
+            Artista artista = artDao.findById(miniatura.getIdArtista());
+            
+            DetalheObra obraDetalhada = new DetalheObra(obra, artista);
+            
+            obras.add(obraDetalhada);
+        }
+        
+        return obras;
+    } 
 }

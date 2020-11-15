@@ -24,9 +24,31 @@
         <c:import url="./../cabecalho.jsp"/> 
         <div class="container">
             <a class="back-button" href="${pageContext.request.contextPath}/home"><i class="fas fa-chevron-left" ></i> Voltar</a>
-            <h1><c:out value="${obra.titulo}"/></h1>
-            <p>pintado por <c:out value="${artista.nome}"/></p>
-            <p>doado para <c:out value="${org.nome}"/></p>
+            <div>
+                <img src="" alt="">
+                <div class='d-flex justify-content-between'>
+                    <h3><c:out value="${detalhe.obra.titulo}"/></h3>
+                    <h5>Arrecadado: </h5>
+                </div>
+                
+                <div class="d-flex justify-content-between">   
+                    <a href="https://${detalhe.artista.portifolio}"><c:out value="${detalhe.artista.nome}"/></a>
+                    <p><c:out value="${detalhe.obra.organizacao.nome}"/></p> 
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between detalhe-obra">
+                <h3>R$ <c:out value="${detalhe.obra.preco}"/></h3>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/carrinho">Comprar</a>
+            </div>
+            
+            <h3>Descrição</h2>
+            <p><c:out value="${detalhe.obra.descricao}"/></p>
+            
+            <h3>Informações sobre a Organização</h2>
+            <p><c:out value="${detalhe.obra.organizacao.descricao}"/></p>
+            
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/carrinho">Adicionar ao Carrinho</a>
         </div>
     </body>
 </html>

@@ -23,16 +23,23 @@
     <body>
         <c:import url="./../cabecalho.jsp" /> 
         <div class="container">
-            <c:forEach var="obra" items="${obras}">
-                <a class="list-group-item list-group-item-action" href="${pageContext.request.contextPath}/obra?id=${obra.id}">
-                    <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
-                    <div class="d-flex justify-content-between">
-                        <p class="mb-1">Preço: <c:out value="${obra.preco}"/></p>
-                        <i class="far fa-edit" style="font-size: 30px;"></i>
+            <div class="row row-cols-1 row-cols-md-3">
+                
+                <c:forEach var="detalhe" items="${obras}">
+                    <div class="col mb-4">
+                        <div class="card h-100">
+                            <img src="" class="card-img-top">
+                            <h5 class="card-title"><c:out value="${detalhe.obra.titulo}"/></h5>
+                            <p class="mb-1">Preço: <c:out value="${detalhe.obra.preco}"/></p>
+                            <p class="mb-1">Organizacao: <c:out value="${detalhe.obra.organizacao.nome}"/></p>
+                            <p class="mb-1">Artista <c:out value="${detalhe.artista.nome}"/></p>
+                            <a class="stretched-link" href="${pageContext.request.contextPath}/obra?id=${detalhe.obra.id}"></a>
+                        </div>
                     </div>
-                    <p class="mb-1">Organizacao: <c:out value="${obra.organizacao.nome}"/></p>
-                </a>
-            </c:forEach>
+                </c:forEach>
+                
+            </div>
+            
         </div>
     </body>
     
