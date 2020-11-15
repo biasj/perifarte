@@ -5,12 +5,8 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Organizacao;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ArtistaDao;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ObraDao;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.OrganizacaoDao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;

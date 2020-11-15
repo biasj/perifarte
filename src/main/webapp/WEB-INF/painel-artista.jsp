@@ -23,7 +23,7 @@
         <title>Perifarte - Artistas</title>
     </head>
     <body>
-         <c:import url="./../cabecalho-painel.jsp"/>
+         <c:import url="./../cabecalho.jsp"/>
         <div class="container">
             <c:if test="${exclusaoSucesso != null}">
                 <div class="form-group w-75 mx-auto">

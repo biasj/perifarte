@@ -23,7 +23,7 @@
         <title>Perifarte - Organizações</title>
     </head>
     <body>
-        <c:import url="./../cabecalho-painel.jsp"/>
+        <c:import url="./../cabecalho.jsp"/>
         <div class="container">
             <h2>Administrador: <c:out value="${administrador.nome}" /></h2>
             <c:if test="${atualizacaoSucesso != null}">

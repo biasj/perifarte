@@ -5,8 +5,7 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.daos;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -152,6 +151,35 @@ public class ObraDao {
         return resultados;
     }
     
+    public List<Obra> findAll() throws SQLException {
+        String sql = "select * from obra";
+        List<Obra> resultados = new ArrayList<>();
+
+        // try-with-resources (após Java 7 ou superior)
+        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                // pega os dados das colunas da tabela do bd
+                String titulo = rs.getString("obra_titulo");
+                int id = rs.getInt("obra_id");
+                String descricao = rs.getString("obra_descricao");
+                int idOrganizacao = rs.getInt("obra_organizacao_id");
+                int artistaId = rs.getInt("obra_artista_id");
+                BigDecimal preco = rs.getBigDecimal("obra_preco");
+                
+                // Construtor: String nome, String email, String senha, String cnpj, String telefone
+                Obra obra = new Obra(titulo, descricao, preco);
+                
+                obra.setId(id);
+                
+                resultados.add(obra);
+            }
+        }
+        return resultados;
+    }
+    
     // atualiza obra através do ficha-obra (login de artista)/ fichaObra (servlet)
     public void atualizarObra(Obra obra, String organizacao) throws SQLException {
         String sql = "update obra set obra_titulo=?, obra_descricao=?, obra_organizacao_id=?, obra_preco=? where obra_id=?";
@@ -197,4 +225,41 @@ public class ObraDao {
             }
         }
     }
+    
+    
+    public int getArtistaId(int idObra) throws SQLException {
+        String sql = "select artista.artista_id from obra join artista on obra_artista_id = artista.artista_id where obra_id = ?";
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idObra);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // pega os dados das colunas da tabela do bd
+                    int id = rs.getInt("artista_id");
+                    
+                    
+                    return id;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int getOrganizacaoId(int idObra) throws SQLException {
+        String sql = "select organizacao.organizacao_id from obra join organizacao on obra_organizacao_id = organizacao.organizacao_id where obra_id = ?";
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idObra);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // pega os dados das colunas da tabela do bd
+                    int id = rs.getInt("organizacao_id");
+                    
+                    return id;
+                }
+            }
+        }
+        return -1;
+    } 
+
 }

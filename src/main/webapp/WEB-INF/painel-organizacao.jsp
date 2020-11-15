@@ -23,7 +23,7 @@
         <title>Perifarte - Obras doadas</title>
     </head>
     <body>
-        <c:import url="./../cabecalho-painel.jsp"/>
+        <c:import url="./../cabecalho.jsp"/>
         
         <div class="container">
             <h2> <c:out value="${organizacao.nome}" /></h2>
