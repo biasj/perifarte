@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15/11/2020, 21:50:20
+    Author     : beatrizsato
+*/
+
+.card-obra {
+    padding: 20px;
+    max-width: 350px;
+    /*centraliza*/
+    margin: 0 auto;
+    float: none;
+}
+
+/*.card {
+    border: none;
+}*/
+
+.home-buttons {
+    max-width: 350px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    margin: 0 auto;
+    float: none;
+}
+
+/*perifarte/obra*/
+.detalhe-obra {
+    padding: 20px;
+    max-width: 350px;
+    /*centraliza*/
+    margin: 0 auto;
+    float: none;
+}
+
+#preco-obra {
+    font-weight: bold;
+}
+
+#adicionar-carrinho {
+    margin: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+
+@media (min-width: 640px) {
+    .home-buttons {
+        max-width: 450px;
+    }
+    
+    .detalhe-obra {
+        max-width: 640px;
+    }
+    
+    #adicionar-carrinho {
+        margin: 40px auto;
+        max-width: 300px;
+    }
+}
