@@ -14,20 +14,33 @@ import java.util.Date;
 public class Doacoes {
     private static int numeroDoacao = 1000;
     private int idCompra;
-    private double totalDoado;
+    private double totalDoado; //este valor é para o total doado
     private String doador; // somente números 27326531000125 para poder verificar
     private String nome;
     private String organizacao;
     private Date data_compra;
+    private String status;
+    private double valor; // este valor é para o quanto será doado em cada compra individual feita
 
-    public Doacoes(int idCompra, double total_doado, String doador, String nome, String organizacao) {
+ 
+
+	public Doacoes(int idCompra, double total_doado, String doador, String nome, String organizacao, Double valor) {
         this.doador = doador;
         this.nome = nome;
         this.organizacao = organizacao;
         totalDoado = 0;
         idCompra = numeroDoacao++;
+        this.valor = valor;
     }
     
+    public int getIdCompra() {
+        return idCompra;
+    }
+
+    public void setIdCompra(int id) {
+        this.idCompra = id;
+    }
+	
     public String getDoador() {
         return doador;
     }
@@ -67,5 +80,21 @@ public class Doacoes {
     public void setTotalDoado(double totalDoado) {
         this.totalDoado = totalDoado;
     }
+ 
+    public String setStatus (String status) {
+    	return status;
+    }
     
+    public String getStatus (String status) {
+    	return status;
+    }
+    
+    public double getValor() {
+ 		return valor;
+ 	}
+
+ 	public void setValor(double valor) {
+ 		this.valor = valor;
+ 	}
+ 	
 }
