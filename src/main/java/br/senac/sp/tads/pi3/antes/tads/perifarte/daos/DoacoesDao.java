@@ -23,7 +23,9 @@ public class DoacoesDao {
 
             // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
             try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                stmt.setDate(1, (Date) doacao.getData_compra());
+                
+            	
+            	stmt.setDate(1, (Date) doacao.getData_compra());
                 stmt.setDouble(2, doacao.getValor());
                 stmt.setString(3, doacao.getStatus(sql));
 
@@ -52,13 +54,16 @@ public class DoacoesDao {
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, Integer.parseInt(id));
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
+                while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
-                    Date data = rs.getDate("doacao_data");
+                    String doador = rs.getString("doador");
+                	String nome = rs.getString("nome");
+                	String organizacao = rs.getString("organizacao");
+                	Date data = rs.getDate("doacao_data");
                     Double valor = rs.getDouble("doacao_valor");
                     String status = rs.getString("doacao_status");
                   
-                    Doacoes doacao = new Doacoes (data, valor, status);
+                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
                     //devolve o id da compra existente no banco de dados
                     doacao.setIdCompra(Integer.parseInt(id));
                     return doacao;

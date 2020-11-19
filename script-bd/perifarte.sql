@@ -101,3 +101,11 @@ SELECT ong.organizacao_id, ong.organizacao_nome, d.doacao_valor, o.obra_titulo
 FROM obra o 
 join doacao d on o.obra_id = d.doacao_obra_id
 join organizacao ong on ong.organizacao_id = o.obra_organizacao_id;
+
+SELECT  administrador_email as user_email, administrador_senha as user_password FROM administrador
+UNION ALL
+SELECT artista_email as user_email, artista_senha as user_password FROM artista
+UNION ALL
+SELECT doador_email as user_email, doador_senha as user_password FROM doador
+UNION ALL
+SELECT organizacao_email as user_email, organizacao_senha as user_password FROM organizacao;

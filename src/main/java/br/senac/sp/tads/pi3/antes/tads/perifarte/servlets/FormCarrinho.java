@@ -53,9 +53,10 @@ public class FormCarrinho extends HttpServlet {
         
         // recupera dados enviados no form
         Obra obra = (Obra) sessao.getAttribute("obra");
-        Artista artista = (Artista) sessao.getAttribute("usuario");
-        Doacoes doacao = (Doacoes) sessao.getAttribute("valor");
-        BigDecimal preco = new BigDecimal(preco);
+   //     Artista artista = (Artista) sessao.getAttribute("usuario");
+        Doador doador = (Doador) sessao.getAttribute("usuario");
+        Doacoes valor = (Doacoes) sessao.getAttribute("valor");
+   //     Double valor = new Double(valor);
         
         // pega os valores para saber qual botão foi clicado
         String botaoPagamento = request.getParameter("botaoPagamento");
