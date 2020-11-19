@@ -5,6 +5,7 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -14,7 +15,8 @@ import java.util.Date;
 public class Doacoes {
     private static int numeroDoacao = 1000;
     private int idCompra;
-    private double totalDoado; //este valor é para o total doado
+  //  private double totalDoado; //este valor é para o total doado
+    private BigDecimal totalDoado; //este valor é para o total doado
     private String doador; // somente números 27326531000125 para poder verificar
     private String nome;
     private String organizacao;
@@ -24,7 +26,16 @@ public class Doacoes {
 
  
 
-	public Doacoes(int idCompra, double total_doado, String doador, String nome, String organizacao, Double valor) {
+    public Doacoes(String doador, String nome, String organizacao, double valor) {
+    	this.doador = doador;
+    	this.nome = nome;
+    	this.organizacao = organizacao;
+    	this.valor = valor;
+    	this.totalDoado = new BigDecimal(0);
+    }
+    
+    
+/**	public Doacoes(int idCompra, double total_doado, String doador, String nome, String organizacao, Double valor) {
         this.doador = doador;
         this.nome = nome;
         this.organizacao = organizacao;
@@ -32,7 +43,7 @@ public class Doacoes {
         idCompra = numeroDoacao++;
         this.valor = valor;
     }
-    
+ */   
     public int getIdCompra() {
         return idCompra;
     }
@@ -73,11 +84,11 @@ public class Doacoes {
         this.data_compra = data_compra;
     }
 
-    public double getTotalDoado() {
+    public BigDecimal getTotalDoado() {
         return totalDoado;
     }
 
-    public void setTotalDoado(double totalDoado) {
+    public void setTotalDoado(BigDecimal totalDoado) {
         this.totalDoado = totalDoado;
     }
  
