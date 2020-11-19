@@ -26,12 +26,12 @@
         <c:import url="./../cabecalho.jsp"/>
         
         <div class="container">
-            <h2> <c:out value="${organizacao.nome}" /></h2>
+            <h2> <c:out value="${usuario.nome}" /></h2>
         
             <h3>Obras doadas para sua organização</h3>
             
             <c:choose>
-                <c:when test="${organizacao.status == 'aprovado'}">
+                <c:when test="${usuario.status == 'aprovado'}">
                     <div class="list-obras-doadas">
                         <c:choose>
                             <c:when test="${obrasDoadas != null}">
