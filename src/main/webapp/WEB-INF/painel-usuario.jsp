@@ -27,8 +27,8 @@
         <!--será painel de meus pedidos-->
         <div class="container">
             <h1>Logado</h1>
-            <h3>Nome: <c:out value="${doador.nome}"/> </h3>
-            <p>E-mail: <c:out value="${doador.email}"/></p>
+            <h3>Nome: <c:out value="${usuario.nome}"/> </h3>
+            <p>E-mail: <c:out value="${usuario.email}"/></p>
         </div>
 
     </body>

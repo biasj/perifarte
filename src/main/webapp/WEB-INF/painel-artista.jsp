@@ -32,7 +32,7 @@
             </c:if>
             
             <div class="d-flex justify-content-between">
-               <h2>Artista: <c:out value="${artista.nome}" /></h2>
+               <h2>Artista: <c:out value="${usuario.nome}" /></h2>
                 <div><a class="login btn btn-primary" href="/perifarte/cadastroobra">Adicionar Obra</a></div> 
             </div>
             
@@ -40,7 +40,7 @@
 
             <!--para cada obra existente publica por esse artista logado-->
             <div class="list-group">
-                <c:forEach var="obra" items="${artista.obras}">
+                <c:forEach var="obra" items="${usuario.obras}">
                         <a class="list-group-item list-group-item-action" href="${pageContext.request.contextPath}/editar/obra?id=${obra.id}">
                             <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
                             <div class="d-flex justify-content-between">
