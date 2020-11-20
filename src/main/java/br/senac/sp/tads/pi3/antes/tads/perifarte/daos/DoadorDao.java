@@ -76,15 +76,16 @@ public class DoadorDao {
     }
     
     public void atualizaDoador(Doador doador) throws SQLException {
-        String sql = "update doador set doador_email=?, doador_senha=? where doador_id=?";
+        String sql = "update doador set doador_nome=?, doador_email=?, doador_senha=? where doador_id=?";
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
             conn.setAutoCommit(false);
 
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, doador.getEmail());
-                stmt.setString(2, doador.getSenha());
-                stmt.setInt(3, doador.getId());
+                stmt.setString(1, doador.getNome());
+                stmt.setString(2, doador.getEmail());
+                stmt.setString(3, doador.getSenha());
+                stmt.setInt(4, doador.getId());
                 
                 int resultados = stmt.executeUpdate();
 

@@ -63,7 +63,7 @@ public class AdministradorDao {
                     String nome = rs.getString("administrador_nome");
                     
                     Administrador adm = new Administrador(nome, email, senha);
-                  
+                    adm.setId(rs.getInt("administrador_id"));
                     
                     return adm;
                 }
@@ -124,15 +124,16 @@ public class AdministradorDao {
     
     // atualiza
     public void atualizaConta(Administrador adm) throws SQLException {
-        String sql = "update administrador set administrador_email=?, administrador_senha=? where administrador_id=?";
+        String sql = "update administrador set administrador_nome=? administrador_email=?, administrador_senha=? where administrador_id=?";
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
             conn.setAutoCommit(false);
 
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, adm.getEmail());
-                stmt.setString(2, adm.getSenha());
-                stmt.setInt(3, adm.getId());
+                stmt.setString(1, adm.getNome());
+                stmt.setString(2, adm.getEmail());
+                stmt.setString(3, adm.getSenha());
+                stmt.setInt(4, adm.getId());
                 
                 int resultados = stmt.executeUpdate();
 

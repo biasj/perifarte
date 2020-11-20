@@ -282,5 +282,32 @@ public class OrganizacaoDao {
         return resultados;
     }
     
+        // atualiza
+    public void atualizaConta(Organizacao org) throws SQLException {
+        String sql = "update organizacao set organizacao_nome=? organizacao_email=?, organizacao_senha=?, "
+                + "organizacao_telefone=?, organizacao_descricao=?, organizacao_justificativa=? where organizacao_id=?";
+        try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, org.getNome());
+                stmt.setString(2, org.getEmail());
+                stmt.setString(3, org.getSenha());
+                stmt.setString(4, org.getTelefone());
+                stmt.setString(5, org.getDescricao());
+                stmt.setString(6, org.getJustificativa());
+                stmt.setInt(7, org.getId());
+                
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
+        
+    }
     
 }
