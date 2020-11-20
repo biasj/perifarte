@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author beatrizsato
  */
-@WebFilter(filterName = "AutorizacaoFilter", urlPatterns = {"/painel/*", "/editar/*", "/cadastroobra", "/processar-cadastro-obra"})
+@WebFilter(filterName = "AutorizacaoFilter", urlPatterns = {"/painel/*", "/editar/*", "/cadastroobra", "/processar-cadastro-obra", "/perfil"})
 public class AutorizacaoFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -73,13 +73,15 @@ public class AutorizacaoFilter implements Filter {
         String paginaAcessada = httpRequest.getRequestURI();
         
         if(usuario instanceof Administrador) {
-            return paginaAcessada.endsWith("/painel/adm") || paginaAcessada.endsWith("/editar/org") || paginaAcessada.endsWith("/editar/adm");
+            return paginaAcessada.endsWith("/painel/adm") || paginaAcessada.endsWith("/editar/org") || 
+                    paginaAcessada.endsWith("/editar/adm") || paginaAcessada.endsWith("/perfil");
         } else if(usuario instanceof Artista) {
-            return paginaAcessada.endsWith("/painel/artista") || paginaAcessada.endsWith("/editar/obra") || paginaAcessada.endsWith("/cadastroobra") || paginaAcessada.endsWith("/processar-cadastro-obra");
+            return paginaAcessada.endsWith("/painel/artista") || paginaAcessada.endsWith("/editar/obra") || 
+                    paginaAcessada.endsWith("/cadastroobra") || paginaAcessada.endsWith("/processar-cadastro-obra") || paginaAcessada.endsWith("/perfil");
         } else if(usuario instanceof Doador) {
-            return paginaAcessada.endsWith("/painel/doador");
+            return paginaAcessada.endsWith("/painel/doador") || paginaAcessada.endsWith("/perfil");
         } else if(usuario instanceof Organizacao) {
-            return paginaAcessada.endsWith("/painel/org");
+            return paginaAcessada.endsWith("/painel/org") || paginaAcessada.endsWith("/perfil");
         }
 
         return false;

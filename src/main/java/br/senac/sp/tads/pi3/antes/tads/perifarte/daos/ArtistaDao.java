@@ -135,7 +135,7 @@ public class ArtistaDao {
     
     // atualiza
     public void atualizaConta(Artista artista) throws SQLException {
-        String sql = "update artista set artista_nome=? artista_email=?, artista_senha=?, artista_portifolio=? where artista_id=?";
+        String sql = "update artista set artista_nome=?, artista_email=?, artista_senha=?, artista_portifolio=? where artista_id=?";
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
             conn.setAutoCommit(false);

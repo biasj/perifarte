@@ -124,7 +124,7 @@ public class AdministradorDao {
     
     // atualiza
     public void atualizaConta(Administrador adm) throws SQLException {
-        String sql = "update administrador set administrador_nome=? administrador_email=?, administrador_senha=? where administrador_id=?";
+        String sql = "update administrador set administrador_nome=?, administrador_email=?, administrador_senha=? where administrador_id=?";
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
             conn.setAutoCommit(false);

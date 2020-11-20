@@ -87,9 +87,9 @@ public class LoginServlet extends HttpServlet {
                 adm.setOrganizacoes(organizacoes);
                 sessao.setAttribute("usuario", adm);
                 // passa a lista de artistas e doadores para serem apresentadas no painel
-                sessao.setAttribute("artistas", artistas);
-                sessao.setAttribute("doadores", doadores);
-                sessao.setAttribute("adms", adms);
+                sessao.setAttribute("todosArtistas", artistas);
+                sessao.setAttribute("todosDoadores", doadores);
+                sessao.setAttribute("todosAdms", adms);
                 
                 // enviar para servlet de adm
                 response.sendRedirect("painel/adm");

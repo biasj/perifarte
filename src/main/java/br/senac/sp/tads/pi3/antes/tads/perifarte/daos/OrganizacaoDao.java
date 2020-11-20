@@ -284,7 +284,7 @@ public class OrganizacaoDao {
     
         // atualiza
     public void atualizaConta(Organizacao org) throws SQLException {
-        String sql = "update organizacao set organizacao_nome=? organizacao_email=?, organizacao_senha=?, "
+        String sql = "update organizacao set organizacao_nome=?, organizacao_email=?, organizacao_senha=?, "
                 + "organizacao_telefone=?, organizacao_descricao=?, organizacao_justificativa=? where organizacao_id=?";
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS

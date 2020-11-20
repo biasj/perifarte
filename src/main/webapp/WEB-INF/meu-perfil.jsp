@@ -26,27 +26,31 @@
         
         <div class="container">
             <c:choose>
-                <c:when test="${organizacao != null}">
-                    <a class="back-button" href="${pageContext.request.contextPath}/painel/org"><i class="fas fa-chevron-left" ></i> Obras doadas</a>
-                </c:when>
-                <c:when test="${artista != null}">
-                    <a class="back-button" href="${pageContext.request.contextPath}/painel/artista"><i class="fas fa-chevron-left" ></i> Minhas obras</a>
-                </c:when>
-                <c:when test="${adm != null}">
+                <c:when test="${usuarioAdministrador != null}">
                     <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Meu painel</a>
                 </c:when>
-                <c:otherwise>
+                    
+                <c:when test="${usuarioArtista != null}">
+                    <a class="back-button" href="${pageContext.request.contextPath}/painel/artista"><i class="fas fa-chevron-left" ></i> Meu painel</a>
+                </c:when>
+                    
+                <c:when test="${usuarioDoador != null}">
                     <a class="back-button" href="${pageContext.request.contextPath}/painel/doador"><i class="fas fa-chevron-left" ></i> Meus pedidos</a>
-                </c:otherwise>
+                </c:when>
+                    
+                <c:when test="${usuarioOrganizacao != null}">
+                    <a class="back-button" href="${pageContext.request.contextPath}/painel/org"><i class="fas fa-chevron-left" ></i> Meu painel</a>
+                </c:when>
+    
             </c:choose>
-            
-            <c:if test="${atualizacaoSucesso != null}">
+
+            <c:if test="${atualizaPerfil != null}">
                 <div class="form-group w-75 mx-auto">
-                    <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>
+                    <span class="sucesso"><c:out value="${atualizaPerfil}" /></span>
                 </div>  
             </c:if>
             
-            <form method="post" action="${pageContext.request.contextPath}/login">
+            <form method="post" action="${pageContext.request.contextPath}/perfil">
                 
                 <h2 class='form-group w-75 p3 mx-auto'>Meu perfil</h2>
                 
@@ -68,10 +72,10 @@
                     </c:if>
                 </div>
                     
-                <c:if test="${artista != null}">
+                <c:if test="${usuarioArtista != null}">
                     <div class="form-group w-75 p3 mx-auto">
                         <label for="portfolio">Portfólio</label>
-                        <input id="portifolio" class="form-control" type="portifolio" name="portifolio" required value="${artista.portifolio}">
+                        <input id="portifolio" class="form-control" type="text" name="portfolio" required value="${usuarioArtista.portifolio}">
                         <!-- caso o servlet aponte um erro -->
                         <c:if test="${portifolioErro != null}">
                             <span class="erro"><c:out value="${portifolioErro}" /></span>
@@ -79,10 +83,10 @@
                     </div>
                 </c:if>
                     
-                <c:if test="${org != null}">
+                <c:if test="${usuarioOrganizacao != null}">
                     <div class='form-group w-75 p3 mx-auto'>
                         <label for='cnpj'>CNPJ</label>
-                        <input id='cnpj' class='form-control' type="text" name="cnpj" value="${org.cnpj}">
+                        <input id='cnpj' class='form-control' type="text" name="cnpj" placeholder="${usuarioOrganizacao.cnpj}" readonly>
                         <!-- caso o servlet aponte um erro -->
                         <c:if test="${cnpjErro != null}">
                             <span class="erro"><c:out value="${cnpjErro}" /></span>
@@ -91,8 +95,7 @@
                     
                     <div class="form-group w-75 p3 mx-auto">
                         <label for="descricao">Descrição da organização:</label>
-
-                        <input class="form-control" id="descricao" name="descricao" required value="${org.descricao}" rows="3"></input>    
+                        <textarea class="form-control" id="descricao" name="descricaoOrganizacao" required  rows="3"><c:out value="${usuarioOrganizacao.descricao}" /></textarea>    
                         <small>No máximo 100 caracteres.</small>
                         <!-- caso o servlet aponte um erro -->
                         <c:if test="${descricaoErro != null}">
@@ -102,7 +105,7 @@
                     
                     <div class="form-group w-75 p3 mx-auto">
                         <label for='justificativa'>O que será realizado com as doações?</label>
-                        <input class="form-control" id="justificativa" name="justificativa" required value="${org.justificativa}" rows="3"></input>  
+                        <textarea class="form-control" id="justificativa" name="justificativaOrganizacao" required rows="3"><c:out value="${usuarioOrganizacao.justificativa}" /></textarea>     
                         <small>No máximo 100 caracteres.</small>
                         <!-- caso o servlet aponte um erro -->
                         <c:if test="${justificativaErro != null}">
@@ -110,7 +113,7 @@
                         </c:if>
                     </div>
                 </c:if>
-
+                   
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="senha">Senha</label>
                     <input id="senha" class="form-control" type="password" name="senha" required value='${usuario.senha}'>
@@ -119,6 +122,7 @@
                 <div class="d-flex justify-content-center">
                     <button class="w-50 btn btn-primary" type="submit">Atualizar dados</button>
                 </div>
+                
             </form>
         </div>
     </body>

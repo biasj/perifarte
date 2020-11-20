@@ -30,16 +30,16 @@ public class AdmServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        Administrador adm = (Administrador) sessao.getAttribute("usuario");
-        List<Artista> artistas = (List<Artista>) sessao.getAttribute("artistas");
-        List<Doador> doadores = (List<Doador>) sessao.getAttribute("doadores");
-        List<Administrador> adms = (List<Administrador>) sessao.getAttribute("adms");
+        Administrador administrador = (Administrador) sessao.getAttribute("usuario");
+        List<Artista> artistas = (List<Artista>) sessao.getAttribute("todosArtistas");
+        List<Doador> doadores = (List<Doador>) sessao.getAttribute("todosDoadores");
+        List<Administrador> adms = (List<Administrador>) sessao.getAttribute("todosAdms");
 
         // recupera os dados do post guardados pela sessão
-        request.setAttribute("administrador", adm);
-        request.setAttribute("doadores", doadores);
-        request.setAttribute("artistas", artistas);
-        request.setAttribute("adms", adms);
+        request.setAttribute("administrador", administrador);
+        request.setAttribute("todosDoadores", doadores);
+        request.setAttribute("todosArtistas", artistas);
+        request.setAttribute("todosAdms", adms);
         
         // envia para a tela de continuação de solicitação de cadastro 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-administrador.jsp");
