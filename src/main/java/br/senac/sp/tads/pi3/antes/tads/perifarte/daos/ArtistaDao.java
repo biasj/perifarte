@@ -132,4 +132,29 @@ public class ArtistaDao {
         }
         return null;
     }
+    
+    // atualiza
+    public void atualizaConta(Artista artista) throws SQLException {
+        String sql = "update artista set artista_nome=?, artista_email=?, artista_senha=?, artista_portifolio=? where artista_id=?";
+        try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, artista.getNome());
+                stmt.setString(2, artista.getEmail());
+                stmt.setString(3, artista.getSenha());
+                stmt.setString(4, artista.getPortifolio());
+                stmt.setInt(5, artista.getId());
+                
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
+        
+    }
 }

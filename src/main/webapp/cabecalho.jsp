@@ -6,10 +6,12 @@
         <form class='form-inline'>
             <c:choose>
                 <c:when test="${sessionScope.usuario != null}">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/perfil"><i class="far fa-user-circle" style="font-size: 28px; color: white"></i></a>
                     <a class='nav-link' href='#'><i class="fas fa-shopping-cart" style="font-size: 28px; color: white"></i></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt" style="font-size: 28px; color: white"></i></a>
                     
                     <!--dropdown-->
-                    <div class="dropdown ">
+<!--                    <div class="dropdown ">
                       <a class="btn btn-secondary dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="far fa-user-circle" style="font-size: 33px; color: white;" ></i>
                       </a>
@@ -19,7 +21,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Logout</a>
                       </div>
-                    </div>
+                    </div>-->
                         
                 </c:when>
                 <c:otherwise>

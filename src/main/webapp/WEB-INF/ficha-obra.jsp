@@ -34,10 +34,10 @@
                 </div>  
             </c:if>
             
-            <h3 class="">Atualizar obra</h3>
         
             <form method="post" action="obra">
-                
+                <h3 class="form-group w-75 p3 mx-auto">Atualizar obra</h3>
+
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="titulo-obra">Titulo</label>
                     <input class="form-control" id="titulo-obra" type="text" name="titulo" required value="${obra.titulo}">

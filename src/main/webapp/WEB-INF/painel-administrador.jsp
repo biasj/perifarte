@@ -60,7 +60,7 @@
             <div class="list-group adm">
                 <h3>Administradores</h3>
                 <!--para cada organizacao existente no banco de dados--> 
-                <c:forEach var="admin" items="${adms}">
+                <c:forEach var="admin" items="${todosAdms}">
                     <!--mostrar as seguintes informacoes com possibilidade de editar-->
                     <a class="list-group-item list-group-item-action" href="/perifarte/editar/adm?id=${admin.id}">
                         
@@ -78,7 +78,7 @@
             <div class="list-group adm">
                 <h3>Doadores</h3>
                 <!--para cada organizacao existente no banco de dados--> 
-                <c:forEach var="doador" items="${doadores}">
+                <c:forEach var="doador" items="${todosDoadores}">
                     <!--mostrar as seguintes informacoes com possibilidade de editar-->
                     <a class="list-group-item list-group-item-action" href="#">
                         <h5 class="mb-1"><c:out value="${doador.nome}"/></h5>
@@ -94,7 +94,7 @@
             <div class="list-group adm">
                 <h3>Artistas</h3>
                 <!--para cada organizacao existente no banco de dados--> 
-                <c:forEach var="artista" items="${artistas}">
+                <c:forEach var="artista" items="${todosArtistas}">
                     <!--mostrar as seguintes informacoes com possibilidade de editar-->
                     <a class="list-group-item list-group-item-action" href="#">
                         <h5 class="mb-1"><c:out value="${artista.nome}"/></h5>
@@ -106,8 +106,6 @@
             </div>
             
         </div>
-            
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
     </body>
 </html>
