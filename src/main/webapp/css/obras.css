@@ -18,7 +18,10 @@ and open the template in the editor.
 }
 
 .card {
+    font-size: 14px;
     border: none;
+    border-radius: 4px;
+    background-color: #fffafa;
 }
 
 .home-buttons {
@@ -46,16 +49,15 @@ and open the template in the editor.
     margin: 30px auto;
     float: none;
     
+    background-color: #fffafa;
+    
     /*borda*/
+    border-color: #430704;
     border-style: solid;
     border-radius: 2px;
     border-width: 1px;
 }
 
-.btn-obra {
-    background-color: #e46866;
-    border-color: #e46866;
-}
 
 #preco-obra {
     font-weight: bold;

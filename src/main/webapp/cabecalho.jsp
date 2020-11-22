@@ -2,13 +2,13 @@
 
 <nav class="navbar navbar-light justify-content-between">
     <div class="container" id="nav">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/home" style="color: white">Perifarte</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/home">perifarte</a>
         <form class='form-inline'>
             <c:choose>
                 <c:when test="${sessionScope.usuario != null}">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/perfil"><i class="far fa-user-circle" style="font-size: 28px; color: white"></i></a>
-                    <a class='nav-link' href='#'><i class="fas fa-shopping-cart" style="font-size: 28px; color: white"></i></a>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt" style="font-size: 28px; color: white"></i></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/perfil"><i class="far fa-user-circle"></i></a>
+                    <a class='nav-link' href='#'><i class="fas fa-shopping-cart"></i></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt"></i></a>
                     
                     <!--dropdown-->
 <!--                    <div class="dropdown">
@@ -25,8 +25,8 @@
                         
                 </c:when>
                 <c:otherwise>
-                    <a class='nav-link' href='./login'><i class="far fa-user-circle" style="font-size: 33px; color: white;" ></i></a>
-                    <a class='nav-link' href='#'><i class="fas fa-shopping-cart" style="font-size: 28px; color: white;"></i></a>
+                    <a class='nav-link' href='./login'><i class="far fa-user-circle"></i></a>
+                    <a class='nav-link' href='#'><i class="fas fa-shopping-cart"></i></a>
                 </c:otherwise>
             </c:choose>
         </form>

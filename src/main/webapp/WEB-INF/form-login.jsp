@@ -48,7 +48,7 @@
                 <div class='form-group mb-2 w-75 p3 mx-auto'>
                     <div class="d-flex w-100 justify-content-between">
                         <label for='senha'>Senha</label>
-                        <a class=' mb-2' href="#">Esqueceu?</a>
+                        <a class=' mb-2 sublinhado' href="#">Esqueceu?</a>
                     </div>    
                     
                     <!--TODO: redefinir senha-->
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class='form-group w-75 p3 mx-auto'>
-                    <div><a class="login" href="./cadastro">Ainda não tenho cadastro</a></div>
+                    <div><a class="login sublinhado" href="./cadastro">Ainda não tenho cadastro</a></div>
                 </div>
 
                 <div class='d-flex justify-content-center'>

@@ -27,7 +27,7 @@
          <c:import url="./../cabecalho.jsp"/>
         <div class="container">
             <c:if test="${exclusaoSucesso != null}">
-                <div class="form-group w-75 mx-auto alert alert-warning" role="alert">
+                <div class="alert alert-warning" role="alert">
                     <span><c:out value="${exclusaoSucesso}"/></span>
                 </div>  
             </c:if>
@@ -37,7 +37,7 @@
                <h3>Minhas obras</h3>
                 <div><a class="login btn btn-primary" href="/perifarte/cadastroobra">Adicionar Obra</a></div> 
             </div>
-            
+                           
             <div class="painel">
                 <h4>Obras</h4>
 

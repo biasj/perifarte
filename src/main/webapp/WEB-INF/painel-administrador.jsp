@@ -60,7 +60,7 @@
             </div>
             
             <!--lista de administradores cadastrados-->
-            <div class="list-group-flush adm">
+            <div class="list-group-flush painel">
                 <h4>Administradores</h4>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="admin" items="${todosAdms}">
@@ -78,7 +78,7 @@
             </div>
             
             <!--lista de doadores cadastrados-->
-            <div class="list-group-flush adm">
+            <div class="list-group-flush painel">
                 <h4>Doadores</h4>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="doador" items="${todosDoadores}">
@@ -95,7 +95,7 @@
             </div>
             
             <!--lista de artistas cadastrados-->
-            <div class="list-group-flush  adm">
+            <div class="list-group-flush painel">
                 <h4>Artistas</h4>
                 <!--para cada organizacao existente no banco de dados--> 
                 <c:forEach var="artista" items="${todosArtistas}">

@@ -8,6 +8,23 @@ and open the template in the editor.
     Author     : beatrizsato
 */
 
+body {
+    background-color: white;
+    color:#430704;
+}
+
+a {
+    color:#430704;
+}
+
+.sublinhado, .back-button{ 
+   text-decoration: underline;
+}
+
+a:hover {
+    color: #ea555e;
+}
+
 .container {
     padding: 20px;
 }
@@ -16,15 +33,36 @@ and open the template in the editor.
     padding: 0;
 }
 
-nav {
-    background-color: #e46866;
+nav{
+    background-color: #fffafa;    
+    color: #e46866;
 }
 
-.navbar-brand a {
-    color: white;
+.navbar-brand {
+    color: #e46866;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #ea555e;
+    border-color: #ea555e;
+}
+
+.btn-primary:hover {
+    background-color: #ea555e;
+    border-color: #ea555e;
+}
+
+.nav-link {
+    font-size: 28px;
+}
+
+nav a {
+    color: #430704;
 }
 
 .back-button{
+    font-size: 18px;
     padding: 20px;
 }
 

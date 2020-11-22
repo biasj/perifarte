@@ -13,5 +13,13 @@ and open the template in the editor.
 }
 
 .painel {
-    margin: 25px auto;
+    margin: 25px auto;    
+}
+
+.painel a {
+    color:#430704;
+}
+
+.painel a : hover {
+    color: #ea555e;
 }

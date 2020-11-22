@@ -25,7 +25,7 @@
     <body >
         <c:import url="./../cabecalho.jsp"/> 
         <div class="container" >
-            <a class="back-button" href="${pageContext.request.contextPath}/home"><i class="fas fa-chevron-left" ></i> Voltar</a>
+            <a class="back-button sublinhado" href="${pageContext.request.contextPath}/home"><i class="fas fa-arrow-left" ></i>  Voltar</a>
             <div class='detalhe-obra'>
                 <div>
                     <img src="" alt="">
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between">   
-                        <a href="https://${detalhe.artista.portifolio}"><c:out value="${detalhe.artista.nome}"/></a>
+                        <a class="sublinhado" href="https://${detalhe.artista.portifolio}"><c:out value="${detalhe.artista.nome}"/></a>
                         <p><c:out value="${detalhe.obra.organizacao.nome}"/></p> 
                     </div>
                 </div>
