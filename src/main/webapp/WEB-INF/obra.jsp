@@ -24,7 +24,7 @@
     </head>
     <body >
         <c:import url="./../cabecalho.jsp"/> 
-        <div class="container" >
+        <div class="container content-container" >
             <a class="back-button sublinhado" href="${pageContext.request.contextPath}/home"><i class="fas fa-arrow-left" ></i>  Voltar</a>
             <div class='detalhe-obra'>
                 <div>

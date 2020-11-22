@@ -25,7 +25,7 @@
     <body>
         <c:import url="./../cabecalho.jsp"/>
         
-        <div class="container">
+        <div class="container content-container">
             <c:choose>
                 <c:when test="${usuarioAdministrador != null}">
                     <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Meu painel</a>

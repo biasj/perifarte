@@ -25,7 +25,7 @@
     </head>
     <body>
         <c:import url="./../cabecalho.jsp"/>
-        <div class="container">
+        <div class="container content-container">
             <!--<h2>Administrador: <c:out value="${administrador.nome}" /></h2>-->
             <h2 class="titulo-pagina">Meu painel</h2>
             

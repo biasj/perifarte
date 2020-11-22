@@ -24,7 +24,7 @@
     </head>
     <body>
         <c:import url="./../cabecalho.jsp"/>
-        <div class="container">
+        <div class="container content-container">
             <h3 class="w-75 p3 mx-auto titulo-pagina">Cadastro de Organização</h3>
             <c:if test="${organizacao.nome != null}">
                 <h3 class="w-75 p3 mx-auto"> <c:out value="${organizacao.nome}" /></h3>

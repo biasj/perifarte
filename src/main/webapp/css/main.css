@@ -25,6 +25,10 @@ a:hover {
     color: #ea555e;
 }
 
+a:pressed{
+    color: #fffafa;
+}
+
 .container {
     padding: 20px;
 }
@@ -35,12 +39,16 @@ a:hover {
 
 nav{
     background-color: #fffafa;    
-    color: #e46866;
+    color: #430704;
 }
 
 .navbar-brand {
-    color: #e46866;
+    color: #430704;
     text-decoration: none;
+}
+
+.navbar-toggler span {
+    color: #430704;
 }
 
 .btn-primary {
@@ -51,6 +59,11 @@ nav{
 .btn-primary:hover {
     background-color: #ea555e;
     border-color: #ea555e;
+}
+
+.btn-primary:pressed {
+    background-color: #fffafa;
+    border-color: #fffafa;
 }
 
 .nav-link {
@@ -82,6 +95,11 @@ nav a {
 @media (min-width: 640px) {
     #nav {
         padding: 0 20px;
+    }
+    
+    .content-container {
+        max-width: 700px;
+        margin: 0 auto;
     }
 }
 

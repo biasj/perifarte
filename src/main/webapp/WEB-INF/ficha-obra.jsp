@@ -25,7 +25,7 @@
     <body>
          <c:import url="./../cabecalho.jsp"/>
          
-         <div class="container">
+         <div class="container content-container">
             <a class="back-button" href="${pageContext.request.contextPath}/painel/artista"><i class="fas fa-chevron-left" ></i> Voltar</a>
             
         
