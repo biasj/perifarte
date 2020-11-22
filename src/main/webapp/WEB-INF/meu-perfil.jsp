@@ -16,6 +16,7 @@
         
         <!--css-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/painel.css">
         
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
@@ -43,87 +44,88 @@
                 </c:when>
     
             </c:choose>
-
-            <c:if test="${atualizaPerfil != null}">
-                <div class="form-group w-75 mx-auto">
-                    <span class="sucesso"><c:out value="${atualizaPerfil}" /></span>
-                </div>  
-            </c:if>
             
-            <form method="post" action="${pageContext.request.contextPath}/perfil">
-                
-                <h2 class='form-group w-75 p3 mx-auto'>Meu perfil</h2>
-                
-                <div class="form-group w-75 p3 mx-auto">
-                    <label for="nome">Nome</label>
-                    <input class="form-control" type="text" name="nome" id="nome" required value="${usuario.nome}">
-                    <!-- caso o servlet aponte um erro -->
-                    <c:if test="${nomeErro != null}">
-                        <span class="erro"><c:out value="${nomeErro}" /></span>
+            <div class="painel">
+                <form method="post" action="${pageContext.request.contextPath}/perfil">
+                    <c:if test="${atualizaPerfil != null}">
+                        <div class="form-group w-75 mx-auto alert alert-success" role="alert">
+                            <span><c:out value="${atualizaPerfil}" /></span>
+                        </div>  
                     </c:if>
-                </div>
-                   
-                <div class="form-group w-75 p3 mx-auto">
-                    <label>E-mail</label>
-                    <input class="form-control" type="email" name="email" required value="${usuario.email}">
-                    <!-- caso o servlet aponte um erro -->
-                    <c:if test="${emailErro != null}">
-                        <span class="erro"><c:out value="${emailErro}" /></span>
+
+                    <h2 class='form-group w-75 p3 mx-auto titulo-pagina'>Meu perfil</h2>
+
+                    <div class="form-group w-75 p3 mx-auto">
+                        <label for="nome">Nome</label>
+                        <input class="form-control" type="text" name="nome" id="nome" required value="${usuario.nome}">
+                        <!-- caso o servlet aponte um erro -->
+                        <c:if test="${nomeErro != null}">
+                            <span class="erro"><c:out value="${nomeErro}" /></span>
+                        </c:if>
+                    </div>
+
+                    <div class="form-group w-75 p3 mx-auto">
+                        <label>E-mail</label>
+                        <input class="form-control" type="email" name="email" required value="${usuario.email}">
+                        <!-- caso o servlet aponte um erro -->
+                        <c:if test="${emailErro != null}">
+                            <span class="erro"><c:out value="${emailErro}" /></span>
+                        </c:if>
+                    </div>
+
+                    <c:if test="${usuarioArtista != null}">
+                        <div class="form-group w-75 p3 mx-auto">
+                            <label for="portfolio">Portfólio</label>
+                            <input id="portifolio" class="form-control" type="text" name="portfolio" required value="${usuarioArtista.portifolio}">
+                            <!-- caso o servlet aponte um erro -->
+                            <c:if test="${portifolioErro != null}">
+                                <span class="erro"><c:out value="${portifolioErro}" /></span>
+                            </c:if>
+                        </div>
                     </c:if>
-                </div>
-                    
-                <c:if test="${usuarioArtista != null}">
+
+                    <c:if test="${usuarioOrganizacao != null}">
+                        <div class='form-group w-75 p3 mx-auto'>
+                            <label for='cnpj'>CNPJ</label>
+                            <input id='cnpj' class='form-control' type="text" name="cnpj" placeholder="${usuarioOrganizacao.cnpj}" readonly>
+                            <!-- caso o servlet aponte um erro -->
+                            <c:if test="${cnpjErro != null}">
+                                <span class="erro"><c:out value="${cnpjErro}" /></span>
+                            </c:if>
+                        </div>
+
+                        <div class="form-group w-75 p3 mx-auto">
+                            <label for="descricao">Descrição da organização:</label>
+                            <textarea class="form-control" id="descricao" name="descricaoOrganizacao" required  rows="3"><c:out value="${usuarioOrganizacao.descricao}" /></textarea>    
+                            <small>No máximo 100 caracteres.</small>
+                            <!-- caso o servlet aponte um erro -->
+                            <c:if test="${descricaoErro != null}">
+                                <span class="erro"><c:out value="${descricaoErro}" /></span>
+                            </c:if>
+                        </div>
+
+                        <div class="form-group w-75 p3 mx-auto">
+                            <label for='justificativa'>O que será realizado com as doações?</label>
+                            <textarea class="form-control" id="justificativa" name="justificativaOrganizacao" required rows="3"><c:out value="${usuarioOrganizacao.justificativa}" /></textarea>     
+                            <small>No máximo 100 caracteres.</small>
+                            <!-- caso o servlet aponte um erro -->
+                            <c:if test="${justificativaErro != null}">
+                                <span class="erro"><c:out value="${justificativaErro}" /></span>
+                            </c:if>
+                        </div>
+                    </c:if>
+
                     <div class="form-group w-75 p3 mx-auto">
-                        <label for="portfolio">Portfólio</label>
-                        <input id="portifolio" class="form-control" type="text" name="portfolio" required value="${usuarioArtista.portifolio}">
-                        <!-- caso o servlet aponte um erro -->
-                        <c:if test="${portifolioErro != null}">
-                            <span class="erro"><c:out value="${portifolioErro}" /></span>
-                        </c:if>
+                        <label for="senha">Senha</label>
+                        <input id="senha" class="form-control" type="password" name="senha" required value='${usuario.senha}'>
                     </div>
-                </c:if>
-                    
-                <c:if test="${usuarioOrganizacao != null}">
-                    <div class='form-group w-75 p3 mx-auto'>
-                        <label for='cnpj'>CNPJ</label>
-                        <input id='cnpj' class='form-control' type="text" name="cnpj" placeholder="${usuarioOrganizacao.cnpj}" readonly>
-                        <!-- caso o servlet aponte um erro -->
-                        <c:if test="${cnpjErro != null}">
-                            <span class="erro"><c:out value="${cnpjErro}" /></span>
-                        </c:if>
+
+                    <div class="d-flex justify-content-center">
+                        <button class="w-50 btn btn-primary" type="submit">Atualizar dados</button>
                     </div>
-                    
-                    <div class="form-group w-75 p3 mx-auto">
-                        <label for="descricao">Descrição da organização:</label>
-                        <textarea class="form-control" id="descricao" name="descricaoOrganizacao" required  rows="3"><c:out value="${usuarioOrganizacao.descricao}" /></textarea>    
-                        <small>No máximo 100 caracteres.</small>
-                        <!-- caso o servlet aponte um erro -->
-                        <c:if test="${descricaoErro != null}">
-                            <span class="erro"><c:out value="${descricaoErro}" /></span>
-                        </c:if>
-                    </div>
-                    
-                    <div class="form-group w-75 p3 mx-auto">
-                        <label for='justificativa'>O que será realizado com as doações?</label>
-                        <textarea class="form-control" id="justificativa" name="justificativaOrganizacao" required rows="3"><c:out value="${usuarioOrganizacao.justificativa}" /></textarea>     
-                        <small>No máximo 100 caracteres.</small>
-                        <!-- caso o servlet aponte um erro -->
-                        <c:if test="${justificativaErro != null}">
-                            <span class="erro"><c:out value="${justificativaErro}" /></span>
-                        </c:if>
-                    </div>
-                </c:if>
-                   
-                <div class="form-group w-75 p3 mx-auto">
-                    <label for="senha">Senha</label>
-                    <input id="senha" class="form-control" type="password" name="senha" required value='${usuario.senha}'>
-                </div>
-                    
-                <div class="d-flex justify-content-center">
-                    <button class="w-50 btn btn-primary" type="submit">Atualizar dados</button>
-                </div>
-                
-            </form>
+
+                </form>
+            </div>
         </div>
     </body>
 </html>

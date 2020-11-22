@@ -16,12 +16,25 @@ and open the template in the editor.
     padding: 0;
 }
 
+nav {
+    background-color: #e46866;
+}
+
+.navbar-brand a {
+    color: white;
+}
+
 .back-button{
     padding: 20px;
 }
 
 .sucesso {
     color: green;
+}
+
+.titulo-pagina{
+    text-align: center;
+    margin-top: 10px;
 }
 
 .erro {
@@ -33,3 +46,4 @@ and open the template in the editor.
         padding: 0 20px;
     }
 }
+

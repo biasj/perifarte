@@ -12,18 +12,20 @@ and open the template in the editor.
     padding: 20px;
     max-width: 350px;
     /*centraliza*/
-    margin: 0 auto;
+    margin: 0px auto;
     float: none;
+
 }
 
-/*.card {
+.card {
     border: none;
-}*/
+}
 
 .home-buttons {
     max-width: 350px;
     padding-top: 20px;
     padding-bottom: 40px;
+    
     margin: 0 auto;
     float: none;
 }
@@ -37,11 +39,29 @@ and open the template in the editor.
     float: none;
 }
 
+.adicionar-carrinho {
+    padding: 20px;
+    max-width: 350px;
+    /*centraliza*/
+    margin: 30px auto;
+    float: none;
+    
+    /*borda*/
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 1px;
+}
+
+.btn-obra {
+    background-color: #e46866;
+    border-color: #e46866;
+}
+
 #preco-obra {
     font-weight: bold;
 }
 
-#adicionar-carrinho {
+#btn-adicionar-carrinho {
     margin: 40px;
     display: flex;
     justify-content: center;

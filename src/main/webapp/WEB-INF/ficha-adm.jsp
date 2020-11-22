@@ -29,8 +29,8 @@
             <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Voltar</a>
             
             <c:if test="${atualizacaoSucesso != null}">
-                <div class="form-group w-75 mx-auto">
-                    <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>
+                <div class="alert alert-success" role="alert">
+                    <span><c:out value="${atualizacaoSucesso}" /></span>
                 </div>  
             </c:if>
             

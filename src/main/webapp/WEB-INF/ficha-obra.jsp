@@ -28,14 +28,15 @@
          <div class="container">
             <a class="back-button" href="${pageContext.request.contextPath}/painel/artista"><i class="fas fa-chevron-left" ></i> Voltar</a>
             
-            <c:if test="${atualizacaoSucesso != null}">
-                <div class="form-group w-75 mx-auto">
-                    <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>
-                </div>  
-            </c:if>
-            
         
             <form method="post" action="obra">
+                            
+                <c:if test="${atualizacaoSucesso != null}">
+                    <div class="alert alert-success form-group w-75 mx-auto" role="alert">
+                        <span><c:out value="${atualizacaoSucesso}" /></span>
+                    </div>  
+                </c:if>
+                
                 <h3 class="form-group w-75 p3 mx-auto">Atualizar obra</h3>
 
                 <div class="form-group w-75 p3 mx-auto">

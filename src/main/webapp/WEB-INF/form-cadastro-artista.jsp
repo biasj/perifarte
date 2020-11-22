@@ -27,7 +27,7 @@
          <div class="container ">
             
             <form method="post" action="processar-cadastro-artista">
-                <h2 class='form-group w-75 p3 mx-auto'>Cadastro de Artista</h2>
+                <h2 class='form-group w-75 p3 mx-auto titulo-pagina'>Cadastro de Artista</h2>
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="nome">Nome</label>
                     <input class="form-control" type="text" name="nome" id="nome" required value="${nome}">
@@ -57,8 +57,9 @@
                 </div>
                     
                 <div class="form-group w-75 p3 mx-auto">
-                    <label for="portfolio">portifolio</label>
-                    <input id="portifolio" class="form-control" type="portifolio" name="portifolio" required value="${portifolio}">
+                    <label for="portfolio">Portfólio</label>
+                    <input id="portifolio" class="form-control" type="portifolio" name="portifolio" placeholder="https://www.instagram.com/artista" required value="${portifolio}">
+                    <small>Ex: instagram, behance, linkedin</small>
                     <!-- caso o servlet aponte um erro -->
                     <c:if test="${portifolioErro != null}">
                         <span class="erro"><c:out value="${portifolioErro}" /></span>

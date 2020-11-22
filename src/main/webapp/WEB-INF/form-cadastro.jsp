@@ -28,7 +28,7 @@
             
             <form method="post" action="processar-cadastro">
                 
-                <h2 class='form-group w-75 p3 mx-auto'>Cadastro</h2>
+                <h2 class='form-group w-75 p3 mx-auto titulo-pagina'>Cadastro</h2>
                 
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="nome">Nome</label>

@@ -27,7 +27,7 @@
         <c:import url="./../cabecalho.jsp" /> 
         <div class="container">
             
-            <div class="d-flex justify-content-between home-buttons">
+            <div class="home-buttons">
                 <a class='btn btn-light' href="#">Atualização COVID</a>
                 <a class='btn btn-light' href="#">Relatório de Doações</a>
             </div>

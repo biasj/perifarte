@@ -26,7 +26,7 @@
         <c:import url="./../cabecalho.jsp"/>
         
         <div class="container">
-            <h2> <c:out value="${usuario.nome}" /></h2>
+            <h2 class="titulo-pagina"> <c:out value="${usuario.nome}"/></h2>
         
             <h3>Obras doadas para sua organização</h3>
             

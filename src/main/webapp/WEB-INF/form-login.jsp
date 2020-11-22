@@ -27,13 +27,13 @@
         
         <div class='container'>
            <form method="post" action="${pageContext.request.contextPath}/login">
-                <h2 class='form-group w-75 p3 mx-auto'>Login</h2>
-
-                <c:if test="${loginErro != null}">
-                    <div class="form-group w-75 mx-auto">
-                        <span class="erro"><c:out value="${loginErro}" /></span>
+               <c:if test="${loginErro != null}">
+                    <div class="alert alert-danger" role="alert">
+                        <span ><c:out value="${loginErro}" /></span>
                     </div>  
                 </c:if>
+               
+                <h2 class='form-group w-75 p3 mx-auto titulo-pagina'>Login</h2>
                 
                 <div class='form-group w-75 p3 mx-auto'>
                     
