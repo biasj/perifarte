@@ -32,6 +32,10 @@ and open the template in the editor.
     font-size: 16px;
 }
 
+.titulo-obra {
+    margin: 25px auto;
+}
+
 .combo-p p {
     padding: 0px;
     margin: 0;
@@ -62,7 +66,8 @@ and open the template in the editor.
     padding: 20px;
     max-width: 350px;
     /*centraliza*/
-    margin: 30px auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
     float: none;
     
     background-color: #fffafa;

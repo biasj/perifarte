@@ -29,11 +29,8 @@
             <div class='detalhe-obra'>
                 <div>
                     <img src="" alt="">
-                    <div class='d-flex justify-content-between'>
-                        <h4><c:out value="${detalhe.obra.titulo}"/></h4>
-                        <h5>Arrecadado: </h5>
-                    </div>
-
+                    <h4 class='text-center titulo-obra'><c:out value="${detalhe.obra.titulo}"/></h4>
+                        
                     <div class="d-flex justify-content-between">   
                         <a class="sublinhado" href="https://${detalhe.artista.portifolio}"><c:out value="${detalhe.artista.nome}"/></a>
                         <p><c:out value="${detalhe.obra.organizacao.nome}"/></p> 
@@ -50,6 +47,8 @@
 
                 <h5>Informações sobre a Organização</h5>
                 <p><c:out value="${detalhe.obra.organizacao.descricao}"/></p>
+                
+                <h5>Total doado da obra: </h5>
 
                 <a class="btn btn-primary btn-obra" id='btn-adicionar-carrinho' href="${pageContext.request.contextPath}/carrinho">Adicionar ao Carrinho</a>
             </div>

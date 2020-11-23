@@ -31,7 +31,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Perifarte</h5>
                   <p class="card-text">Artistas doam, amigos compram e todo mundo ajuda</p>
-                  <a href="#" class="btn btn-primary">Saiba mais</a>
+                  <a href="${pageContext.request.contextPath}/info" class="btn btn-primary">Saiba mais</a>
                 </div>
             </div>
             

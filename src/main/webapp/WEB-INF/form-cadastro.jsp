@@ -54,8 +54,8 @@
                 </div>
                     
                 <div class='form-group w-75 p3 mx-auto sublinhado'>
-                    <div><a class="login" href="./cadastro-artista">Cadastro de artista</a></div>
-                    <div><a class="login" href="./cadastro-org">Cadastro de organização</a></div>
+<!--                    <div><a class="login" href="./cadastro-artista">Cadastro de artista</a></div>
+                    <div><a class="login" href="./cadastro-org">Cadastro de organização</a></div>-->
                     <div><a class="login" href="./cadastro-adm">Cadastro de administrador</a></div>
                 </div>
 

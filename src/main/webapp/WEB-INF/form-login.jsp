@@ -60,7 +60,7 @@
                      </div>
 
                      <div class='form-group w-75 p3 mx-auto'>
-                         <div><a class="login sublinhado" href="./cadastro">Ainda não tenho cadastro</a></div>
+                         <div><a class="login sublinhado" href="${pageContext.request.contextPath}/info">Ainda não tenho cadastro</a></div>
                      </div>
 
                      <div class='d-flex justify-content-center'>
