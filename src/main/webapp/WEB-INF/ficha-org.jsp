@@ -16,7 +16,7 @@
         
         <!--css-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ficha.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/painel.css">
         
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
@@ -33,7 +33,7 @@
         <div class="container content-container">
             <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Voltar</a>
            
-            <div class="ficha-org">
+            <div class="painel">
                 <c:if test="${atualizacaoSucesso != null}">
                     <div class="alert alert-success form-group w-75 mx-auto" role="alert">
                         <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>

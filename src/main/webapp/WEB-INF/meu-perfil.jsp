@@ -26,32 +26,45 @@
         <c:import url="./../cabecalho.jsp"/>
         
         <div class="container content-container">
-            <c:choose>
-                <c:when test="${usuarioAdministrador != null}">
-                    <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Meu painel</a>
-                </c:when>
-                    
-                <c:when test="${usuarioArtista != null}">
-                    <a class="back-button" href="${pageContext.request.contextPath}/painel/artista"><i class="fas fa-chevron-left" ></i> Meu painel</a>
-                </c:when>
-                    
-                <c:when test="${usuarioDoador != null}">
-                    <a class="back-button" href="${pageContext.request.contextPath}/painel/doador"><i class="fas fa-chevron-left" ></i> Meus pedidos</a>
-                </c:when>
-                    
-                <c:when test="${usuarioOrganizacao != null}">
-                    <a class="back-button" href="${pageContext.request.contextPath}/painel/org"><i class="fas fa-chevron-left" ></i> Meu painel</a>
-                </c:when>
-    
-            </c:choose>
+            <c:if test="${atualizaPerfil != null}">
+                <div class="alert alert-success" role="alert">
+                    <span><c:out value="${atualizaPerfil}" /></span>
+                </div>  
+            </c:if>
             
-            <div class="painel">
+            <div class="card">
+                <!--<h2 class="titulo-pagina"><c:out value="${usuario.nome}" /></h2>-->
+                
+                <div class="card-header">
+                    <ul class="nav nav-fill">
+                        <li class="nav-item">
+                            <c:choose>
+                                <c:when test="${usuarioAdministrador != null}">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/painel/adm">Painel</a>
+                                </c:when>
+
+                                <c:when test="${usuarioArtista != null}">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/painel/artista">Painel</a>
+                                </c:when>
+
+                                <c:when test="${usuarioDoador != null}">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/painel/doador">Meus pedidos</a>
+                                </c:when>
+
+                                <c:when test="${usuarioOrganizacao != null}">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/painel/org">Painel</a>
+                                </c:when>
+                            </c:choose>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" href="${pageContext.request.contextPath}/perfil">Perfil</a>
+                        </li>
+                    </ul>
+                </div>
+            
+            
+            <div class="card-body">
                 <form method="post" action="${pageContext.request.contextPath}/perfil">
-                    <c:if test="${atualizaPerfil != null}">
-                        <div class="form-group w-75 mx-auto alert alert-success" role="alert">
-                            <span><c:out value="${atualizaPerfil}" /></span>
-                        </div>  
-                    </c:if>
 
                     <h2 class='form-group w-75 p3 mx-auto titulo-pagina'>Meu perfil</h2>
 
@@ -125,7 +138,11 @@
                     </div>
 
                 </form>
+                    
+                    
+                </div>
             </div>
+                    
         </div>
     </body>
 </html>

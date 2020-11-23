@@ -32,31 +32,40 @@
                 </div>  
             </c:if>
             
-            <div class="d-flex justify-content-between">
-               <!--<h2>Artista: <c:out value="${usuario.nome}" /></h2>-->
-               <h3>Minhas obras</h3>
-                <div><a class="login btn btn-primary" href="/perifarte/cadastroobra">Adicionar Obra</a></div> 
-            </div>
-                           
-            <div class="painel">
-                <h4>Obras</h4>
+            <div class="card">
+                <div class='card-header'>
+                    <ul class="nav nav-fill">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="${pageContext.request.contextPath}/painel/artista">Painel</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="${pageContext.request.contextPath}/perfil">Perfil</a>
+                        </li>
+                    </ul>
+                </div>
+                    
+                <div class="card-body">
+                    <div class='d-flex justify-content-between'>
+                       <h3>Minhas obras</h3>
+                        <div><a class="login btn btn-primary" href="/perifarte/cadastroobra">Adicionar Obra</a></div> 
+                    </div>
+                    
+                    <!--para cada obra existente publica por esse artista logado-->
+                    <div class="list-group-flush">
+                        <c:forEach var="obra" items="${usuario.obras}">
+                                <a class="list-group-item list-group-item-action item-lista-adm" href="${pageContext.request.contextPath}/editar/obra?id=${obra.id}">
+                                    <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="mb-1">Preço: <c:out value="${obra.preco}"/></p>
+                                        <i class="far fa-edit" style="font-size: 30px;"></i>
+                                    </div>
+                                    <p class="mb-1">Organizacao: <c:out value="${obra.organizacao.nome}"/></p>
+                                </a>
+                         </c:forEach>
+                    </div> 
 
-                <!--para cada obra existente publica por esse artista logado-->
-                <div class="list-group-flush">
-                    <c:forEach var="obra" items="${usuario.obras}">
-                            <a class="list-group-item list-group-item-action item-lista-adm" href="${pageContext.request.contextPath}/editar/obra?id=${obra.id}">
-                                <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
-                                <div class="d-flex justify-content-between">
-                                    <p class="mb-1">Preço: <c:out value="${obra.preco}"/></p>
-                                    <i class="far fa-edit" style="font-size: 30px;"></i>
-                                </div>
-                                <p class="mb-1">Organizacao: <c:out value="${obra.organizacao.nome}"/></p>
-                            </a>
-                     </c:forEach>
-                </div> 
-            
-            </div>
-               
+                </div>
+            </div>   
         </div>
         
     </body>

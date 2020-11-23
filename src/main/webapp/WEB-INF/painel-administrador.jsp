@@ -26,96 +26,102 @@
     <body>
         <c:import url="./../cabecalho.jsp"/>
         <div class="container content-container">
-<!--            <div class="card text-center card-header">
-                <div class="card-body">
-                  <h5 class="card-title">Meu painel</h5>
-                  <p class="card-text">Artistas doam, amigos compram e todo mundo ajuda</p>
-                  <a href="#" class="btn btn-primary">perfil</a>
-                </div>
-            </div>-->
-            <!--<h2>Administrador: <c:out value="${administrador.nome}" /></h2>-->
-            <h2 class="titulo-pagina">Meu painel</h2>
             
             <c:if test="${atualizacaoSucesso != null}">
                 <div class="form-group w-75 mx-auto alert alert-success" role="alert">
                     <span><c:out value="${atualizacaoSucesso}" /></span>
                 </div>  
             </c:if>
-            
+
             <c:if test="${exclusaoSucesso != null}">
                 <div class="form-group w-75 mx-auto alert alert-warning" role="alert">
                     <span><c:out value="${exclusaoSucesso}" /></span>
                 </div>  
             </c:if>
-            
-            <div class="list-group-flush painel">
-                <h4>Organizações</h4>
-                <!--para cada organizacao existente no banco de dados--> 
-                <c:forEach var="org" items="${administrador.organizacoes}">
-                    <c:if test="${org.status != 'excluido'}">
-                        <!--mostrar as seguintes informacoes com possibilidade de editar-->
-                        <a class="list-group-item list-group-item-action item-lista-adm" href="/perifarte/editar/org?id=${org.id}">
-                            <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-1">Status: <c:out value="${org.status}"/></p>
-                                <i class="far fa-edit" style="font-size: 30px;"></i>
-                            </div>
-                            <p class="mb-1">Valor arrecadado: R$ 1000</p>
-                        </a>
-                    </c:if>
-                 </c:forEach>
+
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-fill">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="${pageContext.request.contextPath}/painel/adm">Painel</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="${pageContext.request.contextPath}/perfil">Perfil</a>
+                        </li>
+                    </ul>
+                </div>
+             
+                <div class="card-body">
+                    <div class="list-group-flush painel">
+                        <h4>Organizações</h4>
+                        <!--para cada organizacao existente no banco de dados--> 
+                        <c:forEach var="org" items="${administrador.organizacoes}">
+                            <c:if test="${org.status != 'excluido'}">
+                                <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                                <a class="list-group-item list-group-item-action item-lista-adm" href="/perifarte/editar/org?id=${org.id}">
+                                    <h5 class="mb-1"><c:out value="${org.nome}"/></h5>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="mb-1">Status: <c:out value="${org.status}"/></p>
+                                        <i class="far fa-edit" style="font-size: 30px;"></i>
+                                    </div>
+                                    <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                                </a>
+                            </c:if>
+                         </c:forEach>
+                    </div>
+
+                    <!--lista de administradores cadastrados-->
+                    <div class="list-group-flush painel">
+                        <h4>Administradores</h4>
+                        <!--para cada organizacao existente no banco de dados--> 
+                        <c:forEach var="admin" items="${todosAdms}">
+                            <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                            <a class="list-group-item list-group-item-action item-lista-adm" href="/perifarte/editar/adm?id=${admin.id}">
+
+                                <h5 class="mb-1"><c:out value="${admin.nome}"/></h5>
+                                <div class="d-flex justify-content-between">    
+                                    <p class="mb-1">E-mail: <c:out value="${admin.email}"/></p>
+                                    <i class="far fa-edit" style="font-size: 30px;"></i>
+                                </div>
+                                <p>Id: <c:out value="${admin.id}"/></p>
+                            </a>
+                         </c:forEach>
+                    </div>
+
+                    <!--lista de doadores cadastrados-->
+                    <div class="list-group-flush painel">
+                        <h4>Doadores</h4>
+                        <!--para cada organizacao existente no banco de dados--> 
+                        <c:forEach var="doador" items="${todosDoadores}">
+                            <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                            <a class="list-group-item list-group-item-action item-lista-adm" href="#">
+                                <h5 class="mb-1"><c:out value="${doador.nome}"/></h5>
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-1">E-mail: <c:out value="${doador.email}"/></p>
+                                </div>
+                                <p class="mb-1">Valor doado R$ 1000</p>
+                            </a>
+
+                         </c:forEach>
+                    </div>
+
+                    <!--lista de artistas cadastrados-->
+                    <div class="list-group-flush painel">
+                        <h4>Artistas</h4>
+                        <!--para cada organizacao existente no banco de dados--> 
+                        <c:forEach var="artista" items="${todosArtistas}">
+                            <!--mostrar as seguintes informacoes com possibilidade de editar-->
+                            <a class="list-group-item list-group-item-action item-lista-adm" href="#">
+                                <h5 class="mb-1"><c:out value="${artista.nome}"/></h5>
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-1">Portfolio: <c:out value="${artista.portifolio}"/></p>
+                                </div>
+                            </a>
+                         </c:forEach>
+                    </div>
+                </div>
+
             </div>
-            
-            <!--lista de administradores cadastrados-->
-            <div class="list-group-flush painel">
-                <h4>Administradores</h4>
-                <!--para cada organizacao existente no banco de dados--> 
-                <c:forEach var="admin" items="${todosAdms}">
-                    <!--mostrar as seguintes informacoes com possibilidade de editar-->
-                    <a class="list-group-item list-group-item-action item-lista-adm" href="/perifarte/editar/adm?id=${admin.id}">
-                        
-                        <h5 class="mb-1"><c:out value="${admin.nome}"/></h5>
-                        <div class="d-flex justify-content-between">    
-                            <p class="mb-1">E-mail: <c:out value="${admin.email}"/></p>
-                            <i class="far fa-edit" style="font-size: 30px;"></i>
-                        </div>
-                        <p>Id: <c:out value="${admin.id}"/></p>
-                    </a>
-                 </c:forEach>
-            </div>
-            
-            <!--lista de doadores cadastrados-->
-            <div class="list-group-flush painel">
-                <h4>Doadores</h4>
-                <!--para cada organizacao existente no banco de dados--> 
-                <c:forEach var="doador" items="${todosDoadores}">
-                    <!--mostrar as seguintes informacoes com possibilidade de editar-->
-                    <a class="list-group-item list-group-item-action item-lista-adm" href="#">
-                        <h5 class="mb-1"><c:out value="${doador.nome}"/></h5>
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-1">E-mail: <c:out value="${doador.email}"/></p>
-                        </div>
-                        <p class="mb-1">Valor doado R$ 1000</p>
-                    </a>
-                    
-                 </c:forEach>
-            </div>
-            
-            <!--lista de artistas cadastrados-->
-            <div class="list-group-flush painel">
-                <h4>Artistas</h4>
-                <!--para cada organizacao existente no banco de dados--> 
-                <c:forEach var="artista" items="${todosArtistas}">
-                    <!--mostrar as seguintes informacoes com possibilidade de editar-->
-                    <a class="list-group-item list-group-item-action item-lista-adm" href="#">
-                        <h5 class="mb-1"><c:out value="${artista.nome}"/></h5>
-                        <div class="d-flex justify-content-between">
-                            <p class="mb-1">Portfolio: <c:out value="${artista.portifolio}"/></p>
-                        </div>
-                    </a>
-                 </c:forEach>
-            </div>
-            
         </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>

@@ -29,6 +29,10 @@ a:pressed{
     color: #fffafa;
 }
 
+.active {
+    color:#ea555e;
+}
+
 .container {
     padding: 20px;
 }
@@ -57,9 +61,15 @@ nav i:hover {
 .btn-primary {
     background-color: #ea555e;
     border-color: #ea555e;
+    color: white;
 }
 
-.btn-primary:hover {
+.btn-outline-primary {
+    color: #ea555e;
+    border-color: #ea555e;
+}
+
+.btn-primary:hover, .btn-outline-primary:hover {
     background-color: #ea555e;
     border-color: #ea555e;
 }
@@ -69,8 +79,14 @@ nav i:hover {
     border-color: #fffafa;
 }
 
-.nav-link {
+.navbar .nav-link {
     font-size: 28px;
+}
+
+.card .nav-link {
+    max-width: 120px;
+    position: float;
+    margin: 0 auto;
 }
 
 .back-button{

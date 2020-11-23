@@ -27,14 +27,8 @@
          <c:import url="./../cabecalho.jsp"/>
          
          <div class="container content-container">
+                
             <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Voltar</a>
-            
-            <c:if test="${atualizacaoSucesso != null}">
-                <div class="alert alert-success" role="alert">
-                    <span><c:out value="${atualizacaoSucesso}" /></span>
-                </div>  
-            </c:if>
-            
             
             <div class="painel">
                 <form method="post" action="adm">

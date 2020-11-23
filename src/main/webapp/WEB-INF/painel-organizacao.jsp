@@ -26,37 +26,50 @@
         <c:import url="./../cabecalho.jsp"/>
         
         <div class="container content-container">
-            <h2 class="titulo-pagina"> <c:out value="${usuario.nome}"/></h2>
-        
-            <h3>Obras doadas para sua organização</h3>
-            
-            <c:choose>
-                <c:when test="${usuario.status == 'aprovado'}">
-                    <div class="list-obras-doadas">
-                        <c:choose>
-                            <c:when test="${obrasDoadas != null}">
-                                <c:forEach var="obra" items="${obrasDoadas}">
-                                        <a class="list-group-item list-group-item-action" href="#">
-                                            <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
-                                            <p class="mb-1"><c:out value="${obra.descricao}"/></p>
-                                            <p class="mb-1"><c:out value="${obra.preco}"/></p>
-                                        </a>
-                                </c:forEach>
-                            </c:when>
-
-                            <c:otherwise>
-                                <p>Infelizmente obras ainda não foram revertidas para a sua Organização.</p>
-                            </c:otherwise>
-                        </c:choose>
-                    </div> 
-                </c:when>
+            <div class='card'>
                 
-                <c:otherwise>
-                    <p>Seu cadastro está pendente, suspenso ou excluído</p>
-                </c:otherwise>
-            </c:choose>
+                <div class='card-header'>
+                    <ul class="nav nav-fill">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="${pageContext.request.contextPath}/painel/org">Painel</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="${pageContext.request.contextPath}/perfil">Perfil</a>
+                        </li>
+                    </ul>
+                </div>
+                
+            <div class='card-body'>
+                <h2 class="text-center"> <c:out value="${usuario.nome}"/></h2>
+                <h3>Obras doadas</h3>
+            
+                <c:choose>
+                    <c:when test="${usuario.status == 'aprovado'}">
+                        <div class="list-obras-doadas">
+                            <c:choose>
+                                <c:when test="${obrasDoadas != null}">
+                                    <c:forEach var="obra" items="${obrasDoadas}">
+                                            <a class="list-group-item list-group-item-action" href="#">
+                                                <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
+                                                <p class="mb-1"><c:out value="${obra.descricao}"/></p>
+                                                <p class="mb-1"><c:out value="${obra.preco}"/></p>
+                                            </a>
+                                    </c:forEach>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <p>Infelizmente obras ainda não foram revertidas para a sua Organização.</p>
+                                </c:otherwise>
+                            </c:choose>
+                        </div> 
+                    </c:when>
+
+                    <c:otherwise>
+                        <p>Seu cadastro está pendente, suspenso ou excluído</p>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
-        
         
     </body>
 </html>
