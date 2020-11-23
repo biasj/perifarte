@@ -37,18 +37,21 @@ a:pressed{
     padding: 0;
 }
 
-nav{
-    background-color: #fffafa;    
+nav {
+    background-color: #ffe6e6;    
+}
+
+nav i {
     color: #430704;
+}
+
+nav i:hover {
+    color: #ea555e;
 }
 
 .navbar-brand {
     color: #430704;
     text-decoration: none;
-}
-
-.navbar-toggler span {
-    color: #430704;
 }
 
 .btn-primary {
@@ -68,10 +71,6 @@ nav{
 
 .nav-link {
     font-size: 28px;
-}
-
-nav a {
-    color: #430704;
 }
 
 .back-button{

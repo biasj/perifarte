@@ -26,6 +26,13 @@
     <body>
         <c:import url="./../cabecalho.jsp"/>
         <div class="container content-container">
+<!--            <div class="card text-center card-header">
+                <div class="card-body">
+                  <h5 class="card-title">Meu painel</h5>
+                  <p class="card-text">Artistas doam, amigos compram e todo mundo ajuda</p>
+                  <a href="#" class="btn btn-primary">perfil</a>
+                </div>
+            </div>-->
             <!--<h2>Administrador: <c:out value="${administrador.nome}" /></h2>-->
             <h2 class="titulo-pagina">Meu painel</h2>
             
