@@ -24,11 +24,11 @@
     <body>
         <c:import url="./../cabecalho.jsp"/>
         
-        <div class="container">
+        <div class="container content-container">
             
             <form method="post" action="processar-cadastro">
                 
-                <h2 class='form-group w-75 p3 mx-auto'>Cadastro</h2>
+                <h2 class='form-group w-75 p3 mx-auto titulo-pagina'>Cadastro</h2>
                 
                 <div class="form-group w-75 p3 mx-auto">
                     <label for="nome">Nome</label>
@@ -53,9 +53,9 @@
                     <input id="senha" class="form-control" type="password" name="senha" required>
                 </div>
                     
-                <div class='form-group w-75 p3 mx-auto'>
-                    <div><a class="login" href="./cadastro-artista">Cadastro de artista</a></div>
-                    <div><a class="login" href="./cadastro-org">Cadastro de organização</a></div>
+                <div class='form-group w-75 p3 mx-auto sublinhado'>
+<!--                    <div><a class="login" href="./cadastro-artista">Cadastro de artista</a></div>
+                    <div><a class="login" href="./cadastro-org">Cadastro de organização</a></div>-->
                     <div><a class="login" href="./cadastro-adm">Cadastro de administrador</a></div>
                 </div>
 

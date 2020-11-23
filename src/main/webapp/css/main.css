@@ -8,6 +8,31 @@ and open the template in the editor.
     Author     : beatrizsato
 */
 
+body {
+    background-color: white;
+    color:#430704;
+}
+
+a {
+    color:#430704;
+}
+
+.sublinhado, .back-button{ 
+   text-decoration: underline;
+}
+
+a:hover {
+    color: #ea555e;
+}
+
+a:pressed{
+    color: #fffafa;
+}
+
+.active {
+    color:#ea555e;
+}
+
 .container {
     padding: 20px;
 }
@@ -16,12 +41,66 @@ and open the template in the editor.
     padding: 0;
 }
 
+nav {
+    background-color: #ffe6e6;    
+}
+
+nav i {
+    color: #430704;
+}
+
+nav i:hover {
+    color: #ea555e;
+}
+
+.navbar-brand {
+    color: #430704;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #ea555e;
+    border-color: #ea555e;
+    color: white;
+}
+
+.btn-outline-primary {
+    color: #ea555e;
+    border-color: #ea555e;
+}
+
+.btn-primary:hover, .btn-outline-primary:hover {
+    background-color: #ea555e;
+    border-color: #ea555e;
+}
+
+.btn-primary:pressed {
+    background-color: #fffafa;
+    border-color: #fffafa;
+}
+
+.navbar .nav-link {
+    font-size: 28px;
+}
+
+.card .nav-link {
+    max-width: 120px;
+    position: float;
+    margin: 0 auto;
+}
+
 .back-button{
+    font-size: 18px;
     padding: 20px;
 }
 
 .sucesso {
     color: green;
+}
+
+.titulo-pagina{
+    text-align: center;
+    margin-top: 10px;
 }
 
 .erro {
@@ -32,4 +111,10 @@ and open the template in the editor.
     #nav {
         padding: 0 20px;
     }
+    
+    .content-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
 }
+

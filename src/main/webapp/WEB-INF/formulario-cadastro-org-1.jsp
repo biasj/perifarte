@@ -25,9 +25,9 @@
     <body>
         <c:import url="./../cabecalho.jsp"/>
         
-        <div class='container'>
+        <div class='container content-container'>
             <form method="post" action="solicitacao-cadastro-org-1">
-               <h3 class='form-group w-75 p3 mx-auto'>Cadastro de Organização</h3>
+               <h3 class='form-group w-75 p3 mx-auto titulo-pagina'>Cadastro de Organização</h3>
                
                <div class='form-group w-75 p3 mx-auto'>
                    <label for='nome'>Nome</label>

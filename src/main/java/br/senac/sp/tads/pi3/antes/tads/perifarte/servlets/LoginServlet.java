@@ -67,8 +67,10 @@ public class LoginServlet extends HttpServlet {
             if(org != null) {
                 // carrega todas as obras que já foram doadas para a organização
                 List<Obra> obrasDoadas = obraDao.findObraByOrganizacao(org.getId());
-                sessao.setAttribute("obrasDoadas", obrasDoadas);
                 
+                if(obrasDoadas.size() > 0) {
+                    sessao.setAttribute("obrasDoadas", obrasDoadas);
+                }
                 // coloca o objeto org como atributo sessão para levar dados do usuário para a próxima página 
                 sessao.setAttribute("usuario", org);
                 

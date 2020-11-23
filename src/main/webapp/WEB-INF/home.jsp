@@ -27,9 +27,17 @@
         <c:import url="./../cabecalho.jsp" /> 
         <div class="container">
             
-            <div class="d-flex justify-content-between home-buttons">
-                <a class='btn btn-light' href="#">Atualização COVID</a>
-                <a class='btn btn-light' href="#">Relatório de Doações</a>
+            <div class="card text-center card-header">
+                <div class="card-body">
+                  <h5 class="card-title">Perifarte</h5>
+                  <p class="card-text">Artistas doam, amigos compram e todo mundo ajuda</p>
+                  <a href="${pageContext.request.contextPath}/info" class="btn btn-primary">Saiba mais</a>
+                </div>
+            </div>
+            
+            <div class="justify-content-between row row-cols-2 home-buttons">
+                <a class='btn btn-light col' href="#">Atualização COVID</a>
+                <a class='btn btn-light col' href="#">Relatório de Doações</a>
             </div>
             
             <div class="row row-cols-2 row-cols-md-3">
@@ -39,9 +47,12 @@
                         <div class="card h-100 card-obra">
                             <img src="" class="card-img-top">
                             <h5 class="card-title"><c:out value="${detalhe.obra.titulo}"/></h5>
-                            <p class="mb-1" id='preco-obra'>R$ <c:out value="${detalhe.obra.preco}"/></p>
-                            <p class="mb-1">Artista: <c:out value="${detalhe.artista.nome}"/></p>
-                            <p class="mb-1">Organização: <c:out value="${detalhe.obra.organizacao.nome}"/></p>
+                            <p class="mb-1 preco-obra">R$ <c:out value="${detalhe.obra.preco}"/></p>
+                            
+                            <div class='combo-p'>
+                                <p class="mb-1">Artista: <c:out value="${detalhe.artista.nome}"/></p>
+                                <p class="mb-1">Organização: <c:out value="${detalhe.obra.organizacao.nome}"/></p>
+                            </div>
                             <a class="stretched-link" href="${pageContext.request.contextPath}/obra?id=${detalhe.obra.id}"></a>
                         </div>
                     </div>

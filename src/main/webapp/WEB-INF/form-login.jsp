@@ -26,46 +26,49 @@
         <!-- INSERIR MENSAGENS DE LOGIN/CADASTRO pela sessao ? -->
         
         <div class='container'>
-           <form method="post" action="${pageContext.request.contextPath}/login">
-                <h2 class='form-group w-75 p3 mx-auto'>Login</h2>
+            <div class="content-container">
+                <form method="post" action="${pageContext.request.contextPath}/login">
+                    <c:if test="${loginErro != null}">
+                         <div class="alert alert-danger" role="alert">
+                             <span ><c:out value="${loginErro}" /></span>
+                         </div>  
+                     </c:if>
 
-                <c:if test="${loginErro != null}">
-                    <div class="form-group w-75 mx-auto">
-                        <span class="erro"><c:out value="${loginErro}" /></span>
-                    </div>  
-                </c:if>
-                
-                <div class='form-group w-75 p3 mx-auto'>
-                    
-                    <label for='email'>E-mail</label>
-                    <input class='form-control' id='email' type="email" name="email" required value="${email}">
-                    <!-- caso o servlet aponte um erro -->
-                    <c:if test="${emailErro != null}">
-                        <span class="erro"><c:out value="${emailErro}" /></span>
-                    </c:if>
-                </div>
+                     <h2 class='form-group w-75 p3 mx-auto titulo-pagina'>Login</h2>
 
-                <div class='form-group mb-2 w-75 p3 mx-auto'>
-                    <div class="d-flex w-100 justify-content-between">
-                        <label for='senha'>Senha</label>
-                        <a class=' mb-2' href="#">Esqueceu?</a>
-                    </div>    
-                    
-                    <!--TODO: redefinir senha-->
-                    <input class='form-control' id='senha' type="password" name="senha" value="${senha}" required>
-                    <c:if test="${senhaErro != null}">
-                        <span class="erro"><c:out value="${senhaErro}" /></span>
-                    </c:if>
-                </div>
+                     <div class='form-group w-75 p3 mx-auto'>
 
-                <div class='form-group w-75 p3 mx-auto'>
-                    <div><a class="login" href="./cadastro">Ainda não tenho cadastro</a></div>
-                </div>
+                         <label for='email'>E-mail</label>
+                         <input class='form-control' id='email' type="email" name="email" required value="${email}">
+                         <!-- caso o servlet aponte um erro -->
+                         <c:if test="${emailErro != null}">
+                             <span class="erro"><c:out value="${emailErro}" /></span>
+                         </c:if>
+                     </div>
 
-                <div class='d-flex justify-content-center'>
-                    <button class='w-50 btn btn-primary' type="submit">Fazer Login</button>
-                </div>
-            </form> 
+                     <div class='form-group mb-2 w-75 p3 mx-auto'>
+                         <div class="d-flex w-100 justify-content-between">
+                             <label for='senha'>Senha</label>
+                             <a class=' mb-2 sublinhado' href="#">Esqueceu?</a>
+                         </div>    
+
+                         <!--TODO: redefinir senha-->
+                         <input class='form-control' id='senha' type="password" name="senha" value="${senha}" required>
+                         <c:if test="${senhaErro != null}">
+                             <span class="erro"><c:out value="${senhaErro}" /></span>
+                         </c:if>
+                     </div>
+
+                     <div class='form-group w-75 p3 mx-auto'>
+                         <div><a class="login sublinhado" href="${pageContext.request.contextPath}/info">Ainda não tenho cadastro</a></div>
+                     </div>
+
+                     <div class='d-flex justify-content-center'>
+                         <button class='w-50 btn btn-primary' type="submit">Fazer Login</button>
+                     </div>
+
+                 </form>
+            </div>
         </div>
         
     </body>
