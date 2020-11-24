@@ -21,7 +21,7 @@
             
             <h2>Minha Cesta de Compras</h2>
             
-            <div class="container">
+            <div class="container content-container">
 	            <div class="row row-cols-1 row-cols-md-3">
 	                
 	                <c:forEach var="detalhe" items="${obras}">

@@ -16,6 +16,7 @@
         
         <!--css-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/painel.css">
         
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
@@ -29,46 +30,49 @@
     <body>
         <c:import url="./../cabecalho.jsp"/>
         
-        <div class="container ficha-org">
+        <div class="container content-container">
             <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Voltar</a>
-            
-            <c:if test="${atualizacaoSucesso != null}">
-                <div class="form-group w-75 mx-auto">
-                    <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>
-                </div>  
-            </c:if>
-            
-            <form method="post" action="org">
-                <!--cabeçalho do formulário-->
-                <div class="form-group w-75 p3 mx-auto">
-                    <h3 class="mb-1"><c:out value="${org.nome}"/></h3>
-                    <p class="mb-1">Status: <c:out value="${org.status}"/></p>
-                    <p class="mb-1">Valor arrecadado: R$ 1000</p>
-                </div>
+           
+            <div class="painel">
+                <c:if test="${atualizacaoSucesso != null}">
+                    <div class="alert alert-success form-group w-75 mx-auto" role="alert">
+                        <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>
+                    </div>  
+                </c:if>
+                
+                <form method="post" action="org">
+                    <!--cabeçalho do formulário-->
+                    <div class="form-group w-75 p3 mx-auto">
+                        <h3 class="mb-1"><c:out value="${org.nome}"/></h3>
+                        <p class="mb-1">Status: <c:out value="${org.status}"/></p>
+                        <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                    </div>
 
-                <div class="form-group w-75 p3 mx-auto">
-                    <h5 class="mb-1">Descrição</h5>
-                    <p class="mb-1"><c:out value="${org.descricao}"/></p> 
-                </div>
+                    <div class="form-group w-75 p3 mx-auto">
+                        <h5 class="mb-1">Descrição</h5>
+                        <p class="mb-1"><c:out value="${org.descricao}"/></p> 
+                    </div>
+
+                    <div class="form-group w-75 p3 mx-auto">
+                        <h5 class="mb-1">Justificativa</h5>
+                        <p class="mb-1"><c:out value="${org.justificativa}"/></p>
+                    </div>
+
+                    <div class="form-group w-75 p3 mx-auto">
+                        <c:if test="${org.status == 'pendente' || org.status == 'suspenso'}">
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline-danger" type="submit" name="excluir">Excluir Solicitação</button>
+                                <button class="btn btn-primary" type="submit" name="aprovar">Aprovar Cadastro</button> 
+                            </div>
+                        </c:if>
+                        <c:if test="${org.status == 'aprovado'}">
+                            <button class="btn btn-outline-danger" name="suspender">Suspender Cadastro</button>
+                        </c:if> 
+                    </div>
+
+                </form>
+            </div>
                 
-                <div class="form-group w-75 p3 mx-auto">
-                    <h5 class="mb-1">Justificativa</h5>
-                    <p class="mb-1"><c:out value="${org.justificativa}"/></p>
-                </div>
-                
-                <div class="form-group w-75 p3 mx-auto">
-                    <c:if test="${org.status == 'pendente' || org.status == 'suspenso'}">
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-outline-danger" type="submit" name="excluir">Excluir Solicitação</button>
-                            <button class="btn btn-primary" type="submit" name="aprovar">Aprovar Cadastro</button> 
-                        </div>
-                    </c:if>
-                    <c:if test="${org.status == 'aprovado'}">
-                        <button class="btn btn-outline-danger" name="suspender">Suspender Cadastro</button>
-                    </c:if> 
-                </div>
-                
-            </form>
         </div>
     </body>
 </html>

@@ -23,7 +23,7 @@
     </head>
     <body>
         <c:import url="./../cabecalho.jsp"/>
-        <div class="container">
+        <div class="container content-container">
             <h1>Erro - Página não autorizada</h1>
             <p>Infelizmente você não tem acesso a essa página. Por favor faça seu login novamente</p>
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/login">Login</a>
