@@ -5,6 +5,7 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
 
 /**
@@ -17,6 +18,7 @@ public class Obra {
     private String descricao;
     private Organizacao organizacao;
     private BigDecimal preco;
+    private InputStream conteudoArquivo;
     
     private int id;
 
@@ -28,11 +30,18 @@ public class Obra {
         this.id = id;
     }
     
-    public Obra(String pTitulo, String pDescricao, BigDecimal pPreco) {
+    public Obra(String pTitulo, String pDescricao, BigDecimal pPreco, InputStream pconteudoArquivo) {
         this.titulo = pTitulo;
         this.descricao = pDescricao;
         this.preco = pPreco; //começa com o valor zerado.
+        this.conteudoArquivo = pconteudoArquivo;
     }
+
+    public InputStream getConteudoArquivo() {
+        return conteudoArquivo;
+    }
+    
+    
 
     public int getNumeroObra() {
         return numeroObra;

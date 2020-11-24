@@ -6,6 +6,7 @@
 package br.senac.sp.tads.pi3.antes.tads.perifarte.daos;
 
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ public class ObraDao {
     // adiciona obra ao banco de dados
     public void addObra(Obra obr, int idOrg, int idArt) throws SQLException {
 
-       String sql = "INSERT INTO obra (obra_titulo, obra_descricao, obra_organizacao_id, obra_artista_id, obra_preco) VALUES (?,?,?,?,?)";
+       String sql = "INSERT INTO obra (obra_titulo, obra_descricao, obra_organizacao_id, obra_artista_id, obra_preco, obra_imagem) VALUES (?,?,?,?,?,?)";
 
        try (Connection conn = Conexao.obterConexao()) {
            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
@@ -36,6 +37,7 @@ public class ObraDao {
                stmt.setInt(3, idOrg);
                stmt.setInt(4, idArt);
                stmt.setBigDecimal(5, obr.getPreco());
+               stmt.setBlob(6, obr.getConteudoArquivo());
 
                int resultados = stmt.executeUpdate();
 
@@ -71,9 +73,10 @@ public class ObraDao {
                     String descricao = rs.getString("obra_descricao");
                     int idOrganizacao = rs.getInt("obra_organizacao_id");
                     BigDecimal preco = rs.getBigDecimal("obra_preco");
+                    InputStream imagem = (InputStream) rs.getBlob("obra_imagem");
 
                     // Construtor: String titulo, String descricao, BigDecimal preco
-                    Obra obra = new Obra(titulo, descricao, preco);
+                    Obra obra = new Obra(titulo, descricao, preco, imagem);
                     OrganizacaoDao orgDao = new OrganizacaoDao();
                     obra.setId(id);
                     
@@ -101,9 +104,9 @@ public class ObraDao {
                     int idOrganizacao = rs.getInt("obra_organizacao_id");
                     BigDecimal preco = rs.getBigDecimal("obra_preco");
                     int idArtista = rs.getInt("obra_artista_id");
-                  
+                    InputStream imagem = (InputStream) rs.getBlob("obra_imagem");
                     // Construtor: String titulo, String descricao, BigDecimal preco
-                    Obra obra = new Obra(titulo, descricao, preco);
+                    Obra obra = new Obra(titulo, descricao, preco, imagem);
                     // seta os atributos que não são inicializados no construtor
                     obra.setId(Integer.parseInt(id));
                     OrganizacaoDao orgDao = new OrganizacaoDao();
@@ -135,9 +138,9 @@ public class ObraDao {
                     String descricao = rs.getString("obra_descricao");
                     int idArtista = rs.getInt("obra_artista_id");
                     BigDecimal preco = rs.getBigDecimal("obra_preco");
-
+                    InputStream imagem = (InputStream) rs.getBlob("obra_imagem");
                     // Construtor: String titulo, String descricao, BigDecimal preco
-                    Obra obra = new Obra(titulo, descricao, preco);
+                    Obra obra = new Obra(titulo, descricao, preco, imagem);
                     OrganizacaoDao orgDao = new OrganizacaoDao();
                     obra.setId(id);
                     
@@ -168,9 +171,9 @@ public class ObraDao {
                 int idOrganizacao = rs.getInt("obra_organizacao_id");
                 int artistaId = rs.getInt("obra_artista_id");
                 BigDecimal preco = rs.getBigDecimal("obra_preco");
-                
+                InputStream imagem = (InputStream) rs.getBlob("obra_imagem");
                 // Construtor: String nome, String email, String senha, String cnpj, String telefone
-                Obra obra = new Obra(titulo, descricao, preco);
+                Obra obra = new Obra(titulo, descricao, preco, imagem);
                 
                 obra.setId(id);
                 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -75,6 +76,10 @@ public class FormCadastroObra extends HttpServlet {
         String precoStr = request.getParameter("preco");
         String ongEscolhida = request.getParameter("ongEscolhida");
         
+        Part arquivo = request.getPart("arquivo");
+        String nomeArquivo = Paths.get(arquivo.getSubmittedFileName()).getFileName().toString();
+        InputStream imagem = arquivo.getInputStream();
+        
         BigDecimal preco = null;
         if(precoStr != null && precoStr.trim().length() > 0) {
             preco = new BigDecimal(precoStr);
@@ -94,7 +99,9 @@ public class FormCadastroObra extends HttpServlet {
         
         boolean ongEscolhidaValido = (ongEscolhida != null);
         
-        boolean camposValidosGlobal = tituloValido && descricaoValido && /*precoValido &&*/  ongEscolhidaValido;
+        boolean imagemValido = (imagem != null);
+        
+        boolean camposValidosGlobal = tituloValido && descricaoValido && /*precoValido &&*/  ongEscolhidaValido && imagemValido;
 
         
         if (!camposValidosGlobal) {
@@ -119,7 +126,7 @@ public class FormCadastroObra extends HttpServlet {
             request.setAttribute("descricao", descricao);
             request.setAttribute("preco", preco);
             request.setAttribute("ongEscolhida", ongEscolhida);
-            
+            request.setAttribute("imagem", imagem);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-cadastro-obra.jsp");
             dispatcher.forward(request, response);
@@ -143,7 +150,7 @@ public class FormCadastroObra extends HttpServlet {
         HttpSession sessao = request.getSession();
         Artista art = (Artista) sessao.getAttribute("usuario");
         
-        Obra obra = new Obra(titulo, descricao, preco);
+        Obra obra = new Obra(titulo, descricao, preco, imagem);
         
         ObraDao obraDao = new ObraDao();
         OrganizacaoDao orgDao = new OrganizacaoDao();

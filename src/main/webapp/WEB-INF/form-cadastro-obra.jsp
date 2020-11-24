@@ -69,7 +69,12 @@
                 </div>
                         
                 <div class='form-group w-75 p3 mx-auto'>
-                    <input type="file" name="file" size="50"/><br/>
+                    
+                    <form action="${pageContext.request.contextPath}/upload" method="post" enctype="multipart/form-data">
+                        <input type="file" name="arquivo">
+                        
+                    </form>
+        
                 </div>
                         
                 <div class='form-group w-75 p3 mx-auto'>
