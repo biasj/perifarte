@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.servlet.annotation.MultipartConfig;
 
 
 /**
@@ -31,13 +32,9 @@ import javax.servlet.http.Part;
  * @author Gabriel
  */
 @WebServlet(name = "FormCadastroObra", urlPatterns = {"/processar-cadastro-obra"})
+@MultipartConfig(maxFileSize=20848820) //5MB
 public class FormCadastroObra extends HttpServlet {
-    
-    // database connection settings
-    private String dbURL = "jdbc:mysql://localhost:3306/AppDB";
-    private String dbUser = "root";
-    private String dbPass = "";
-
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -58,7 +55,7 @@ public class FormCadastroObra extends HttpServlet {
             Logger.getLogger(FormCadastroObra.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-//        sessao.setAttribute("usuario", artista);
+        sessao.setAttribute("usuario", artista);
         request.setAttribute("artista", artista);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
         dispatcher.forward(request, response);
@@ -76,8 +73,8 @@ public class FormCadastroObra extends HttpServlet {
         String precoStr = request.getParameter("preco");
         String ongEscolhida = request.getParameter("ongEscolhida");
         
+        // upload de arquivo
         Part arquivo = request.getPart("arquivo");
-        String nomeArquivo = Paths.get(arquivo.getSubmittedFileName()).getFileName().toString();
         InputStream imagem = arquivo.getInputStream();
         
         BigDecimal preco = null;
@@ -85,8 +82,6 @@ public class FormCadastroObra extends HttpServlet {
             preco = new BigDecimal(precoStr);
         }
         
-        System.out.println("entrou no post");
-
         // Validacao do titulo
         boolean tituloValido = (titulo != null);
         
@@ -101,7 +96,7 @@ public class FormCadastroObra extends HttpServlet {
         
         boolean imagemValido = (imagem != null);
         
-        boolean camposValidosGlobal = tituloValido && descricaoValido && /*precoValido &&*/  ongEscolhidaValido && imagemValido;
+        boolean camposValidosGlobal = tituloValido && descricaoValido && ongEscolhidaValido && imagemValido;
 
         
         if (!camposValidosGlobal) {
@@ -114,9 +109,9 @@ public class FormCadastroObra extends HttpServlet {
                 request.setAttribute("descricaoErro", "descricao deve ser preenchida");
             }
             
-            /*if (!precoValido) {
-                request.setAttribute("precoErro", "preco deve ser preenchido");
-            }*/
+            if (!imagemValido) {
+                request.setAttribute("imagemErro", "imagem zuada");
+            }
             
            if (!ongEscolhidaValido) {
                request.setAttribute("ongEscolhidaErro", "ongEscolhida deve ser preenchida");
@@ -132,20 +127,6 @@ public class FormCadastroObra extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
-        
-        // TENTA PEGAR ARQUIVO DO FORMULARIO (não tá funcionando ainda)
-        /*InputStream inputStream = null; // input stream of the upload file
-         
-        // obtains the upload file part in this multipart request
-        Part filePart = request.getPart("file");
-        
-        if (filePart != null) {
-            // prints out some information for debugging
-            System.out.println(filePart.getContentType());
-             
-            // obtains input stream of the upload file
-            inputStream = filePart.getInputStream();
-        }*/
         
         HttpSession sessao = request.getSession();
         Artista art = (Artista) sessao.getAttribute("usuario");

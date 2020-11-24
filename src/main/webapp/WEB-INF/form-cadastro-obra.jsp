@@ -73,7 +73,10 @@
                     </div>
 
                     <div class='form-group w-75 p3 mx-auto'>
-                        <input class="form-control-file" type="file" name="arquivo" size="50" required /><br/>
+                        <input class="form-control-file" type="file" name="arquivo" required /><br/>
+                        <c:if test="${imagemErro != null}">
+                            <span class="erro"><c:out value="${imagemErro}" /></span>
+                        </c:if>
                     </div>
 
                     <div class='form-group w-75 p3 mx-auto d-flex justify-content-center'>
