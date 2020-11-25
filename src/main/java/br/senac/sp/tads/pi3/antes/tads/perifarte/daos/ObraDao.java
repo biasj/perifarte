@@ -75,12 +75,14 @@ public class ObraDao {
                     int idOrganizacao = rs.getInt("obra_organizacao_id");
                     BigDecimal preco = rs.getBigDecimal("obra_preco");
                     Blob imagemBlob =  rs.getBlob("obra_imagem");
+                    byte[] imagemByte = rs.getBytes("obra_imagem");
                     
 
                     // Construtor: String titulo, String descricao, BigDecimal preco
                     Obra obra = new Obra(titulo, descricao, preco, imagemBlob.getBinaryStream());
                     OrganizacaoDao orgDao = new OrganizacaoDao();
                     obra.setId(id);
+                    obra.setImageBytes(imagemByte);
                     
                     obra.setOrganizacao(orgDao.findById(String.valueOf(idOrganizacao)));
 
@@ -107,12 +109,13 @@ public class ObraDao {
                     BigDecimal preco = rs.getBigDecimal("obra_preco");
                     int idArtista = rs.getInt("obra_artista_id");
                     Blob imagem = rs.getBlob("obra_imagem");
+                    byte[] imagemByte = rs.getBytes("obra_imagem");
                     // Construtor: String titulo, String descricao, BigDecimal preco
                     Obra obra = new Obra(titulo, descricao, preco, imagem.getBinaryStream());
                     // seta os atributos que não são inicializados no construtor
                     obra.setId(Integer.parseInt(id));
                     OrganizacaoDao orgDao = new OrganizacaoDao();
-                    
+                    obra.setImageBytes(imagemByte);
                     obra.setOrganizacao(orgDao.findById(String.valueOf(idOrganizacao)));
                     
                     return obra;
@@ -141,10 +144,13 @@ public class ObraDao {
                     int idArtista = rs.getInt("obra_artista_id");
                     BigDecimal preco = rs.getBigDecimal("obra_preco");
                     Blob imagem = rs.getBlob("obra_imagem");
+                    byte[] imagemByte = rs.getBytes("obra_imagem");
+                    
                     // Construtor: String titulo, String descricao, BigDecimal preco
                     Obra obra = new Obra(titulo, descricao, preco, imagem.getBinaryStream());
                     OrganizacaoDao orgDao = new OrganizacaoDao();
                     obra.setId(id);
+                    obra.setImageBytes(imagemByte);
                     
                     obra.setOrganizacao(orgDao.findById(String.valueOf(idOrganizacao)));
 
@@ -174,9 +180,11 @@ public class ObraDao {
                 int artistaId = rs.getInt("obra_artista_id");
                 BigDecimal preco = rs.getBigDecimal("obra_preco");
                 Blob imagem = rs.getBlob("obra_imagem");
+                byte[] imagemByte = rs.getBytes("obra_imagem");
+                
                 // Construtor: String nome, String email, String senha, String cnpj, String telefone
                 Obra obra = new Obra(titulo, descricao, preco, imagem.getBinaryStream());
-                
+                obra.setImageBytes(imagemByte);
                 obra.setId(id);
                 
                 resultados.add(obra);

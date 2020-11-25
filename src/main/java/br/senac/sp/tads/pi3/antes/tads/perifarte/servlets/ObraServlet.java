@@ -8,6 +8,7 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sun.misc.IOUtils;
 
 /**
  *

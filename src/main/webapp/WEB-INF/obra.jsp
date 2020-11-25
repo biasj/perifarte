@@ -28,13 +28,16 @@
             <a class="back-button sublinhado" href="${pageContext.request.contextPath}/home"><i class="fas fa-arrow-left" ></i>  Voltar</a>
             <div class='detalhe-obra'>
                 <div>
-                    <img src="" alt="">
+                    <img src="${pageContext.request.contextPath}/imagem-obra?id=${detalhe.obra.id}" alt="" class="imagem-detalhe-obra">
                     <h4 class='text-center titulo-obra'><c:out value="${detalhe.obra.titulo}"/></h4>
                         
                     <div class="d-flex justify-content-between">   
                         <a class="sublinhado" href="https://${detalhe.artista.portifolio}"><c:out value="${detalhe.artista.nome}"/></a>
                         <p><c:out value="${detalhe.obra.organizacao.nome}"/></p> 
                     </div>
+                    <div class="d-flex justify-content-between">   
+                        <h5>Total doado à obra: </h5>
+                    </div
                 </div>
             
                 <div class="d-flex justify-content-between adicionar-carrinho">
@@ -48,7 +51,7 @@
                 <h5>Informações sobre a Organização</h5>
                 <p><c:out value="${detalhe.obra.organizacao.descricao}"/></p>
                 
-                <h5>Total doado da obra: </h5>
+                
 
                 <a class="btn btn-primary btn-obra" id='btn-adicionar-carrinho' href="${pageContext.request.contextPath}/carrinho">Adicionar ao Carrinho</a>
             </div>

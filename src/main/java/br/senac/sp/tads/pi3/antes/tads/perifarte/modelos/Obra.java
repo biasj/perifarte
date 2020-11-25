@@ -19,6 +19,7 @@ public class Obra {
     private Organizacao organizacao;
     private BigDecimal preco;
     private InputStream conteudoArquivo;
+    private byte[] imageBytes;
     
     private int id;
 
@@ -35,14 +36,21 @@ public class Obra {
         this.descricao = pDescricao;
         this.preco = pPreco; //começa com o valor zerado.
         this.conteudoArquivo = pconteudoArquivo;
+        imageBytes = null;
     }
 
     public InputStream getConteudoArquivo() {
         return conteudoArquivo;
     }
-    
-    
 
+    public byte[] getImageBytes() {
+        return imageBytes;
+    }
+
+    public void setImageBytes(byte[] imageBytes) {
+        this.imageBytes = imageBytes;
+    }
+    
     public int getNumeroObra() {
         return numeroObra;
     }

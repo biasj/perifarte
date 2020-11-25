@@ -66,8 +66,10 @@ and open the template in the editor.
     padding: 20px;
     max-width: 350px;
     /*centraliza*/
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
     float: none;
     
     background-color: #fffafa;
@@ -77,6 +79,23 @@ and open the template in the editor.
     border-style: solid;
     border-radius: 2px;
     border-width: 1px;
+}
+
+.imagem-detalhe-obra {
+    max-height: 500px;
+    max-width: 300px;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.imagem-miniatura {
+    height: 212px;
+    width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
 }
 
 #btn-adicionar-carrinho {

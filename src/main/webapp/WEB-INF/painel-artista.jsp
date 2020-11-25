@@ -54,12 +54,18 @@
                     <div class="list-group-flush">
                         <c:forEach var="obra" items="${usuario.obras}">
                                 <a class="list-group-item list-group-item-action item-lista-adm" href="${pageContext.request.contextPath}/editar/obra?id=${obra.id}">
-                                    <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="mb-1">Preço: <c:out value="${obra.preco}"/></p>
-                                        <i class="far fa-edit" style="font-size: 30px;"></i>
+                                    <div class="media">
+                                        <img class="mr-3 mini-obra-artista" src="${pageContext.request.contextPath}/imagem-obra?id=${obra.id}" >
+                                    
+                                        <div class="media-body">
+                                            <h5 class="mt-0"><c:out value="${obra.titulo}"/></h5>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="mb-1">Preço: <c:out value="${obra.preco}"/></p>
+                                                <i class="far fa-edit" style="font-size: 30px;"></i>
+                                            </div>
+                                            <p class="mb-1">Organizacao: <c:out value="${obra.organizacao.nome}"/></p>
+                                        </div>
                                     </div>
-                                    <p class="mb-1">Organizacao: <c:out value="${obra.organizacao.nome}"/></p>
                                 </a>
                          </c:forEach>
                     </div> 
