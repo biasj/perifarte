@@ -23,3 +23,8 @@ and open the template in the editor.
 .painel a:hover {
     color: #ea555e;
 }
+
+.mini-obra-artista {
+    width: 64px;
+    height: 90px;
+}

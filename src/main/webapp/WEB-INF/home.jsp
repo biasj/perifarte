@@ -45,7 +45,7 @@
                 <c:forEach var="detalhe" items="${obras}">
                     <div class="col mb-4">
                         <div class="card h-100 card-obra">
-                            <img src="" class="card-img-top">
+                            <img class="imagem-miniatura" src="${pageContext.request.contextPath}/imagem-obra?id=${detalhe.obra.id}" class="card-img-top">
                             <h5 class="card-title"><c:out value="${detalhe.obra.titulo}"/></h5>
                             <p class="mb-1 preco-obra">R$ <c:out value="${detalhe.obra.preco}"/></p>
                             

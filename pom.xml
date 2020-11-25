@@ -7,7 +7,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>perifarte v2</name>
+    <name>perifarte</name>
     
     <organization>
         <name>Antes TADS do que Nunca</name>

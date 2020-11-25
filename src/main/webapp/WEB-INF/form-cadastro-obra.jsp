@@ -29,7 +29,7 @@
             <a class="back-button" href="${pageContext.request.contextPath}/painel/artista"><i class="fas fa-chevron-left" ></i> Voltar</a>
             
             <div class="painel">
-                <form method="post" action="processar-cadastro-obra">
+                <form method="post" action="processar-cadastro-obra" enctype="multipart/form-data">
                     <h2 class='form-group w-75 p3 mx-auto titulo-pagina'>Cadastro de Obra</h2>
 
                     <div class='form-group w-75 p3 mx-auto'>
@@ -40,41 +40,15 @@
                             <span class="erro"><c:out value="${tituloErro}" /></span>
                         </c:if>
                     </div>
-
-                <div class='form-group w-75 p3 mx-auto'>
-                    <label for="preco">Preço</label>
-                    <input class="form-control" id="preco-obra" type="number" name="preco" required value ="${preco}">
-                    <!-- caso o servlet aponte um erro -->
-                     <c:if test="${precoErro != null}">
-                        <span class="erro"><c:out value="${precoErro}" /></span>
-                    </c:if>
-                </div>
-                    
-                <div class='form-group w-75 p3 mx-auto'>
-                    <label for="org-obra">Organização beneficiada:</label>
-                    <select class="form-control" id="org-obra" name="ongEscolhida" required value="${ongEscolhida}">
-                        <c:forEach var="org" items="${organizacoes}">
-                            <option>${org.nome}</option>
-                        </c:forEach>
-                    </select>
-                    <!-- caso o servlet aponte um erro -->
-                     <c:if test="${ongEscolhidaErro != null}">
-                        <span class="erro"><c:out value="${ongEscolhidaErro}" /></span>
-                    </c:if>
-                </div>
                         
-                <div class='form-group w-75 p3 mx-auto'>
-                    
-                    <form action="${pageContext.request.contextPath}/upload" method="post" enctype="multipart/form-data">
-                        <input type="file" name="arquivo">
-                        
-                    </form>
-        
-                </div>
-                        
-                <div class='form-group w-75 p3 mx-auto'>
-                    <button class="btn btn-primary" type="submit" value="Upload File">Cadastrar obra</button>
-                </div>
+                    <div class='form-group w-75 p3 mx-auto'>
+                        <label for="descricao-obra">Descrição</label>
+                        <textarea class="form-control" id="descricao-obra" type="number" name="descricao" required value ="${descricao}" rows="2"></textarea>
+                        <!-- caso o servlet aponte um erro -->
+                         <c:if test="${descricaoErro != null}">
+                            <span class="erro"><c:out value="${precoErro}" /></span>
+                        </c:if>
+                    </div>
 
                     <div class='form-group w-75 p3 mx-auto'>
                         <label for="preco">Preço</label>
@@ -99,7 +73,10 @@
                     </div>
 
                     <div class='form-group w-75 p3 mx-auto'>
-                        <input class="form-control-file" type="file" name="file" size="50"/><br/>
+                        <input class="form-control-file" type="file" name="arquivo" required /><br/>
+                        <c:if test="${imagemErro != null}">
+                            <span class="erro"><c:out value="${imagemErro}" /></span>
+                        </c:if>
                     </div>
 
                     <div class='form-group w-75 p3 mx-auto d-flex justify-content-center'>
