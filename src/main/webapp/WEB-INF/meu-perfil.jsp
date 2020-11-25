@@ -48,7 +48,7 @@
                                 </c:when>
 
                                 <c:when test="${usuarioDoador != null}">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/painel/doador">Meus pedidos</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/painel/doador">Painel</a>
                                 </c:when>
 
                                 <c:when test="${usuarioOrganizacao != null}">
