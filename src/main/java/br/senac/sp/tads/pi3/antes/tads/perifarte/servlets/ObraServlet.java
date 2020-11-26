@@ -34,11 +34,19 @@ public class ObraServlet extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         
+        String userid = request.getParameter("id"); //ver se vai funcionar
+        
         ObraDao obraDao = new ObraDao();
         ArtistaDao artistaDao = new ArtistaDao();
         
+        DoadorDao doadorDao = new DoadorDao(); //ver se vai funcionar
+        
         try {
             MiniaturaObra mini = obraDao.findMiniaturaByObra(Integer.parseInt(id));
+            
+            
+            Doador doador = doadorDao.findById(userid); //ver se vai funcionar
+            
             
             // carregar informações da obra, artista e ong
             Obra obra = obraDao.findById(id);
@@ -47,6 +55,8 @@ public class ObraServlet extends HttpServlet {
             DetalheObra detalheObra = new DetalheObra(obra, artista);
             
             request.setAttribute("detalhe", detalheObra);
+            
+            request.setAttribute("userid", doador);  //ver se vai funcionar
             
         } catch (SQLException ex) {
             Logger.getLogger(ObraServlet.class.getName()).log(Level.SEVERE, null, ex);
