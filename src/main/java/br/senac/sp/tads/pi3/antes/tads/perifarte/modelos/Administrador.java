@@ -14,17 +14,21 @@ import java.util.Random;
  */
 public class Administrador extends Usuario{
     private int id;
-    private final String credencial;
+    private String status;
     private List<Organizacao> organizacoes;
     
-    public Administrador(String nome, String email, String senha) {
+    public Administrador(String nome, String email, String senha, String status) {
         super(nome, email, senha);
         organizacoes = null;
-        credencial = gerarCredencial();
+        this.status = status;
     }
 
-    public String getCredencial() {
-        return credencial;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getId() {
@@ -41,37 +45,6 @@ public class Administrador extends Usuario{
 
     public void setOrganizacoes(List<Organizacao> organizacoes) {
         this.organizacoes = organizacoes;
-    }
-    
-    // credencial é composta por 3 números e 1 letra, usada para conferir que usuário é administrador
-    private String gerarCredencial() {
-        StringBuilder credencialGerada = new StringBuilder();
-        
-        // valueOf() -> pega 3 números aleatórios de 0 a 9 e coloca na credencial
-        for(int i=0;i<3;i++) {
-            credencialGerada.append(randomDigit());
-        }
-        
-        // gera 1 letra aleatorias e coloca na senha
-        credencialGerada.append(randomLetter());
-        
-        // StringBuilder -> junta tudo e converte pra String
-        return credencialGerada.toString();
-    }
-    
-    private static String randomLetter() {
-        String alfabeto = "abcdefghijklmnopqrstuvwxyz";
-        
-        int posicaoAleatoriaAlfabeto = (int)(Math.random()*alfabeto.length());
-        
-        return String.valueOf(alfabeto.charAt(posicaoAleatoriaAlfabeto));
-        
-    }
-    
-    private static String randomDigit() {
-        int num = (int)(Math.random()*10);
-        
-        return String.valueOf(num);
     }
     
 }

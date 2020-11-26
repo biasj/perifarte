@@ -21,7 +21,7 @@ import java.util.List;
 public class AdministradorDao {
     // insere administrador no banco de dados
     public void addAdministrador(Administrador adm) throws SQLException {
-        String sql = "INSERT INTO administrador (administrador_nome, administrador_email, administrador_senha) VALUES (?,?,?)";
+        String sql = "INSERT INTO administrador (administrador_nome, administrador_email, administrador_senha, administrador_status=?) VALUES (?,?,?,?)";
 
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
@@ -32,6 +32,7 @@ public class AdministradorDao {
                 stmt.setString(1, adm.getNome());
                 stmt.setString(2, adm.getEmail());
                 stmt.setString(3, adm.getSenha());
+                stmt.setString(4, adm.getStatus());
 
                 int resultados = stmt.executeUpdate();
                 
@@ -61,8 +62,9 @@ public class AdministradorDao {
                 if (rs.next()) {
                     // pega os dados das colunas da tabela do bd
                     String nome = rs.getString("administrador_nome");
+                    String status = rs.getString("administrador_status");
                     
-                    Administrador adm = new Administrador(nome, email, senha);
+                    Administrador adm = new Administrador(nome, email, senha, status);
                     adm.setId(rs.getInt("administrador_id"));
                     
                     return adm;
@@ -88,9 +90,10 @@ public class AdministradorDao {
                 int id = rs.getInt("administrador_id");
                 String email = rs.getString("administrador_email");
                 String senha = rs.getString("administrador_senha");
+                String status = rs.getString("administrador_status");
   
                 // Construtor: String nome, String email, String senha, String portfolio
-                Administrador adm = new Administrador(nome, email, senha);
+                Administrador adm = new Administrador(nome, email, senha, status);
                 // inicializa id pelo id do banco
                 adm.setId(id);
                 
@@ -111,8 +114,9 @@ public class AdministradorDao {
                     String nome = rs.getString("administrador_nome");
                     String email = rs.getString("administrador_email");
                     String senha = rs.getString("administrador_senha");
+                    String status = rs.getString("administrador_status");
                   
-                    Administrador adm = new Administrador(nome, email, senha);
+                    Administrador adm = new Administrador(nome, email, senha, status);
                     adm.setId(Integer.parseInt(id));
                     
                     return adm;
@@ -134,6 +138,27 @@ public class AdministradorDao {
                 stmt.setString(2, adm.getEmail());
                 stmt.setString(3, adm.getSenha());
                 stmt.setInt(4, adm.getId());
+                
+                int resultados = stmt.executeUpdate();
+
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        }
+        
+    }
+    
+    public void aprovaConta(Administrador adm) throws SQLException {
+        String sql = "update administrador set administrador_status=? where administrador_id=?";
+        try (Connection conn = Conexao.obterConexao()) {
+            // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, adm.getStatus());
+                stmt.setInt(2, adm.getId());
                 
                 int resultados = stmt.executeUpdate();
 

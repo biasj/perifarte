@@ -82,7 +82,7 @@ public class FormCadastroAdm extends HttpServlet {
             return;
         }
         
-        Administrador adm = new Administrador(nome, email, senha);
+        Administrador adm = new Administrador(nome, email, senha, "pendente");
         
         // insere no banco de dados
         AdministradorDao admDao = new AdministradorDao();
