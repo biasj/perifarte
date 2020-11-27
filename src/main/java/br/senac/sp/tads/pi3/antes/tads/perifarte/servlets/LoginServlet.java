@@ -77,25 +77,30 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("painel/org");                
             // se for adm
             } else if(adm != null) {
-                // pega a lista de doador e artista para apresentar no painel adm
-                List<Artista> artistas = artDao.findAll();
-                List<Doador> doadores = doadorDao.findAll();
-                // carregar todas as organizações
-                List organizacoes = orgDao.findAll();
-                // carrega todos os adms
-                List adms = admDao.findAll();
-                
-                // setar o atributo organizacao c a lista das organizacoes
-                adm.setOrganizacoes(organizacoes);
-                sessao.setAttribute("usuario", adm);
-                // passa a lista de artistas e doadores para serem apresentadas no painel
-                sessao.setAttribute("todosArtistas", artistas);
-                sessao.setAttribute("todosDoadores", doadores);
-                sessao.setAttribute("todosAdms", adms);
-                
-                // enviar para servlet de adm
-                response.sendRedirect("painel/adm");
-                
+                if(adm.getStatus().equals("aprovado")) {
+                    // pega a lista de doador e artista para apresentar no painel adm
+                    List<Artista> artistas = artDao.findAll();
+                    List<Doador> doadores = doadorDao.findAll();
+                    // carregar todas as organizações
+                    List organizacoes = orgDao.findAll();
+                    // carrega todos os adms
+                    List adms = admDao.findAll();
+
+                    // setar o atributo organizacao c a lista das organizacoes
+                    adm.setOrganizacoes(organizacoes);
+                    sessao.setAttribute("usuario", adm);
+                    // passa a lista de artistas e doadores para serem apresentadas no painel
+                    sessao.setAttribute("todosArtistas", artistas);
+                    sessao.setAttribute("todosDoadores", doadores);
+                    sessao.setAttribute("todosAdms", adms);
+
+                    // enviar para servlet de adm
+                    response.sendRedirect("painel/adm");
+                } else {
+                    // volta para o formulário com os campos preenchidos
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/nao-autorizado.jsp");
+                    dispatcher.forward(request, response);
+                }
             //se for art
             } else if(art != null){
                  // pega a lista de obras para apresentar no painel de adm

@@ -25,19 +25,20 @@
     </head>
     <body>
         <c:import url="./../cabecalho.jsp"/>
-        <div class="container content-container">
+        <div class="container">
             
-            <c:if test="${atualizacaoSucesso != null}">
-                <div class="form-group w-75 mx-auto alert alert-success" role="alert">
-                    <span><c:out value="${atualizacaoSucesso}" /></span>
-                </div>  
-            </c:if>
+            <div class='content-container'>
+                <c:if test="${atualizacaoSucesso != null}">
+                    <div class="form-group w-75 mx-auto alert alert-success" role="alert">
+                        <span><c:out value="${atualizacaoSucesso}" /></span>
+                    </div>  
+                </c:if>
 
-            <c:if test="${exclusaoSucesso != null}">
-                <div class="form-group w-75 mx-auto alert alert-warning" role="alert">
-                    <span><c:out value="${exclusaoSucesso}" /></span>
-                </div>  
-            </c:if>
+                <c:if test="${exclusaoSucesso != null}">
+                    <div class="form-group w-75 mx-auto alert alert-warning" role="alert">
+                        <span><c:out value="${exclusaoSucesso}" /></span>
+                    </div>  
+                </c:if>
 
             <div class="card">
                 <div class="card-header">
@@ -122,6 +123,7 @@
                     </div>
                 </div>
 
+            </div>
             </div>
         </div>
 

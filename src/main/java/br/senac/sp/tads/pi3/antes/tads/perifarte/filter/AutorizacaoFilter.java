@@ -74,7 +74,7 @@ public class AutorizacaoFilter implements Filter {
         
         if(usuario instanceof Administrador) {
             return paginaAcessada.endsWith("/painel/adm") || paginaAcessada.endsWith("/editar/org") || 
-                    paginaAcessada.endsWith("/editar/adm") || paginaAcessada.endsWith("/perfil");
+                    paginaAcessada.endsWith("/editar/adm") ||paginaAcessada.endsWith("/perfil");
         } else if(usuario instanceof Artista) {
             return paginaAcessada.endsWith("/painel/artista") || paginaAcessada.endsWith("/editar/obra") || 
                     paginaAcessada.endsWith("/cadastroobra") || paginaAcessada.endsWith("/processar-cadastro-obra") || paginaAcessada.endsWith("/perfil");

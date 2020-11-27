@@ -21,7 +21,7 @@ import java.util.List;
 public class AdministradorDao {
     // insere administrador no banco de dados
     public void addAdministrador(Administrador adm) throws SQLException {
-        String sql = "INSERT INTO administrador (administrador_nome, administrador_email, administrador_senha, administrador_status=?) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO administrador (administrador_nome, administrador_email, administrador_senha, administrador_status) VALUES (?,?,?,?)";
 
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS

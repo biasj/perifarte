@@ -23,16 +23,24 @@
     </head>
     <body>
         <c:import url="./../cabecalho.jsp"/>
-        <!-- INSERIR MENSAGENS DE LOGIN/CADASTRO pela sessao ? -->
         
         <div class='container'>
             <div class="content-container">
+ 
+                <c:if test="${loginErro != null}">
+                    <div class="alert alert-danger" role="alert">
+                        <span ><c:out value="${loginErro}" /></span>
+                    </div>  
+                </c:if>
+                
+                <c:if test="${cadastroSucesso != null}">
+                    <div class="alert alert-success" role="alert">
+                        <span ><c:out value="${cadastroSucesso}" /></span>
+                    </div>  
+                </c:if>
+                
                 <form method="post" action="${pageContext.request.contextPath}/login">
-                    <c:if test="${loginErro != null}">
-                         <div class="alert alert-danger" role="alert">
-                             <span ><c:out value="${loginErro}" /></span>
-                         </div>  
-                     </c:if>
+                    
 
                      <h2 class='form-group w-75 p3 mx-auto titulo-pagina'>Login</h2>
 

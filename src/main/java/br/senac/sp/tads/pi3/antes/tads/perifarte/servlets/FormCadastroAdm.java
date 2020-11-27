@@ -39,6 +39,7 @@ public class FormCadastroAdm extends HttpServlet {
         sessao.removeAttribute("adm");
 
         // TODO: APARECER MENSAGEM DE CADASTRO COM SUCESSO
+        request.setAttribute("cadastroSucesso", "Cadastro feito com sucesso");
         // envia para a tela de login
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-login.jsp");
         dispatcher.forward(request, response);

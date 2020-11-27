@@ -58,7 +58,7 @@
                     <c:if test="${admEdit.status == 'pendente'}">
                         <div class="form-group w-75 mx-auto d-flex justify-content-between">
                             <button type="submit" name="botaoExcluir" class="btn btn-outline-danger">Excluir</button>
-                            <button type="submit" name="botaoAprovar" class="btn btn-outline-danger">Aprovar Administrador</button>
+                            <button type="submit" name="botaoAprovar" class="btn btn-warning">Aprovar Administrador</button>
                         </div>
                     </c:if>
                         
