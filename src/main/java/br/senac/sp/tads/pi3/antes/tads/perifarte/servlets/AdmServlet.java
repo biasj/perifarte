@@ -40,6 +40,9 @@ public class AdmServlet extends HttpServlet {
         request.setAttribute("todosDoadores", doadores);
         request.setAttribute("todosArtistas", artistas);
         request.setAttribute("todosAdms", adms);
+        // pega mensagem de sucesso de exclusão
+        request.setAttribute("exclusaoSucesso", sessao.getAttribute("exclusaoSucesso"));
+        sessao.removeAttribute("exclusaoSucesso");
         
         // envia para a tela de continuação de solicitação de cadastro 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-administrador.jsp");

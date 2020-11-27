@@ -157,8 +157,10 @@ public class AdministradorDao {
             conn.setAutoCommit(false);
 
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, adm.getStatus());
+                stmt.setString(1, "aprovado");
                 stmt.setInt(2, adm.getId());
+                
+                adm.setStatus("aprovado");
                 
                 int resultados = stmt.executeUpdate();
 

@@ -84,6 +84,7 @@
                                     <i class="far fa-edit" style="font-size: 30px;"></i>
                                 </div>
                                 <p>Id: <c:out value="${admin.id}"/></p>
+                                <p>Status: <c:out value="${admin.status}"/></p>
                             </a>
                          </c:forEach>
                     </div>

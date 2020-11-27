@@ -42,6 +42,9 @@ public class FichaAdm extends HttpServlet {
             // caso esteja acessando pelo painel de administrador
             if(id != null && admEdit == null) {
                 admEdit = admDao.findById(id);
+            } else {
+                admEdit = (Administrador) sessao.getAttribute("admEdit");
+                request.setAttribute("atualizacaoSucesso", "Administrador aprovado!");
             }
             
         } catch (SQLException ex) {
@@ -63,23 +66,35 @@ public class FichaAdm extends HttpServlet {
         HttpSession sessao = request.getSession();
         
         Administrador admEdit = (Administrador) sessao.getAttribute("admEdit");
+        String botaoExcluir = request.getParameter("botaoExcluir");
         
         AdministradorDao admDao = new AdministradorDao();
         
         try {
-            admDao.excluirConta(String.valueOf(admEdit.getId()));
-            
-            // atualiza a lista de administradores no painels
-            List adms = admDao.findAll();
-            sessao.setAttribute("adms", adms);
-            
+            if(botaoExcluir != null) {
+                admDao.excluirConta(String.valueOf(admEdit.getId()));
+
+                // atualiza a lista de administradores no painels
+                List adms = admDao.findAll();
+                sessao.setAttribute("todosAdms", adms);
+                
+                sessao.setAttribute("exclusaoSucesso", "Administrador excluído com sucesso");
+                response.sendRedirect(request.getContextPath() + "/painel/adm");
+                
+            } else {
+                admDao.aprovaConta(admEdit);
+                
+                // atualiza adms da sessão
+                List<Administrador> adms = admDao.findAll();
+                sessao.setAttribute("todosAdms", adms);
+                sessao.setAttribute("admEdit", admEdit);
+                
+                response.sendRedirect("adm");
+            }
             
         } catch (SQLException ex) {
             Logger.getLogger(FichaAdm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.setAttribute("exclusaoSucesso", "Administrador excluído com sucesso");
 
-        response.sendRedirect(request.getContextPath() + "/painel/adm");
     }
 }
