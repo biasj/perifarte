@@ -23,6 +23,16 @@ public class Doador extends Usuario{
         this.totalDoado = new BigDecimal(0);
     }
     
+    public Doador(String email, String hashSenha) {
+        super(email, hashSenha);
+        obras = new ArrayList<>();
+    }
+    
+    public void setInfo(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+    
     public void comprarObra(Obra obra){
         this.obras.add(obra);
         totalDoado = totalDoado.add(obra.getPreco());

@@ -56,15 +56,15 @@ public class LoginServlet extends HttpServlet {
         
         try {
             // procura no banco de dados pelo e-mail e senha
-             Organizacao org = orgDao.findAccount(email, senha);
+             Organizacao org = orgDao.findAccount(email);
              Administrador adm = admDao.findAccount(email);
              Artista art = artDao.findAccount(email);
-             Doador doador = doadorDao.findAccount(email, senha);
+             Doador doador = doadorDao.findAccount(email);
              
             // confere se é ong, adm, doador, ou artista. 
             
             // se for ong
-            if(org != null) {
+            if(org != null && org.validarSenha(senha)) {
                 // carrega todas as obras que já foram doadas para a organização
                 List<Obra> obrasDoadas = obraDao.findObraByOrganizacao(org.getId());
                 
@@ -111,7 +111,7 @@ public class LoginServlet extends HttpServlet {
                 // enviar para servlet de adm
                 response.sendRedirect("painel/artista");
                 
-            } else if(doador != null) {
+            } else if(doador != null && doador.validarSenha(senha)) {
                 sessao.setAttribute("usuario", doador);
                 response.sendRedirect("painel/doador");
             }
