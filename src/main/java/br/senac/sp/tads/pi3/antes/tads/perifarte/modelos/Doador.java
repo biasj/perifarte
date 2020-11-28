@@ -75,18 +75,6 @@ public class Doador extends Usuario{
     public void setNumeroConta(int numeroConta) {
         this.numeroConta = numeroConta;
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
     
     
 }

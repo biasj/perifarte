@@ -130,7 +130,7 @@
 
                     <div class="form-group w-75 p3 mx-auto">
                         <label for="senha">Senha</label>
-                        <input id="senha" class="form-control" type="password" name="senha" required value='${usuario.senha}'>
+                        <input id="senha" class="form-control" type="password" name="senha" required>
                     </div>
 
                     <div class="d-flex justify-content-center">

@@ -52,20 +52,22 @@ public class AdministradorDao {
     }
     
     // procura administrador no banco de dados (login)
-    public Administrador findAccount(String email, String senha) throws SQLException {
-        String sql = "SELECT * FROM administrador WHERE administrador_email=? and administrador_senha=?";
+    public Administrador findAccount(String email) throws SQLException {
+        String sql = "SELECT * FROM administrador WHERE administrador_email=?";
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
-            stmt.setString(2, senha);
+            
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     // pega os dados das colunas da tabela do bd
                     String nome = rs.getString("administrador_nome");
                     String status = rs.getString("administrador_status");
+                    String senha = rs.getString("administrador_senha");
+                    int id = rs.getInt("administrador_id");
                     
-                    Administrador adm = new Administrador(nome, email, senha, status);
-                    adm.setId(rs.getInt("administrador_id"));
+                    Administrador adm = new Administrador(email, senha);
+                    adm.setInfo(nome, status, id);
                     
                     return adm;
                 }

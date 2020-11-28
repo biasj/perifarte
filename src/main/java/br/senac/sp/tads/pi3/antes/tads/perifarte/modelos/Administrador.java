@@ -22,6 +22,16 @@ public class Administrador extends Usuario{
         organizacoes = null;
         this.status = status;
     }
+    
+    public Administrador(String email, String hashSenha) {
+        super(email, hashSenha);
+    }
+    
+    public void setInfo(String nome, String status, int id) {
+        this.nome = nome;
+        this.status = status;
+        this.id = id;
+    }
 
     public String getStatus() {
         return status;

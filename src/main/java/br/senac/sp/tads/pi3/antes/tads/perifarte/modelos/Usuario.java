@@ -5,6 +5,8 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  *
  * @author beatrizsato
@@ -16,14 +18,19 @@ public abstract class Usuario {
     protected String email;
     protected String senha;
 
-    public Usuario(String nome, String email, String senha) {
+    public Usuario(String nome, String email, String senhaAberta) {
         this.nome = nome;
         this.email = email;
-        this.senha = senha;
+        setSenha(senhaAberta);
         
         numeroConta = contas++;
     }
     
+    public Usuario(String email, String senhaHash) {
+        this.email = email;
+        senha = senhaHash;
+    } 
+        
     public int getNumeroConta() {
         return numeroConta;
     }
@@ -43,15 +50,21 @@ public abstract class Usuario {
     public String getSenha() {
         return senha;
     }
+    
+    public final void setSenha(String senhaAberta) {
+        this.senha = BCrypt.hashpw(senhaAberta, BCrypt.gensalt());
+        //this.hashSenha = senhaAberta;
+    }
+    
+    public boolean validarSenha(String senhaAberta) {
+        return BCrypt.checkpw(senhaAberta, senha);
+        //return senhaAberta.equals(hashSenha);
+    }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    
     // redefine a senha
     public void redefinirSenha(String novaSenha) {
         senha = novaSenha;
