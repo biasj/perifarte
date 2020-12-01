@@ -55,21 +55,22 @@ public class DoadorDao {
     }
     
     // procura conta de doador no banco (login)
-    public Doador findAccount(String email, String senha) throws SQLException {
-        String sql = "SELECT * FROM doador WHERE doador_email=? and doador_senha=?";
+    public Doador findAccount(String email) throws SQLException {
+        String sql = "SELECT * FROM doador WHERE doador_email=?";
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
-            stmt.setString(2, senha);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     // pega os dados das colunas da tabela do bd
                     String nome = rs.getString("doador_nome");
-                    String id = rs.getString("doador_id");
+                    int id = rs.getInt("doador_id");
+                    String senha = rs.getString("doador_senha");
                     
-                    Doador doador = new Doador(nome, email, senha);
+                    Doador doador = new Doador(email, senha);
                     // atualiza o id que não é inicializado na construção
-                    doador.setId(Integer.parseInt(id));
+                    doador.setInfo(id, nome);
+                    
                     checkdoador = true;
                     return doador;
                 }

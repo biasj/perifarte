@@ -27,6 +27,11 @@
          <c:import url="./../cabecalho.jsp"/>
          
          <div class="container content-container">
+             <c:if test="${atualizacaoSucesso != null}">
+                <div class="alert alert-success form-group w-75 mx-auto" role="alert">
+                    <span class="sucesso"><c:out value="${atualizacaoSucesso}" /></span>
+                </div>  
+            </c:if>
                 
             <a class="back-button" href="${pageContext.request.contextPath}/painel/adm"><i class="fas fa-chevron-left" ></i> Voltar</a>
             
@@ -49,11 +54,19 @@
                             <input class="form-control" id="admEdit-id" type="number" name="admEdit-id" required value ="${admEdit.id}">
                         </div>
                     </div>
-
-                    <div class="form-group w-75 mx-auto d-flex justify-content-center">
-                        <button type="submit" name="botaoExcluir" class="btn btn-outline-danger">Excluir Administrador</button>
-                    </div>
-
+                        
+                    <c:if test="${admEdit.status == 'pendente'}">
+                        <div class="form-group w-75 mx-auto d-flex justify-content-between">
+                            <button type="submit" name="botaoExcluir" class="btn btn-outline-danger">Excluir</button>
+                            <button type="submit" name="botaoAprovar" class="btn btn-warning">Aprovar Administrador</button>
+                        </div>
+                    </c:if>
+                        
+                    <c:if test="${admEdit.status =='aprovado'}">
+                        <div class="form-group w-75 mx-auto d-flex justify-content-center">
+                            <button type="submit" name="botaoExcluir" class="btn btn-outline-danger">Excluir Administrador</button>
+                        </div>
+                    </c:if>
                 </form>
             </div>
          </div>

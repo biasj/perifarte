@@ -53,22 +53,23 @@ public class ArtistaDao {
     }
     
     // procura artista no banco de dados (Login)
-    public Artista findAccount(String email, String senha) throws SQLException {
-        String sql = "SELECT * FROM artista WHERE artista_email=? and artista_senha=?";
+    public Artista findAccount(String email) throws SQLException {
+        String sql = "SELECT * FROM artista WHERE artista_email=?";
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
-            stmt.setString(2, senha);
+            
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     // pega os dados das colunas da tabela do bd
                     int id = rs.getInt("artista_id");
                     String nome = rs.getString("artista_nome");
-                    String portifolio = rs.getString("artista_portifolio");
+                    String portfolio = rs.getString("artista_portifolio");
+                    String senha = rs.getString("artista_senha");
                     
-                    Artista art = new Artista(nome, email, senha, portifolio);
-                    
-                    art.setId(id);
+                    Artista art = new Artista(email, senha);
+                    art.setInfo(nome, id, portfolio);
+                 
                     
                     return art;
                 }

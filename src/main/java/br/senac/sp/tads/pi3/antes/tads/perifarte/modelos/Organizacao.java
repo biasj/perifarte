@@ -37,6 +37,21 @@ public class Organizacao extends Usuario {
         // já começa como pendente e só depois vai ser aprovado
         status = "pendente";
     }
+    
+    public Organizacao(String email, String hashSenha) {
+        super(email, hashSenha);
+    }
+    
+    public void setInfo(int id, String nome, String cnpj, String telefone, 
+            String descricao, String justificativa, String status) {
+        setId(id);
+        setNome(nome);
+        this.cnpj = cnpj;
+        setTelefone(telefone);
+        setDescricao(descricao);
+        setJustificativa(justificativa);
+        setStatus(status);
+    }
 
     @Override
     public int getNumeroConta() {

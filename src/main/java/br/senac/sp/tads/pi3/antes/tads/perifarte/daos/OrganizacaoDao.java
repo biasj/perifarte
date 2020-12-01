@@ -168,27 +168,26 @@ public class OrganizacaoDao {
     }
 
     
-    public Organizacao findAccount(String email, String senha) throws SQLException {
-        String sql = "SELECT * FROM organizacao WHERE organizacao_email=? and organizacao_senha=?";
+    public Organizacao findAccount(String email) throws SQLException {
+        String sql = "SELECT * FROM organizacao WHERE organizacao_email=?";
         try (Connection conn = Conexao.obterConexao();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
-            stmt.setString(2, senha);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     // pega os dados das colunas da tabela do bd
                     String nome = rs.getString("organizacao_nome");
+                    String senha = rs.getString("organizacao_senha");
                     String cnpj = rs.getString("organizacao_cnpj");
                     String telefone = rs.getString("organizacao_telefone");
                     String descricao = rs.getString("organizacao_descricao");
                     String justificativa = rs.getString("organizacao_justificativa");
+                    String status = rs.getString("organizacao_status");
+                    int id = rs.getInt("organizacao_id");
                     
-                    Organizacao org = new Organizacao(nome, email, senha, cnpj, telefone);
+                    Organizacao org = new Organizacao(email, senha);
                     // "seta" os atributos que não são inicializados no construtor
-                    org.setStatus(rs.getString("organizacao_status"));
-                    org.setId(rs.getInt("organizacao_id"));
-                    org.setDescricao(descricao);
-                    org.setJustificativa(justificativa);
+                    org.setInfo(id, nome, cnpj, telefone, descricao, justificativa, status);
                             
                     
                     return org;

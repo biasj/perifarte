@@ -22,6 +22,17 @@ public class Artista extends Usuario{
         this.obras = null;
     }
     
+    public Artista(String email, String hashSenha) {
+        super(email, hashSenha);
+    }
+    
+    public void setInfo(String nome, int id, String portfolio) {
+        this.nome = nome;
+        this.id = id;
+        this.portifolio = portfolio;
+        this.obras = null;
+    }
+        
     public void cadastrarObra(Obra obra){
         obras.add(obra);
     }
@@ -82,9 +93,6 @@ public class Artista extends Usuario{
         this.email = email;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
     
      public int getId() {
         return id;

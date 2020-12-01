@@ -56,15 +56,15 @@ public class LoginServlet extends HttpServlet {
         
         try {
             // procura no banco de dados pelo e-mail e senha
-             Organizacao org = orgDao.findAccount(email, senha);
-             Administrador adm = admDao.findAccount(email, senha);
-             Artista art = artDao.findAccount(email, senha);
-             Doador doador = doadorDao.findAccount(email, senha);
+             Organizacao org = orgDao.findAccount(email);
+             Administrador adm = admDao.findAccount(email);
+             Artista art = artDao.findAccount(email);
+             Doador doador = doadorDao.findAccount(email);
              
             // confere se é ong, adm, doador, ou artista. 
             
             // se for ong
-            if(org != null) {
+            if(org != null && org.validarSenha(senha)) {
                 // carrega todas as obras que já foram doadas para a organização
                 List<Obra> obrasDoadas = obraDao.findObraByOrganizacao(org.getId());
                 
@@ -76,28 +76,33 @@ public class LoginServlet extends HttpServlet {
                 
                 response.sendRedirect("painel/org");                
             // se for adm
-            } else if(adm != null) {
-                // pega a lista de doador e artista para apresentar no painel adm
-                List<Artista> artistas = artDao.findAll();
-                List<Doador> doadores = doadorDao.findAll();
-                // carregar todas as organizações
-                List organizacoes = orgDao.findAll();
-                // carrega todos os adms
-                List adms = admDao.findAll();
-                
-                // setar o atributo organizacao c a lista das organizacoes
-                adm.setOrganizacoes(organizacoes);
-                sessao.setAttribute("usuario", adm);
-                // passa a lista de artistas e doadores para serem apresentadas no painel
-                sessao.setAttribute("todosArtistas", artistas);
-                sessao.setAttribute("todosDoadores", doadores);
-                sessao.setAttribute("todosAdms", adms);
-                
-                // enviar para servlet de adm
-                response.sendRedirect("painel/adm");
-                
+            } else if(adm != null && adm.validarSenha(senha)) {
+                if(adm.getStatus().equals("aprovado")) {
+                    // pega a lista de doador e artista para apresentar no painel adm
+                    List<Artista> artistas = artDao.findAll();
+                    List<Doador> doadores = doadorDao.findAll();
+                    // carregar todas as organizações
+                    List organizacoes = orgDao.findAll();
+                    // carrega todos os adms
+                    List adms = admDao.findAll();
+
+                    // setar o atributo organizacao c a lista das organizacoes
+                    adm.setOrganizacoes(organizacoes);
+                    sessao.setAttribute("usuario", adm);
+                    // passa a lista de artistas e doadores para serem apresentadas no painel
+                    sessao.setAttribute("todosArtistas", artistas);
+                    sessao.setAttribute("todosDoadores", doadores);
+                    sessao.setAttribute("todosAdms", adms);
+
+                    // enviar para servlet de adm
+                    response.sendRedirect("painel/adm");
+                } else {
+                    // volta para o formulário com os campos preenchidos
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/nao-autorizado.jsp");
+                    dispatcher.forward(request, response);
+                }
             //se for art
-            } else if(art != null){
+            } else if(art != null && art.validarSenha(senha)){
                  // pega a lista de obras para apresentar no painel de adm
                 List<Obra> obras = obraDao.findObraByArtista(art.getId());
                 art.setObras(obras);
@@ -106,7 +111,7 @@ public class LoginServlet extends HttpServlet {
                 // enviar para servlet de adm
                 response.sendRedirect("painel/artista");
                 
-            } else if(doador != null) {
+            } else if(doador != null && doador.validarSenha(senha)) {
                 sessao.setAttribute("usuario", doador);
                 response.sendRedirect("painel/doador");
             }

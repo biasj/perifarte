@@ -90,7 +90,7 @@ public class ObraServlet extends HttpServlet {
            try {
                // procura no banco de dados pelo e-mail e senha
              
-                Doador doador = doadorDao.findAccount(email, senha);
+                Doador doador = doadorDao.findAccount(email);
                 
                // confere se é ong, adm, doador, ou artista. 
                
