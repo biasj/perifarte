@@ -37,7 +37,7 @@
                     </div>
                     <div class="d-flex justify-content-between">   
                         <h5>Total doado à obra: </h5>
-                    </div
+                    </div>
                 </div>
             
                 <div class="d-flex justify-content-between adicionar-carrinho">
@@ -52,8 +52,12 @@
                 <p><c:out value="${detalhe.obra.organizacao.descricao}"/></p>
                 
                 
+                <!-- ver se vai funcionar -->
+                <c:if test="${doador != null}">
+                	<a class="btn btn-primary btn-obra" id='btn-adicionar-carrinho' href="${pageContext.request.contextPath}/carrinho">Adicionar ao Carrinho</a>
+                </c:if>
 
-                <a class="btn btn-primary btn-obra" id='btn-adicionar-carrinho' href="${pageContext.request.contextPath}/carrinho">Adicionar ao Carrinho</a>
+                <a class="btn btn-primary btn-obra" id='btn-adicionar-carrinho' href="${pageContext.request.contextPath}/home">Retornar</a>
             </div>
             
         </div>
