@@ -15,7 +15,7 @@
         <title>Perifarte - Carrinho</title>
     </head>
     <body>
-       <c:import url="./../cabecalho.jsp"/> 
+    	<c:import url="./../cabecalho.jsp"/> 
         <div class="container">
             <a class="back-button" href="${pageContext.request.contextPath}/home"><i class="fas fa-chevron-left" ></i> Voltar</a>
             
