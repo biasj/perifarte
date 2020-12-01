@@ -19,6 +19,9 @@ import java.util.List;
  * @author beatrizsato
  */
 public class DoadorDao {
+	
+	boolean checkdoador = false;
+	
     // insere doador no banco de dados
     public void addDoador(Doador doador) throws SQLException {
         String sql = "INSERT INTO doador (doador_nome, doador_email, doador_senha) VALUES (?,?,?)";
@@ -67,7 +70,7 @@ public class DoadorDao {
                     Doador doador = new Doador(nome, email, senha);
                     // atualiza o id que não é inicializado na construção
                     doador.setId(Integer.parseInt(id));
-                    
+                    checkdoador = true;
                     return doador;
                 }
             }
