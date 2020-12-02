@@ -40,7 +40,6 @@
 	            </div>
             
         	</div>
-                        
             <a class="btn btn-primary" href="${pageContext.request.contextPath}/pagamento">Prosseguir com o pagamento</a>
         </div>
     </body>

@@ -61,12 +61,17 @@ public class FormCarrinho extends HttpServlet {
         // pega os valores para saber qual botão foi clicado
         String botaoPagamento = request.getParameter("botaoPagamento");
         
-        DoacoesDao doacaoDao = new DoacoesDao();
-                
-        sessao.setAttribute("obra", obra);
-        sessao.setAttribute("usuario", doador);
-        sessao.setAttribute("valor", valor);
-        sessao.setAttribute("status", "comprado"); //conferir se isto vai funcionar
-        response.sendRedirect("valor");
+        if (botaoPagamento != null) {
+        	
+            DoacoesDao doacaoDao = new DoacoesDao();
+            
+            sessao.setAttribute("obra", obra);
+            sessao.setAttribute("usuario", doador);
+            sessao.setAttribute("valor", valor);
+            sessao.setAttribute("status", "comprado"); //conferir se isto vai funcionar
+            response.sendRedirect("valor");
+        }
+        
+ 
     }
 }
