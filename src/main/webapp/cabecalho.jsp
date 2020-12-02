@@ -9,13 +9,13 @@
             <c:choose>
                 <c:when test="${sessionScope.usuario != null}">
                     <a class="nav-link" href="${pageContext.request.contextPath}/perfil"><i class="far fa-user-circle"></i></a>                        
-                    <a class='nav-link' href='#'><i class="fas fa-shopping-cart"></i></a>
+                    <a class='nav-link' href='${pageContext.request.contextPath}/carrinho'><i class="fas fa-shopping-cart"></i></a>
                     <a class="nav-link" href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt"></i></a>
                     
                 </c:when>
                 <c:otherwise>
-                    <a class='nav-link' href='./login'><i class="far fa-user-circle"></i></a>
-                    <a class='nav-link' href='#'><i class="fas fa-shopping-cart"></i></a>
+                    <a class='nav-link' href='${pageContext.request.contextPath}/login'><i class="far fa-user-circle"></i></a>
+                    <a class='nav-link' href='${pageContext.request.contextPath}/carrinho'><i class="fas fa-shopping-cart"></i></a>
                 </c:otherwise>
             </c:choose>
         </form>

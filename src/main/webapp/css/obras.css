@@ -110,6 +110,11 @@ and open the template in the editor.
     margin-bottom: 30px;
 }
 
+.mini-obra-artista {
+    width: 75px;
+    height: 100px;
+}
+
 @media (min-width: 640px) {
     .home-buttons {
         max-width: 450px;
