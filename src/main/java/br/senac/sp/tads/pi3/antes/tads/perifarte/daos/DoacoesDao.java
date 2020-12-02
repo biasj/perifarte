@@ -178,7 +178,7 @@ public class DoacoesDao {
     
     // procura o valor total doações por Id do Organização	
     public Doacoes findDonationbyOrgId(String id) throws SQLException {
-        String sql = "Select organizacao.organizacao_id, Sum(doacao.doacao_valor) from organizacao WHERE organizacao_id=?";
+        String sql = "Select organizacao.organizacao_id, Sum(doacao_valor) from organizacao WHERE organizacao_id=?";
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, Integer.parseInt(id));

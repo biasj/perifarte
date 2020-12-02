@@ -36,6 +36,7 @@ public class Organizacao extends Usuario {
         contaPayPal = null;
         // já começa como pendente e só depois vai ser aprovado
         status = "pendente";
+        totalRecebido = 0.0;
     }
     
     public Organizacao(String email, String hashSenha) {
@@ -52,7 +53,7 @@ public class Organizacao extends Usuario {
         setJustificativa(justificativa);
         setStatus(status);
     }
-
+    
     @Override
     public int getNumeroConta() {
         return numeroConta;
@@ -88,6 +89,10 @@ public class Organizacao extends Usuario {
     
     public Double getTotalRecebido() {
         return totalRecebido;
+    }
+
+    public void setTotalRecebido(Double totalRecebido) {
+        this.totalRecebido = totalRecebido;
     }
 
     public String getStatus() {

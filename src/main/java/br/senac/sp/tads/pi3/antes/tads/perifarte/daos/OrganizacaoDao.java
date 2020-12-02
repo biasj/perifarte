@@ -161,6 +161,9 @@ public class OrganizacaoDao {
                 org.setDescricao(descricao);
                 org.setJustificativa(justificativa);
                 
+                DoacoesDao doaDao = new DoacoesDao();
+                org.setTotalRecebido(doaDao.findDonationbyOrgId(String.valueOf(id)).getValor());
+                
                 resultados.add(org);
             }
         }

@@ -35,9 +35,8 @@
                 </div>
             </div>
             
-            <div class="justify-content-between row row-cols-2 home-buttons">
-                <a class='btn btn-light col' href="#">Atualização COVID</a>
-                <a class='btn btn-light col' href="#">Relatório de Doações</a>
+            <div class="d-flex justify-content-center home-buttons">
+                <a class='btn btn-light col' href="${pageContext.request.contextPath}/relatorio">Relatório de Doações</a>
             </div>
             
             <div class="row row-cols-2 row-cols-md-3">
