@@ -65,7 +65,7 @@
                                         <p class="mb-1">Status: <c:out value="${org.status}"/></p>
                                         <i class="far fa-edit" style="font-size: 30px;"></i>
                                     </div>
-                                    <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                                        <p class="mb-1">Valor arrecadado: R$ <c:out value="${org.totalRecebido}0" /></p>
                                 </a>
                             </c:if>
                          </c:forEach>

@@ -32,11 +32,15 @@ public class RelatorioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        OrganizacaoDao orgDao = new OrganizacaoDao();     
+        OrganizacaoDao orgDao = new OrganizacaoDao();   
+        DoacoesDao doacoesDao = new DoacoesDao();
+        
         List<Organizacao> organizacoes = null;
         
         try {
             organizacoes = orgDao.findAll();
+            double totalDoado = doacoesDao.totalDonation();
+            request.setAttribute("totalDoado", totalDoado);
             
         } catch (SQLException ex) {
             Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -110,6 +110,10 @@ and open the template in the editor.
     margin-bottom: 30px;
 }
 
+.btn-adicionar-carrinho {
+    margin: 25px;
+}
+
 @media (min-width: 640px) {
     .home-buttons {
         max-width: 450px;

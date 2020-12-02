@@ -20,6 +20,7 @@ public class Obra {
     private BigDecimal preco;
     private InputStream conteudoArquivo;
     private byte[] imageBytes;
+    double totalArrecadado;
     
     private int id;
 
@@ -37,6 +38,14 @@ public class Obra {
         this.preco = pPreco; //começa com o valor zerado.
         this.conteudoArquivo = pconteudoArquivo;
         imageBytes = null;
+    }
+
+    public double getTotalArrecadado() {
+        return totalArrecadado;
+    }
+
+    public void setTotalArrecadado(double totalArrecadado) {
+        this.totalArrecadado = totalArrecadado;
     }
 
     public InputStream getConteudoArquivo() {

@@ -12,11 +12,12 @@ import java.util.List;
 
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doacao;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doador;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Organizacao;
 
 public class DoacoesDao {
 	  // insere dados da doacao no banco de dados
     public void addDoacao(Doacao doacao) throws SQLException {
-        String sql = "INSERT INTO doacao (doacao_data, doacao_valor, doacao_status) VALUES (?,?,?)";
+        String sql = "INSERT INTO doacao (doacao_doador_id, doacao_obra_id, doacao_data, doacao_valor, doacao_status) VALUES (?,?,?,?,?)";
 
         try (Connection conn = Conexao.obterConexao()) {
             // DESLIGAR AUTO-COMMIT -> POSSIBILITAR DESFAZER OPERACOES EM CASOS DE ERROS
@@ -25,10 +26,11 @@ public class DoacoesDao {
             // ADICIONAR O Statement.RETURN_GENERATED_KEYS PARA RECUPERAR O ID GERADO NO BD
             try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 
-            	
-            	stmt.setDate(1, (Date) doacao.getData_compra());
-                stmt.setBigDecimal(2, doacao.getValor());
-                stmt.setString(3, doacao.getStatus(sql));
+            	stmt.setInt(1, doacao.getIdDoador());
+                stmt.setInt(2, doacao.getIdObra());
+            	stmt.setDate(3, Date.valueOf(doacao.getData_compra()));
+                stmt.setBigDecimal(4, doacao.getValor());
+                stmt.setString(5, doacao.getStatus());
 
                 int resultados = stmt.executeUpdate();
                 
@@ -57,14 +59,18 @@ public class DoacoesDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
-                    String doador = rs.getString("doador");
-                	String nome = rs.getString("nome");
-                	String organizacao = rs.getString("organizacao");
-                	Date data = rs.getDate("doacao_data");
+                    int doador = rs.getInt("doacao_doador_id");
+                    int idObra = rs.getInt("doacao_obra_id");
+                    Date data = rs.getDate("doacao_data");
                     BigDecimal valor = rs.getBigDecimal("doacao_valor");
                     String status = rs.getString("doacao_status");
+                    
+                    OrganizacaoDao orgDao = new OrganizacaoDao();
+                    ObraDao obraDao = new ObraDao();
+                    Organizacao org = orgDao.findById(String.valueOf(obraDao.findById(String.valueOf(idObra)).getId()));
                   
-                    Doacao doacao = new Doacao (doador, nome, organizacao, valor);
+                    Doacao doacao = new Doacao (doador, idObra, org.getId(), valor);
+                    doacao.setStatus(status);
                     //devolve o id da compra existente no banco de dados
                     doacao.setIdCompra(Integer.parseInt(id));
                     return doacao;
@@ -76,16 +82,16 @@ public class DoacoesDao {
 
    
     // procura o valor total de todas as doações feitas	
-    public Double totalDonation(String id) throws SQLException {
+    public Double totalDonation() throws SQLException {
         String sql = "SELECT SUM(doacao_valor) FROM doacao";
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, Integer.parseInt(id));
+            
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
                     
-                    Double valor = rs.getDouble("doacao_valor");
+                    Double valor = rs.getDouble("SUM(doacao_valor)");
                    
                     return valor;
                 }
@@ -113,7 +119,7 @@ public class DoacoesDao {
 //                	String organizacao = rs.getString("organizacao");
 //                	Date data = rs.getDate("doacao_data");
 //                    String status = rs.getString("doacao_status");
-                    Double valor = rs.getDouble("doacao_valor");
+                    Double valor = rs.getDouble("total_doado");
 
 //                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
 //                    //devolve o id da compra existente no banco de dados
@@ -139,17 +145,9 @@ public class DoacoesDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
-//                    String doador = rs.getString("doador");
-//                	String nome = rs.getString("nome");
-//                	String organizacao = rs.getString("organizacao");
-//                	Date data = rs.getDate("doacao_data");
-//                    String status = rs.getString("doacao_status");
-                    Double valor = rs.getDouble("doacao_valor");
 
-//                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
-//                    //devolve o id da compra existente no banco de dados
-//                    doacao.setIdCompra(Integer.parseInt(id));
-//                    return doacao;
+                    Double valor = rs.getDouble("total_obtido_obra");
+
                     return valor;
                 }
             }
@@ -176,7 +174,7 @@ public class DoacoesDao {
 //                	String organizacao = rs.getString("organizacao");
 //                	Date data = rs.getDate("doacao_data");
 //                    String status = rs.getString("doacao_status");
-                    Double valor = rs.getDouble("doacao_valor");
+                    Double valor = rs.getDouble("total_obtido");
 
 //                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
 //                    //devolve o id da compra existente no banco de dados
@@ -202,13 +200,7 @@ public class DoacoesDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
-//                    String doador = rs.getString("doador");
-//                	String nome = rs.getString("nome");
-//                	String organizacao = rs.getString("organizacao");
-//                	Date data = rs.getDate("doacao_data");
                     Double valor = rs.getDouble("total_recebido");
-//                    String status = rs.getString("doacao_status");
-                  
                     
                     return valor;
                 }

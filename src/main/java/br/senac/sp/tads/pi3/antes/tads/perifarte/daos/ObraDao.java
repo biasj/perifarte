@@ -84,6 +84,10 @@ public class ObraDao {
                     obra.setId(id);
                     obra.setImageBytes(imagemByte);
                     
+                    // pega valor arrecadado
+                    double totalDoado = this.getValorArrecadado(String.valueOf(id));
+                    obra.setTotalArrecadado(totalDoado);
+                    
                     obra.setOrganizacao(orgDao.findById(String.valueOf(idOrganizacao)));
 
                     resultados.add(obra);
@@ -117,6 +121,10 @@ public class ObraDao {
                     OrganizacaoDao orgDao = new OrganizacaoDao();
                     obra.setImageBytes(imagemByte);
                     obra.setOrganizacao(orgDao.findById(String.valueOf(idOrganizacao)));
+                    
+                    // pega valor arrecadado
+                    double totalDoado = this.getValorArrecadado(id);
+                    obra.setTotalArrecadado(totalDoado);
                     
                     return obra;
                 }
@@ -152,6 +160,10 @@ public class ObraDao {
                     obra.setId(id);
                     obra.setImageBytes(imagemByte);
                     
+                    // pega valor arrecadado
+                    double totalDoado = this.getValorArrecadado(String.valueOf(id));
+                    obra.setTotalArrecadado(totalDoado);
+                    
                     obra.setOrganizacao(orgDao.findById(String.valueOf(idOrganizacao)));
 
                     resultados.add(obra);
@@ -186,6 +198,10 @@ public class ObraDao {
                 Obra obra = new Obra(titulo, descricao, preco, imagem.getBinaryStream());
                 obra.setImageBytes(imagemByte);
                 obra.setId(id);
+                
+                // pega valor arrecadado
+                double totalDoado = this.getValorArrecadado(String.valueOf(id));
+                obra.setTotalArrecadado(totalDoado);
                 
                 resultados.add(obra);
             }
@@ -280,5 +296,10 @@ public class ObraDao {
                 throw e;
             }
         }
+    }
+    
+    public double getValorArrecadado(String id) throws SQLException {
+        DoacoesDao doa = new DoacoesDao();
+        return doa.findDonationbyArtId(id);
     }
 }
