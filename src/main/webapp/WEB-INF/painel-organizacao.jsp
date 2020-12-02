@@ -16,6 +16,7 @@
         
         <!--css-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/painel.css">
         
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
@@ -50,9 +51,13 @@
                                 <c:when test="${obrasDoadas != null}">
                                     <c:forEach var="obra" items="${obrasDoadas}">
                                             <a class="list-group-item list-group-item-action" href="#">
-                                                <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
-                                                <p class="mb-1"><c:out value="${obra.descricao}"/></p>
-                                                <p class="mb-1"><c:out value="${obra.preco}"/></p>
+                                                <div class="media">
+                                                    <img class="mr-3 mini-obra-artista" src="${pageContext.request.contextPath}/imagem-obra?id=${obra.id}" >
+                                                    <div class="media-body">
+                                                        <h5 class="mb-1"><c:out value="${obra.titulo}"/></h5>
+                                                        <p class="mb-1">Valor arrecadado: R$ <c:out value="${obra.totalArrecadado}0"/></p>
+                                                    </div>
+                                                </div>
                                             </a>
                                     </c:forEach>
                                 </c:when>

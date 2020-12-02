@@ -82,16 +82,16 @@ public class DoacoesDao {
 
    
     // procura o valor total de todas as doações feitas	
-    public Double totalDonation(String id) throws SQLException {
+    public Double totalDonation() throws SQLException {
         String sql = "SELECT SUM(doacao_valor) FROM doacao";
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, Integer.parseInt(id));
+            
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
                     
-                    Double valor = rs.getDouble("doacao_valor");
+                    Double valor = rs.getDouble("SUM(doacao_valor)");
                    
                     return valor;
                 }
@@ -119,7 +119,7 @@ public class DoacoesDao {
 //                	String organizacao = rs.getString("organizacao");
 //                	Date data = rs.getDate("doacao_data");
 //                    String status = rs.getString("doacao_status");
-                    Double valor = rs.getDouble("doacao_valor");
+                    Double valor = rs.getDouble("total_doado");
 
 //                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
 //                    //devolve o id da compra existente no banco de dados
@@ -145,17 +145,9 @@ public class DoacoesDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
-//                    String doador = rs.getString("doador");
-//                	String nome = rs.getString("nome");
-//                	String organizacao = rs.getString("organizacao");
-//                	Date data = rs.getDate("doacao_data");
-//                    String status = rs.getString("doacao_status");
-                    Double valor = rs.getDouble("doacao_valor");
 
-//                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
-//                    //devolve o id da compra existente no banco de dados
-//                    doacao.setIdCompra(Integer.parseInt(id));
-//                    return doacao;
+                    Double valor = rs.getDouble("total_obtido_obra");
+
                     return valor;
                 }
             }
@@ -182,7 +174,7 @@ public class DoacoesDao {
 //                	String organizacao = rs.getString("organizacao");
 //                	Date data = rs.getDate("doacao_data");
 //                    String status = rs.getString("doacao_status");
-                    Double valor = rs.getDouble("doacao_valor");
+                    Double valor = rs.getDouble("total_obtido");
 
 //                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
 //                    //devolve o id da compra existente no banco de dados
@@ -208,13 +200,7 @@ public class DoacoesDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
-//                    String doador = rs.getString("doador");
-//                	String nome = rs.getString("nome");
-//                	String organizacao = rs.getString("organizacao");
-//                	Date data = rs.getDate("doacao_data");
                     Double valor = rs.getDouble("total_recebido");
-//                    String status = rs.getString("doacao_status");
-                  
                     
                     return valor;
                 }

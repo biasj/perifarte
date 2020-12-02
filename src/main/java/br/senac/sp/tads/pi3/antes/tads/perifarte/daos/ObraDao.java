@@ -152,6 +152,10 @@ public class ObraDao {
                     obra.setId(id);
                     obra.setImageBytes(imagemByte);
                     
+                    DoacoesDao doa = new DoacoesDao();
+                    double totalDoado = doa.findDonationbyArtId(String.valueOf(id));
+                    obra.setTotalArrecadado(totalDoado);
+                    
                     obra.setOrganizacao(orgDao.findById(String.valueOf(idOrganizacao)));
 
                     resultados.add(obra);

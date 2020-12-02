@@ -55,7 +55,6 @@ public class FormCarrinho extends HttpServlet {
         DoacoesDao doacaoDao = new DoacoesDao();
         
         // pega os valores para saber qual botão foi clicado
-//        String botaoPagamento = request.getParameter("ProsseguirComPagamento");
         if (doador != null) {
             for (DetalheObra detalhe: obras) {
                     Doacao doacao = new Doacao(doador.getId(), detalhe.getObra().getId(), detalhe.getObra().getOrganizacao().getId(), detalhe.getObra().getPreco());

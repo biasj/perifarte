@@ -29,7 +29,7 @@
             
             <h5 id="total-arrecadado-h5">Total arrecadado:</h5>
             <div class="d-flex justify-content-center total-arrecadado">
-                <h2>R$ 10,00</h2>
+                <h2>R$ <c:out value="${totalDoado}0"/></h2>
             </div>
             
             <div class="lista-arrecadado">
