@@ -38,14 +38,15 @@
                         </div>
                         <div class="d-flex justify-content-between">   
                             <h5>Total doado à obra: </h5>
+                            <h5>R$ <c:out value="${detalhe.obra.totalArrecadado}0" /></h5> 
                         </div>
                     </div>
 
 
                     <div class="d-flex justify-content-between adicionar-carrinho">
-                        <h4>R$ <c:out value="${detalhe.obra.preco}"/></h4>
+                        <h4>R$ <c:out value="${detalhe.obra.preco}0"/></h4>
                         <button class="btn btn-primary btn-obra" type="submit" name="botaoComprar">Comprar</button>
-                        <!--<a class="btn btn-primary btn-obra" href="${pageContext.request.contextPath}/carrinho">Comprar</a>-->
+     
                     </div>
 
 
@@ -56,13 +57,10 @@
                     <p><c:out value="${detalhe.obra.organizacao.descricao}"/></p>
 
 
-                    <!-- ver se vai funcionar -->
-                    <c:if test="${doador != null}">
-                        <button class="btn btn-primary btn-obra" name="botaoComprar">Comprar</button>
-                        <!--<a class="btn btn-primary btn-obra" id='btn-adicionar-carrinho' href="${pageContext.request.contextPath}/carrinho">Adicionar ao Carrinho</a>-->
-                    </c:if>
 
-                    <a class="btn btn-primary btn-obra" id='btn-adicionar-carrinho' href="${pageContext.request.contextPath}/home">Retornar</a>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary btn-adicionar-carrinho" type="submit" name="botaoComprar">Adicionar ao Carrinho</button>
+                    </div>
                 </div>
             </form>
         </div>
