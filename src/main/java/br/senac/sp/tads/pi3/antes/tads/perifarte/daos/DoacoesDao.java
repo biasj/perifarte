@@ -177,25 +177,27 @@ public class DoacoesDao {
     
     
     // procura o valor total doações por Id do Organização	
-    public Doacoes findDonationbyOrgId(String id) throws SQLException {
-        String sql = "Select organizacao.organizacao_id, Sum(doacao_valor) from organizacao WHERE organizacao_id=?";
+    public Double findDonationbyOrgId(String id) throws SQLException {
+        String sql = "Select Sum(doacao.doacao_valor) as total_recebido\n"
+        		+ "from organizacao\n"
+        		+ "inner join obra on obra.obra_organizacao_id = organizacao.organizacao_id\n"
+        		+ "inner join doacao on obra.obra_id = doacao.doacao_obra_id\n"
+        		+ "where organizacao.organizacao_id = ?";
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, Integer.parseInt(id));
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
-                    String doador = rs.getString("doador");
-                	String nome = rs.getString("nome");
-                	String organizacao = rs.getString("organizacao");
-                	Date data = rs.getDate("doacao_data");
-                    Double valor = rs.getDouble("doacao_valor");
-                    String status = rs.getString("doacao_status");
+//                    String doador = rs.getString("doador");
+//                	String nome = rs.getString("nome");
+//                	String organizacao = rs.getString("organizacao");
+//                	Date data = rs.getDate("doacao_data");
+                    Double valor = rs.getDouble("total_recebido");
+//                    String status = rs.getString("doacao_status");
                   
-                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
-                    //devolve o id da compra existente no banco de dados
-                    doacao.setIdCompra(Integer.parseInt(id));
-                    return doacao;
+                    
+                    return valor;
                 }
             }
         }
