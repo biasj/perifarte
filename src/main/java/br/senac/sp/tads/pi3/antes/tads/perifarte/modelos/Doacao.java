@@ -12,26 +12,23 @@ import java.util.Date;
  *
  * @author marce_000
  */
-public class Doacoes {
-    private static int numeroDoacao = 1000;
+public class Doacao {
     private int idCompra;
   //  private double totalDoado; //este valor é para o total doado
-    private BigDecimal totalDoado; //este valor é para o total doado
     private String doador; // somente números 27326531000125 para poder verificar
-    private String nome;
+    private String nomeObra;
     private String organizacao;
     private Date data_compra;
     private String status;
-    private double valor; // este valor é para o quanto será doado em cada compra individual feita
+    private BigDecimal valor; // este valor é para o quanto será doado em cada compra individual feita
 
  
 
-    public Doacoes(String doador, String nome, String organizacao, double valor) {
+    public Doacao(String doador, String nomeObra, String organizacao, BigDecimal valor) {
     	this.doador = doador;
-    	this.nome = nome;
+    	this.nomeObra = nomeObra;
     	this.organizacao = organizacao;
     	this.valor = valor;
-    	this.totalDoado = new BigDecimal(0);
     }
     
     
@@ -60,12 +57,12 @@ public class Doacoes {
         this.doador = doador;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeObra() {
+        return nomeObra;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeObra(String nomeObra) {
+        this.nomeObra = nomeObra;
     }
 
     public String getOrganizacao() {
@@ -83,14 +80,6 @@ public class Doacoes {
     public void setData_compra(Date data_compra) {
         this.data_compra = data_compra;
     }
-
-    public BigDecimal getTotalDoado() {
-        return totalDoado;
-    }
-
-    public void setTotalDoado(BigDecimal totalDoado) {
-        this.totalDoado = totalDoado;
-    }
  
     public String setStatus (String status) {
     	return status;
@@ -100,11 +89,11 @@ public class Doacoes {
     	return status;
     }
     
-    public double getValor() {
+    public BigDecimal getValor() {
  		return valor;
  	}
 
- 	public void setValor(double valor) {
+ 	public void setValor(BigDecimal valor) {
  		this.valor = valor;
  	}
  	

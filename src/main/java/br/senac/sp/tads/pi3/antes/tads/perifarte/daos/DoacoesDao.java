@@ -1,5 +1,6 @@
 package br.senac.sp.tads.pi3.antes.tads.perifarte.daos;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,12 +10,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doacoes;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doacao;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doador;
 
 public class DoacoesDao {
 	  // insere dados da doacao no banco de dados
-    public void addDoacao(Doacoes doacao) throws SQLException {
+    public void addDoacao(Doacao doacao) throws SQLException {
         String sql = "INSERT INTO doacao (doacao_data, doacao_valor, doacao_status) VALUES (?,?,?)";
 
         try (Connection conn = Conexao.obterConexao()) {
@@ -26,7 +27,7 @@ public class DoacoesDao {
                 
             	
             	stmt.setDate(1, (Date) doacao.getData_compra());
-                stmt.setDouble(2, doacao.getValor());
+                stmt.setBigDecimal(2, doacao.getValor());
                 stmt.setString(3, doacao.getStatus(sql));
 
                 int resultados = stmt.executeUpdate();
@@ -48,7 +49,7 @@ public class DoacoesDao {
     }
     
     // procura a doacao a partir do ID do Doador	
-    public Doacoes findByDonatorId(String id) throws SQLException {
+    public Doacao findByDonatorId(String id) throws SQLException {
         String sql = "SELECT * FROM doacao WHERE doacao_doador_id=?";
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -60,10 +61,10 @@ public class DoacoesDao {
                 	String nome = rs.getString("nome");
                 	String organizacao = rs.getString("organizacao");
                 	Date data = rs.getDate("doacao_data");
-                    Double valor = rs.getDouble("doacao_valor");
+                    BigDecimal valor = rs.getBigDecimal("doacao_valor");
                     String status = rs.getString("doacao_status");
                   
-                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
+                    Doacao doacao = new Doacao (doador, nome, organizacao, valor);
                     //devolve o id da compra existente no banco de dados
                     doacao.setIdCompra(Integer.parseInt(id));
                     return doacao;
