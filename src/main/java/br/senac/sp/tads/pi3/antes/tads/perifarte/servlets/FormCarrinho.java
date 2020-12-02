@@ -19,10 +19,8 @@ import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.DoacoesDao;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ObraDao;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.OrganizacaoDao;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doacoes;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doador;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Organizacao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
+import java.util.ArrayList;
 
 @WebServlet(name = "FormCarrinho", urlPatterns = {"/carrinho"})
 public class FormCarrinho extends HttpServlet {
@@ -31,12 +29,11 @@ public class FormCarrinho extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        Doador doador = (Doador) sessao.getAttribute("usuario");
-
-        String id = request.getParameter("id");
         
-        DoacoesDao doacaoDao = new DoacoesDao();
-        Doacoes doacao = null;
+        // PEGA INFO DA OBRA ESCOLHIDA
+        List<DetalheObra> obras = (List<DetalheObra>) sessao.getAttribute("obrasCarrinho");
+                
+        request.setAttribute("obras", obras);
         
         // envia para a tela de ficha de específica de carrinho
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/carrinho.jsp");
