@@ -69,45 +69,58 @@ public class ObraServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-     
-    	   request.setCharacterEncoding("UTF-8");
-           
-           // pega os dados do formulario de login
-           String email = request.getParameter("email");
-           String senha = request.getParameter("senha");
-           
-           // LOGIN 
-           // busca o e-mail na lista de usuários/bd
-//           OrganizacaoDao orgDao = new OrganizacaoDao();
-//           AdministradorDao admDao = new AdministradorDao();
-//           ArtistaDao artDao = new ArtistaDao();
-           DoadorDao doadorDao = new DoadorDao();
-//           ObraDao obraDao = new ObraDao();
-           
-           HttpSession sessao = request.getSession();
-           
-           try {
-               // procura no banco de dados pelo e-mail e senha
-             
-                Doador doador = doadorDao.findAccount(email);
-                
-               // confere se é ong, adm, doador, ou artista. 
-               
-               // se for doador
-               if(doador != null) {
-            	   
-            	   //redireciona para o painel de carrinho
-                   sessao.setAttribute("usuario", doador);
-                   response.sendRedirect("painel/carrinho");
-               } else { 
-            	   //se não for doador, é redirecionado para a mesma página
-            	   response.sendRedirect("painel/obra");
-               }
-           } catch (SQLException ex) {
-               Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           
+    		throws ServletException, IOException {
+
+    	request.setCharacterEncoding("UTF-8");
+
+    	AdministradorDao admDao = new AdministradorDao();
+    	ArtistaDao artDao = new ArtistaDao();
+    	DoadorDao doadorDao = new DoadorDao();
+    	ObraDao obraDao = new ObraDao();
+
+    	HttpSession sessao = request.getSession();
+    	Doador doador = (Doador) sessao.getAttribute("usuario");
+    	Obra obra = (Obra) sessao.getAttribute("obra_id");
+    	
+    	// pega os dados de Id da obra e Id de quem está logado
+    	String id = request.getParameter("obra_id");
+    	String email = request.getParameter("email");
+    	String senha = request.getParameter("senha");
+
+    	// pega os valores para saber qual botão foi clicado
+    	String botaoComprar = request.getParameter("botaoComprar");
+    	String botaoRetornar = request.getParameter("botaoRetornar");
+
+    	try {
+    		// verifica qual dos botões foram clicados
+    		if(botaoComprar != null) {
+    			//verificar se quem está logado é doador e remete para lista de compras
+    			if(doador != null) {
+
+    				obraDao.findById(id);
+    				// atualiza a obra a partir do banco de dados
+    				obra = obraDao.findById(String.valueOf(obra.getId()));
+    				//redireciona para o painel de carrinho
+    				sessao.setAttribute("usuario", doador);
+    				response.sendRedirect("painel/carrinho");
+    				
+    			//se não for doador, é remetido para a tela inicial
+    			} else {
+    				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/home.jsp");
+    				dispatcher.forward(request, response);
+    			}    
+
+    		//se selecionar o botão retornar, é devolvido à tela inicial
+    		} else if(botaoRetornar != null) {
+    			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/home.jsp");
+    			dispatcher.forward(request, response);
+    		}
+
+    	} catch (SQLException ex) {
+
+    		Logger.getLogger(FichaOrg.class.getName()).log(Level.SEVERE, null, ex);
+    	}
+
     }
 
 }
