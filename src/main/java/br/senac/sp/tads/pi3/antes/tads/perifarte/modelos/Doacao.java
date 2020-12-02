@@ -6,7 +6,8 @@
 package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDate;
 
 /**
  *
@@ -15,32 +16,24 @@ import java.util.Date;
 public class Doacao {
     private int idCompra;
   //  private double totalDoado; //este valor é para o total doado
-    private String doador; // somente números 27326531000125 para poder verificar
-    private String nomeObra;
-    private String organizacao;
-    private Date data_compra;
+    private int idDoador; // somente números 27326531000125 para poder verificar
+    private int idObra;
+    private int idOrganizacao;
+    private LocalDate data_compra;
     private String status;
     private BigDecimal valor; // este valor é para o quanto será doado em cada compra individual feita
 
  
 
-    public Doacao(String doador, String nomeObra, String organizacao, BigDecimal valor) {
-    	this.doador = doador;
-    	this.nomeObra = nomeObra;
-    	this.organizacao = organizacao;
+    public Doacao(int idDoador, int idObra, int organizacao, BigDecimal valor) {
+    	this.idDoador = idDoador;
+    	this.idObra = idObra;
+    	this.idOrganizacao = organizacao;
     	this.valor = valor;
+        data_compra = LocalDate.now();
+        status = "pendente";
     }
     
-    
-/**	public Doacoes(int idCompra, double total_doado, String doador, String nome, String organizacao, Double valor) {
-        this.doador = doador;
-        this.nome = nome;
-        this.organizacao = organizacao;
-        totalDoado = 0;
-        idCompra = numeroDoacao++;
-        this.valor = valor;
-    }
- */   
     public int getIdCompra() {
         return idCompra;
     }
@@ -48,44 +41,44 @@ public class Doacao {
     public void setIdCompra(int id) {
         this.idCompra = id;
     }
-	
-    public String getDoador() {
-        return doador;
+
+    public int getIdDoador() {
+        return idDoador;
     }
 
-    public void setDoador(String doador) {
-        this.doador = doador;
+    public void setIdDoador(int idDoador) {
+        this.idDoador = idDoador;
     }
 
-    public String getNomeObra() {
-        return nomeObra;
+    public int getIdObra() {
+        return idObra;
     }
 
-    public void setNomeObra(String nomeObra) {
-        this.nomeObra = nomeObra;
+    public void setIdObra(int idObra) {
+        this.idObra = idObra;
     }
 
-    public String getOrganizacao() {
-        return organizacao;
+    public int getIdOrganizacao() {
+        return idOrganizacao;
     }
 
-    public void setOrganizacao(String organizacao) {
-        this.organizacao = organizacao;
+    public void setIdOrganizacao(int idOrganizacao) {
+        this.idOrganizacao = idOrganizacao;
     }
 
-    public Date getData_compra() {
+    public LocalDate getData_compra() {
         return data_compra;
     }
 
-    public void setData_compra(Date data_compra) {
+    public void setData_compra(LocalDate data_compra) {
         this.data_compra = data_compra;
     }
- 
-    public String setStatus (String status) {
-    	return status;
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
-    public String getStatus (String status) {
+    public String getStatus() {
     	return status;
     }
     

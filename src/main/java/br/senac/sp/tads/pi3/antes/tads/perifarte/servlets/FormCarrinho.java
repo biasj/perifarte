@@ -48,34 +48,25 @@ public class FormCarrinho extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         HttpSession sessao = request.getSession();
-        
-        
+
+        // recupera dados enviados no form
+        List<DetalheObra> obras = (List<DetalheObra>) sessao.getAttribute("obrasCarrinho");
+        Doador doador = (Doador) sessao.getAttribute("usuario");
         DoacoesDao doacaoDao = new DoacoesDao();
         
-        // PEGA INFO DA OBRA ESCOLHIDA
-        List<DetalheObra> obras = (List<DetalheObra>) sessao.getAttribute("obrasCarrinho");
-        
-        // recupera dados enviados no form
-//        Obra obra = (Obra) sessao.getAttribute("obra");
-   //     Artista artista = (Artista) sessao.getAttribute("usuario");
-        Doador doador = (Doador) sessao.getAttribute("usuario");
-        
-//        Doacoes valor = (Doacoes) sessao.getAttribute("valor");
-   //     Double valor = new Double(valor);
-        
         // pega os valores para saber qual botão foi clicado
-        String botaoPagamento = request.getParameter("ProsseguirComPagamento");
+//        String botaoPagamento = request.getParameter("ProsseguirComPagamento");
         if (doador != null) {
-        	for (DetalheObra detalhe: obras) {
-        		Doacao doacao = new Doacao(doador.getNome(), detalhe.getObra().getTitulo(), detalhe.getObra().getOrganizacao().getNome(), detalhe.getObra().getPreco());
-        		try {
-        			doacaoDao.addDoacao(doacao);
-        		} catch (SQLException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-        	}
-        	response.sendRedirect("painel/doador");
+            for (DetalheObra detalhe: obras) {
+                    Doacao doacao = new Doacao(doador.getId(), detalhe.getObra().getId(), detalhe.getObra().getOrganizacao().getId(), detalhe.getObra().getPreco());
+                    try {
+                        doacaoDao.addDoacao(doacao);
+                    } catch (SQLException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                    }
+            }
+            response.sendRedirect("painel/doador");
         }
         else {
         	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-login.jsp");
