@@ -16,6 +16,7 @@
         
         <!--css-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/relatorio.css">
         
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>
@@ -26,25 +27,26 @@
         <div class="container content-container">
             <a class="back-button sublinhado" href="${pageContext.request.contextPath}/home"><i class="fas fa-arrow-left" ></i>  Voltar</a>
             
-            <h5>Total arrecadado</h5>
+            <h5 id="total-arrecadado-h5">Total arrecadado:</h5>
             <div class="d-flex justify-content-center total-arrecadado">
                 <h2>R$ 10,00</h2>
             </div>
             
-            <ul class="list-group list-group-flush">
-                <h5>Arrecadado por organização</h5>
-                <c:forEach var="org" items="${organizacoes}">
-                    <li class="list-group-item">
-                        <div class="d-flex justify-content-between">
-                            <h4><c:out value="${org.nome}" /></h4>
-                            <div>
-                                <p>Total arrecadado</p>
-                                <p>R$ <c:out value="${org.totalRecebido}" /></p>
+            <div class="lista-arrecadado">
+                <ul class="list-group list-group-flush">
+                    <h5 class="titulo-lista">Arrecadado por organização:</h5>
+                    <c:forEach var="org" items="${organizacoes}">
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="titulo-org"><c:out value="${org.nome}" /></h4>
+                                <div>
+                                    <p>Total arrecadado: <br>R$ <c:out value="${org.totalRecebido}" /></p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
         </div>
     </body>
 </html>

@@ -1,0 +1,46 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02/12/2020, 17:50:03
+    Author     : beatrizsato
+*/
+
+#total-arrecadado-h5 {
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.total-arrecadado {
+    padding: 20px;
+    max-width: 350px;
+    /*centraliza*/
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    float: none;
+    
+    background-color: #fffafa;
+    
+    /*borda*/
+    border-color: #430704;
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 1px;
+}
+
+.lista-arrecadado {
+    margin: 20px;
+}
+
+
+.titulo-lista {
+    padding-bottom: 15px;
+}
+
+.titulo-org {
+    margin-top: 10px;
+}
