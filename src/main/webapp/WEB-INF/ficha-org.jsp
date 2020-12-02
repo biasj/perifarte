@@ -45,7 +45,7 @@
                     <div class="form-group w-75 p3 mx-auto">
                         <h3 class="mb-1"><c:out value="${org.nome}"/></h3>
                         <p class="mb-1">Status: <c:out value="${org.status}"/></p>
-                        <p class="mb-1">Valor arrecadado: R$ 1000</p>
+                        <p class="mb-1">Valor arrecadado: R$ <c:out value="${org.totalRecebido}0" /></p>
                     </div>
 
                     <div class="form-group w-75 p3 mx-auto">
