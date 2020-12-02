@@ -10,7 +10,7 @@
         
         <!--css-->
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/obras.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/carrinho.css">
         
         <!--font awesome -> icons-->
         <script src="https://kit.fontawesome.com/4b644107cc.js" crossorigin="anonymous"></script>          
@@ -40,7 +40,12 @@
                                         <p>Artista: <c:out value="${detalhe.artista.nome}"/></p>
                                     </div>
                                 </div>
-
+                                    
+                                <hr>
+                                <div class="d-flex justify-content-between" >
+                                    <p>Valor a ser doado</p>
+                                    <div><button>-</button><label><c:out value="${detalhe.obra.preco}"/></label><button>+</button></div>
+                                </div>
                             </div>
                         </div>
                     </c:forEach>

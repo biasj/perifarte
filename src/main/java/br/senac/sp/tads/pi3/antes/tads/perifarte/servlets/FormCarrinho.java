@@ -35,6 +35,7 @@ public class FormCarrinho extends HttpServlet {
                 
         request.setAttribute("obras", obras);
         
+        
         // envia para a tela de ficha de específica de carrinho
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/carrinho.jsp");
         dispatcher.forward(request, response);
