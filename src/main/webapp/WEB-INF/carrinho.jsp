@@ -19,10 +19,11 @@
     <body>
     	<c:import url="./../cabecalho.jsp"/> 
         <div class="container">
-            <!--<a class="back-button" href="${pageContext.request.contextPath}/obra?id=${detalhe.obra.id}"><i class="fas fa-chevron-left" ></i> Voltar</a>-->
+            <a class="back-button" href="${pageContext.request.contextPath}/obra?id=${detalhe.obra.id}"><i class="fas fa-chevron-left" ></i> Voltar</a>
             
             <h2>Minha Cesta de Compras</h2>
             
+            <form method="post" action="carrinho">
             
             <div class="container content-container">
                 <div class="row row-cols-1 row-cols-md-3">
@@ -42,10 +43,11 @@
                                 </div>
                                     
                                 <hr>
-                                <div class="d-flex justify-content-between" >
+                                <!--  <div class="d-flex justify-content-between" >
                                     <p>Valor a ser doado</p>
                                     <div><button>-</button><label><c:out value="${detalhe.obra.preco}"/></label><button>+</button></div>
-                                </div>
+                                </div> -->
+                                
                             </div>
                         </div>
                     </c:forEach>
@@ -53,8 +55,11 @@
                 </div>
 
             </div>
-                        
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}/pagamento">Prosseguir com o pagamento</a>
+                  
+            <button class="btn btn-primary" name="ProsseguirComPagamento">Prosseguir com o pagamento</button>
+        
+            </form>
+        
         </div>
     </body>
 </html>
