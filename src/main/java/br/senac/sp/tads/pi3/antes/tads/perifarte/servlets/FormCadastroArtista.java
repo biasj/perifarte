@@ -89,7 +89,7 @@ public class FormCadastroArtista extends HttpServlet {
             request.setAttribute("portfolio", portifolio);
             
             
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/form-cadastro-artista.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-cadastro-artista.jsp");
             dispatcher.forward(request, response);
             return;
         }
