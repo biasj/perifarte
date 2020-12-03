@@ -10,9 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doacao;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doador;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Organizacao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
+
 
 public class DoacoesDao {
 	  // insere dados da doacao no banco de dados
@@ -209,7 +208,32 @@ public class DoacoesDao {
         return null;
     }
  
+    public List<Doacao> findAllDonationsByDonor(int id) throws SQLException {
+        String sql = "select * from doacao where doacao_doador_id = ?";
+        List<Doacao> resultados = new ArrayList<>();
 
+        // try-with-resources (após Java 7 ou superior)
+        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
+        try (Connection conn = Conexao.obterConexao();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try(ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    // pega os dados das colunas da tabela do bd
+                    String idObra = rs.getString("doacao_obra_id");
+                    String status = rs.getString("doacao_status");
+                    Date data = rs.getDate("doacao_data");
+                    
+                    Doacao doacao = new Doacao(Integer.parseInt(idObra), status, data.toLocalDate());
+                    
+                    resultados.add(doacao);
+                }
+        }
+                
+        }
+        
+        return resultados;
+    }
 }
 
 

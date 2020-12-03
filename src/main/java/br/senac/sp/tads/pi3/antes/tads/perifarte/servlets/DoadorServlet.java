@@ -5,9 +5,15 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doador;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +33,30 @@ public class DoadorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        Doador doador = (Doador) sessao.getAttribute("usuario");
         
+        Doador doador = (Doador) sessao.getAttribute("usuario");
+        // para não adicionar obras duplicadas toda vez
+        doador.getObras().clear();
+        
+        DoacoesDao doacaoDao = new DoacoesDao();
+        ObraDao obraDao = new ObraDao();
+        
+        try {
+            List<Doacao> obrasCompradas = doacaoDao.findAllDonationsByDonor(doador.getId());
+           
+            for(Doacao doacao : obrasCompradas) {
+                Obra obra = obraDao.findById(String.valueOf(doacao.getIdObra()));
+                doador.comprarObra(obra);
+            }
+            
+            Collections.reverse(doador.getObras());
+            request.setAttribute("doacoes", obrasCompradas);
+
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DoadorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
         request.setAttribute("doador", doador);
         
         // envia para a tela de continuação de solicitação de cadastro 
