@@ -19,13 +19,19 @@
     <body>
     	<c:import url="./../cabecalho.jsp"/> 
         <div class="container">
+            <c:if test="${erro != null}">
+                <div class="alert alert-danger" role="alert">
+                    <span><c:out value="${erro}" /></span>
+                </div>  
+            </c:if>
+            
             
             <h2 class="text-center">Meu carrinho</h2>
 
             <div class="container content-container">
                 <div class="row row-cols-1 row-cols-md-3">
                     <form method="post" action="carrinho">
-                        
+                        <!--para cada obra no carrinho mostra as informacoes-->
                         <c:forEach var="detalhe" items="${obras}">
                             <div class="col mb-4">
                                 <div class="card h-100">
@@ -52,6 +58,7 @@
                             </div>
                         </c:forEach>
                         
+                        <!--confere se está existem obras no carrinho para mostrar o resumo ou a mensagem-->
                         <c:choose>
                             <c:when test="${obras != null}">
                                 <div class="resumo">
@@ -73,24 +80,17 @@
                                     <button class="btn btn-primary" name="ProsseguirComPagamento">Prosseguir com o pagamento</button>
                                 </div>
                             </c:when>
-                                <c:otherwise>
-                                    
-                                    <p>Infelizmente ainda não há obras no carrinho</p>
-                                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/home">Comprar obras</a>
-                                    
-                                </c:otherwise>
+                            
+                            <c:otherwise>
+                                <p>Infelizmente ainda não há obras no carrinho</p>
+                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/home">Comprar obras</a>
+                            </c:otherwise>
                         </c:choose>
-                       
-                        
-                        
+
                     </form>
                 </div>
 
             </div>
-                  
-        
-            
-        
         </div>
     </body>
 </html>

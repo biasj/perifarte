@@ -8,8 +8,6 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,20 +32,16 @@ public class ObraServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        
-        String userid = request.getParameter("id"); //ver se vai funcionar
         HttpSession sessao = request.getSession();
+        
+        String id = request.getParameter("id");
         
         ObraDao obraDao = new ObraDao();
         ArtistaDao artistaDao = new ArtistaDao();
         
-        DoadorDao doadorDao = new DoadorDao(); //ver se vai funcionar
-        
         try {
+            // pega informações sobre determinado artista e sua obra
             MiniaturaObra mini = obraDao.findMiniaturaByObra(Integer.parseInt(id));
-            
-            Doador doador = doadorDao.findById(userid); //ver se vai funcionar
             
             // carregar informações da obra, artista e ong
             Obra obra = obraDao.findById(id);
@@ -55,11 +49,9 @@ public class ObraServlet extends HttpServlet {
             
             DetalheObra detalheObra = new DetalheObra(obra, artista);
             
-            request.setAttribute("detalhe", detalheObra);
-            // ADICIONEI A SESSAO 
             sessao.setAttribute("detalhe", detalheObra);
-            
-            request.setAttribute("userid", doador);  //ver se vai funcionar
+            request.setAttribute("detalhe", detalheObra);
+           
             
         } catch (SQLException ex) {
             Logger.getLogger(ObraServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,14 +68,12 @@ public class ObraServlet extends HttpServlet {
     	   request.setCharacterEncoding("UTF-8");
            HttpSession sessao = request.getSession();
            
-            // SE O BOTÃO DE COMPRAR FOR APERTADO
-            // PEGA A OBRA DO SERVLET PELA SESSAO
             DetalheObra obra = (DetalheObra) sessao.getAttribute("detalhe");
 
-             // PEGA TODAS AS OBRAS DETALHADAS        
+             // pega todas as obras detalhadas        
             List<DetalheObra> obrasCarrinho = (List<DetalheObra>) sessao.getAttribute("obrasCarrinho");
 
-             // ADICIONA NA LISTA DE OBRAS DO CARRINHO
+             // adiciona na lista de obras do carrinho
              if(obrasCarrinho != null) {
                  obrasCarrinho.add(obra);
              } else {

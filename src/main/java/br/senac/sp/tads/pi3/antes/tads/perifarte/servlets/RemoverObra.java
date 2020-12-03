@@ -32,6 +32,7 @@ public class RemoverObra extends HttpServlet {
         
         String id = request.getParameter("id");
         
+        // verifica em qual posição da lista está a obra cujo id veio do parametro
         int index = this.getIndex(obras, Integer.parseInt(id));
         obras.remove(index);
         
@@ -40,9 +41,9 @@ public class RemoverObra extends HttpServlet {
         // envia para a tela de ficha de específica de carrinho
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/carrinho.jsp");
         dispatcher.forward(request, response);
-        
     }
 
+    // retorna a posição de determinada obra
     public int getIndex(List<DetalheObra> obras, int id) {
         for(int i=0;i<obras.size();i++) {
             if(obras.get(i).getObra().getId() == id)

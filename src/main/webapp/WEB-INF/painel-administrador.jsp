@@ -101,7 +101,7 @@
                                 <div class="d-flex justify-content-between">
                                     <p class="mb-1">E-mail: <c:out value="${doador.email}"/></p>
                                 </div>
-                                <p class="mb-1">Valor doado R$ 1000</p>
+                                <p class="mb-1">Valor doado: R$ <c:out value="${doador.totalDoado}" /></p>
                             </a>
 
                          </c:forEach>

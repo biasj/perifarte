@@ -8,7 +8,6 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.AdministradorDao;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Administrador;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;

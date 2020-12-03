@@ -30,25 +30,24 @@
             <h2 class='text-center'>Como ajudar?</h2>
             <div class="card text-center info-card">
                 <div class="card-body">
-                  <h5 class="card-title">Feito para artista</h5>
-                  <p class="card-text">Para ajudar é simples! Você se cadastra, cadastra sua obra, 
-                      escolhe quem você quer ajudar e pronto!</p>
+                  <h5 class="card-title">Perifarte para artista</h5>
+                  <p class="card-text">Para ajudar é simples! Você se cadastra, cadastra sua obra e pronto!</p>
                   <a href="${pageContext.request.contextPath}/cadastro-artista" class="btn btn-primary">Cadastro de Artista</a>
                 </div>
             </div>
                 
             <div class="card text-center info-card">
                 <div class="card-body">
-                  <h5 class="card-title">Também para pessoas generosas</h5>
-                  <p class="card-text">Alguém tem que comprar as obras dos artistas, não é mesmo?</p>
+                  <h5 class="card-title">Perifarte para pessoas generosas</h5>
+                  <p class="card-text">Ajude 1, 2 ou quantas organizações você quiser! Contribua para o bem de quem faz bem!</p>
                   <a href="${pageContext.request.contextPath}/cadastro" class="btn btn-primary">Cadastro de Doador</a>
                 </div>
             </div>
             
             <div class="card text-center info-card">
                 <div class="card-body">
-                  <h5 class="card-title">Organização</h5>
-                  <p class="card-text">Alguém tem que receber dinheiro</p>
+                  <h5 class="card-title">Perifarte para Organizações</h5>
+                  <p class="card-text">Deseja receber uma ajuda para continuar ajudando as pessoas? Solicite um cadastro!!</p>
                   <a href="${pageContext.request.contextPath}/cadastro-org" class="btn btn-primary">Cadastro de Organização</a>
                 </div>
             </div>

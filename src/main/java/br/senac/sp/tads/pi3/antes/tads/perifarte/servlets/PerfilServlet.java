@@ -33,6 +33,7 @@ public class PerfilServlet extends HttpServlet {
         HttpSession sessao = request.getSession();
         Usuario usuario = (Usuario) sessao.getAttribute("usuario");
         
+        // verifica qual tipo de usuário é para popular jsp com as informações certas
         if(usuario instanceof Artista) {
             request.setAttribute("usuarioArtista", usuario);
         } else if(usuario instanceof Organizacao) {

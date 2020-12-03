@@ -1,12 +1,11 @@
 package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
+
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,13 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.DoacoesDao;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ObraDao;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.OrganizacaoDao;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
-import java.util.ArrayList;
 
 @WebServlet(name = "FormCarrinho", urlPatterns = {"/carrinho"})
 public class FormCarrinho extends HttpServlet {
@@ -63,13 +55,13 @@ public class FormCarrinho extends HttpServlet {
 
         // recupera dados enviados no form
         List<DetalheObra> obras = (List<DetalheObra>) sessao.getAttribute("obrasCarrinho");
-        Doador doador = (Doador) sessao.getAttribute("usuario");
+        Usuario usuario = (Usuario) sessao.getAttribute("usuario");
         DoacoesDao doacaoDao = new DoacoesDao();
         
-        // pega os valores para saber qual botão foi clicado
-        if (doador != null) {
+        // se for um doador
+        if (usuario instanceof Doador) {
             for (DetalheObra detalhe: obras) {
-                    Doacao doacao = new Doacao(doador.getId(), detalhe.getObra().getId(), detalhe.getObra().getOrganizacao().getId(), detalhe.getObra().getPreco());
+                    Doacao doacao = new Doacao(((Doador)usuario).getId(), detalhe.getObra().getId(), detalhe.getObra().getOrganizacao().getId(), detalhe.getObra().getPreco());
                     try {
                         doacaoDao.addDoacao(doacao);
                     } catch (SQLException e) {
@@ -77,14 +69,17 @@ public class FormCarrinho extends HttpServlet {
                             e.printStackTrace();
                     }
             }
+            
+            // retira as obras do carrinho
+            sessao.removeAttribute("obrasCarrinho");
             response.sendRedirect("painel/doador");
-        }
-        else {
-        	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form-login.jsp");
+        } else {
+            // se não estiver logado ou não for um doador
+            request.setAttribute("erro", "Só é possível comprar com perfil de Doador");
+            sessao.removeAttribute("obrasCarrinho");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/carrinho.jsp");
             dispatcher.forward(request, response);
         }
-        
-        
-               
+
     }
 }

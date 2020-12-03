@@ -9,6 +9,8 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.modelos;
  *
  * @author beatrizsato
  */
+
+// junta a obra e o artista em um objeto só
 public class DetalheObra {
     private Obra obra;
     private Artista artista;

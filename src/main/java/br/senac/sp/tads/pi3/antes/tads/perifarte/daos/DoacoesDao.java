@@ -112,18 +112,9 @@ public class DoacoesDao {
             stmt.setInt(1, Integer.parseInt(id));
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    // pega os dados das colunas da tabela do bd
-//                    String doador = rs.getString("doador");
-//                	String nome = rs.getString("nome");
-//                	String organizacao = rs.getString("organizacao");
-//                	Date data = rs.getDate("doacao_data");
-//                    String status = rs.getString("doacao_status");
+
                     Double valor = rs.getDouble("total_doado");
 
-//                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
-//                    //devolve o id da compra existente no banco de dados
-//                    doacao.setIdCompra(Integer.parseInt(id));
-//                    return doacao;
                     return valor;
                 }
             }
@@ -168,16 +159,8 @@ public class DoacoesDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     // pega os dados das colunas da tabela do bd
-//                    String doador = rs.getString("doador");
-//                	String nome = rs.getString("nome");
-//                	String organizacao = rs.getString("organizacao");
-//                	Date data = rs.getDate("doacao_data");
-//                    String status = rs.getString("doacao_status");
                     Double valor = rs.getDouble("total_obtido");
 
-//                    Doacoes doacao = new Doacoes (doador, nome, organizacao, valor);
-//                    //devolve o id da compra existente no banco de dados
-//                    doacao.setIdCompra(Integer.parseInt(id));
                     return valor;
                 }
             }
@@ -208,12 +191,11 @@ public class DoacoesDao {
         return null;
     }
  
+    // pega informações apenas de obra e status para serem exibidas na tela de meus pedidos
     public List<Doacao> findAllDonationsByDonor(int id) throws SQLException {
         String sql = "select * from doacao where doacao_doador_id = ?";
         List<Doacao> resultados = new ArrayList<>();
 
-        // try-with-resources (após Java 7 ou superior)
-        // conn/stmt/rs são auto-closeable -> São fechados automaticament ao final do bloco try
         try (Connection conn = Conexao.obterConexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);

@@ -17,6 +17,8 @@ import java.util.logging.Logger;
  *
  * @author beatrizsato
  */
+
+// ALTERAR ESSA CLASSE PARA AJUSTAR A CONEXÃO PARA O BANCO DE DADOS
 public class Conexao {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/perifarte";

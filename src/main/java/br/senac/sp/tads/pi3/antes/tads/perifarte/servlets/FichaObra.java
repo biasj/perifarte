@@ -8,7 +8,6 @@ package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
 import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
@@ -42,8 +41,10 @@ public class FichaObra extends HttpServlet {
         Obra obra = null;
         
         try {
+            // carrega organizações que podem receber dinheiro
             List<Organizacao> orgs = orgDao.findOrganizacoesAprovadas();
             request.setAttribute("organizacoes", orgs);
+            
             // caso esteja acessando pelo painel de administrador
             if(id != null && obra == null) {
                 obra = obraDao.findById(id);
@@ -112,8 +113,7 @@ public class FichaObra extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/painel-artista.jsp");
                 dispatcher.forward(request, response);
             }
-            
-            
+
             artista.setObras(obraDao.findObraByArtista(artista.getId()));
             
         } catch (SQLException ex) {
