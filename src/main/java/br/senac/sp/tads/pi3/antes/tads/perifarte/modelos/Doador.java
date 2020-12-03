@@ -35,7 +35,6 @@ public class Doador extends Usuario{
     
     public void comprarObra(Obra obra){
         this.obras.add(obra);
-        totalDoado = totalDoado.add(obra.getPreco());
     }
 
     public int getId() {

@@ -23,9 +23,7 @@ public class Doacao {
     private String status;
     private BigDecimal valor; // este valor é para o quanto será doado em cada compra individual feita
 
- 
-
-    public Doacao(int idDoador, int idObra, int organizacao, BigDecimal valor) {
+     public Doacao(int idDoador, int idObra, int organizacao, BigDecimal valor) {
     	this.idDoador = idDoador;
     	this.idObra = idObra;
     	this.idOrganizacao = organizacao;
@@ -33,6 +31,13 @@ public class Doacao {
         data_compra = LocalDate.now();
         status = "pendente";
     }
+    
+     public Doacao(int idObra, String status, LocalDate data) {
+         this.data_compra = data;
+         this.idObra = idObra;
+         this.status = status;
+     }
+    
     
     public int getIdCompra() {
         return idCompra;

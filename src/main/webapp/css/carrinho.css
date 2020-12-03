@@ -13,3 +13,31 @@ and open the template in the editor.
     width: 100px;
     height: 133px;
 }
+
+.resumo {
+    padding: 20px;
+    max-width: 420px;
+    /*centraliza*/
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    float: none;
+    
+    background-color: #fffafa;
+    
+        /*borda*/
+    border-color: #430704;
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 1px;
+}
+
+.retira-carrinho {
+    margin-bottom: 20px;
+}
+
+.obra-mini {
+    padding-left: 30px;
+    padding-top: 25px;
+}

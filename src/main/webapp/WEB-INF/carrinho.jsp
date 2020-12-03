@@ -19,46 +19,77 @@
     <body>
     	<c:import url="./../cabecalho.jsp"/> 
         <div class="container">
-            <a class="back-button" href="${pageContext.request.contextPath}/obra?id=${detalhe.obra.id}"><i class="fas fa-chevron-left" ></i> Voltar</a>
             
-            <h2>Minha Cesta de Compras</h2>
-            
-            <form method="post" action="carrinho">
-            
+            <h2 class="text-center">Meu carrinho</h2>
+
             <div class="container content-container">
                 <div class="row row-cols-1 row-cols-md-3">
-
-                    <c:forEach var="detalhe" items="${obras}">
-                        <div class="col mb-4">
-                            <div class="card h-100">
-
-                                <div class="media">
-                                    <img class="mr-3 mini-obra-artista" src="${pageContext.request.contextPath}/imagem-obra?id=${detalhe.obra.id}" >
-
-                                    <div class="media-body">
-                                        <h5 class="mt-0"><c:out value="${detalhe.obra.titulo}"/></h5>
-                                        <p class="mb-1">Organização: <c:out value="${detalhe.obra.organizacao.nome}"/></p>
-                                        <p>Artista: <c:out value="${detalhe.artista.nome}"/></p>
-                                    </div>
-                                </div>
+                    <form method="post" action="carrinho">
+                        
+                        <c:forEach var="detalhe" items="${obras}">
+                            <div class="col mb-4">
+                                <div class="card h-100">
                                     
-                                <hr>
-                                <!--  <div class="d-flex justify-content-between" >
-                                    <p>Valor a ser doado</p>
-                                    <div><button>-</button><label><c:out value="${detalhe.obra.preco}"/></label><button>+</button></div>
-                                </div> -->
-                                
-                            </div>
-                        </div>
-                    </c:forEach>
+                                    <div class="media obra-mini">
+                                        <img class="mr-3 mini-obra-artista" src="${pageContext.request.contextPath}/imagem-obra?id=${detalhe.obra.id}" >
 
+                                        <div class="media-body">
+                                            <h5 class="mt-0"><c:out value="${detalhe.obra.titulo}"/></h5>
+                                            <p class="mb-1">Organização: <c:out value="${detalhe.obra.organizacao.nome}"/></p>
+                                            <p class="mb-1">Artista: <c:out value="${detalhe.artista.nome}"/></p>
+                                            <p class="mb-1">Valor: R$ <c:out value="${detalhe.obra.preco}0"/></p>
+                                        </div>
+                    
+                                    </div>
+                                        
+                                    <hr>
+                                        
+                                    <div class="d-flex justify-content-center">
+                                        <a class="retira-carrinho" href="${pageContext.request.contextPath}/retira-carrinho?id=${detalhe.obra.id}">Retirar da cesta</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </c:forEach>
+                        
+                        <c:choose>
+                            <c:when test="${obras != null}">
+                                <div class="resumo">
+                                    <h5>Resumo do pedido: </h5>
+                                    <div class="d-flex justify-content-between">
+                                        <p><c:out value="${numObra} obra"/><c:if test="${numObra > 1}">s</c:if></p>
+                                        <h6>R$ <c:out value="${total}0"/></h6>
+                                    </div>
+                                    <c:if test="${usuario != null}">
+                                        <div class="d-flex justify-content-between">
+                                            <p>Endereço de e-mail: </p>
+                                            <p><c:out value="${usuario.email}"/></p>
+                                        </div>
+                                        <small>*As obras compradas serão enviadas por e-mail</small>
+                                    </c:if>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-primary" name="ProsseguirComPagamento">Prosseguir com o pagamento</button>
+                                </div>
+                            </c:when>
+                                <c:otherwise>
+                                    
+                                    <p>Infelizmente ainda não há obras no carrinho</p>
+                                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/home">Comprar obras</a>
+                                    
+                                </c:otherwise>
+                        </c:choose>
+                       
+                        
+                        
+                    </form>
                 </div>
 
             </div>
                   
-            <button class="btn btn-primary" name="ProsseguirComPagamento">Prosseguir com o pagamento</button>
         
-            </form>
+            
         
         </div>
     </body>

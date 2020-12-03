@@ -113,7 +113,12 @@ public class LoginServlet extends HttpServlet {
                 
             } else if(doador != null && doador.validarSenha(senha)) {
                 sessao.setAttribute("usuario", doador);
-                response.sendRedirect("painel/doador");
+                List<Obra> obras = (List<Obra>)sessao.getAttribute("obrasCarrinho");
+                if(obras != null) {
+                    response.sendRedirect("carrinho");
+                } else {
+                    response.sendRedirect("painel/doador");
+                }
             }
             
             // se não for nenhum dos 4: email/senha errados
