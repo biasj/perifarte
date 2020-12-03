@@ -35,9 +35,13 @@ public class Conexao {
         
         // 2) Abrir a conexão
         Connection conn = DriverManager.getConnection(
-                URL + "?useUnicode=yes&characterEncoding=UTF-8&useTimezone=true&serverTimezone=UTC",
-                USER, // Usuário de conexão no BD
-                PASS); // Senha
+        		"jdbc:mysql://antestads.mysql.database.azure.com:3306/TesteAzureBD?"
+        				+ "useUnicode=yes&"
+        				+ "characterEncoding=UTF-8&"
+        				+ "useTimezone=true&"
+        				+ "serverTimezone=UTC",
+        				"marcelofrost@antestads",
+        				"Alpha1be"); // Senha
         return conn ;
     }
 }
