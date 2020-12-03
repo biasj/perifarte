@@ -73,12 +73,14 @@ public class FormCarrinho extends HttpServlet {
             // retira as obras do carrinho
             sessao.removeAttribute("obrasCarrinho");
             response.sendRedirect("painel/doador");
-        } else {
+        } else if(usuario != null){
             // se não estiver logado ou não for um doador
             request.setAttribute("erro", "Só é possível comprar com perfil de Doador");
             sessao.removeAttribute("obrasCarrinho");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/carrinho.jsp");
             dispatcher.forward(request, response);
+        } else {
+            response.sendRedirect("login");
         }
 
     }

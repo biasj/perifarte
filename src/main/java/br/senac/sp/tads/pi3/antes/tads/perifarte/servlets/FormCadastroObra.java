@@ -5,10 +5,8 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Obra;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.ObraDao;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.OrganizacaoDao;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.daos.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -49,7 +47,7 @@ public class FormCadastroObra extends HttpServlet {
         
         // mostra todos as obras daquele artista
         ObraDao obraDao = new ObraDao();
-        Artista artista = (Artista) sessao.getAttribute("artista");
+        Artista artista = (Artista) sessao.getAttribute("usuario");
         try {
             List<Obra> obras = obraDao.findObraByArtista(artista.getId());
             artista.setObras(obras);
@@ -131,7 +129,7 @@ public class FormCadastroObra extends HttpServlet {
         }
         
         HttpSession sessao = request.getSession();
-        Artista art = (Artista) sessao.getAttribute("artista");
+        Artista art = (Artista) sessao.getAttribute("usuario");
         
         Obra obra = new Obra(titulo, descricao, preco, imagem);
         
@@ -146,6 +144,7 @@ public class FormCadastroObra extends HttpServlet {
         }
         
         sessao.setAttribute("obra", obra);
+        
         // manda para a área do usuário ou carrinho (pra onde tava antes?)
         response.sendRedirect("processar-cadastro-obra");
         
