@@ -12,8 +12,6 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author beatrizsato
  */
 public abstract class Usuario {
-    private static int contas = 10000;
-    protected int numeroConta;
     protected String nome;
     protected String email;
     protected String senha;
@@ -22,18 +20,12 @@ public abstract class Usuario {
         this.nome = nome;
         this.email = email;
         setSenha(senhaAberta);
-        
-        numeroConta = contas++;
     }
     
     public Usuario(String email, String senhaHash) {
         this.email = email;
         senha = senhaHash;
     } 
-        
-    public int getNumeroConta() {
-        return numeroConta;
-    }
 
     public String getNome() {
         return nome;
@@ -53,12 +45,10 @@ public abstract class Usuario {
     
     public final void setSenha(String senhaAberta) {
         this.senha = BCrypt.hashpw(senhaAberta, BCrypt.gensalt());
-        //this.hashSenha = senhaAberta;
     }
     
     public boolean validarSenha(String senhaAberta) {
         return BCrypt.checkpw(senhaAberta, senha);
-        //return senhaAberta.equals(hashSenha);
     }
 
     public void setEmail(String email) {

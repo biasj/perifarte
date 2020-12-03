@@ -60,7 +60,7 @@
                                         <div class="media-body">
                                             <h5 class="mt-0"><c:out value="${obra.titulo}"/></h5>
                                             <div class="d-flex justify-content-between">
-                                                <p class="mb-1">Preço: <c:out value="${obra.preco}"/></p>
+                                                <p class="mb-1">Preço: R$ <c:out value="${obra.preco}0"/></p>
                                                 <i class="far fa-edit" style="font-size: 30px;"></i>
                                             </div>
                                             <p class="mb-1">Organizacao: <c:out value="${obra.organizacao.nome}"/></p>

@@ -53,26 +53,6 @@ public class Doador extends Usuario{
         return totalDoado;
     }
 
-    @Override
-    public int getNumeroConta() {
-        return numeroConta;
-    }
-
-    @Override
-    public String getNome() {
-        return nome;
-    }
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
-    public String getSenha() {
-        return senha;
-    }
-
     public void setObras(ArrayList<Obra> obras) {
         this.obras = obras;
     }
@@ -81,9 +61,4 @@ public class Doador extends Usuario{
         this.totalDoado = totalDoado;
     }
 
-    public void setNumeroConta(int numeroConta) {
-        this.numeroConta = numeroConta;
-    }
-    
-    
 }

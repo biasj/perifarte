@@ -5,9 +5,7 @@
  */
 package br.senac.sp.tads.pi3.antes.tads.perifarte.servlets;
 
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Administrador;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Artista;
-import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doador;
+import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

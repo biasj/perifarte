@@ -31,14 +31,17 @@ public class RelatorioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sessao = request.getSession();
+
         OrganizacaoDao orgDao = new OrganizacaoDao();   
         DoacoesDao doacoesDao = new DoacoesDao();
         
         List<Organizacao> organizacoes = null;
         
         try {
+            // pega todas as organizações para mostrar uma por uma com seu valor arrecadado
             organizacoes = orgDao.findAll();
+            
+            // pega o total de todas as doações
             double totalDoado = doacoesDao.totalDonation();
             request.setAttribute("totalDoado", totalDoado);
             

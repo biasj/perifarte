@@ -170,7 +170,7 @@ public class OrganizacaoDao {
         return resultados;
     }
 
-    
+    // busca organização para login
     public Organizacao findAccount(String email) throws SQLException {
         String sql = "SELECT * FROM organizacao WHERE organizacao_email=?";
         try (Connection conn = Conexao.obterConexao();
@@ -200,6 +200,7 @@ public class OrganizacaoDao {
         return null;
     }
     
+    // busca organização para mostrar na ficha de organização
     public Organizacao findById(String id) throws SQLException {
         String sql = "SELECT * FROM organizacao WHERE organizacao_id=?";
         try (Connection conn = Conexao.obterConexao();

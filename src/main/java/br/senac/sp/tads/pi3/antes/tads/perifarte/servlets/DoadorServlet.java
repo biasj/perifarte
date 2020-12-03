@@ -35,20 +35,23 @@ public class DoadorServlet extends HttpServlet {
         HttpSession sessao = request.getSession();
         
         Doador doador = (Doador) sessao.getAttribute("usuario");
-        // para não adicionar obras duplicadas toda vez
+        // limpa as obras do doador para não ter obra duplicada ao atualizar a página
         doador.getObras().clear();
         
         DoacoesDao doacaoDao = new DoacoesDao();
         ObraDao obraDao = new ObraDao();
         
         try {
+            // pega o id da obra e o status de todas as doações feitas por esse usuário
             List<Doacao> obrasCompradas = doacaoDao.findAllDonationsByDonor(doador.getId());
            
+            // para cada id de obra, acha a obra inteira no banco de dados 
             for(Doacao doacao : obrasCompradas) {
                 Obra obra = obraDao.findById(String.valueOf(doacao.getIdObra()));
                 doador.comprarObra(obra);
             }
             
+            // mostra primeiro as ultimas obras compradas
             Collections.reverse(doador.getObras());
             request.setAttribute("doacoes", obrasCompradas);
 

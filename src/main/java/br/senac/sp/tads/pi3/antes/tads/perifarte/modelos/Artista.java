@@ -49,26 +49,6 @@ public class Artista extends Usuario{
         return obras.size();
     }
 
-    @Override
-    public int getNumeroConta() {
-        return numeroConta;
-    }
-
-    @Override
-    public String getNome() {
-        return nome;
-    }
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
-    public String getSenha() {
-        return senha;
-    }
-    
     public void excluirObra(Obra obra) {
         obras.remove(obra);
     }
@@ -80,19 +60,6 @@ public class Artista extends Usuario{
     public void setObras(List<Obra> obras) {
         this.obras = obras;
     }
-
-    public void setNumeroConta(int numeroConta) {
-        this.numeroConta = numeroConta;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     
      public int getId() {
         return id;
@@ -102,9 +69,4 @@ public class Artista extends Usuario{
         this.id = id;
     }
 
-    
-    
-    public void AtualizarObra(Obra obra){
-        //tarefa referente ao marco 3 
-    }
 }

@@ -22,8 +22,6 @@ public class Organizacao extends Usuario {
     
     private String status;
     private Double totalRecebido;
-
-    private String contaPayPal;
     
     private ArrayList<Obra> obraDoada;
     
@@ -33,7 +31,6 @@ public class Organizacao extends Usuario {
         this.cnpj = cnpj;
         descricao = null;
         justificativa = null;
-        contaPayPal = null;
         // já começa como pendente e só depois vai ser aprovado
         status = "pendente";
         totalRecebido = 0.0;
@@ -52,11 +49,6 @@ public class Organizacao extends Usuario {
         setDescricao(descricao);
         setJustificativa(justificativa);
         setStatus(status);
-    }
-    
-    @Override
-    public int getNumeroConta() {
-        return numeroConta;
     }
 
     public int getId() {
@@ -82,11 +74,7 @@ public class Organizacao extends Usuario {
     public String getDescricao() {
         return descricao;
     }    
- 
-    public String getContaPayPal() {
-        return contaPayPal;
-    }
-    
+
     public Double getTotalRecebido() {
         return totalRecebido;
     }
@@ -109,10 +97,6 @@ public class Organizacao extends Usuario {
 
     public void setJustificativa(String justificativa) {
         this.justificativa = justificativa;
-    }
-
-    public void setContaPayPal(String contaPayPal) {
-        this.contaPayPal = contaPayPal;
     }
 
     public void setTelefone(String telefone) {

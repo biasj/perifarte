@@ -40,7 +40,7 @@
                             <div class="d-flex justify-content-between">
                                 <h4 class="titulo-org"><c:out value="${org.nome}" /></h4>
                                 <div>
-                                    <p>Total arrecadado: <br>R$ <c:out value="${org.totalRecebido}" /></p>
+                                    <p>Total arrecadado: <br>R$ <c:out value="${org.totalRecebido}0" /></p>
                                 </div>
                             </div>
                         </li>

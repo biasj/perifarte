@@ -1,0 +1,2 @@
+Prezado professor Tsuda. Para poder rodar na sua máquina, alterar a classe Conexao do
+Pacote Daos a fim de rodar o banco de dados.

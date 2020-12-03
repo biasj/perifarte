@@ -6,6 +6,7 @@
 package br.senac.sp.tads.pi3.antes.tads.perifarte.daos;
 
 import br.senac.sp.tads.pi3.antes.tads.perifarte.modelos.Doador;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,9 +20,7 @@ import java.util.List;
  * @author beatrizsato
  */
 public class DoadorDao {
-	
-	boolean checkdoador = false;
-	
+
     // insere doador no banco de dados
     public void addDoador(Doador doador) throws SQLException {
         String sql = "INSERT INTO doador (doador_nome, doador_email, doador_senha) VALUES (?,?,?)";
@@ -70,8 +69,7 @@ public class DoadorDao {
                     Doador doador = new Doador(email, senha);
                     // atualiza o id que não é inicializado na construção
                     doador.setInfo(id, nome);
-                    
-                    checkdoador = true;
+
                     return doador;
                 }
             }
@@ -144,6 +142,10 @@ public class DoadorDao {
                 // inicializa id pelo id do banco
                 doador.setId(id);
                 
+                // pega valor arrecadado
+                double totalDoado = this.getValorArrecadado(String.valueOf(id));
+                doador.setTotalDoado(BigDecimal.valueOf(totalDoado));
+                
                 resultados.add(doador);
             }
         }
@@ -164,10 +166,19 @@ public class DoadorDao {
                   
                     Doador doador = new Doador(nome, email, senha);
                     
+                    // pega valor arrecadado
+                    double totalDoado = this.getValorArrecadado(String.valueOf(id));
+                    doador.setTotalDoado(BigDecimal.valueOf(totalDoado));
+                    
                     return doador;
                 }
             }
         }
         return null;
+    }
+    
+    public double getValorArrecadado(String id) throws SQLException {
+        DoacoesDao doa = new DoacoesDao();
+        return doa.findDonationbyDonatorId(id);
     }
 }

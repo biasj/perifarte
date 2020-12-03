@@ -113,7 +113,10 @@ public class LoginServlet extends HttpServlet {
                 
             } else if(doador != null && doador.validarSenha(senha)) {
                 sessao.setAttribute("usuario", doador);
+                
                 List<Obra> obras = (List<Obra>)sessao.getAttribute("obrasCarrinho");
+                
+                // verifica se veio do carrinho ou de algum login "normal"
                 if(obras != null) {
                     response.sendRedirect("carrinho");
                 } else {
