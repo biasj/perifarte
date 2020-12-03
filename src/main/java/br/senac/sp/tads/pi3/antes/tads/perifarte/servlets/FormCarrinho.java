@@ -32,7 +32,19 @@ public class FormCarrinho extends HttpServlet {
         
         // PEGA INFO DA OBRA ESCOLHIDA
         List<DetalheObra> obras = (List<DetalheObra>) sessao.getAttribute("obrasCarrinho");
-                
+        if(obras != null) {
+            int quantidadeObra = obras.size();
+            request.setAttribute("numObra", quantidadeObra);
+            
+            double total = 0.0;
+            
+            for(DetalheObra detalhe : obras) {
+                total += detalhe.getObra().getPreco().doubleValue();
+            }
+            
+            request.setAttribute("total", total);
+        }
+        
         request.setAttribute("obras", obras);
         
         
