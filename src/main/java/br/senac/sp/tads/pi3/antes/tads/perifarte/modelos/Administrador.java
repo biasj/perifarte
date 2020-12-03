@@ -50,7 +50,7 @@ public class Administrador extends Usuario{
     }
     
     public void setId(int id) {
-        this.id = id;
+        Administrador.id = id;
     }
 
     public void setOrganizacoes(List<Organizacao> organizacoes) {

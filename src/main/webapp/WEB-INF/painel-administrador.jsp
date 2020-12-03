@@ -24,7 +24,7 @@
         <title>Perifarte - Organizações</title>
     </head>
     <body>
-        <c:import url="./../cabecalho.jsp"/>
+        <c:import url="./../cabecalho-painel.jsp"/>
         <div class="container">
             
             <div class='content-container'>

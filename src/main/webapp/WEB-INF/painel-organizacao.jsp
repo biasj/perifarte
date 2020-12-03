@@ -24,7 +24,7 @@
         <title>Perifarte - Obras doadas</title>
     </head>
     <body>
-        <c:import url="./../cabecalho.jsp"/>
+        <c:import url="./../cabecalho-painel.jsp"/>
         
         <div class="container content-container">
             <div class='card'>

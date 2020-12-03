@@ -23,7 +23,7 @@
         <title>Perifarte - Meus pedidos</title>
     </head>
     <body>
-        <c:import url="./../cabecalho.jsp"/>
+        <c:import url="./../cabecalho-painel.jsp"/>
         
         <!--será painel de meus pedidos-->
         <div class="container">
