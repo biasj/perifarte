@@ -80,7 +80,7 @@ public class FichaObra extends HttpServlet {
         
         // recupera dados enviados no form
         Obra obra = (Obra) sessao.getAttribute("obra");
-        Artista artista = (Artista) sessao.getAttribute("artista");
+        Artista artista = (Artista) sessao.getAttribute("usuario");
         
         String titulo = request.getParameter("titulo");
         String descricao = request.getParameter("descricao");
@@ -104,7 +104,7 @@ public class FichaObra extends HttpServlet {
                 obraDao.atualizarObra(obra, ongEscolhida);
                 // atualiza a obra a partir do banco de dados
                 obra = obraDao.findById(String.valueOf(obra.getId()));                
-                
+                artista.setObras(obraDao.findObraByArtista(artista.getId()));
             } else if(botaoExcluir != null) {
                 obraDao.excluirObra(obra.getId());
                 // envia para a tela de painel
@@ -116,7 +116,7 @@ public class FichaObra extends HttpServlet {
                 dispatcher.forward(request, response);
             }
 
-            artista.setObras(obraDao.findObraByArtista(artista.getId()));
+            
             
         } catch (SQLException ex) {
             
