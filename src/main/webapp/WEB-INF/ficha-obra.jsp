@@ -86,7 +86,6 @@
                     </div>
 
                     <div class="form-group w-75 p3 mx-auto">
-                        <label for="file">Escolher arquivo</label>
                         <input id="file" type="file" name="file" size="50"/><br/>
                     </div>
 
