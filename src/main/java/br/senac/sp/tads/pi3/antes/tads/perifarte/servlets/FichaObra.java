@@ -124,7 +124,7 @@ public class FichaObra extends HttpServlet {
         }
         
         sessao.setAttribute("obra", obra);
-        sessao.setAttribute("artista", artista);
+        sessao.setAttribute("usuario", artista);
         
         response.sendRedirect("obra");
     }
