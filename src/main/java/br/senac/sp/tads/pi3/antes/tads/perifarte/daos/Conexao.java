@@ -21,9 +21,9 @@ import java.util.logging.Logger;
 // ALTERAR ESSA CLASSE PARA AJUSTAR A CONEXÃO PARA O BANCO DE DADOS
 public class Conexao {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/perifarte";
-    private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String URL = "jdbc:mysql://perifarte.mysql.database.azure.com:3306/perifarte";
+    private static final String USER = "antes_tads@perifarte";
+    private static final String PASS = "BiaMaGa1";
 
     public static Connection obterConexao() throws SQLException {
         // 1) Declarar o driver JDBC de acordo com o Banco de dados usado
