@@ -14,6 +14,12 @@ and open the template in the editor.
     height: 133px;
 }
 
+.lista-obra-carrinho {
+    width: 450px;
+    margin: 0 auto;
+    padding-top: 25px;
+}
+
 .resumo {
     padding: 20px;
     max-width: 420px;

@@ -28,8 +28,8 @@
             
             <h2 class="text-center">Meu carrinho</h2>
 
-            <div class="container content-container">
-                <div class="row row-cols-1 row-cols-md-3">
+            <div class="content-container">
+                <div class="row row-cols-1 row-cols-md-1 lista-obra-carrinho">
                     <form method="post" action="carrinho">
                         <!--para cada obra no carrinho mostra as informacoes-->
                         <c:forEach var="detalhe" items="${obras}">
