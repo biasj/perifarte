@@ -80,7 +80,7 @@ public class FichaObra extends HttpServlet {
         
         // recupera dados enviados no form
         Obra obra = (Obra) sessao.getAttribute("obra");
-        Artista artista = (Artista) sessao.getAttribute("artista");
+        Artista artista = (Artista) sessao.getAttribute("usuario");
         
         String titulo = request.getParameter("titulo");
         String descricao = request.getParameter("descricao");
@@ -124,7 +124,7 @@ public class FichaObra extends HttpServlet {
         }
         
         sessao.setAttribute("obra", obra);
-        sessao.setAttribute("artista", artista);
+        sessao.setAttribute("usuario", artista);
         
         response.sendRedirect("obra");
     }
