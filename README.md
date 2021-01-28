@@ -5,7 +5,6 @@ Aplicação web desenvolvida para a disciplina Projeto Integrador 3, com enfoque
 - JSTL
 - Bootstrap
 - Banco de dados MySQL
-- Git
 
 ## Tema sugerido pelo professor
 COVID-19
